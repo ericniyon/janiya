@@ -22,9 +22,9 @@ Route::get('/', [HomeController::class, 'index'] )->name('home');
 
 
 
-Route::get('/admin', function () {
+Route::get('/admin/dashboard', function () {
     return view('backend.pages.admin_dashboard');
-});
+})->name('admin.dashboard');
 
 
 Route::get('/add-product', function () {
@@ -50,9 +50,25 @@ Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
 
 
 
+// Admin's routes
+Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
+    Route::view('/shops','backend.pages.admin.shops')->name('shops');
+});
+
+// Vendor's routes
+Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name('vendor.')->group(function(){
+    Route::view('/dashboard','backend.pages.admin.shops')->name('dashboard');
+});
+
+// Normal Users's routes
+Route::middleware('auth')->group(function(){
+    Route::view('/my-orders','backend.pages.admin.shops')->name('orders');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
 
 require __DIR__.'/auth.php';

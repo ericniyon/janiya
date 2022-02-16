@@ -76,7 +76,7 @@
             </li>
             <li><a class="sidebar-header" href=""><i data-feather="users"></i><span>Vendors</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
-                    <li><a href="list-vendor.html"><i class="fa fa-circle"></i>Vendor List</a></li>
+                    <li><a href="{{route('admin.shops')}}"><i class="fa fa-circle"></i>Vendor List</a></li>
                     <li><a href="create-vendors.html"><i class="fa fa-circle"></i>Create Vendor</a></li>
                 </ul>
             </li>
