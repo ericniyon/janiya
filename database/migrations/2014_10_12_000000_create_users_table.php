@@ -17,8 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone')->unique();
+            $table->string('promo_code')->nullable();
+            $table->string('affiliate_link')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('profile')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
