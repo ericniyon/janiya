@@ -68,19 +68,7 @@
                                                 <label for="validationCustom02" class="col-form-label"><span>*</span> Product Price</label>
                                                 <input class="form-control" id="validationCustom02" type="text" required="">
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label"><span>*</span> Status</label>
-                                                <div class="m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                                    <label class="d-block" for="edo-ani">
-                                                        <input class="radio_animated" id="edo-ani" type="radio" name="rdo-ani">
-                                                        Enable
-                                                    </label>
-                                                    <label class="d-block" for="edo-ani1">
-                                                        <input class="radio_animated" id="edo-ani1" type="radio" name="rdo-ani">
-                                                        Disable
-                                                    </label>
-                                                </div>
-                                            </div>
+                                            @livewire('admin.add-product')
                                             <label class="col-form-label pt-0"> Product Upload</label>
                                             <input type="file" name="" id="image">
                                         </div>
