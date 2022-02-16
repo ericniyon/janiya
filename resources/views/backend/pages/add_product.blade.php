@@ -22,75 +22,85 @@
 </div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
+    <div class="row product-adding">
+        <div class="col-xl-6">
             <div class="card">
                 <div class="card-header">
-                    <h5>Add Product</h5>
+                    <h5>General</h5>
                 </div>
                 <div class="card-body">
-                    <div class="row product-adding">
-                        <div class="col-xl-5">
-                            <div class="add-product">
-                                <div class="row">
-                                    <div class="col-xl-9 xl-50 col-sm-6 col-9">
-                                        <img src="../assets/images/pro3/1.jpg" alt="" id="preview-image-before-upload" class="img-fluid image_zoom_1 blur-up lazyloaded">
-                                    </div>
-
-                                </div>
+                    <div class="digital-add needs-validation">
+                        <div class="form-group">
+                            <label for="validationCustom01" class="col-form-label pt-0"><span>*</span> Title</label>
+                            <input class="form-control" id="validationCustom01" type="text" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="validationCustomtitle" class="col-form-label pt-0"><span>*</span> SKU</label>
+                            <input class="form-control" id="validationCustomtitle" type="text" required="">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label"><span>*</span> Categories</label>
+                            <select class="custom-select form-control" required="">
+                                <option value="">--Select--</option>
+                                <option value="1">eBooks</option>
+                                <option value="2">Graphic Design</option>
+                                <option value="3">3D Impact</option>
+                                <option value="4">Application</option>
+                                <option value="5">Websites</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Sort Summary</label>
+                            <textarea rows="5" cols="12"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="validationCustom02" class="col-form-label"><span>*</span> Product Price</label>
+                            <input class="form-control" id="validationCustom02" type="text" required="">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label"><span>*</span> Status</label>
+                            <div class="m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
+                                <label class="d-block" for="edo-ani">
+                                    <input class="radio_animated" id="edo-ani" type="radio" name="rdo-ani">
+                                    Enable
+                                </label>
+                                <label class="d-block" for="edo-ani1">
+                                    <input class="radio_animated" id="edo-ani1" type="radio" name="rdo-ani">
+                                    Disable
+                                </label>
                             </div>
                         </div>
-                        <div class="col-xl-7">
-                            <form class="needs-validation add-product-form" novalidate="">
-
-                                        <div class="digital-add needs-validation">
-                                            <div class="form-group">
-                                                <label for="validationCustom01" class="col-form-label pt-0"><span>*</span> Title</label>
-                                                <input class="form-control" id="validationCustom01" type="text" required="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="validationCustomtitle" class="col-form-label pt-0"><span>*</span> SKU</label>
-                                                <input class="form-control" id="validationCustomtitle" type="text" required="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label"><span>*</span> Categories</label>
-                                                <select class="custom-select form-control" required="">
-                                                    <option value="">--Select--</option>
-                                                    <option value="1">eBooks</option>
-                                                    <option value="2">Graphic Design</option>
-                                                    <option value="3">3D Impact</option>
-                                                    <option value="4">Application</option>
-                                                    <option value="5">Websites</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="validationCustom02" class="col-form-label"><span>*</span> Product Price</label>
-                                                <input class="form-control" id="validationCustom02" type="text" required="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label"><span>*</span> Status</label>
-                                                <div class="m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-                                                    <label class="d-block" for="edo-ani">
-                                                        <input class="radio_animated" id="edo-ani" type="radio" name="rdo-ani">
-                                                        Enable
-                                                    </label>
-                                                    <label class="d-block" for="edo-ani1">
-                                                        <input class="radio_animated" id="edo-ani1" type="radio" name="rdo-ani">
-                                                        Disable
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <label class="col-form-label pt-0"> Product Upload</label>
-                                            <input type="file" name="" id="image">
-                                        </div>
-
-
-                                <div class="offset-xl-3 offset-sm-4 mt-6">
-                                    <button type="submit" class="btn btn-primary">Add</button>
-                                    <button type="button" class="btn btn-light">Discard</button>
-                                </div>
-                            </form>
+                        <label class="col-form-label pt-0"> Product Upload</label>
+                        <form class="dropzone digits dz-clickable" id="singleFileUpload" action="/upload.php">
+                            <div class="dz-message needsclick"><i class="fa fa-cloud-upload"></i>
+                                <h4 class="mb-0 f-w-600">Drop files here or click to upload.</h4>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            
+            <div class="card">
+                <div class="card-header">
+                    <h5>Meta Data</h5>
+                </div>
+                <div class="card-body">
+                    <div class="digital-add needs-validation">
+                        <div class="form-group">
+                            <label for="validationCustom05" class="col-form-label pt-0"> Meta Title</label>
+                            <input class="form-control" id="validationCustom05" type="text" required="">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Meta Description</label>
+                            <textarea rows="4" cols="12"></textarea>
+                        </div>
+                        <div class="form-group mb-0">
+                            <div class="product-buttons text-center">
+                                <button type="button" class="btn btn-primary">Add</button>
+                                <button type="button" class="btn btn-light">Discard</button>
+                            </div>
                         </div>
                     </div>
                 </div>
