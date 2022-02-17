@@ -120,38 +120,57 @@
                     </div>
                     <div class="theme-tab">
                         <ul class="tabs tab-title">
-                            <li class="current"><a href="#tab-7">unisex watches</a></li>
-                            <li class=""><a href="#tab-8">couple watches</a></li>
-                            <li class=""><a href="#tab-9">titanium watches</a></li>
+                            <li class="current"><a href="#tab-1">unisex watches</a></li>
+                            <li class=""><a href="#tab-2">couple watches</a></li>
+                            <li class=""><a href="#tab-3">titanium watches</a></li>
                             <li class=""><a href="#tab-10">gold watches</a></li>
                         </ul>
                         <div class="tab-content-cls">
-                            @foreach ($product_categories as $item)
-                            <div id="tab-{{$item->id}}" class="tab-content active default" style="display: block;">
-                                <div class="row product-tab mt-5">
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="product-page(no-sidebar).html"><img class="img-fluid blur-up lazyloaded" src="{{asset('storage/storage/category-img/'.$item->category_image )}}" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                                    <a href="product-page(no-sidebar).html">
-                                                        <h6>Slim Fit Cotton Shirt</h6>
-                                                    </a>
-                                                    <h4>$500.00 <del>$600.00</del></h4>
-                                                    <ul class="color-variant">
-                                                        <li class="bg-light0"></li>
-                                                        <li class="bg-light1"></li>
-                                                        <li class="bg-light2"></li>
-                                                    </ul>
-                                                </div>
+                            <div id="tab-1" class="tab-content active default" style="display: block;">
+                                <div class="no-slider row">  
+                                    @foreach ($product_categories as $item)
+                                    <div class="product-box">
+                                        <div class="img-wrapper">
+                                            <div class="front">
+                                                <a href="product-page(no-sidebar).html">
+                                                    <img src="../assets/images/pro3/27.jpg"
+                                                        class="img-fluid blur-up lazyload bg-img" 
+                                                        alt=""></a>
+                                            </div>
+                                            <div class="back">
+                                                <a href="product-page(no-sidebar).html"><img
+                                                        src="../assets/images/pro3/28.jpg"
+                                                        class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                            </div>
+                                            <div class="cart-info cart-wrap">
+                                                <button data-bs-toggle="modal" data-bs-target="#addtocart"
+                                                    title="Add to cart"><i class="ti-shopping-cart"></i></button> <a
+                                                    href="javascript:void(0)" title="Add to Wishlist"><i
+                                                        class="ti-heart" aria-hidden="true"></i></a> <a href="#"
+                                                    data-bs-toggle="modal" data-bs-target="#quick-view"
+                                                    title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
+                                                <a href="compare.html" title="Compare"><i class="ti-reload"
+                                                        aria-hidden="true"></i></a>
                                             </div>
                                         </div>
+                                        <div class="product-detail">
+                                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                    class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                                    class="fa fa-star"></i></div>
+                                            <a href="product-page(no-sidebar).html">
+                                                <h6>purple solid polo tshirt</h6>
+                                            </a>
+                                            <h4>$50.00</h4>
+                                            <ul class="color-variant">
+                                                <li class="bg-light0"></li>
+                                                <li class="bg-light1"></li>
+                                                <li class="bg-light2"></li>
+                                            </ul>
+                                        </div>
                                     </div>
-
+                                    @endforeach
                                 </div>
                             </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>

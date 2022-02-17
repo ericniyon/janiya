@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductValiations;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,7 @@ class HomeController extends Controller
     {
 
         $product_categories = ProductCategory::all();
-        $products = Product::all();
+        $products = ProductValiations::with('product','color','size')->get();
 
         return view('frontend.pages.home', compact('product_categories', 'products'));
     }
