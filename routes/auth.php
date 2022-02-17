@@ -85,3 +85,8 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
+
+Route::post('/admin/logout', [AdminLoginController::class, 'destroy'])
+                ->middleware('auth:admin')->name('admin.logout');
+Route::post('/vendor/logout', [AdminLoginController::class, 'destroy'])
+                ->middleware('auth:vendor')->name('vendor.logout');

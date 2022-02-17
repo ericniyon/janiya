@@ -34,6 +34,7 @@
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css')}}">
     @livewireStyles
+    @stack('extracss')
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/admin.css')}}">
 </head>
@@ -130,5 +131,6 @@
 <!--script admin-->
 <script src="{{ asset('assets/js/admin-script.js')}}"></script>
 @livewireScripts
+@stack('extrajs')
 </body>
 </html>
