@@ -49,12 +49,13 @@ class AddProduct extends Component
         $this->product_color = '';
         $this->product_name = '';
         $this->product_size = '';
-        $this->product_image = 'image|max:1024';
+        $this->product_image = '';
     }
 
 
     public function store()
     {
+        $images = new Product();
         $validation = $this->validate([
     		'description'		    =>	'required',
     		'name'			        =>	'required',
@@ -63,11 +64,26 @@ class AddProduct extends Component
 
     	]);
 
-        $name = md5($this->product_image . microtime()).'.'.$this->product_image->extension();
+        $filename = "";
+        if ($this->product_image) {
+            $filename = $this->product_image->store('products', 'public');
+        } else {
+            $filename = Null;
+        }
 
-        $this->product_image->storeAs('photos', $name);
+        $images->name = $this->name;
+        $images->description = $this->description;
+        $images->product_image = $filename;
+        $images->product_category_id = $this->product_category_id;
 
-        $product = Product::create($validation);
+        $result = $images->save();
+        dd($result);
+
+        // $name = md5($this->product_image . microtime()).'.'.$this->product_image->extension();
+
+        // $this->product_image->storeAs('photos', $name);
+
+        // $product = Product::create($validation);
 
         foreach ($this->quantity as $key => $value) {
 
@@ -78,7 +94,7 @@ class AddProduct extends Component
                 'product_size' => $this->product_size[$key],
                 'product_color' => $this->product_color[$key],
 
-                'product_name' => $product['id'],
+                'product_name' => $result['id'],
 
             ]);
         }

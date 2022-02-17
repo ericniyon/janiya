@@ -13,7 +13,7 @@
     <div class="slide-1 home-slider">
         <div>
             <div class="home  text-center">
-                <img src="{{ asset('assets/img/home1.jpg')}}" alt="" class="bg-img blur-up lazyload">
+                <img src="{{ asset('assets/img/home1.jpeg')}}" alt="" class="bg-img blur-up lazyload">
                 <div class="container">
                     <div class="row">
                         <div class="col">
@@ -107,9 +107,6 @@
 <!-- Paragraph-->
 
 <!-- Paragraph end -->
-@foreach ($products as $item)
-<img src="{{asset('storage/photos/'.$item->product_image)}}" alt="T" srcset="">
-@endforeach
 
 <!-- Product slider -->
 <section class="p-0">

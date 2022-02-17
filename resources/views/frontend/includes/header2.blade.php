@@ -6,8 +6,8 @@
                 <div class="col-lg-6">
                     <div class="header-contact">
                         <ul>
-                            <li>Welcome to Our store Janiya shop</li>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 123 - 456 - 7890</li>
+                            <li>Welcome to Our store Janiya shops</li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: +(250) 782 779 773</li>
                         </ul>
                     </div>
                 </div>
