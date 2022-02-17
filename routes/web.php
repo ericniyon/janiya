@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AffilitesController;
 use App\Http\Controllers\Admin\ColorsController;
+use App\Http\Controllers\Admin\PartnersController;
+use App\Http\Controllers\Admin\ShopsController;
 use App\Http\Controllers\Admins\AdminController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +27,9 @@ Route::get('/', [HomeController::class, 'index'] )->name('home');
 
 
 
-Route::get('/admin', function () {
+Route::get('/admin/dashboard', function () {
     return view('backend.pages.admin_dashboard');
-});
+})->name('admin.dashboard');
 
 
 
@@ -70,9 +73,39 @@ Route::post('purchase', [CheckoutController::class, 'payment'])->name('purchase'
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 
 
+// Admin's routes
+Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
+    Route::view('/shops','backend.admin.shops')->name('shops');
+    Route::view('/shops/add-new-shop','backend.admin.addEditShops')->name('shops.add');
+    Route::post('/shops/add-new-shop',[ShopsController::class,'store'])->name('shops.store');
+    Route::get('/shops/{vendor}/edit',[ShopsController::class,'edit'])->name('shops.edit');
+    Route::put('/shops/{vendor}/update',[ShopsController::class,'update'])->name('shops.update');
+
+    // users & Partners
+    Route::view('partners','backend.admin.partners')->name('partners');
+    Route::view('/partners/add-new-shop','backend.admin.addEditpartner')->name('partners.add');
+    Route::post('/partners/add-new-shop',[PartnersController::class,'store'])->name('partners.store');
+    Route::get('/partners/{user}/edit',[PartnersController::class,'edit'])->name('partners.edit');
+    Route::put('/partners/{user}/update',[PartnersController::class,'update'])->name('partners.update');
+
+    // Affiliator
+    Route::get('affiliators',[AffilitesController::class,'index'])->name('affiliator');
+});
+
+// Vendor's routes
+Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name('vendor.')->group(function(){
+    Route::view('/dashboard','backend.vendors.index')->name('dashboard');
+});
+
+// Normal Users's routes
+Route::middleware('auth')->group(function(){
+    // Route::view('/my-orders')->name('orders');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
 
 require __DIR__.'/auth.php';
