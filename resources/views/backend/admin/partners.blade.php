@@ -1,6 +1,6 @@
 @extends('backend.base')
 
-@section('title', 'Our Vendors')
+@section('title', 'Our Partners')
 @section('content')
 
 <div class="container-fluid">
@@ -16,7 +16,7 @@
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i data-feather="home"></i></a></li>
-                    <li class="breadcrumb-item active">Vendors</li>
+                    <li class="breadcrumb-item active">Partners</li>
                 </ol>
             </div>
         </div>
@@ -26,11 +26,12 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between">
                     <h5>Vendors</h5>
+                    <a href="{{route('admin.partners.add')}}" class="btn btn-sm btn-primary">Add new shop</a>
                 </div>
-                <div class="card-body">
-                    @livewire('admin.shops')
+                <div class="card-body pt-0 mt-0" >
+                    @livewire('admin.partners')
                 </div>
             </div>
         </div>

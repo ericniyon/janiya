@@ -23,6 +23,9 @@ class User extends Authenticatable
         'phone',
         'promo_code',
         'affiliate_link',
+        'sales',
+        'clicks',
+        'active',
         'profile',
         'password',
     ];
