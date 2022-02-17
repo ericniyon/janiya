@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\VendorLoginController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +19,30 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
 Route::post('/register', [RegisteredUserController::class, 'store'])
                 ->middleware('guest');
 
+Route::get('/vendor/register', [RegisteredUserController::class, 'vendorAccountForm'])
+                ->middleware('guest:vendor')
+                ->name('register');
+
+Route::post('/vendor/register', [RegisteredUserController::class, 'storeVendor'])
+                ->middleware('guest:vendor');
+
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->middleware('guest')
                 ->name('login');
+
+Route::get('/admin/login', [AdminLoginController::class, 'create'])
+->middleware('guest:admin')
+->name('admin.login');
+
+Route::get('/vendor/login', [VendorLoginController::class, 'create'])
+->middleware('guest:vendor')
+->name('vendor.login');
+
+Route::post('/admin/login', [AdminLoginController::class, 'store'])
+                ->middleware('guest:admin');
+
+Route::post('/vendor/login', [VendorLoginController::class, 'store'])
+                ->middleware('guest:vendor');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
                 ->middleware('guest');
