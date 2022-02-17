@@ -1,6 +1,6 @@
 <div class="page-sidebar">
     <div class="main-header-left d-none d-lg-block">
-        <div class="logo-wrapper"><a href="/admin"><img class="blur-up lazyloaded" src="../assets/images/dashboard/multikart-logo.png" alt=""></a></div>
+        <div class="logo-wrapper"><a href="/admin"><img class="blur-up lazyloaded" src="{{asset('assets/img/janiya-logo.jpg')}}" alt=""></a></div>
     </div>
     <div class="sidebar custom-scrollbar">
         <div class="sidebar-user text-center">
@@ -19,7 +19,7 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a href="product-list.html"><i class="fa fa-circle"></i>Product List</a></li>
-                            <li><a href="/add-product"><i class="fa fa-circle"></i>Add Product</a></li>
+                            <li><a href="{{route('add-product')}}"><i class="fa fa-circle"></i>Add Product</a></li>
                         </ul>
                     </li>
                     <li>

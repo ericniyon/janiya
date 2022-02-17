@@ -1,18 +1,18 @@
 @charset "UTF-8";
 :root {
-  --theme-deafult: #ff4c3b; }
+  --theme-deafult: #6E0B28; }
 
 .theme-color-1 {
-  --theme-deafult: #ff4c3b; }
+  --theme-deafult: #6E0B28; }
 
 .theme-color-2 {
-  --theme-deafult: #f0583d; }
+  --theme-deafult: #6E0B28; }
 
 .theme-color-3 {
   --theme-deafult: #f0b54d; }
 
 .theme-color-4 {
-  --theme-deafult: #e4604a; }
+  --theme-deafult: #6E0B28; }
 
 .theme-color-5 {
   --theme-deafult: #d4b196; }
@@ -21,22 +21,22 @@
   --theme-deafult: #866e6c; }
 
 .theme-color-7 {
-  --theme-deafult: #cc2121; }
+  --theme-deafult: #6E0B28; }
 
 .theme-color-8 {
-  --theme-deafult: #dc457e; }
+  --theme-deafult: #6E0B28; }
 
 .theme-color-9 {
   --theme-deafult: #6d7e87; }
 
 .theme-color-10 {
-  --theme-deafult: #fa869b; }
+  --theme-deafult: #6E0B28; }
 
 .theme-color-11 {
   --theme-deafult: #81ba00; }
 
 .theme-color-12 {
-  --theme-deafult: #fe816d; }
+  --theme-deafult: #621027; }
 
 .theme-color-13 {
   --theme-deafult: #01effc;
@@ -53,7 +53,7 @@
   --theme-deafult: #5fcbc4; }
 
 .theme-color-17 {
-  --theme-deafult: #e38888; }
+  --theme-deafult: #621027; }
 
 .theme-color-18 {
   --theme-deafult: #000000; }
@@ -94,7 +94,7 @@
   --theme-deafult2: #F7BB97; }
 
 :root {
-  --theme-deafult: #ff4c3b; }
+  --theme-deafult: #6E0B28; }
 
 @-webkit-keyframes textNoise1 {
   0% {
@@ -3871,7 +3871,7 @@ button.btn.btn-solid:active, button.btn.btn-outline:active {
     right: 30px; }
 
 /*=====================
-    Demo CSS 
+    Demo CSS
 ==========================*/
 .full-scroll-menu {
   position: fixed;
@@ -6397,7 +6397,7 @@ header {
       top: -12px;
       background-color: #eeeeee; }
       header.left-header .sidenav .pixelstrap > li .lable-nav:before {
-        border-top: 5px solid #ff4c3b; }
+        border-top: 5px solid #6E0B28; }
       header.left-header .sidenav .pixelstrap > li .lable-nav.grey-lable {
         background-color: #4d6171; }
         header.left-header .sidenav .pixelstrap > li .lable-nav.grey-lable:before {
@@ -6429,7 +6429,7 @@ header {
         header.left-header .sidenav .bottom-section .icon_settings .shopping-cart .shopping-count {
           width: 18px;
           height: 18px;
-          background-color: #ff4c3b;
+          background-color: #6E0B28;
           color: white;
           position: absolute;
           border-radius: 100%;
@@ -8782,7 +8782,7 @@ header.stickycls {
     font-size: 14px;
     text-shadow: none; }
   .pixelstrap ul a.current {
-    background: #ff4c3b;
+    background: #6E0B28;
     color: #fff; }
   .pixelstrap ul a.disabled {
     color: #b3b3b3; }
@@ -8921,9 +8921,9 @@ header.stickycls {
     top: 15px;
     left: 22px; }
   .pixelstrap li .lable-nav.lable-red {
-    background-color: #ff4c3b; }
+    background-color: #6E0B28; }
     .pixelstrap li .lable-nav.lable-red:before {
-      border-top: 5px solid #ff4c3b; }
+      border-top: 5px solid #6E0B28; }
 
 .sm-vertical {
   background-color: #ffffff; }

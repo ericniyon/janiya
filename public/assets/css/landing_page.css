@@ -1,5 +1,5 @@
 :root {
-  --theme-deafult: #ff4c3b; }
+  --theme-deafult: #650B25; }
 
 /*=====================
     1.General CSS start
@@ -109,21 +109,21 @@ section, .section-t-space {
       -ms-flex-pack: center;
           justify-content: center; }
   .btn:hover {
-    border: 1px solid #ff4c3b;
+    border: 1px solid #650B25;
     color: white;
-    background-color: #ff4c3b; }
+    background-color: #650B25; }
 
 .btn-primary {
   padding: 12px 40px;
-  background-color: #ff4c3b;
+  background-color: #650B25;
   font-size: 16px;
-  border: 1px solid #ff4c3b;
+  border: 1px solid #650B25;
   color: white;
   margin: 0 auto; }
   .btn-primary:active, .btn-primary:focus {
     background-color: transparent !important;
-    border: 1px solid #ff4c3b !important;
-    color: #ff4c3b !important;
+    border: 1px solid #650B25 !important;
+    color: #650B25 !important;
     -webkit-box-shadow: none !important;
             box-shadow: none !important; }
 
@@ -156,14 +156,14 @@ header {
 .navbar-light .navbar-nav .nav-link {
   color: black; }
   .navbar-light .navbar-nav .nav-link:hover {
-    color: #ff4c3b;
+    color: #650B25;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease; }
 
 .navbar-light .navbar-nav .nav-item a {
   text-transform: capitalize; }
   .navbar-light .navbar-nav .nav-item a.active {
-    color: #ff4c3b;
+    color: #650B25;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease; }
 
@@ -198,7 +198,7 @@ header {
 .purchase-btn {
   letter-spacing: 0.3em;
   color: white;
-  background: #ff4c3b;
+  background: #650B25;
   width: 160px;
   height: 65px;
   font-weight: 500;
@@ -252,7 +252,7 @@ header {
       background-blend-mode: overlay;
       padding: 0 0 22px 0; }
     .main-img .main-contain h1 {
-      color: #ff4c3b;
+      color: #650B25;
       font-weight: 600;
       padding-bottom: 0; }
       .main-img .main-contain h1 span {
@@ -261,12 +261,12 @@ header {
       color: black;
       padding-bottom: 25px; }
       .main-img .main-contain h3 span {
-        color: #ff4c3b;
+        color: #650B25;
         font-weight: 700; }
     .main-img .main-contain h4 {
       color: black; }
       .main-img .main-contain h4 span {
-        color: #ff4c3b; }
+        color: #650B25; }
 
 .home-decor .decor {
   position: absolute; }
@@ -532,7 +532,7 @@ ul.tabs {
     transition: all 0.5s ease;
     font-size: 18px; }
     ul.tabs li.current {
-      background: #ff4c3b;
+      background: #650B25;
       color: white;
       -webkit-box-shadow: 3px 5px 25px 0 rgba(0, 0, 0, 0.21);
               box-shadow: 3px 5px 25px 0 rgba(0, 0, 0, 0.21);
@@ -596,7 +596,7 @@ ul.tabs {
     width: 0;
     height: 0;
     border-top: 5px solid transparent;
-    border-right: 7px solid #ff4c3b;
+    border-right: 7px solid #650B25;
     border-bottom: 5px solid transparent;
     left: -5px;
     top: 2.1px; }
@@ -610,7 +610,7 @@ ul.tabs {
     top: 3.5px;
     right: 4px; }
   .badge.badge-danger {
-    background-color: #ff4c3b; }
+    background-color: #650B25; }
 
 .special-feature {
   background-color: #f5f4f4; }
@@ -674,7 +674,7 @@ ul.tabs {
   transition: all 0.5s ease; }
 
 .main-feature .key-feature .theme-collection:hover h5 {
-  color: #ff4c3b;
+  color: #650B25;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
@@ -769,7 +769,7 @@ ul.tabs {
   display: none;
   color: #fff;
   text-align: center;
-  background: #ff4c3b;
+  background: #650B25;
   border: none;
   font-size: 22px;
   padding: 7px;

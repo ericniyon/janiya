@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Admins;
 
+
 use App\Http\Controllers\Controller;
+use App\Models\Color;
+use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductSize;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,6 +19,18 @@ class AdminController extends Controller
         $categories = ProductCategory::all();
         return view('backend.pages.product_category', compact('categories'));
     }
+
+
+    public function product_product()
+    {
+        $colors = Color::all();
+        $sizes = ProductSize::all();
+        $categories = ProductCategory::all();
+        return view('backend.pages.add_product', compact('categories', 'colors','sizes'));
+    }
+
+
+
 
 
 
@@ -42,4 +58,6 @@ public function save_category(Request $request)
 
 
 }
+
+
 }
