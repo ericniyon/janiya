@@ -1,7 +1,7 @@
 @extends('backend.base')
 
 @section('title')
-<title>Colors</title>
+<title>Size</title>
 @endsection
 
 
@@ -38,7 +38,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Add Color</h5>
+                    <h5>Add Size</h5>
                 </div>
                 <div class="card-body">
                     <form class="needs-validation" action="save-size" method="POST">

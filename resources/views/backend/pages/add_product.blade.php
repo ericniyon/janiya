@@ -1,5 +1,6 @@
 @extends('backend.base')
 @section('content')
+@livewireStyles
 <div class="container-fluid">
     <div class="page-header">
         <div class="row">
@@ -22,64 +23,14 @@
 </div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
+    <div class="row product-adding">
+        <div class="col-xl-12 col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <h5>Add Product</h5>
-                </div>
+
                 <div class="card-body">
-                    <div class="row product-adding">
-                        <div class="col-xl-5">
-                            <div class="add-product">
-                                <div class="row">
-                                    <div class="col-xl-9 xl-50 col-sm-6 col-9">
-                                        <img src="../assets/images/pro3/1.jpg" alt="" id="preview-image-before-upload" class="img-fluid image_zoom_1 blur-up lazyloaded">
-                                    </div>
+                    <div class="digital-add needs-validation">
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-7">
-                            <form class="needs-validation add-product-form" novalidate="">
-
-                                        <div class="digital-add needs-validation">
-                                            <div class="form-group">
-                                                <label for="validationCustom01" class="col-form-label pt-0"><span>*</span> Title</label>
-                                                <input class="form-control" id="validationCustom01" type="text" required="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="validationCustomtitle" class="col-form-label pt-0"><span>*</span> SKU</label>
-                                                <input class="form-control" id="validationCustomtitle" type="text" required="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-form-label"><span>*</span> Categories</label>
-                                                <select class="custom-select form-control" required="">
-                                                    <option value="">--Select--</option>
-                                                    <option value="1">eBooks</option>
-                                                    <option value="2">Graphic Design</option>
-                                                    <option value="3">3D Impact</option>
-                                                    <option value="4">Application</option>
-                                                    <option value="5">Websites</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="validationCustom02" class="col-form-label"><span>*</span> Product Price</label>
-                                                <input class="form-control" id="validationCustom02" type="text" required="">
-                                            </div>
-                                            @livewire('admin.add-product')
-                                            <label class="col-form-label pt-0"> Product Upload</label>
-                                            <input type="file" name="" id="image">
-                                        </div>
-
-
-                                <div class="offset-xl-3 offset-sm-4 mt-6">
-                                    <button type="submit" class="btn btn-primary">Add</button>
-                                    <button type="button" class="btn btn-light">Discard</button>
-                                </div>
-                            </form>
-                        </div>
+                        @livewire('admin.add-product')
                     </div>
                 </div>
             </div>
@@ -87,7 +38,7 @@
     </div>
 </div>
 
-
+@livewireScripts
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
