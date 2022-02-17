@@ -27,9 +27,6 @@ Route::get('/', [HomeController::class, 'index'] )->name('home');
 
 
 
-Route::get('/admin/dashboard', function () {
-    return view('backend.pages.admin_dashboard');
-})->name('admin.dashboard');
 
 
 
@@ -75,6 +72,13 @@ Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 
 // Admin's routes
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
+
+
+    Route::get('/admin/dashboard', function () {
+        return view('backend.pages.admin_dashboard');
+    })->name('admin.dashboard');
+
+
     Route::view('/shops','backend.admin.shops')->name('shops');
     Route::view('/shops/add-new-shop','backend.admin.addEditShops')->name('shops.add');
     Route::post('/shops/add-new-shop',[ShopsController::class,'store'])->name('shops.store');
@@ -103,7 +107,7 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('backend.pages.admin_dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 
