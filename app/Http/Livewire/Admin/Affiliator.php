@@ -11,13 +11,39 @@ class Affiliator extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $perPage = 10, $searchKey = '', $active = null, $confirmed = '', $promo_code;
-
+    public $promote = false, $selected_user, $user, $promoter_code;
     public $queryString = [
         'perPage'=>['except'=>10],
         'searchKey'=>['except'=>''],
         'active'=>['except'=>null],
         'confirmed'=>['except'=>''],
     ];
+
+    public function promoteForm($id)
+    {
+        $user = User::findOrFail($id);
+        $this->promote = true;
+        $this->selected_user = $user->id;
+        $this->user = $user->id;
+    }
+
+    public function closeForm()
+    {
+        $this->reset();
+        $this->promote = false;
+    }
+
+    public function promote()
+    {
+        $user = User::findOrFail($this->user);
+        $user->update([
+            'promo_code'=>$this->promoter_code,
+            'level'=>'Golden',
+        ]);
+        $this->reset();
+        $this->promote = false;
+        $this->emit('alert',['type'=>'success','message'=>'Affiliator Promoted Successfully!']);
+    }
 
     public function updated($fields)
     {

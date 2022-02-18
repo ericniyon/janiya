@@ -77,7 +77,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     Route::get('/admin/dashboard', function () {
         return view('backend.pages.admin_dashboard');
-    })->name('admin.dashboard');
+    })->name('dashboard');
 
 
     Route::view('/shops','backend.admin.shops')->name('shops');

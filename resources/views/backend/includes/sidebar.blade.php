@@ -21,7 +21,7 @@
         </div>
         <ul class="sidebar-menu">
             {{-- @auth('admin') --}}
-            <li><a class="sidebar-header" href="/admin"><i data-feather="home"></i><span>Dashboard</span></a></li>
+            <li><a class="sidebar-header" href="{{url('/admin/dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
             <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
                     <li>
@@ -38,22 +38,21 @@
                         <a href="#"><i class="fa fa-circle"></i>
                             <span>Product Attributes</span> <i class="fa fa-angle-right pull-right"></i>
                         </a>
-                        <ul class="">
-                            <li><a class="sidebar-header" href="{{route('colors')}}"><i data-feather="camera"></i>
+                        <ul class="sidebar-submenu">
+                            <li><a href="{{route('colors')}}">
                                 <span>Colors</span></a>
                             </li>
-                            <li><a class="sidebar-header" href="{{route('size')}}"><i data-feather="camera"></i>
+                            <li><a href="{{route('size')}}">
                                 <span>Sizes</span></a>
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="sidebar-header" href="#"><span>Coupons</span><i class="fa fa-angle-right pull-right"></i></a>
-                        <ul class="">
-                            <li><a href="coupon-list.html"><i class="fa fa-circle"></i>List Coupons</a></li>
-                            <li><a href="coupon-create.html"><i class="fa fa-circle"></i>Create Coupons </a></li>
-                        </ul>
-                    </li>
+                </ul>
+            </li>
+            <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Coupons</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                    <li><a href="coupon-list.html"><i class="fa fa-circle"></i>List Coupons</a></li>
+                    <li><a href="coupon-create.html"><i class="fa fa-circle"></i>Create Coupons </a></li>
                 </ul>
             </li>
             <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Sales</span><i class="fa fa-angle-right pull-right"></i></a>
