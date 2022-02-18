@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Size;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Vendors\StoresController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +77,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     Route::get('/admin/dashboard', function () {
         return view('backend.pages.admin_dashboard');
-    })->name('admin.dashboard');
+    })->name('dashboard');
 
 
     Route::view('/shops','backend.admin.shops')->name('shops');
@@ -99,6 +100,8 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 // Vendor's routes
 Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name('vendor.')->group(function(){
     Route::view('/dashboard','backend.vendors.index')->name('dashboard');
+    Route::get('store/add-products',[StoresController::class,'index'])->name('store');
+    Route::view('store/my-shop','backend.vendors.shop')->name('shop');
 });
 
 // Normal Users's routes
