@@ -31,13 +31,17 @@ class Store extends Component
     public function addProductToStore()
     {
         $product = ProductValiations::findOrFail($this->product);
-        $this->validate(['quantity'=>'required|integer|min:10|max:'.$product->quantity - 5,]);
-        ModelsStore::create([
-            'user_id'=>Auth::user()->id, 
-            'product_valiations_id'=>$product->id, 
-            'quantity'=>$this->quantity,
-        ]);
-
+        $this->validate(['quantity'=>'required|integer|min:10|max:'.$product->quantity - 5]);
+        $store = ModelsStore::find($product->id);
+        if($store->count() > 0){
+            $store->update(['quantity'=>$this->quantity]);
+        } else{
+            ModelsStore::create([
+                'user_id'=>Auth::user()->id, 
+                'product_valiations_id'=>$product->id, 
+                'quantity'=>$this->quantity,
+            ]);
+        }
         $product->update(['quantity'=>$product->quantity - $this->quantity]);
         
         $this->reset();

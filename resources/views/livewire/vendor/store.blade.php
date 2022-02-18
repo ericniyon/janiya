@@ -22,7 +22,7 @@
                             @forelse ($products as $product)
                             <tr>
                               <th scope="row">{{$loop->iteration}}</th>
-                              <td>{{$product->product->name}}<td>
+                              <td>{{$product->product->name}}</td>
                               <td>{{$product->color->color_name}}</td>
                               <td>{{$product->size->size}}</td>
                               <td>{{$product->price}}</td>

@@ -22,20 +22,20 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/fontawesome.css')}}">
 
     <!--Slick slider css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick-theme.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick-theme.css') }}">
 
     <!-- Animate icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
 
     <!-- Themify icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/themify-icons.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/themify-icons.css') }}">
 
     <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css') }}">
 
     <!-- Theme css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 
 
 
@@ -101,57 +101,25 @@
     @yield('scripts')
     <!-- latest jquery-->
 
-    <script src="../assets/js/slick.js"></script>
-
-
-
-    <!-- latest jquery-->
-
-    <script src="{{ asset('assets/js/jquery-3.3.1.min.js')}}"></script>
-
-    <!-- fly cart ui jquery-->
-    <script src="{{ asset('assets/js/jquery-ui.min.js')}}"></script>
-
-    <!-- exitintent jquery-->
-    <script src="{{ asset('assets/js/jquery.exitintent.js')}}"></script>
-    <script src="{{ asset('assets/js/exit.js')}}"></script>
-
-    <!-- slick js-->
-    <script src="{{ asset('assets/js/slick.js')}}"></script>
-
+    <script src="{{ asset('assets/js/slick.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
     <!-- menu js-->
-    <script src="{{ asset('assets/js/menu.js')}}"></script>
-
+    <script src="{{ asset('assets/js/menu.js') }}"></script>
     <!-- lazyload js-->
-    <script src="{{ asset('assets/js/lazysizes.min.js')}}"></script>
-
+    <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
+    <!-- slick js-->
+    <script src="{{ asset('assets/js/slick.js') }}"></script>
     <!-- Bootstrap js-->
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Bootstrap Notification js-->
-    <script src="{{ asset('assets/js/bootstrap-notify.min.js')}}"></script>
-
-    <!-- Fly cart js-->
-    <script src="{{ asset('assets/js/fly-cart.js')}}"></script>
-
-    <!-- Theme js-->
-    <script src="{{ asset('assets/js/theme-setting.js')}}"></script>
-    <script src="{{ asset('assets/js/script.js')}}"></script>
+    <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ asset('assets/js/theme-setting.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
 
     <script>
         $(window).on('load', function () {
-            setTimeout(function () {
-                $('#exampleModal').modal('show');
-            }, 2500);
+            $('#exampleModal').modal('show');
         });
-
-        function openSearch() {
-            document.getElementById("search-overlay").style.display = "block";
-        }
-
-        function closeSearch() {
-            document.getElementById("search-overlay").style.display = "none";
-        }
     </script>
 
 </body>

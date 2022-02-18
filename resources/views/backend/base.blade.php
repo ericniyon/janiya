@@ -33,6 +33,7 @@
 
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/Toastr/toastr.min.css') }}">
     @livewireStyles
     @stack('extracss')
     <!-- App css-->
@@ -130,6 +131,18 @@
 
 <!--script admin-->
 <script src="{{ asset('assets/js/admin-script.js')}}"></script>
+<script src="{{ asset('assets/Toastr/Toastr.min.js') }}"></script>
+<script>
+    window.livewire.on('alert',param=>{
+        toastr[param['type']](param['message'],param['type']);
+    });
+
+    @if(Session::has('success'))
+        toastr.success("{{Session::get('success')}}");
+    @elseif(Session::has('warning'))
+        toastr.warning("{{Session::get('warning')}}");
+    @endif
+</script>
 @livewireScripts
 @stack('extrajs')
 </body>
