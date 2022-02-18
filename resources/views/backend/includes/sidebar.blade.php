@@ -29,7 +29,7 @@
                             <span>Product</span> <i class="fa fa-angle-right pull-right"></i>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a href="product-list.html"><i class="fa fa-circle"></i>Product List</a></li>
+                            <li><a href="#"><i class="fa fa-circle"></i>Product List</a></li>
                             <li><a href="{{route('add-product')}}"><i class="fa fa-circle"></i>Add Product</a></li>
                         </ul>
                     </li>
@@ -47,12 +47,6 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
-            </li>
-            <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Coupons</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
-                    <li><a href="coupon-list.html"><i class="fa fa-circle"></i>List Coupons</a></li>
-                    <li><a href="coupon-create.html"><i class="fa fa-circle"></i>Create Coupons </a></li>
                 </ul>
             </li>
             <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Sales</span><i class="fa fa-angle-right pull-right"></i></a>

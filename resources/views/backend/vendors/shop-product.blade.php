@@ -1,5 +1,7 @@
 @extends('backend.vendor_base')
-
+@section('title')
+<title>Shop From Our Store</title>
+@endsection
 @section('title', 'Shop from store')
 @section('content')
 

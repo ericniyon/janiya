@@ -1,6 +1,7 @@
 @extends('backend.vendor_base')
-
-@section('title', 'My Store/Shop')
+@section('title')
+<title>My Store</title>
+@endsection
 @section('content')
 
 <div class="container-fluid">

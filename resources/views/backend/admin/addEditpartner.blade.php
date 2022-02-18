@@ -2,7 +2,9 @@
 @push('extracss')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/users/dropzone.css')}}">
 @endpush
-@section('title', 'Add Partner')
+@section('title')
+<title>Add Partner</title>
+@endsection
 @section('content')
 
 <div class="container-fluid">

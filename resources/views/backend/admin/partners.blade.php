@@ -1,6 +1,7 @@
 @extends('backend.base')
-
-@section('title', 'Our Partners')
+@section('title')
+<title>Our Partners</title>
+@endsection
 @section('content')
 
 <div class="container-fluid">

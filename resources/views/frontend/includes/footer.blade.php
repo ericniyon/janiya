@@ -7,7 +7,7 @@
                         <div class="subscribe">
                             <div>
                                 <h4>KNOW IT ALL FIRST!</h4>
-                                <p>Never Miss Anything From Multikart By Signing Up To Our Newsletter.</p>
+                                <p>Never Miss Anything From {{config('app.name')}} By Signing Up To Our Newsletter.</p>
                             </div>
                         </div>
                     </div>
@@ -36,8 +36,7 @@
                     </div>
                     <div class="footer-contant">
                         <div class="footer-logo"><img src="{{asset('assets/img/janiya-logo.jpg')}}" alt=""></div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>The ultimate clothing to see the world in.</p>
                         <div class="footer-social">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -88,11 +87,10 @@
                         </div>
                         <div class="footer-contant">
                             <ul class="contact-list">
-                                <li><i class="fa fa-map-marker"></i>Multikart Demo Store, Demo store India 345-659
+                                <li><i class="fa fa-map-marker"></i>Rwanda, Muhanga District
                                 </li>
-                                <li><i class="fa fa-phone"></i>Call Us: 123-456-7898</li>
-                                <li><i class="fa fa-envelope-o"></i>Email Us: <a href="#">Support@Fiot.com</a></li>
-                                <li><i class="fa fa-fax"></i>Fax: 123456</li>
+                                <li><i class="fa fa-phone"></i>Call Us: <a href="tel:250782779773">250782779773</a></li>
+                                <li><i class="fa fa-envelope-o"></i>Email Us: <a href="mailto:info@janiyashop.rw">info@janiyashop.rw</a></li>
                             </ul>
                         </div>
                     </div>
@@ -105,8 +103,7 @@
             <div class="row">
                 <div class="col-xl-6 col-md-6 col-sm-12">
                     <div class="footer-end">
-                        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2017-18 themeforest powered by
-                            pixelstrap</p>
+                        <p><i class="fa fa-copyright" aria-hidden="true"></i> 2021 {{config('app.name')}}</p>
                     </div>
                 </div>
                 <div class="col-xl-6 col-md-6 col-sm-12">

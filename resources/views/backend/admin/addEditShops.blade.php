@@ -2,7 +2,9 @@
 @push('extracss')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/dropzone.css')}}">
 @endpush
-@section('title', 'Our Vendors')
+@section('title')
+<title>{{isset($vendor)?'Edit '.$vendor->shop_name'Add new shop'}}</title>
+@endsection
 @section('content')
 
 <div class="container-fluid">

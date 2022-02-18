@@ -1,7 +1,8 @@
 @extends('backend.base')
+@section('title')
+<title>Product Categories</title>
+@endsection
 @section('content')
-
-
 <div class="container-fluid">
     <div class="page-header">
         <div class="row">

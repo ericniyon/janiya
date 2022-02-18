@@ -1,6 +1,8 @@
 @extends('backend.base')
 
-
+@section('title')
+<title>Admin Dashboard</title>
+@endsection
 @section('content')
 
 <div class="container-fluid">
