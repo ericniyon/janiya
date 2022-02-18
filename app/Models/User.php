@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'promo_code',
-        'level',
+        'commission_id',
         'affiliate_link',
         'sales',
         'clicks',

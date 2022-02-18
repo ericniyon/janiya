@@ -33,6 +33,7 @@
 
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/Toastr/toastr.min.css') }}">
     @livewireStyles
     @stack('extracss')
     <!-- App css-->
@@ -65,40 +66,15 @@
                     </div>
                     {{-- @endauth --}}
                     <h6 class="mt-3 f-14">
-                        {{Auth::guard('vendor')->user()->name}}
+                        {{Auth::guard('vendor')->user()->shop_name}}
                     </h6>
                 </div>
                 <ul class="sidebar-menu">
                     <li><a class="sidebar-header" href="/admin"><i data-feather="home"></i><span>Dashboard</span></a></li>
                     <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Shops</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
-                            <li>
-                                <a href="#"><i class="fa fa-circle"></i>
-                                    <span>Product</span> <i class="fa fa-angle-right pull-right"></i>
-                                </a>
-                                <ul class="sidebar-submenu">
-                                    <li><a href="{{route('vendor.shop')}}"><i class="fa fa-circle"></i>My Shop</a></li>
-                                    <li><a href="{{route('vendor.store')}}"><i class="fa fa-circle"></i>Add To Store</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-circle"></i>
-                                    <span>Product Category</span> <i class="fa fa-angle-right pull-right"></i>
-                                </a>
-                                <ul class="sidebar-submenu">
-                                    <li><a href="{{route('product-category')}}"><i class="fa fa-circle"></i>Categories</a></li>
-                                    {{-- <li><a href="/"><i class="fa fa-circle"></i>Add Category</a></li> --}}
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-circle"></i>
-                                    <span>Product Attributes</span> <i class="fa fa-angle-right pull-right"></i>
-                                </a>
-                                <ul class="sidebar-submenu">
-                                    <li><a href="category-digital.html"><i class="fa fa-circle"></i>List</a></li>
-                                    <li><a href="add-digital-product.html"><i class="fa fa-circle"></i>Add New</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="{{route('vendor.shop')}}"><i class="fa fa-circle"></i>My Shop</a></li>
+                            <li><a href="{{route('vendor.store')}}"><i class="fa fa-circle"></i>Add To Store</a></li>
                         </ul>
                     </li>
                     <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Sales</span><i class="fa fa-angle-right pull-right"></i></a>
@@ -107,11 +83,8 @@
                             <li><a href="transactions.html"><i class="fa fa-circle"></i>Invoice</a></li>
                         </ul>
                     </li>
-                    <li><a class="sidebar-header" href=""><i data-feather="tag"></i><span>Coupons</span><i class="fa fa-angle-right pull-right"></i></a>
-                        <ul class="sidebar-submenu">
-                            <li><a href="coupon-list.html"><i class="fa fa-circle"></i>List Coupons</a></li>
-                            <li><a href="coupon-create.html"><i class="fa fa-circle"></i>Create Coupons </a></li>
-                        </ul>
+                    <li><a class="sidebar-header" href="{{route('vendor.coupons')}}">
+                        <i data-feather="tag"></i><span>Coupons</span></a>
                     </li>
                     <li><a class="sidebar-header" href=""><i data-feather="user-plus"></i><span>Clients</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
@@ -206,6 +179,18 @@
 
 <!--script admin-->
 <script src="{{ asset('assets/js/admin-script.js')}}"></script>
+<script src="{{ asset('assets/Toastr/Toastr.min.js') }}" defer></script>
+<script>
+    window.livewire.on('alert',param=>{
+        toastr[param['type']](param['message'],param['type']);
+    });
+
+    @if(Session::has('success'))
+        toastr.success("{{Session::get('success')}}");
+    @elseif(Session::has('warning'))
+        toastr.warning("{{Session::get('warning')}}");
+    @endif
+</script>
 @livewireScripts
 @stack('extrajs')
 </body>

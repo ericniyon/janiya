@@ -44,7 +44,7 @@
                         <td>
                           <div class="d-flex justify-content-center align-items-center">
                             <button class="btn btn-primary btn-sm" wire:click="promoteForm({{$user->id}})">
-                                <i class="fa fa-trash"></i>
+                                <i class="fa fa-arrow-up"></i>
                             </button>
                             <button wire:click="delete({{$user->id}})" class="btn btn-danger btn-sm" 
                               wire:loading.attr="disabled" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()">
@@ -67,18 +67,12 @@
   <div class="col-md-4 card">
     <form class="card-body" method="POST" wire:submit.prevent="promote()">
         @csrf
-        <h4 class="text-center">Insert New Class</h4>
+        <h4 class="text-center">{{$user_name}}</h4>
         <div class="form-group">
-            <label for="name">Item Name</label>
-            <input type="text" wire:model="user" class="form-control" 
-            value="{{$user}}">
-            {{-- <input type="hidden" wire:model="product" value="{{$product}}" class="form-control" > --}}
-        </div>
-        <div class="form-group">
-            <label for="quantity">Quantity</label>
-            <input type="text" wire:model="quantity" class="form-control 
-            @error('quantity') is-invalid @enderror" value="{{old('quantity')}}">
-            @error('quantity')
+            <label for="promoter_code">Promo Code</label>
+            <input type="text" wire:model="promoter_code" class="form-control 
+            @error('promoter_code') is-invalid @enderror" value="{{old('promoter_code')}}">
+            @error('promoter_code')
                 <span class="invalid-feedback">{{$message}}</span>
             @enderror
         </div>

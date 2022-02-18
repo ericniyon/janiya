@@ -6,6 +6,7 @@
             <th scope="col">Name</th>
             <th scope="col">Contact Info</th>
             <th scope="col">Promo Code</th>
+            <th scope="col">Level</th>
             <th scope="col">Sales</th>
             <th scope="col">Requests</th>
             <th scope="col"><i class="fa fa-ellipsis"></i></th>
@@ -29,6 +30,7 @@
                 </div>
               </td>
               <td>{{$partner->promo_code}}</td>
+              <td>{{$partner->level}}</td>
               <td>salescount</td>
               <td>
                   <div class="d-flex flex-column">
