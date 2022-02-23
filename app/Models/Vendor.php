@@ -14,10 +14,25 @@ class Vendor extends Authenticatable
         protected $guard = 'vendor';
 
         protected $fillable = [
-            'name', 'shop_name', 'email', 'phone', 'confirmed', 'active', 'profile', 'password',
+            'name', 'shop_name', 'email', 'phone', 'confirmed', 'active', 'details', 'slug', 'profile', 'password',
         ];
 
         protected $hidden = [
             'password', 'remember_token',
         ];
+
+        public function getRouteKeyName()
+        {
+            return 'slug';
+        }
+
+        /**
+         * Get all of the boughtProducts for the Vendor
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\HasMany
+         */
+        public function boughtProducts()
+        {
+            return $this->hasMany(Store::class, 'foreign_key', 'local_key');
+        }
 }

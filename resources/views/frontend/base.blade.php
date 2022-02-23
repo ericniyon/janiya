@@ -36,7 +36,7 @@
 
     <!-- Theme css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-
+    @stack('extra-css')
 
 
 </head>
@@ -101,12 +101,13 @@
     @yield('scripts')
     <!-- latest jquery-->
 
-    <script src="{{ asset('assets/js/slick.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.js') }}"></script>
     <!-- menu js-->
     <script src="{{ asset('assets/js/menu.js') }}"></script>
     <!-- lazyload js-->
     <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
+    <script src="{{ asset('assets/js/sticky-cart-bottom.js') }}"></script>
     <!-- slick js-->
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     <!-- Bootstrap js-->

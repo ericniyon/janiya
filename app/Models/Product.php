@@ -9,12 +9,17 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'description', 'product_category_id','product_image'
+        'name', 'slug', 'description', 'product_category_id','product_image'
     ];
 
     public function product_categories()
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     /**
@@ -24,6 +29,6 @@ class Product extends Model
      */
     public function attributes()
     {
-        return $this->hasMany(ProductValiations::class);
+        return $this->hasMany(ProductValiations::class,'product_name');
     }
 }

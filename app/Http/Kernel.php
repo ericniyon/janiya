@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'active' => \App\Http\Middleware\IsActivated::class,
         'confirmed' => \App\Http\Middleware\IsConfirmed::class,
+        'referral' =>\App\Http\Middleware\ReferralSystem::class,
     ];
 }

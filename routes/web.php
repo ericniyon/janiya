@@ -24,7 +24,7 @@ use App\Http\Controllers\Vendors\StoresController;
 */
 
 // Frontend routes
-Route::get('/', [HomeController::class, 'index'] )->name('home');
+Route::get('/', [HomeController::class, 'index'] )->middleware('referral')->name('home');
 
 
 
@@ -40,10 +40,9 @@ Route::post('save-category', [AdminController::class, 'save_category'] )->name('
 
 
 // products routes
-Route::view('test','frontend.pages.nurse');
 Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
-Route::get('shop-product', [HomeController::class, 'shop'] )->name('shop');
-Route::get('product_details/{id}', [HomeController::class, 'product_details'] )->name('product_details');
+Route::get('shop', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
+Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
 
 
 
@@ -101,6 +100,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name('vendor.')->group(function(){
     Route::view('/dashboard','backend.vendors.index')->name('dashboard');
     Route::get('store/add-products',[StoresController::class,'index'])->name('store');
+    Route::get('store/products/{product}',[StoresController::class,'shop'])->name('store.single');
     Route::view('store/my-shop','backend.vendors.shop')->name('shop');
 
     // coupons
@@ -110,11 +110,10 @@ Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name(
 // Normal Users's routes
 Route::middleware('auth')->group(function(){
     // Route::view('/my-orders')->name('orders');
+    Route::get('/dashboard', function () {return view('frontend.pages.dashboard'); })->name('dashboard');
+    Route::put('become-affiate',[HomeController::class, 'becomeAffiliate'])->name('affiliate');
 });
 
-Route::get('/dashboard', function () {
-    return view('backend.pages.admin_dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 
 

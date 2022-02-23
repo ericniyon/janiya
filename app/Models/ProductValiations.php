@@ -19,7 +19,7 @@ class ProductValiations extends Model
      */
     public function product()
     {
-        return $this->belongsTo(Product::class, 'product_name', 'id');
+        return $this->belongsTo(Product::class,'product_name', 'id');
     }
 
     public function color()

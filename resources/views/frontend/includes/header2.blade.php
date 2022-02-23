@@ -18,8 +18,15 @@
                         <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
                             My Account
                             <ul class="onhover-show-div">
+                                @guest
                                 <li><a href="/login">Login</a></li>
                                 <li><a href="/register">register</a></li>
+                                @else
+                                <li><a href="/dashboard">Dashboard</a></li>
+                                @if (is_null(Auth::user()->affiliate_link))
+                                <li><a href="/register">Become Affiates</a></li>
+                                @endif
+                                @endguest
                             </ul>
                         </li>
                     </ul>

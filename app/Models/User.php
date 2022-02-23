@@ -49,4 +49,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the commission associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function commission()
+    {
+        return $this->belongsTo(Commission::class);
+    }
 }

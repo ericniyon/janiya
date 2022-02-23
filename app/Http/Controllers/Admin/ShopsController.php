@@ -17,6 +17,7 @@ class ShopsController extends Controller
             'shop'=>'required|unique:vendors,shop_name|string|min:3|max:120',
             'email'=>'required|email|string|min:5|max:120',
             'phone'=>'required|string|min:10|max:12',
+            'details'=>'required|string|min:20',
             'profile'=>'nullable|image|mimes:png,jpg,webp|max:700',
         ]);
         $password = str()->random(8);
@@ -27,10 +28,12 @@ class ShopsController extends Controller
         Vendor::create([
             'name'=>$request->name, 
             'shop_name'=>$request->shop, 
+            'slug'=>str()->slug($request->shop),
             'email'=>$request->email, 
             'phone'=>$request->phone, 
             'confirmed'=>1, 
             'active'=>1, 
+            'details'=>$request->details,
             'profile'=>$profile, 
             'password'=>Hash::make($password),
         ]);
@@ -50,6 +53,7 @@ class ShopsController extends Controller
             'shop'=>'required|unique:vendors,shop_name,'.$vendor->id.'|string|min:3|max:120',
             'email'=>'required|email|string|min:5|max:120',
             'phone'=>'required|string|min:10|max:12',
+            'details'=>'required|string|min:20',
             'profile'=>'sometimes|image|mimes:png,jpg,webp|max:700',
         ]);
         if ($request->hasFile('logo')) {
@@ -63,9 +67,11 @@ class ShopsController extends Controller
         }
         $vendor->update([
             'name'=>$request->name, 
+            'slug'=>str()->slug($request->shop),
             'shop_name'=>$request->shop, 
             'email'=>$request->email, 
             'phone'=>$request->phone,
+            'details'=>$request->details,
             'profile'=>$profile,
         ]);
 

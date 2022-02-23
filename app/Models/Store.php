@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Store extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'product_valiations_id', 'quantity'];
+    protected $fillable = ['vendor_id', 'product_id'];
 
     // public function products()
     // {
@@ -17,11 +17,21 @@ class Store extends Model
 
     public function product()
     {
-        return $this->belongsTo(ProductValiations::class, 'product_valiations_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
     
     public function owner()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
+    }
+
+    /**
+     * The valiations that belong to the Store
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function valiations()
+    {
+        return $this->belongsToMany(ProductValiations::class, 'product_valiation_store', 'store_id', 'product_valiations_id')->withPivot('quantity');
     }
 }

@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/dropzone.css')}}">
 @endpush
 @section('title')
-<title>{{isset($vendor)?'Edit '.$vendor->shop_name'Add new shop'}}</title>
+<title>{{isset($vendor)?'Edit '.$vendor->shop_name:'Add new shop'}}</title>
 @endsection
 @section('content')
 
@@ -71,6 +71,14 @@
                                 <span class="invalid-feedback" role="alert">{{$message}}</span>
                             @enderror
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label pt-0"> Shop Description</label>
+                        <textarea name="details" class="form-control @error('details') is-invalid @enderror"
+                        cols="30" rows="5" >{{isset($vendor)?$vendor->details:old('details')}}</textarea>
+                        @error('details')
+                            <span class="invalid-feedback" role="alert">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label class="col-form-label pt-0"> Shop logo/image</label>
