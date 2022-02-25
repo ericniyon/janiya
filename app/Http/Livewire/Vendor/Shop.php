@@ -14,8 +14,8 @@ class Shop extends Component
     public $perPage = 10, $searchkey = '';
     public function render()
     {
-        $items = Store::with('product','owner')
-                        ->where('user_id',Auth::user()->id)
+        $items = Store::with('product')
+                        ->where('vendor_id',Auth::guard('vendor')->user()->id)
                         ->orderByDesc('created_at')
                         ->paginate($this->perPage);
         return view('livewire.vendor.shop', compact('items'));

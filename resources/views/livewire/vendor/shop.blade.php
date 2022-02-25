@@ -1,37 +1,40 @@
-<div class="table-responsive">
-    <table class="table">
+<div class="card-body pt-0 mt-0" >
+  @forelse ($items as $item)
+  <div class="row" style="border-bottom: 1px solid black!important">
+    <div class="col-md-4 d-flex flex-column">
+      <img src="{{$item->product->thumb()->exists()?asset(
+        Storage::url($item->product->thumb->image)):'../assets/images/dashboard/man.png'}}"
+         height="130" width="" class="w-50 mt-2">
+        <h5>{{$item->name}}</h5>
+    </div>
+    <div class="col-md-8">
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Item</th>
-            <th scope="col">Unit Price</th>
+            <th scope="col">Color</th>
+            <th scope="col">Size</th>
             <th scope="col">Quantity</th>
-            <th scope="col">Attributes</th>
-            {{-- <th scope="col">Sales</th> --}}
+            <th scope="col">Edit</th>
           </tr>
         </thead>
         <tbody>
-            @forelse ($items as $item)
+            @forelse ($item->valiations as $var)
             <tr>
               <th scope="row">{{$loop->iteration}}</th>
-              <td>
-                <div class="d-flex align-items-center">
-                  {{-- <img class="mr-2 rounded-circle lazyloaded blur-up" height="30" width="30" 
-                src="{{$item->profile?asset(Storage::url($item->profile)):'../assets/images/dashboard/man.png'}}" alt="#"> --}}
-                {{$item->product->product->name}}</td>
-                </div>
-              <td>{{$item->product->price}}</td>
-              <td>{{$item->quantity}}</td>
-              <td>
-                  <div class="d-flex flex-column">
-                      <span><strong>Color:</strong> {{$item->product->color->color_name}}</span>
-                      <span><strong>Size:</strong> {{$item->product->size->size}}</span>
-                  </div>
-              </td>
+              <td>{{$var->color->color_name}}</td>
+              <td>{{$var->size->size}}</td>
+              <td>{{$var->quantity}}</td>
+              <td>edit</td>
             </tr> 
             @empty
                 
             @endforelse
         </tbody>
       </table>
+    </div>
+  </div>
+  @empty
+      
+  @endforelse
 </div>

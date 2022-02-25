@@ -1,28 +1,29 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <h5>Shop</h5>
+            <div class="card-header p-2 pt-3 d-flex justify-content-between">
+                <h5>List of available products from {{config('app.name')}} Store</h5>
+                <div class="d-flex">
+                    <input type="search" wire:model.lazy="searchKey" id="" class="form-control">
+                </div>
             </div>
-            <div class="card-body row pt-0 mt-0" >
+            <div class="card-body row pt-0 pl-4 mt-0" >
                 @forelse ($products as $product)
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-4 mt-1">
                     <div class="row">
-                        <div class="col-md-4">
-                            <img src="{{asset('../assets/images/pro3/27.jpg')}}" class="rounded img-responsive w-100"
-                             height="150">
-                            {{-- <img src="{{asset($product->product_image)}}" class="rounded img-responsive"> --}}
-                            <h5 class="d-flex align-items-center justify-content-center px-1">{{$product->name}}</h5>
-                        </div>
                         <div class="col-md-5">
-                            <ul>
-                                @foreach ($product->attributes as $item)
-                                <li>{{$item->color->color_name.__(', ').$item->size->size._(', ').$item->price.__('RWF, ').$item->quantity}}</li>
-                                @endforeach
-                            </ul>
+                            <img src="{{asset(Storage::url($product->thumb->image))}}" class="rounded img-responsive w-100"
+                             height="150">
+                            <h5 class="text-center">{{$product->name}}</h5>
+                            <h4 class="text-center font-weight-bold"></h4>
                         </div>
-                        <div class="col-md-3">
-                            <a href="{{route('vendor.store.single', $product->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Buy</a>
+                        <div class="col-md-7 d-flex flex-column justify-content-between">
+                            <div>
+                                <h5><strong>Price: </strong>{{$product->price}}</h5>
+                                <h5><strong>Category: </strong>{{$product->product_categories->category_name}}</h5>
+                            </div>
+                            <a href="{{route('vendor.store.single', $product->slug)}}" class="btn btn-primary">
+                                <i class="fa fa-plus-circle"></i> Buy</a>
                         </div>
                     </div>
                 </div>

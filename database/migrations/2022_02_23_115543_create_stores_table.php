@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\ProductValiations;
-use App\Models\Store;
+use App\Models\Product;
+use App\Models\Vendor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,11 +15,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_valiation_store', function (Blueprint $table) {
+        Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(ProductValiations::class)->constrained();
-            $table->foreignIdFor(Store::class)->constrained();
-            $table->integer('quantity')->unsigned();
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->foreignIdFor(Vendor::class)->constrained();
+            $table->foreignIdFor(Product::class)->constrained();
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_valiation_store');
+        Schema::dropIfExists('stores');
     }
 };

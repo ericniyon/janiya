@@ -16,10 +16,7 @@ class Store extends Component
     public $perPage = 10, $searchkey = '';
     public function render()
     {
-        $products = Product::with('attributes')
-                    ->whereHas('attributes', function($query){
-                        $query->where('quantity','>',3);
-                    })
+        $products = Product::with('colors','sizes','thumb')
                     ->paginate($this->perPage);
         return view('livewire.vendor.store', compact('products'));
     }

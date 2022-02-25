@@ -7,155 +7,138 @@
 
 
     <form enctype="multipart/form-data">
-
-       <div class="row">
-           <div class="col-md-6">
-            <div class="form-group">
-                <label for="validationCustom01" class="col-form-label pt-0"><span>*</span> Product Name</label>
-                <input class="form-control" wire:model="name" name="name" id="validationCustom01" type="text" required="">
-            </div>
-           </div>
-           <div class="col-md-6">
-            <div class="form-group">
-                <label for="validationCustom02" class="col-form-label pt-0"><span>*</span> Categories</label>
-                <select id="validationCustom02" class="custom-select form-control" required="" wire:model="product_category_id" name="product_category_id">
-                    <option value="">--Select--</option>
-                    @foreach ($categories as $item)
-
-                    <option value="{{$item->id}}">{{$item->category_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-           </div>
-           <div class="col-md-6">
-            <div class="form-group">
-                <label for="validationCustom02" for="validationCustom01" class="col-form-label pt-0"><span>*</span> Product Description</label>
-                <textarea wire:model="description" name="description" id="validationCustom02" cols="3" rows="4"></textarea>
-            </div>
-           </div>
-           <div class="col-md-4">
-            <div class="form-group">
-                <label for="validationCustom02" for="validationCustom01" class="col-form-label pt-0"><span>*</span> Product Image</label>
-                <img src="" alt="" srcset="" id="preview-image-before-upload" height="70">
-            </div>
-            <input wire:model="product_image" type="file" name="product_image" id="image" >
-           </div>
-
-
-       </div>
-
-
-       <hr>
-       <h4>Product Valuation</h4>
-        <div class=" add-input">
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <input type="number" class="form-control" placeholder="Enter Quantity" wire:model="quantity.0">
-                        @error('quantity.0') <span class="text-danger error">{{ $message }}</span>@enderror
+        <div class="row">
+            <div class="col-md-7 border-right">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="validationCustom01" class="col-form-label pt-0"><span>*</span> Product Name</label>
+                        <input class="form-control" wire:model="name" name="name" id="validationCustom01" type="text" required="">
+                    </div>
+                    <div class="form-group col-md-6">
+                         <label class="col-form-label pt-0"><span>*</span> Price </label>
+                         <input class="form-control @error('price') is-invalid @enderror" wire:model="price" 
+                         name="price" type="number" required="">
+                     </div>
+                     <div class="form-group col-md-12">
+                         <label class="col-form-label pt-0"><span>*</span> Categories</label>
+                         <select class="custom-select form-control" required="" wire:model="product_category_id" name="product_category_id">
+                             <option value="">--Select--</option>
+                             @foreach ($categories as $item)
+         
+                             <option value="{{$item->id}}">{{$item->category_name}}</option>
+                             @endforeach
+                         </select>
+                     </div>
+                    <div class="col-md-12">
+                     <div class="form-group">
+                         <label class="col-form-label pt-0"><span>*</span> Product Description</label>
+                         <textarea wire:model="description" name="description" cols="3" rows="4"></textarea>
+                     </div>
+                    </div>
+                    <div class="col-md-4">
+                     <div class="form-group">
+                         <label class="col-form-label pt-0"><span>*</span> Product Image</label>
+                         <img src="" alt="" srcset="" id="preview-image-before-upload" height="70">
+                         <input wire:model="product_image" type="file" multiple accept="image/*" 
+                         name="product_image" id="image" >
+                     </div>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <input type="number" class="form-control" placeholder="Enter Price" wire:model="price.0">
-                        @error('price.0') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select  wire:model="product_color.0" id="" class="form-control">
-                            <option value="" >--- select color ----</option>
-                            @foreach ($colors as $item)
-                            <option value="{{$item->id}}" >{{$item->color_name}}</option>
-
-                            @endforeach
-                        </select>
-                        {{-- <input type="text" class="form-control" placeholder="Enter Color" wire:model="product_color.0"> --}}
-                        @error('product_color.0') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select  wire:model="product_size.0" id="" class="form-control">
-                            <option value="" >--- select size ----</option>
+            </div>
+            <div class="col-md-5 p-2 border-left pt-4">
+                @foreach($sizesLoop as $index=>$item)
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Product Size</label>
+                        <select name="sizesLoop[{{$index}}][size]" 
+                        wire:model.lazy="sizesLoop.{{$index}}.size" 
+                        class="form-control show-tick ms @error('sizesLoop.'.$index.'.size') is-invalid @enderror">
+                            <option value="">Choose Product size</option>
                             @foreach ($sizes as $item)
-                            <option value="{{$item->id}}" >{{$item->size}}</option>
-
+                                <option value="{{$item->id}}">{{$item->size}}</option>
                             @endforeach
                         </select>
-                        {{-- <input type="text" class="form-control" placeholder="Enter Size"> --}}
-                        @error('product_size.0') <span class="text-danger error">{{ $message }}</span>@enderror
+                        @error('sizesLoop.'.$index.'.size')
+                            <span class="invalid-feedback" role="alert">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >Quantity</label>
+                        <input type="number" value="sizesLoop[{{$index}}][quantity]" 
+                        name="sizesLoop[{{$index}}][quantity]" 
+                        wire:model.lazy="sizesLoop.{{$index}}.quantity" id="quantity" 
+                        class="form-control @error('sizesLoop.'.$index.'quantity') is-invalid @enderror">
+                        @error('sizesLoop.'.$index.'quantity')
+                            <span class="invalid-feedback" role="alert">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-2 pt-3 d-flex justify-content-end align-items-center">
+                        <button class="btn btn-outline-none text-success p-2 mr-2" 
+                        wire:click.prevent="addNewSizeRow">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button class="btn btn-outline-none p-2 text-danger" 
+                        {{$index==0?'disabled':''}} 
+                        wire:click.prevent="removeSizeRow({{$index}})">
+                            <i class="fa fa-minus"></i>
+                        </button>
                     </div>
                 </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter Name" wire:model="product_name.0" disabled>
-                        @error('product_name.0') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <button class="btn text-white btn-info btn-sm" wire:click.prevent="add({{$i}})">Add</button>
-                </div>
+                @endforeach
             </div>
         </div>
-
-        @foreach($inputs as $key => $value)
-            <div class=" add-input">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter quantity" wire:model="quantity.{{ $value }}">
-                            @error('quantity.'.$value) <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter price" wire:model="price.{{$value}}">
-                            @error('price.'.$value) <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <select  wire:model="product_color.{{$value}}" id="" class="form-control">
-                                <option value="" >--- select color ----</option>
-                                @foreach ($colors as $item)
-                                <option value="{{$item->id}}" >{{$item->color_name}}</option>
-
-                                @endforeach
-                            </select>
-                            {{-- <input type="text" class="form-control" placeholder="Enter color" wire:model="product_color.{{$value}}"> --}}
-                            @error('product_color.'.$value) <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <select  wire:model="product_size.{{$value}}" id="" class="form-control">
-                                <option value="" >--- select size ----</option>
-                                @foreach ($sizes as $item)
-                                <option value="{{$item->id}}" >{{$item->size}}</option>
-
-                                @endforeach
-                            </select>
-                            {{-- <input type="text" class="form-control" placeholder="Enter size" wire:model="product_size.{{$value}}"> --}}
-                            @error('product_size.'.$value) <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter name" wire:model="product_name.{{$value}}" disabled>
-                            @error('product_name.'.$value) <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <button class="btn btn-danger btn-sm" wire:click.prevent="remove({{$key}})">Remove</button>
-                    </div>
+       <hr>
+       <h4>Product Valiations</h4>
+        <div class=" add-input">
+            @foreach($colorsLoop as $index=>$item)
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label >Image</label>
+                    <input type="file" accept="image/*" value="colorsLoop[{{$index}}][image]" 
+                    name="colorsLoop[{{$index}}][image]" 
+                    wire:model.lazy="colorsLoop.{{$index}}.image" id="image" 
+                    class="form-control @error('colorsLoop.'.$index.'image') is-invalid @enderror">
+                    @error('colorsLoop.'.$index.'image')
+                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Color</label>
+                    <select name="colorsLoop[{{$index}}][color]" wire:model.lazy="colorsLoop.{{$index}}.color" 
+                    class="form-control show-tick ms @error('colorsLoop.'.$index.'.color') is-invalid @enderror">
+                        <option value="">Choose Color</option>
+                        @foreach ($colors as $item)
+                            <option value="{{$item->id}}">{{$item->color_name}}</option>
+                        @endforeach
+                    </select>
+                    @error('colorsLoop.'.$index.'.color')
+                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-2">
+                    <label >Quantity</label>
+                    <input type="number" value="colorsLoop[{{$index}}][quantity]" 
+                    name="colorsLoop[{{$index}}][quantity]" 
+                    wire:model.lazy="colorsLoop.{{$index}}.quantity" id="quantity" 
+                    class="form-control @error('colorsLoop.'.$index.'quantity') is-invalid @enderror">
+                    @error('colorsLoop.'.$index.'quantity')
+                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                    @enderror
+                </div>
+                <div class="form-group col-md-1 pt-3 d-flex justify-content-end align-items-center">
+                    <button class="btn btn-outline-none text-success p-2 mr-2" wire:click.prevent="addNewRow">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <button class="btn btn-outline-none p-2 text-danger" 
+                    wire:click.prevent="removeRow({{$index}})" 
+                    {{$index==0?'disabled':''}}>
+                        <i class="fa fa-minus"></i>
+                    </button>
                 </div>
             </div>
-        @endforeach
+            @endforeach
+        </div>
+
 
         <div class="row">
             <div class="col-md-12">

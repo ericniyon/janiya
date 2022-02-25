@@ -41,7 +41,7 @@
                     <h5>Add Size</h5>
                 </div>
                 <div class="card-body">
-                    <form class="needs-validation" action="save-size" method="POST">
+                    <form class="needs-validation" action="{{route('admin.save-size')}}" method="POST">
                         @csrf
                         <div class="form-group row">
                             <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Sise Name</label>

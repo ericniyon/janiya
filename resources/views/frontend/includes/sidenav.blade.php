@@ -8,12 +8,12 @@
                 <li class="active"><a href="{{url('/dashboard')}}">Account Info</a></li>
                 <li><a href="#">My Orders</a></li>
                 <li><a href="#">My Wishlist</a></li>
-                <li><a href="#">My Profile</a></li>
+                <li><a href="{{route('profile')}}">My Profile</a></li>
                 @if (Auth::user()->promo_code)
                 <li><a href="#">Withdraw</a></li>
                 <li><a href="#">history</a></li>
                 @endif
-                <li><a href="#">Change Password</a></li>
+                <li><a href="{{route('profile.password')}}">Change Password</a></li>
                 <li class="last">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">Log Out</a>

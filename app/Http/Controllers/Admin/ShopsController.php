@@ -58,7 +58,7 @@ class ShopsController extends Controller
         ]);
         if ($request->hasFile('logo')) {
             if ($vendor->profile) {
-                Storage::disk()->delete($vendor->profile);
+                Storage::delete($vendor->profile);
             }
             $fileName = str()->slug($request->shop).time().'.'.$request->logo->extension();
             $profile = $request->logo->storeAs('vendors',$fileName,'public');

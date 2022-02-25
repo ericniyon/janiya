@@ -68,7 +68,7 @@
                                             <h6>Promo Code: <strong>{{Auth::user()->promo_code}}</strong>
                                             </h6>
                                             <h6>Category/Level: <strong>{{Auth::user()->commission->name}}</strong></h6>
-                                            <h6>Total Sales: {{Auth::user()->sales}}</h6>
+                                            <h6>Total Sales: {{Auth::user()->partner_total_sales}}</h6>
                                         </div>
                                     </div>
                                     @endif
@@ -78,13 +78,13 @@
                                 <div class="col-12">
                                     <div class="box">
                                         <div class="box-title">
-                                            <h3>Contact Information</h3><a href="#">Edit</a>
+                                            <h3>Contact Information</h3><a href="{{route('profile')}}">Updated my profile</a>
                                         </div>
                                         <div class="box-content">
-                                            <h6>{{Auth::user()->name}}</h6>
-                                            <h6>{{Auth::user()->email}}</h6>
-                                            <h6>{{Auth::user()->phone}}</h6>
-                                            <h6><a href="#">Change Password</a></h6>
+                                            <h6><strong>Full Name:</strong> {{Auth::user()->name}}</h6>
+                                            <h6><strong>Email Address: </strong>{{Auth::user()->email}}</h6>
+                                            <h6><strong>Phone Number: </strong>{{Auth::user()->phone}}</h6>
+                                            <h6><a href="{{route('profile.password')}}">Change Password</a></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -92,13 +92,19 @@
                             <div class="mt-2">
                                 <div class="box">
                                     <div class="box-title">
-                                        <h3>Address Book</h3><a href="#">Manage Addresses</a>
+                                        <h3>Address Book</h3><a href="{{route('profile')}}">Updated my profile</a>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
                                             <h6>Default Billing Address</h6>
+                                            @if (is_null(Auth::user()->neighborhood)) 
                                             <address>You have not set a default billing address.<br><a href="#">Edit
                                                     Address</a></address>
+                                            @else
+                                            <h6><strong>Address:</strong> {{Auth::user()->address1}}</h6>
+                                            <h6><strong>Neighborhood: </strong>{{Auth::user()->neighborhood}}</h6>
+                                            <h6><strong>Street Address</strong>{{Auth::user()->street_name}}</h6>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

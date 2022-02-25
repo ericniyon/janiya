@@ -138,16 +138,16 @@
                                         <div class="img-wrapper" style="height: 14rem">
                                             <div class="front">
                                                 <a href="{{route('product_details'
-                                                ,[$store->owner->slug,$store->product->slug])}}" class="bg-size blur-up lazyloaded" 
+                                                ,[$store->shop->slug,$store->slug])}}" class="bg-size blur-up lazyloaded" 
                                                 style="background-image: url(&quot;{{ asset('assets/images/pro3/35.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;"><img src="{{ asset('assets/images/pro3/35.jpg')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="back">
                                                 <a href="{{route('product_details'
-                                                ,[$store->owner->slug,$store->product->slug])}}" class="bg-size blur-up lazyloaded" 
+                                                ,[$store->shop->slug,$store->slug])}}" class="bg-size blur-up lazyloaded" 
                                                 style="background-image: url(&quot;{{ asset('assets/images/pro3/36.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;"><img src="{{ asset('assets/images/pro3/36.jpg')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="cart-info cart-wrap">
-                                                <a href="{{route('add.to.cart',$store->product->id)}}" title="Add to Wishlist"><i class="ti-shopping-cart" aria-hidden="true"></i></a> 
+                                                <a href="{{route('add.to.cart',$store->id)}}" title="Add to Wishlist"><i class="ti-shopping-cart" aria-hidden="true"></i></a> 
                                                 <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-heart"></i></button> 
                                                 <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a>
                                             </div>
@@ -162,8 +162,8 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                                 <a href="{{route('product_details'
-                                                ,[$store->owner->slug,$store->product->slug])}}">
-                                                    <h6>{{$store->product->name}}</h6>
+                                                ,[$store->shop->slug,$store->slug])}}">
+                                                    <h6>{{$store->name}}</h6>
                                                 </a>
                                                 {{-- <h4>$500.00</h4> --}}
                                                 {{-- <ul class="color-variant">

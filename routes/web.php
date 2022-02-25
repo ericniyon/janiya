@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AffilitesController;
 use App\Http\Controllers\Admin\ColorsController;
 use App\Http\Controllers\Admin\PartnersController;
+use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ShopsController;
 use App\Http\Controllers\Admins\AdminController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -26,35 +27,12 @@ use App\Http\Controllers\Vendors\StoresController;
 // Frontend routes
 Route::get('/', [HomeController::class, 'index'] )->middleware('referral')->name('home');
 
-
-
-
-
-
-
-
 // products routes
-
-Route::get('product/category', [AdminController::class, 'product_category'] )->name('product-category');
-Route::post('save-category', [AdminController::class, 'save_category'] )->name('save-category');
-
-
-// products routes
-Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
 Route::get('shop', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
 Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
-
-
-
 // all about colors
 Route::get('colors', [ColorsController::class, 'colors'] )->name('colors');
 Route::post('save-color', [ColorsController::class, 'save_colors'] )->name('save-color');
-
-
-// all about size
-Route::get('sizes', [Size::class, 'size'] )->name('size');
-Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
-
 // cart
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
@@ -63,21 +41,24 @@ Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remo
 
 // checkout
 Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-
-
-
 Route::post('purchase', [CheckoutController::class, 'payment'])->name('purchase');
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 
-
 // Admin's routes
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
-
-
     Route::get('/dashboard', function () {
         return view('backend.pages.admin_dashboard');
     })->name('dashboard');
-
+    Route::get('sizes', [Size::class, 'size'] )->name('size');
+    Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
+    Route::get('product/category', [AdminController::class, 'product_category'] )->name('product-category');
+    Route::post('save-category', [AdminController::class, 'save_category'] )->name('save-category');
+    Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
+    Route::view('products','backend.admin.products')->name('products.all');
+    Route::get('products/{product}',[ProductsController::class,'show'])->name('products.single');
+    Route::put('products/{product}',[ProductsController::class,'updateProduct'])->name('products.update');
+    Route::put('products/{product}/{size}',[ProductsController::class,'updateSize'])->name('products.update.size');
+    Route::put('products/{product}/{color}/n',[ProductsController::class,'updateColor'])->name('products.update.color');
 
     Route::view('/shops','backend.admin.shops')->name('shops');
     Route::view('/shops/add-new-shop','backend.admin.addEditShops')->name('shops.add');
@@ -112,6 +93,10 @@ Route::middleware('auth')->group(function(){
     // Route::view('/my-orders')->name('orders');
     Route::get('/dashboard', function () {return view('frontend.pages.dashboard'); })->name('dashboard');
     Route::put('become-affiate',[HomeController::class, 'becomeAffiliate'])->name('affiliate');
+    Route::view('profile', 'frontend.pages.profile')->name('profile');
+    Route::put('profile',[HomeController::class, 'updateProfile'])->name('profile.update');
+    Route::view('update-password', 'frontend.pages.password')->name('profile.password');
+    Route::put('update-password',[HomeController::class, 'updatePassword'])->name('profile.password.update');
 });
 
 

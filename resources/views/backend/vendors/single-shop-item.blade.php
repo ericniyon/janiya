@@ -31,7 +31,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
-                        <h5>Buy {{$product->name}} into my store</h5>
+                        <h5>Add {{$product->name}} to your store</h5>
                     </div>
                     <div class="card-body pt-0 mt-0" >
                         @livewire('vendor.single-shop',['product' => $product], key($product->id))

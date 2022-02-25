@@ -27,6 +27,10 @@ class User extends Authenticatable
         'sales',
         'clicks',
         'active',
+        'partner_total_sales',
+        'address1',
+        'neighborhood',
+        'street_name',
         'profile',
         'password',
     ];

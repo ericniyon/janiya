@@ -4,23 +4,14 @@
     </div>
     <div class="sidebar custom-scrollbar">
         <div class="sidebar-user text-center">
-            {{-- @auth('vendor') --}}
             <div>
                 <img class="img-60 rounded-circle lazyloaded blur-up"
                 src="../assets/images/dashboard/man.png" alt="#">
             </div>
-            {{-- @endauth --}}
             <h6 class="mt-3 f-14">
-                {{-- @auth('admin') --}}
-                {{-- {{Auth::guard('admin')->user()->name}} --}}
-                {{-- @endauth --}}
-                {{-- @auth('vendor') --}}
-                {{-- {{Auth::guard('vendor')->user()->name}} --}}
-                {{-- @endauth --}}
             </h6>
         </div>
         <ul class="sidebar-menu">
-            {{-- @auth('admin') --}}
             <li><a class="sidebar-header" href="{{url('/admin/dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
             <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
@@ -29,11 +20,11 @@
                             <span>Product</span> <i class="fa fa-angle-right pull-right"></i>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a href="#"><i class="fa fa-circle"></i>Product List</a></li>
-                            <li><a href="{{route('add-product')}}"><i class="fa fa-circle"></i>Add Product</a></li>
+                            <li><a href="{{route('admin.add-product')}}"><i class="fa fa-circle"></i>Add Product</a></li>
+                            <li><a href="{{route('admin.products.all')}}"><i class="fa fa-circle"></i>Products</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{route('product-category')}}"><i class="fa fa-circle"></i>Categories</a></li>
+                    <li><a href="{{route('admin.product-category')}}"><i class="fa fa-circle"></i>Categories</a></li>
                     <li>
                         <a href="#"><i class="fa fa-circle"></i>
                             <span>Product Attributes</span> <i class="fa fa-angle-right pull-right"></i>
@@ -42,7 +33,7 @@
                             <li><a href="{{route('colors')}}">
                                 <span>Colors</span></a>
                             </li>
-                            <li><a href="{{route('size')}}">
+                            <li><a href="{{route('admin.size')}}">
                                 <span>Sizes</span></a>
                             </li>
                         </ul>
