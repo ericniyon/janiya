@@ -41,6 +41,8 @@ class AddProduct extends Component
 
 
     private function resetInputFields(){
+
+
         $this->name = '';
         $this->description = '';
         $this->product_category_id = '';
@@ -64,6 +66,7 @@ class AddProduct extends Component
 
     	]);
 
+
         $filename = "";
         if ($this->product_image) {
             $filename = $this->product_image->store('products', 'public');
@@ -71,19 +74,24 @@ class AddProduct extends Component
             $filename = Null;
         }
 
-        $images->name = $this->name;
-        $images->description = $this->description;
-        $images->product_image = $filename;
-        $images->product_category_id = $this->product_category_id;
 
-        $result = $images->save();
-        dd($result);
+
+
+        $product = Product::create([
+            'name' => $this->name,
+            'description' => $this->description,
+            'product_image' => $filename,
+            'product_category_id' => $this->product_category_id
+        ]);
+        // $result = $images->create();
+        // dd($result);
+        // return session()->flash('message', 'Records Has Been Inserted Successfully.');
 
         // $name = md5($this->product_image . microtime()).'.'.$this->product_image->extension();
 
         // $this->product_image->storeAs('photos', $name);
 
-        // $product = Product::create($validation);
+        // $product = Product::create($products);
 
         foreach ($this->quantity as $key => $value) {
 
@@ -94,7 +102,7 @@ class AddProduct extends Component
                 'product_size' => $this->product_size[$key],
                 'product_color' => $this->product_color[$key],
 
-                'product_name' => $result['id'],
+                'product_name' => $product->id,
 
             ]);
         }

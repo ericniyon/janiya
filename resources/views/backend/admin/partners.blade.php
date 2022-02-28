@@ -27,8 +27,8 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h5>Janiya Partners</h5>
-                    <a href="{{route('admin.partners.add')}}" class="btn btn-sm btn-primary">Add new partners</a>
+                    <h5>Vendors</h5>
+                    <a href="{{route('admin.partners.add')}}" class="btn btn-sm btn-primary">Add new shop</a>
                 </div>
                 <div class="card-body pt-0 mt-0" >
                     @livewire('admin.partners')
