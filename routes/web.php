@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Size;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Vendors\StoresController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::post('save-category', [AdminController::class, 'save_category'] )->name('
 
 
 // products routes
-
+Route::view('test','frontend.pages.nurse');
 Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
 Route::get('shop-product', [HomeController::class, 'shop'] )->name('shop');
 Route::get('product_details/{id}', [HomeController::class, 'product_details'] )->name('product_details');
@@ -74,9 +75,9 @@ Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
 
 
-    Route::get('/admin/dashboard', function () {
+    Route::get('/dashboard', function () {
         return view('backend.pages.admin_dashboard');
-    })->name('admin.dashboard');
+    })->name('dashboard');
 
 
     Route::view('/shops','backend.admin.shops')->name('shops');
@@ -99,6 +100,11 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 // Vendor's routes
 Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name('vendor.')->group(function(){
     Route::view('/dashboard','backend.vendors.index')->name('dashboard');
+    Route::get('store/add-products',[StoresController::class,'index'])->name('store');
+    Route::view('store/my-shop','backend.vendors.shop')->name('shop');
+
+    // coupons
+    Route::view('coupons','backend.vendors.coupons')->name('coupons');
 });
 
 // Normal Users's routes

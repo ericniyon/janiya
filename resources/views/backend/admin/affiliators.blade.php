@@ -1,9 +1,4 @@
 @extends('backend.base')
-@push('extracss')
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-@endpush
 @section('title', 'Affiliate Partners')
 @section('content')
 
@@ -27,81 +22,6 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <h5>Vendors</h5>
-                </div>
-                <div class="card-body pt-0 mt-0" >
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Contact Info</th>
-                                <th scope="col">link</th>
-                                <th scope="col">Sales</th>
-                                <th scope="col">Clicks</th>
-                                <th scope="col"><i class="fa fa-ellipsis"></i></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($affiliators as $user)
-                                <tr>
-                                  <th scope="row">{{$loop->iteration}}</th>
-                                  <td>
-                                    <div class="d-flex align-items-center">
-                                      <img class="mr-2 rounded-circle lazyloaded blur-up" height="30" width="30" 
-                                    src="{{$user->profile?asset(Storage::url($user->profile)):'../assets/images/dashboard/man.png'}}" alt="#">
-                                    {{$user->name}}</td>
-                                    </div>
-                                  <td>
-                                    <div class="d-flex flex-column">
-                                      <a href="mailto:{{$user->email}}">{{$user->email}}</a>
-                                      <a href="tel:{{$user->phone}}">{{$user->phone}}</a>
-                                    </div>
-                                  </td>
-                                  <td>{{$user->affiliate_link}}</td>
-                                  <td>salescount</td>
-                                  <td>Clicks count
-                                  </td>
-                                  <td>
-                                    <div class="d-flex justify-content-center align-items-center">
-                                      <button data-toggle="modal" data-target="#user-{{$user->id}}" class="btn btn-primary btn-sm">
-                                          <i class="fa fa-trash"></i>
-                                      </button>
-                                      <button wire:click="delete({{$user->id}})" class="btn btn-danger btn-sm" 
-                                        wire:loading.attr="disabled" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                    </div>
-                                  </td>
-                                </tr> 
-                                <div class="modal fade" id="user-{{$user->id}}" tabindex="-1" role="dialog" 
-                                  aria-labelledby="user-{{$user->id}}Label" aria-hidden="true">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="user-{{$user->id}}Label">Promote {{$user->name}}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      @livewire('admin.add-promo-code-modal', ['user' => $user], key($user->id))
-                                    </div>
-                                  </div>
-                                </div>
-                                @empty
-                                    
-                                @endforelse
-                            </tbody>
-                          </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  @livewire('admin.affiliator')
 </div>
 @endsection

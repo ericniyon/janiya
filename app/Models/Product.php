@@ -16,4 +16,14 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
+
+    /**
+     * Get all of the attributes for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attributes()
+    {
+        return $this->hasMany(ProductValiations::class);
+    }
 }
