@@ -16,7 +16,7 @@
             </div>
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
-                    <li class="breadcrumb-item"><a href="{{route('vendor.dashboard')}}"><i data-feather="home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i data-feather="home"></i></a></li>
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
             </div>

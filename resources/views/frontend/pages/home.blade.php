@@ -135,7 +135,7 @@
                                     <div class="tab-box">
                                         <div class="product-box2">
                                             <div class="media">
-                                                <a href=">
+                                                <a href="">
                                                 <img class="img-fluid blur-up lazyloaded" src="{{asset('tesst/'.$product->product_image )}}" alt=""></a>
                                                 <div class="media-body align-self-center">
                                                     <div class="rating">

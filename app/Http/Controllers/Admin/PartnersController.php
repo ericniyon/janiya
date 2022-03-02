@@ -27,7 +27,6 @@ class PartnersController extends Controller
         User::create([
             'name'=>$request->name, 
             'promo_code'=>$request->promo_code, 
-            'commission_id'=>1,
             'email'=>$request->email, 
             'phone'=>$request->phone, 
             'profile'=>$profile, 

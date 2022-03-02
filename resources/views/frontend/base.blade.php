@@ -22,17 +22,17 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/fontawesome.css')}}">
 
     <!--Slick slider css-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick-theme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick-theme.css')}}">
 
     <!-- Animate icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css')}}">
 
     <!-- Themify icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/themify-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/themify-icons.css')}}">
 
     <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css')}}">
 
     <!-- Theme css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
@@ -109,9 +109,17 @@
     <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
     <script src="{{ asset('assets/js/sticky-cart-bottom.js') }}"></script>
     <!-- slick js-->
-    <script src="{{ asset('assets/js/slick.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.js')}}"></script>
+
+    <!-- menu js-->
+    <script src="{{ asset('assets/js/menu.js')}}"></script>
+
+    <!-- lazyload js-->
+    <script src="{{ asset('assets/js/lazysizes.min.js')}}"></script>
+
     <!-- Bootstrap js-->
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+
     <!-- Bootstrap Notification js-->
     <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme-setting.js') }}"></script>
@@ -120,8 +128,18 @@
     @livewireScripts
     <script>
         $(window).on('load', function () {
-            $('#exampleModal').modal('show');
+            setTimeout(function () {
+                $('#exampleModal').modal('show');
+            }, 2500);
         });
+
+        function openSearch() {
+            document.getElementById("search-overlay").style.display = "block";
+        }
+
+        function closeSearch() {
+            document.getElementById("search-overlay").style.display = "none";
+        }
     </script>
 
 </body>
