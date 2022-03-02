@@ -30,21 +30,10 @@ class AddProduct extends Component
         $this->colorsLoop[] = [];
     }
 
-    public function addNewSizeRow()
-    {
-        $this->sizesLoop[] = [];
-    }
-
     public function removeRow($index)
     {
         unset($this->colorsLoop[$index]);
         $this->colorsLoop = array_values($this->colorsLoop);
-    }
-
-    public function removeSizeRow($index)
-    {
-        unset($this->sizesLoop[$index]);
-        $this->sizesLoop = array_values($this->sizesLoop);
     }
 
     public function FunctionName($fields)
@@ -58,8 +47,7 @@ class AddProduct extends Component
             'colorsLoop.*.color'=>'required|integer',
             'colorsLoop.*.quantity'=>'required|integer',
             'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
-            'sizesLoop.*.size'=>'required|integer',
-            'sizesLoop.*.quantity'=>'required|integer|min:5',
+            'colorsLoop.*.size'=>'required|integer',
         ]);
     }
 
@@ -74,8 +62,7 @@ class AddProduct extends Component
             'colorsLoop.*.color'=>'required|integer',
             'colorsLoop.*.quantity'=>'required|integer',
             'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
-            'sizesLoop.*.size'=>'required|integer',
-            'sizesLoop.*.quantity'=>'required|integer|min:5',
+            'colorsLoop.*.size'=>'required|integer',
         ]);
 
         $product = Product::create([
@@ -83,7 +70,7 @@ class AddProduct extends Component
             'slug'=>str()->slug($this->name), 
             'price'=>$this->price, 
             'description'=>$this->description,
-            'product_image'=>'test.png', 
+            'product_image'=>'null', 
             'product_category_id'=>$this->product_category_id
         ]);
 
@@ -99,15 +86,11 @@ class AddProduct extends Component
 
         foreach($this->colorsLoop as $key=>$item){
             $color_image = $item['image']->store('public/products/gallery/color');
-            $product->colors()->attach($item['color'],[
+            $product->attributes()->create([
+                'color_id'=>$item['color'],
+                'product_size_id'=>$item['size'],
                 'quantity'=>$item['quantity'],
                 'image'=>$color_image,
-            ]);
-        }
-
-        foreach($this->sizesLoop as $key=>$item){
-            $product->sizes()->attach($item['size'],[
-                'quantity'=>$item['quantity'],
             ]);
         }
 

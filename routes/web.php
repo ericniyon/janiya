@@ -29,7 +29,8 @@ Route::get('/', [HomeController::class, 'index'] )->middleware('referral')->name
 
 // products routes
 Route::get('shop', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
-Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
+// Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
+Route::get('shop/{vendor}/{product}',[HomeController::class,'singleProduct'])->name('product.single');
 // all about colors
 Route::get('colors', [ColorsController::class, 'colors'] )->name('colors');
 Route::post('save-color', [ColorsController::class, 'save_colors'] )->name('save-color');
@@ -40,8 +41,13 @@ Route::patch('update-cart', [CartController::class, 'update'])->name('update.car
 Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
 
 // checkout
-Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::get('checkout', [CheckoutController::class, 'checkout'])->middleware('auth')->name('checkout');
+Route::get('guest-checkout', [CheckoutController::class, 'checkout'])->name('checkout.guest');
 Route::post('purchase', [CheckoutController::class, 'payment'])->name('purchase');
+Route::put('checkout/{order}/change-status',[CheckoutController::class, 'markAsPaid'])->name('order.paid');
+Route::put('checkout/{order}/change-status',[CheckoutController::class, 'cancelOrder'])->name('order.cancelled');
+Route::view('thankyou','front.thankyou')->name('thankyou');
+Route::view('order-cancelled','front.thankyou')->name('thankyou');
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 
 // Admin's routes
@@ -56,9 +62,8 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
     Route::view('products','backend.admin.products')->name('products.all');
     Route::get('products/{product}',[ProductsController::class,'show'])->name('products.single');
-    Route::put('products/{product}',[ProductsController::class,'updateProduct'])->name('products.update');
-    Route::put('products/{product}/{size}',[ProductsController::class,'updateSize'])->name('products.update.size');
-    Route::put('products/{product}/{color}/n',[ProductsController::class,'updateColor'])->name('products.update.color');
+    Route::put('products/{attribute}',[ProductsController::class,'updateAttribute'])->name('products.update');
+    Route::post('products/{product}',[ProductsController::class,'newAttribute'])->name('products.new');
 
     Route::view('/shops','backend.admin.shops')->name('shops');
     Route::view('/shops/add-new-shop','backend.admin.addEditShops')->name('shops.add');
@@ -103,3 +108,7 @@ Route::middleware('auth')->group(function(){
 
 
 require __DIR__.'/auth.php';
+
+Route::fallback(function(){
+    return to_route('shop');
+});

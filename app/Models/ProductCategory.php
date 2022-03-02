@@ -12,5 +12,15 @@ class ProductCategory extends Model
     protected $table = 'product_categories';
     protected $fillable = ['category_name', 'category_image'];
 
+    /**
+     * Get all of the product for the ProductCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     
 }

@@ -47,6 +47,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                     <div class="col-7 d-flex flex-column justify-content-between">
                         <h5><strong>Name:</strong> {{$product->name}}</h5>
                         <h5><strong>Category:</strong> {{$product->product_categories->category_name}}</h5>
+                        <h5><strong>Quantity:</strong> {{$product->attributes->sum('quantity')}}</h5>
                         <h5><strong>Unit price:</strong> {{number_format($product->price)}} Rwf</h5>
                     </div>
                 </div>
@@ -69,39 +70,55 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                                 <tr>
                                     <th>#</th>
                                     <th>Size</th>
+                                    <th>Color</th>
                                     <th>Quantity</th>
-                                    <th>Addional Fees</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($product->sizes as $size)
-                                   <tr class="@if($size->pivot->quantity < 10) bg-danger @elseif($size->pivot->quantity<20) bg-warning @endif">
+                                @forelse ($product->attributes()->get() as $attribute)
+                                   <tr class="@if($attribute->quantity < 10) bg-danger
+                                     @elseif($attribute->quantity<20) bg-warning @endif">
                                        <td>{{$loop->iteration}}</td>
-                                       <td>{{$size->size}}</td>
-                                       <td>{{$size->pivot->quantity}}</td>
-                                       <td>{{$size->additional_fees}}</td>
-                                       <td><a href="#" data-toggle="modal" data-target="#update{{$size->id}}">Edit</a></td>
+                                       <td>{{$attribute->size->size}}</td>
+                                       <td>{{$attribute->color->color_name}}</td>
+                                       <td>{{$attribute->quantity}}</td>
+                                       <td><a href="#" data-toggle="modal" data-target="#update{{$attribute->id}}">Edit</a></td>
                                    </tr> 
-                                   <div class="modal fade" id="update{{$size->id}}" tabindex="-1" role="dialog" aria-labelledby="update{{$size->id}}Label" aria-hidden="true">
+                                   <div class="modal fade" id="update{{$attribute->id}}" tabindex="-1" role="dialog" aria-labelledby="update{{$attribute->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
-                                          <h5 class="modal-title" id="update{{$size->id}}Label">Update {{$size->size}}</h5>
+                                          <h5 class="modal-title" id="update{{$attribute->id}}Label">
+                                            Update {{$product->name}}, 
+                                            {{$attribute->size->size}}, 
+                                            {{$attribute->color->color_name}}
+                                          </h5>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <form action="{{route('admin.products.update.size',[$product->slug,$size->id])}}" method="POST">
+                                        <form action="{{route('admin.products.update',$attribute->id)}}" method="POST" 
+                                            enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
-                                                <label for="">Insert New Value to update {{$size->pivot->quantity}}</label>
-                                              <input name="quantity" required value="{{old('quantity')}}"
-                                               class="form-control @error('quantity') is-invalid @enderror" type="number">
-                                               @error('quantity')
-                                                   <span class="invalid-feedback" role="alert">{{$message}}</span>
-                                               @enderror
+                                                <div class="form-group">
+                                                    <label for="">Insert New Value to update {{$attribute->quantity}}</label>
+                                                    <input name="quantity" required value="{{old('quantity',$attribute->quantity)}}"
+                                                     class="form-control @error('quantity') is-invalid @enderror" type="number">
+                                                     @error('quantity')
+                                                         <span class="invalid-feedback" role="alert">{{$message}}</span>
+                                                     @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Insert New Value to update {{$attribute->quantity}}</label>
+                                                    <input name="image" accept="images/*"
+                                                     class="form-control @error('image') is-invalid @enderror" type="file">
+                                                     @error('image')
+                                                         <span class="invalid-feedback" role="alert">{{$message}}</span>
+                                                     @enderror
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -121,86 +138,6 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="card">
-            <div class="card-header py-2 pt-3">
-                <h5>Product Colors</h5>
-            </div>
-            <div class="row card-body pt-0 mt-0">
-                <div class="table-responsive">
-                    <table class="table table-hover table-stripped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Image</th>
-                                <th>Color Name</th>
-                                <th>Quantity</th>
-                                <th>Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($product->colors as $color)
-                               <tr class="@if($color->pivot->quantity < 10) bg-danger @elseif($color->pivot->quantity<20) bg-warning @endif">
-                                   <td>{{$loop->iteration}}</td>
-                                   <td>
-                                       <img src="{{asset(Storage::url($color->pivot->image))}}" class="rounded" 
-                                       height="50" width="40" alt="">
-                                    </td>
-                                   <td>{{$color->color_name}}</td>
-                                   <td>{{$color->pivot->quantity}}</td>
-                                   <td>
-                                    <a href="#" data-toggle="modal" data-target="#updateColor{{$color->id}}">Edit</a>
-                                   </td>
-                               </tr>
-                               <div class="modal fade" id="updateColor{{$color->id}}" tabindex="-1" role="dialog" aria-labelledby="updateColor{{$color->id}}Label" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="updateColor{{$color->id}}Label">
-                                        Update quantity of {{$color->color_name}} in {{config('app.name')}} store</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <form action="{{route('admin.products.update.color',[$product->slug,$color->id])}}" 
-                                        method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="">Insert New Value to update {{$color->pivot->quantity}}</label>
-                                                <input name="quantity" required value="{{old('quantity',$color->pivot->quantity)}}"
-                                                 class="form-control @error('quantity') is-invalid @enderror" type="number">
-                                                 @error('quantity')
-                                                     <span class="invalid-feedback" role="alert">{{$message}}</span>
-                                                 @enderror
-                                            </div>
-                                            {{-- <div class="form-group">
-                                                <label for="">New Color Image</label>
-                                                <input name="image" accept="image/*"
-                                                 class="form-control @error('image') is-invalid @enderror" type="file">
-                                                 @error('image')
-                                                     <span class="invalid-feedback" role="alert">{{$message}}</span>
-                                                 @enderror
-                                            </div> --}}
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                          <button type="submit" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div> 
-                            @empty
-                                
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <div class="modal fade" id="updateProduct" tabindex="-1" role="dialog" 
 aria-labelledby="updateProductLabel" aria-hidden="true">
@@ -213,42 +150,52 @@ aria-labelledby="updateProductLabel" aria-hidden="true">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{route('admin.products.update',[$product->slug])}}" 
+        <form action="{{route('admin.products.new',$product->slug)}}" 
             method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
             <div class="modal-body">
                 <div class="row">
-                    <div class="form-group col-md-7">
-                        <label for="">Product Name</label>
-                        <input name="name" required value="{{old('name',$product->name)}}"
-                         class="form-control @error('name') is-invalid @enderror" type="text">
-                         @error('name')
-                             <span class="invalid-feedback" role="alert">{{$message}}</span>
-                         @enderror
+                    <div class="form-group col-md-4">
+                        <label>Color</label>
+                        <select name="color" required 
+                        class="form-control show-tick ms @error('color') is-invalid @enderror">
+                            <option value="">Choose Color</option>
+                            @foreach ($colors as $item)
+                                <option value="{{$item->id}}">{{$item->color_name}}</option>
+                            @endforeach
+                        </select>
+                        @error('color')
+                            <span class="invalid-feedback" role="alert">{{$message}}</span>
+                        @enderror
                     </div>
-                    <div class="form-group col-md-5">
-                        <label for="">Unit Price</label>
-                        <input name="price" required value="{{old('price',$product->price)}}"
-                         class="form-control @error('price') is-invalid @enderror" type="number">
-                         @error('price')
-                             <span class="invalid-feedback" role="alert">{{$message}}</span>
-                         @enderror
+                    <div class="form-group col-md-4">
+                        <label>Size</label>
+                        <select name="size" required
+                        class="form-control show-tick ms @error('size') is-invalid @enderror">
+                            <option value="">Size</option>
+                            @foreach ($sizes as $item)
+                                <option value="{{$item->id}}">{{$item->size}}</option>
+                            @endforeach
+                        </select>
+                        @error('size')
+                            <span class="invalid-feedback" role="alert">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >Quantity</label>
+                        <input type="number" value="{{old('quantity')}}" name="quantity" 
+                        id="quantity"  required 
+                        class="form-control @error('quantity') is-invalid @enderror">
+                        @error('quantity')
+                            <span class="invalid-feedback" role="alert">{{$message}}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-form-label pt-0">Product Description</label>
-                    <textarea class="form-control @error('details') is-invalid @enderror" name="details" cols="3" rows="4"
-                    >{{old('details',$product->description)}}</textarea>
-                    @error('details')
-                         <span class="invalid-feedback" role="alert">{{$message}}</span>
-                     @enderror
-                </div>
-                <div class="form-group">
-                    <label for="">New Color Image</label>
-                    <input name="images[]" multiple accept="image/*"
-                     class="form-control @error('images') is-invalid @enderror" type="file">
-                     @error('images')
+                    <label for="">New Image</label>
+                    <input name="image" accept="image/*"
+                     class="form-control @error('image') is-invalid @enderror" type="file">
+                     @error('image')
                          <span class="invalid-feedback" role="alert">{{$message}}</span>
                      @enderror
                 </div>
@@ -260,5 +207,5 @@ aria-labelledby="updateProductLabel" aria-hidden="true">
         </form>
       </div>
     </div>
-  </div> 
+  </div>
 @endsection

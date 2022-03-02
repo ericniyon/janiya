@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Product;
 use App\Models\ProductImage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,30 +18,31 @@ class Products extends Component
     public function delete($id)
     {
         $product = Product::findOrFail($id);
+        if ($product->shops()->exists()) {
+            $this->emit('alert',['type'=>'error','message'=>'This product belongs to some shops!!']);
+            return;
+        }
         if ($product->images()->exists()) {
             $images = ProductImage::where('product_id',$product->id)->get();
             foreach($images as $img){
-                Storage::delete($img->image);
+                if($img->image){Storage::delete($img->image);}
                 $img->delete();
             }
         }
 
-        if ($product->colors()->exists()){
-            foreach($product->colors as $color){
-                Storage::delete($color->pivot->image);
+        if ($product->attributes()->exists()) {
+            foreach($product->attributes as $attr){
+                if ($attr->image) { Storage::delete($attr->image); }
+                $attr->delete();
             }
-            $product->colors()->detach();
         }
-
-        if ($product->sizes()->exists()){
-            $product->sizes()->detach();
-        }
+        
         $product->delete();
     }
     public function render()
     {
-        $products = Product::with('sizes','colors')->withCount('colors','sizes','images')
-                            ->orderByDesc('created_at')->paginate($this->perPage);
+        $products = Product::with('thumb','attributes')->withCount('images')
+        ->orderByDesc('products.created_at')->paginate($this->perPage);
         return view('livewire.admin.products', compact('products'));
     }
 }

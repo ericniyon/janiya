@@ -22,33 +22,43 @@ class Product extends Model
         return 'slug';
     }
 
-    /**
-     * Get all of the images for the Product
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function images()
     {
         return $this->hasMany(ProductImage::class);
     }
 
-    /**
-     * Get the thumb associated with the Product
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function thumb()
     {
         return $this->hasOne(ProductImage::class)->oldestOfMany();
     }
 
-    public function colors()
+    /**
+     * Get the lastThumb associated with the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function lastThumb()
     {
-        return $this->belongsToMany(Color::class, 'color_product', 'product_id', 'color_id')->withPivot('quantity','image');
+        return $this->hasOne(ProductImage::class)->latestOfMany();
+    }
+    
+    public function attributes()
+    {
+        return $this->hasMany(ProductAttribute::class);
     }
 
-    public function sizes()
+    /**
+     * Get all of the color for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function color()
     {
-        return $this->belongsToMany(ProductSize::class, 'product_size', 'product_id', 'product_size_id')->withPivot('quantity');
+        return $this->hasManyThrough(Color::class, ProductAttribute::class);
+    }
+
+    public function shops()
+    {
+        return $this->hasMany(Store::class);
     }
 }

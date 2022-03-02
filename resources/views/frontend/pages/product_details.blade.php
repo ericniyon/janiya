@@ -1,9 +1,8 @@
     @extends('frontend.base')
 
     @section('title')
-    <title>Product Details</title>
+    <title>{{$product->name}}</title>
     @endsection
-
     @section('content')
     <!-- breadcrumb start -->
     <div class="breadcrumb-section">
@@ -139,26 +138,28 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="product-slick">
-                                        <div><img src="{{ asset('assets/images/pro3/1.jpg')}}" alt=""
-                                                class="img-fluid blur-up lazyload image_zoom_cls-0"></div>
-                                        <div><img src="{{ asset('assets/images/pro3/2.jpg')}}" alt=""
-                                                class="img-fluid blur-up lazyload image_zoom_cls-1"></div>
-                                        <div><img src="{{ asset('assets/images/pro3/27.jpg')}}" alt=""
-                                                class="img-fluid blur-up lazyload image_zoom_cls-2"></div>
-                                        <div><img src="{{ asset('assets/images/pro3/27.jpg')}}" alt=""
-                                                class="img-fluid blur-up lazyload image_zoom_cls-3"></div>
+                                        <div>
+                                            <img src="{{ asset(Storage::url($product->product->thumb->image))}}" alt=""
+                                                class="img-fluid blur-up lazyload image_zoom_cls-0">
+                                        </div>
+                                        @foreach ($product->product->images as $image) 
+                                        <div>
+                                            <img src="{{ asset(Storage::url($image->image))}}" alt=""
+                                                class="img-fluid blur-up lazyload image_zoom_cls-0">
+                                        </div>
+                                        @endforeach
                                     </div>
                                     <div class="row">
                                         <div class="col-12 p-0">
                                             <div class="slider-nav">
-                                                <div><img src="{{ asset('assets/images/pro3/1.jpg')}}" alt=""
-                                                        class="img-fluid blur-up lazyload"></div>
-                                                <div><img src="{{ asset('assets/images/pro3/2.jpg')}}" alt=""
-                                                        class="img-fluid blur-up lazyload"></div>
-                                                <div><img src="{{ asset('assets/images/pro3/27.jpg')}}" alt=""
-                                                        class="img-fluid blur-up lazyload"></div>
-                                                <div><img src="{{ asset('assets/images/pro3/27.jpg')}}" alt=""
-                                                        class="img-fluid blur-up lazyload"></div>
+                                                <div>
+                                                    <img src="{{ asset(Storage::url($product->product->thumb->image))}}" alt=""
+                                                        class="img-fluid blur-up lazyload">
+                                                </div>
+                                                @foreach ($product->product->images as $image) 
+                                                <div><img src="{{ asset(Storage::url($image->image))}}" alt=""
+                                                    class="img-fluid blur-up lazyload"></div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -189,50 +190,10 @@
                                         </div>
                                         <div class="label-section">
                                             <span class="badge badge-grey-color">{{$vendor->shop_name}}</span>
-                                            <span class="label-text">in {{$product->product_categories->category_name}}</span>
+                                            <span class="label-text">in {{$product->product->product_categories->category_name}}</span>
                                         </div>
-                                        <h3 class="price-detail">$32.96 <del>$459.00</del><span>55% off</span></h3>
-                                        <ul class="color-variant">
-                                            <li class="bg-light0 active"></li>
-                                            <li class="bg-light1"></li>
-                                            <li class="bg-light2"></li>
-                                        </ul>
-                                        <div id="selectSize"
-                                            class="addeffect-section product-description border-product">
-                                            <h6 class="error-message">please select size</h6>
-                                            <div class="size-box">
-                                                <ul>
-                                                    <li><a href="javascript:void(0)">s</a></li>
-                                                    <li><a href="javascript:void(0)">m</a></li>
-                                                    <li><a href="javascript:void(0)">l</a></li>
-                                                    <li><a href="javascript:void(0)">xl</a></li>
-                                                </ul>
-                                            </div>
-                                            <h6 class="product-title">quantity</h6>
-                                            <div class="qty-box">
-                                                <div class="input-group"><span class="input-group-prepend"><button
-                                                            type="button" class="btn quantity-left-minus"
-                                                            data-type="minus" data-field=""><i
-                                                                class="ti-angle-left"></i></button> </span>
-                                                    <input type="text" name="quantity" class="form-control input-number"
-                                                        value="1"> <span class="input-group-prepend"><button
-                                                            type="button" class="btn quantity-right-plus"
-                                                            data-type="plus" data-field=""><i
-                                                                class="ti-angle-right"></i></button></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" value="{{$product->id}}" id="product_id">
-                                        <div class="product-buttons  ">
-
-                                            <a href="{{ route('add.to.cart', $product->id) }}" id="cartEffect" 
-                                                class="btn btn-solid hover-solid btn-animation ">
-                                                <i class="fa fa-shopping-cart me-1" aria-hidden="true">
-                                                </i> add to cart</a>
-
-                                            <a href="#" class="btn btn-solid">
-                                                <i class="fa fa-bookmark fz-16 me-2" aria-hidden="true"></i>wishlist</a>
-                                        </div>
+                                        @livewire('front.add-to-cart',
+                                        ['product' => $product], key($product->id))
                                         <div class="product-count">
                                             <ul>
                                                 <li>
@@ -281,12 +242,6 @@
                                                     class="icofont icofont-ui-home"></i>Details</a>
                                             <div class="material-border"></div>
                                         </li>
-                                        <li class="nav-item"><a class="nav-link" id="profile-top-tab"
-                                                data-bs-toggle="tab" href="#top-profile" role="tab"
-                                                aria-selected="false"><i
-                                                    class="icofont icofont-man-in-glasses"></i>Specification</a>
-                                            <div class="material-border"></div>
-                                        </li>
                                         <li class="nav-item"><a class="nav-link" id="contact-top-tab"
                                                 data-bs-toggle="tab" href="#top-contact" role="tab"
                                                 aria-selected="false"><i class="icofont icofont-contacts"></i>Video</a>
@@ -303,67 +258,7 @@
                                         <div class="tab-pane fade show active" id="top-home" role="tabpanel"
                                             aria-labelledby="top-home-tab">
                                             <div class="product-tab-discription">
-                                                <div class="part">
-                                                    <p>The Model is wearing a white blouse from our stylist's
-                                                        collection, see the image for a mock-up of what the actual
-                                                        blouse would look like.it has text written on it in a black
-                                                        cursive language which looks great on a white color.</p>
-                                                </div>
-                                                <div class="part">
-                                                    <h5 class="inner-title">fabric:</h5>
-                                                    <p>Art silk is manufactured by synthetic fibres like rayon. It's
-                                                        light in weight and is soft on the skin for comfort in
-                                                        summers.Art silk is manufactured by synthetic fibres like rayon.
-                                                        It's light in weight and is soft on the skin for comfort in
-                                                        summers.</p>
-                                                </div>
-                                                <div class="part">
-                                                    <h5 class="inner-title">size & fit:</h5>
-                                                    <p>The model (height 5'8") is wearing a size S</p>
-                                                </div>
-                                                <div class="part">
-                                                    <h5 class="inner-title">Material & Care:</h5>
-                                                    <p>Top fabric: pure cotton</p>
-                                                    <p>Bottom fabric: pure cotton</p>
-                                                    <p>Hand-wash</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="top-profile" role="tabpanel"
-                                            aria-labelledby="profile-top-tab">
-                                            <p>The Model is wearing a white blouse from our stylist's collection, see
-                                                the image for a mock-up of what the actual blouse would look like.it has
-                                                text written on it in a black cursive language which looks great on a
-                                                white color.</p>
-                                            <div class="single-product-tables">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Sleeve Length</td>
-                                                            <td>Sleevless</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Neck</td>
-                                                            <td>Round Neck</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Occasion</td>
-                                                            <td>Sports</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Fabric</td>
-                                                            <td>Polyester</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Fit</td>
-                                                            <td>Regular Fit</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                {{$product->product->description}}
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="top-contact" role="tabpanel"
@@ -685,13 +580,23 @@
                         <h5>{{$product->name}}</h5>
                     </div>
                 </div>
-                <div class="selection-section col-md-6">
+                <div class="selection-section col-md-3">
                     <div class="form-group mb-0 w-100">
                         <select id="inputState" class="form-control">
-                            <option selected>Choose size, color</option>
-                            @foreach ($product->attributes as $item)
+                            <option selected>Choose size</option>
+                            {{-- @foreach ($product->attributes as $item)
                             <option>{{__('Color: ').$item->color->color_name.__(', Size: ').$item->size->size._(', Price: ').$item->price.__(' RWF')}}</option>
-                            @endforeach
+                            @endforeach --}}
+                        </select>
+                    </div>
+                </div>
+                <div class="selection-section col-md-3">
+                    <div class="form-group mb-0 w-100">
+                        <select id="inputState" class="form-control">
+                            <option selected>Choose Color</option>
+                            {{-- @foreach ($product->attributes as $item)
+                            <option>{{__('Color: ').$item->color->color_name.__(', Size: ').$item->size->size._(', Price: ').$item->price.__(' RWF')}}</option>
+                            @endforeach --}}
                         </select>
                     </div>
                 </div>
@@ -705,49 +610,6 @@
     @endsection
 
     @section('scripts')
-    <script src="{{ asset('assets/js/sticky-cart-bottom.js') }}"></script>
     <script src="{{ asset('assets/js/timer.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.elevatezoom.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-            $('.bambe').click(function(e){
-                e.preventDefault();
-
-                var product_id = $(this).closest('.product_data').find('.').val()
-                var product_quantity = $(this).closest('.product_data').find('.quantity').val()
-
-                $.ajaxSetup({
-                    headers:{
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $.ajax({
-                    method: 'POST',
-                    url: '/add-to-cart',
-                    data: {
-                        'product_id': product_id,
-                        'product_quantity': product_quantity
-                    },
-                    success: function(response){
-                        alert(response.status)
-                    }
-                })
-            })
-        })
-
-
-    // $(document).ready(function(){
-
-    //     })
-
-
-
-        // var qty = document.getElementById('qty0').value;
-        // var prodt_price = document.getElementById('prod_price').value;
-        // let sub = document.getElementById('subtotal').innerHTML = qty * prodt_price;
-        // let total = document.getElementById('total').innerHTML = qty * prodt_price;
-
-    </script>
     @endsection

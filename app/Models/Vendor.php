@@ -26,11 +26,6 @@ class Vendor extends Authenticatable
             return 'slug';
         }
 
-        /**
-         * Get all of the boughtProducts for the Vendor
-         *
-         * @return \Illuminate\Database\Eloquent\Relations\HasMany
-         */
         public function boughtProducts()
         {
             return $this->hasMany(Store::class, 'foreign_key', 'local_key');

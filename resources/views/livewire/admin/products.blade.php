@@ -12,10 +12,14 @@
                             <h5 class="badge badge-pill badge-secondary px-1">{{$product->price.__(' Rwf')}}</h5>
                         </div>
                         <div class="col-6 d-flex flex-column justify-content-between">
+                            <div class="d-flex">
+                                <strong>Quantity:</strong> {{$product->attributes->sum('quantity')}}
+                            </div>
                             <ul>
-                                @foreach ($product->colors as $color)
-                                <li>{{$color->color_name.__(': ').$color->pivot->quantity}}</li>
-                                @endforeach
+                                {{-- {{$product->color}} --}}
+                                {{-- @foreach ($product->attributes->colors as $item)
+                                 <li>{{$item->color_id}}</li>
+                                @endforeach --}}
                             </ul>
                             <div>
                                 <a href="{{route('admin.products.single',$product->slug)}}"

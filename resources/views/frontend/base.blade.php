@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="multikart">
-    <meta name="keywords" content="multikart">
-    <meta name="author" content="multikart">
+    <meta name="description" content="{{config('app.name')}}">
+    <meta name="keywords" content="{{config('app.name')}}">
+    <meta name="author" content="{{config('app.name')}}">
     <link rel="icon" href="{{asset('assets/img/janiya-logo.jpg')}}" type="image/x-icon">
     <link rel="shortcut icon" href=".{{asset('assets/img/janiya-logo.jpg')}}" type="image/x-icon">
 
@@ -37,6 +37,7 @@
     <!-- Theme css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     @stack('extra-css')
+    @livewireStyles
 
 
 </head>
@@ -98,9 +99,8 @@
     </div>
     <!-- tap to top end -->
 
-    @yield('scripts')
     <!-- latest jquery-->
-
+    
     <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     <!-- menu js-->
@@ -116,7 +116,8 @@
     <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme-setting.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
-
+    @yield('scripts')
+    @livewireScripts
     <script>
         $(window).on('load', function () {
             $('#exampleModal').modal('show');

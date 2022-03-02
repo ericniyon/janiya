@@ -11,52 +11,40 @@
         </div>
         @foreach($sizesLoop as $index=>$item)
         <div class="row">
-            <div class="form-group col-md-3">
-                <label>Product Size</label>
-                <select name="sizesLoop[{{$index}}][size]" 
-                wire:model.lazy="sizesLoop.{{$index}}.size"  required
-                class="form-control show-tick ms @error('sizesLoop.'.$index.'.size') is-invalid @enderror">
-                    <option value="">Choose Product size</option>
-                    @foreach ($product->sizes as $item)
-                        <option value="{{$item->id}}">{{$item->size}}</option>
-                    @endforeach
+            <div class="form-group col-md-6">
+                <label for="">Product Attributes</label>
+                <select name="sizesLoop[{{$index}}][attribute]" 
+                wire:model.lazy="sizesLoop.{{$index}}.attribute" id="" class="
+                form-control @error('sizesLoop.'.$index.'attribute') is-invalid @enderror">
+                <option value="">Select Product Valiation</option>
+                @foreach ($product->attributes()->where('quantity','>',3)->get() as $item)
+                    <option value="{{$item->id}}">
+                        Size: {{$item->size->size}}, 
+                        Color: {{$item->color->color_name}}
+                    </option>
+                @endforeach
                 </select>
-                @error('sizesLoop.'.$index.'.size')
-                    <span class="invalid-feedback" role="alert">{{$message}}</span>
-                @enderror
-            </div>
-            <div class="form-group col-md-3">
-                <label>Product Color</label>
-                <select name="sizesLoop[{{$index}}][color]" required 
-                wire:model.lazy="sizesLoop.{{$index}}.color" 
-                class="form-control show-tick ms @error('sizesLoop.'.$index.'.color') is-invalid @enderror">
-                    <option value="">Choose Product Color</option>
-                    @foreach ($product->colors as $item)
-                        <option value="{{$item->id}}">{{$item->color_name}}</option>
-                    @endforeach
-                </select>
-                @error('sizesLoop.'.$index.'.color')
+                @error('sizesLoop.'.$index.'attribute')
                     <span class="invalid-feedback" role="alert">{{$message}}</span>
                 @enderror
             </div>
             <div class="form-group col-md-4">
                 <label >Quantity</label>
                 <input type="number" value="sizesLoop[{{$index}}][quantity]" 
-                name="sizesLoop[{{$index}}][quantity]" required 
+                name="sizesLoop[{{$index}}][quantity]" 
                 wire:model.lazy="sizesLoop.{{$index}}.quantity" id="quantity" 
                 class="form-control @error('sizesLoop.'.$index.'quantity') is-invalid @enderror">
                 @error('sizesLoop.'.$index.'quantity')
                     <span class="invalid-feedback" role="alert">{{$message}}</span>
                 @enderror
             </div>
-            <div class="form-group col-md-2 pt-3 d-flex justify-content-end align-items-center">
-                <button class="btn btn-outline-none text-success p-2 mr-2" 
-                wire:click.prevent="addNewSizeRow">
+            <div class="form-group col-md-1 pt-3 d-flex justify-content-end align-items-center">
+                <button class="btn btn-outline-none text-success p-2 mr-2" wire:click.prevent="addNewRow">
                     <i class="fa fa-plus"></i>
                 </button>
                 <button class="btn btn-outline-none p-2 text-danger" 
-                {{$index==0?'disabled':''}} 
-                wire:click.prevent="removeSizeRow({{$index}})">
+                wire:click.prevent="removeRow({{$index}})" 
+                {{$index==0?'disabled':''}}>
                     <i class="fa fa-minus"></i>
                 </button>
             </div>

@@ -22,7 +22,10 @@ class Shop extends Component
 
     public function mount()
     {
-        $this->products = Store::with('product','valiations')->get();
+        $this->products = Store::with('valiations')->whereHas('valiations',function($query){
+            $query->where('order_confirmed',1);
+        })->get();
+        
         $this->shops = Vendor::select('shop_name','id')->inRandomOrder()->orderBy('shop_name')->limit(5)->get();
         $this->categories = ProductCategory::select('id','category_name')->get();
     }

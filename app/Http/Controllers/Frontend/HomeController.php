@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Models\ProductValiations;
+use App\Models\ProductSize;
 use App\Models\Store;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,14 +20,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $product_categories = ProductCategory::all();
+        $product_categories = ProductCategory::with('products')->get();
         $products = Store::with('product')->get();
         $shops = Vendor::where('confirmed',1)->where('active',1)->get();
 
         return view('frontend.pages.home', compact('product_categories', 'products','shops'));
     }
     // this function will return product by it id
-    public function product_details(Vendor $vendor,Product $product)
+    public function singleProduct(Vendor $vendor, Store $product)
     {
         return view('frontend.pages.product_details', compact('vendor','product'));
     }

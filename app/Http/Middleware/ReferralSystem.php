@@ -21,13 +21,16 @@ class ReferralSystem
         $response = $next($request);
         if ($request->has('ref')) {
             $user = User::where('affiliate_link',$request->get('ref'))->first();
-            if (Cookie::has('ref')) {
-                if ($request->cookie('ref') != $request->get('ref')) {
-                    $user->increment('clicks');
-                }
-            } else{
-                $user->increment('clicks');
+            if(!$user){
+               return redirect('/')->with('error','Invalid affiliate link'); 
             }
+            if (Cookie::has('ref')) {
+                if ($request->cookie('ref') == $request->get('ref')) {
+                    $user->increment('clicks');
+                } else{
+                    Cookie::queue(Cookie::forget('ref'));
+                }
+            } 
             $response->cookie('ref', $user->affiliate_link, 60 * 60 * 24 * 187);
         }
         return $response;

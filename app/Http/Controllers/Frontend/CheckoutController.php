@@ -3,21 +3,64 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\CustomerNewOrder;
 use App\Models\Order;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Darryldecode\Cart\Cart;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
     public function checkout()
     {
+        if(\Cart::isEmpty()){
+            return back()->with('success','your shopping cart is empty!!');
+        }
         return view('frontend.pages.checkout');
     }
 
 
     public function payment(Request $request)
     {
-        $amount = 100;
+        $amount = \Cart::getTotal() - getDiscount();
+        $order = Order::create([
+            'user_id'=>Auth::check()?Auth::id():null,
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'address'=>$request->address,
+            'street'=>$request->street,
+            'neighborhood'=>$request->neighborhood,
+            'promoter'=>Cookie::has('referredBy')?referencedBy()->id:NULL,
+            'discount'=>getDiscount()==0?NULL:getDiscount(),
+            'total'=>$amount,
+        ]);
+        foreach(\Cart::getContent() as $item){
+            $order->items()->create([
+                'product_id'=>$item->id,
+                'price'=>$item->price,
+                'shop'=>$item->model->id,
+                'color'=>$item->attributes['color'],
+                'size'=>$item->attributes['size'],
+                'quantity'=>$item->quantity,
+            ]);
+        }
+        if(Cookie::has('referredBy')){
+            referencedBy()->increment('partner_total_sales');
+        }
+
+        if(Cookie::has('ref')){
+            $user = User::where('affiliate_link',Cookie::get('ref'))->first();
+            if ($user) {
+                $user->increment('sales');
+            }
+        }
+
         $request = [
             'tx_ref' => time(),
             'amount' => $amount,
@@ -85,6 +128,12 @@ class CheckoutController extends Controller
 
                 echo "We can not proccess your payment";
             }
+            Mail::queue(new CustomerNewOrder($order));
+            \Cart::clear();
+            if(Session::has('coupon')){
+                session()->forget('coupon');
+            }
+            Session::flash('success','Order placed successfuly!');
             return redirect()->back()->with('alert', 'Success');
 
     }
@@ -152,6 +201,18 @@ class CheckoutController extends Controller
        else{
            echo "There is something wrong with your payment";
        }
+  }
+
+  public function markAsPaid(Order $order)
+  {
+      $order->update(['Status'=>'Paid']);
+      return redirect('thankyou');
+  }
+
+  public function cancelOrder(Order $order)
+  {
+      $order->update(['Status'=>'Cancelled']);
+      return redirect('order-cancelled');
   }
 
 

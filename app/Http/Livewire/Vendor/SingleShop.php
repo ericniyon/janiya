@@ -3,9 +3,9 @@
 namespace App\Http\Livewire\Vendor;
 
 use App\Models\ProductCategory;
-use App\Models\ProductValiations;
+use App\Models\ProductAttribute;
 use App\Models\Store;
-use App\Models\StoreValiation;
+use App\Models\StoreAttribute;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -20,12 +20,12 @@ class SingleShop extends Component
         $this->categories = ProductCategory::select('id','category_name')->get();
     }
 
-    public function addNewSizeRow()
+    public function addNewRow()
     {
         $this->sizesLoop[] = [];
     }
 
-    public function removeSizeRow($index)
+    public function removeRow($index)
     {
         unset($this->sizesLoop[$index]);
         $this->sizesLoop = array_values($this->sizesLoop);
@@ -35,8 +35,7 @@ class SingleShop extends Component
     {
         $this->validateOnly($fields,[
             'name'=>'string|unique:stores,name|min:3|max:220',
-            'sizesLoop.*.size'=>'required|integer',
-            'sizesLoop.*.color'=>'required|integer',
+            'sizesLoop.*.attribute'=>'required|integer',
             'sizesLoop.*.quantity'=>'required|integer|min:5',
         ]);
     }
@@ -45,24 +44,29 @@ class SingleShop extends Component
     {
         $this->validate([
             'name'=>'string|unique:stores,name|min:3|max:220',
-            'sizesLoop.*.size'=>'required|integer',
-            'sizesLoop.*.color'=>'required|integer',
+            'sizesLoop.*.attribute'=>'required|integer',
             'sizesLoop.*.quantity'=>'required|integer|min:5',
         ]);
-        $product = Store::create([
+        $store = Store::create([
             'name'=>$this->name,
             'slug'=>str()->slug($this->name),
             'vendor_id'=>Auth::guard('vendor')->id(),
             'product_id'=>$this->product->id,
         ]);
         foreach($this->sizesLoop as $key=>$item){
-            StoreValiation::create([
-                'store_id'=>$product->id,
-                'color_id'=>$item['color'],
-                'product_size_id'=>$item['size'],
+            $attribute = ProductAttribute::findOrFail($item['attribute']);
+            $stored_item = $store->valiations()->create([
+                'product_size_id'=>$attribute->product_size_id,
+                'color_id'=>$attribute->color_id,
                 'quantity'=>$item['quantity'],
             ]);
+
+            $attribute->update(['quantity'=>$attribute->quantity - $item['quantity']]);
         }
+
+        $store->orders()->create([
+            'total_amount'=>$store->product->price * $store->valiations()->sum('quantity'),
+        ]);
         session()->flash('success',$this->product->name.' Added into store successfully!');
         $this->reset();
         return to_route('vendor.store');

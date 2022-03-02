@@ -19,14 +19,29 @@ class Store extends Model
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
-    
-    /**
-     * Get all of the valiations for the Store
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+
     public function valiations()
     {
-        return $this->hasMany(StoreValiation::class);
+        return $this->hasMany(StoreAttribute::class);
+    }
+
+    /**
+     * Get all of the colors for the Store
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function colors()
+    {
+        return $this->valiations()->color();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(ShopOrder::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

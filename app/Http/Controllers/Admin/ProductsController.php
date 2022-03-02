@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\ProductImage;
 use App\Models\ProductSize;
 use Illuminate\Http\Request;
@@ -14,36 +15,65 @@ class ProductsController extends Controller
 {
     public function show(Product $product)
     {
-        return view('backend.admin.view-single-product', compact('product'));
+        $sizes = ProductSize::select('size','id')->orderBy('size')->get();
+        $colors = Color::select('color_name','id')->orderBy('color_name')->get();
+        return view('backend.admin.view-single-product', compact('product','sizes','colors'));
     }
 
-    public function updateSize(Request $request,Product $product,$size)
+    public function updateAttribute(Request $request,ProductAttribute $attribute,)
     {
         $this->validate($request,[
             'quantity'=>'required|integer',
+            'image'=>'sometimes|image|mimes:png,jpg,webp|max:750',
         ]);
-        $product->sizes()->updateExistingPivot($size,['quantity'=>$request->quantity]);
+        if ($request->hasFile('image')) {
+            if ($attribute->image) {
+                Storage::delete($attribute->image);
+            }
+            $color_image = $request->image->store('public/products/gallery/color');
+        } else{
+            $color_image = $attribute->image;
+        }
+        $attribute->update([
+            'quantity'=>$request->quantity,
+            'image'=>$color_image,
+        ]);
         return back()->with('success','Quantity updated Successfully!');
     }
 
-    public function updateColor(Request $request,Product $product,$color)
+    public function newAttribute(Request $request, Product $product)
     {
         $this->validate($request,[
+            'size'=>'integer|required',
+            'color'=>'integer|required',
+            'image'=>'sometimes|image|mimes:png,jpg,webp|max:750',
             'quantity'=>'required|integer',
-            // 'image'=>'image|sometimes|mimes:png,jpg,webp|max:800',
         ]);
-        // if($request->hasFile('image')){
-        //     if ($product->colors->pivot->image) {
-        //         Storage::disk('public')->delete($product->colors->pivot->image);
-        //     }
-        //     $image = $request->image->store('public/products/gallery/color');
-        // } else{
-        //     $image = $product->colors->pivot->image;
-        // }
-        $color = Color::findOrFail($color);
-        $product->colors()->updateExistingPivot($color,['quantity'=>$request->quantity]);
-        return back()->with('success',$color->color_name.' Quantity Updated Successfully!');
+
+        if ($request->hasFile('image')) {
+            $color_image = $request->image->store('public/products/gallery/color');
+        } else{
+            $color_image=null;
+        }
+        $product->attributes()->create([
+            'color_id'=>$request->color,
+            'product_size_id'=>$request->size,
+            'quantity'=>$request->quantity,
+            'image'=>$color_image,
+        ]);
+
+        return back()->with('success','Product updated Successfully!');
     }
+
+    // public function updateColor(Request $request,Product $product,$color)
+    // {
+    //     $this->validate($request,[
+    //         'quantity'=>'required|integer',
+    //     ]);
+    //     $color = Color::findOrFail($color);
+    //     $product->colors()->updateExistingPivot($color,['quantity'=>$request->quantity]);
+    //     return back()->with('success',$color->color_name.' Quantity Updated Successfully!');
+    // }
 
     public function updateProduct(Request $request,Product $product)
     {

@@ -137,14 +137,18 @@
                                     <div class="product-box">
                                         <div class="img-wrapper" style="height: 14rem">
                                             <div class="front">
-                                                <a href="{{route('product_details'
-                                                ,[$store->shop->slug,$store->slug])}}" class="bg-size blur-up lazyloaded" 
-                                                style="background-image: url(&quot;{{ asset('assets/images/pro3/35.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;"><img src="{{ asset('assets/images/pro3/35.jpg')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                                                <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}" 
+                                                    class="bg-size blur-up lazyloaded" 
+                                                style="background-image: url(&quot;{{asset(Storage::url($store->product->thumb->image))}}&quot;); 
+                                                background-size: cover; background-position: center center; display: block;">
+                                                <img src="{{asset(Storage::url($store->product->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="back">
-                                                <a href="{{route('product_details'
-                                                ,[$store->shop->slug,$store->slug])}}" class="bg-size blur-up lazyloaded" 
-                                                style="background-image: url(&quot;{{ asset('assets/images/pro3/36.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;"><img src="{{ asset('assets/images/pro3/36.jpg')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                                                <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}" 
+                                                    class="bg-size blur-up lazyloaded" 
+                                                style="background-image: url(&quot;{{asset(Storage::url($store->product->thumb->image))}}&quot;); 
+                                                background-size: cover; background-position: center center; display: block;">
+                                                <img src="{{asset(Storage::url($store->product->lastThumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="cart-info cart-wrap">
                                                 <a href="{{route('add.to.cart',$store->id)}}" title="Add to Wishlist"><i class="ti-shopping-cart" aria-hidden="true"></i></a> 
@@ -153,7 +157,7 @@
                                             </div>
                                         </div>
                                         <div class="product-detail">
-                                            <div>
+                                            <div class="text-center">
                                                 <div class="rating">
                                                     <i class="fa fa-star"></i> 
                                                     <i class="fa fa-star"></i> 
@@ -161,8 +165,8 @@
                                                     <i class="fa fa-star"></i> 
                                                     <i class="fa fa-star"></i>
                                                 </div>
-                                                <a href="{{route('product_details'
-                                                ,[$store->shop->slug,$store->slug])}}">
+                                                <h5>{{number_format($store->product->price)}} Rwf</h5>
+                                                <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}">
                                                     <h6>{{$store->name}}</h6>
                                                 </a>
                                                 {{-- <h4>$500.00</h4> --}}

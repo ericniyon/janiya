@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Color;
-use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,12 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('color_product', function (Blueprint $table) {
+        Schema::create('shop_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Color::class)->constrained();
-            $table->foreignIdFor(Product::class)->constrained();
-            $table->string('image')->nullable();
-            $table->integer('quantity')->unsigned();
+            $table->string('orderNo')->unique();
+            $table->foreignIdFor(Store::class)->constrained();
+            $table->decimal('total_amount', 12, 0);
+            $table->boolean('payment_confirmed')->default(false);
+            $table->enum('status', ['Pending', 'Approved','Denied'])->default('Pending');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('color_product');
+        Schema::dropIfExists('shop_orders');
     }
 };
