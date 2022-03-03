@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="top-banner-wrapper">
-                                    <img src="{{asset($vendor->banner?Storage::url($vendor->banner):'assets/images/mega-menu/2.jpg')}}"
+                                    <img src="{{asset($vendor->banner?Storage::url($vendor->banner):'assets/img/111.jpg')}}"
                                         class="img-fluid blur-up lazyload" alt="{{$vendor->shop_name}}">
                                     <div class="top-banner-content small-section">
                                         <h4>BIGGEST DEALS ON TOP BRANDS</h4>

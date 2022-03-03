@@ -56,6 +56,10 @@ class Product extends Model
     {
         return $this->hasManyThrough(Color::class, ProductAttribute::class);
     }
+    public function size()
+    {
+        return $this->hasManyThrough(productSize::class, ProductAttribute::class);
+    }
 
     public function shops()
     {

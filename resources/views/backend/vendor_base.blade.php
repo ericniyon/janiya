@@ -66,7 +66,7 @@
                     </div>
                     {{-- @endauth --}}
                     <h6 class="mt-3 f-14">
-                        {{Auth::guard('vendor')->user()->name}}
+                        {{-- {{Auth::guard('vendor')->user()->shop_name}} --}}
                     </h6>
                 </div>
                 <ul class="sidebar-menu">

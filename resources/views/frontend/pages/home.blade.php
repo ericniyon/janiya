@@ -14,8 +14,8 @@
                         <div class="col">
                             <div class="slider-contain">
                                 <div>
-                                    <h4>save upto 10% as janiya partner</h4>
-                                    <h1 style="color: #611228">janiya shops </h1><a href="#"
+                                    <h4>Janiya Campaigns save upto 10% as janiya Partner</h4>
+                                    <h1 style="color: #fff">Best Selling </h1><a href="#"
                                         class="btn btn-outline btn-classic">shop now</a>
                                 </div>
                             </div>
@@ -26,14 +26,14 @@
         </div>
         <div>
             <div class="home text-start p-right">
-                <img src="{{ asset('assets/img/home5.jpg')}}" alt="" class="bg-img blur-up lazyload">
+                <img src="{{ asset('assets/img/home.jpg')}}" alt="" class="bg-img blur-up lazyload">
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <div class="slider-contain">
                                 <div>
-                                    <h4>save upto 20% as janiya partner</h4>
-                                    <h1 style="color: #611228">new collection</h1><a href="#" class="btn btn-outline btn-classic">shop
+                                    <h4>Janiya Campaigns save upto 10% as janiya Partner</h4>
+                                    <h1 style="color: #fff">Best Selling</h1><a href="#" class="btn btn-outline btn-classic">shop
                                         now</a>
                                 </div>
                             </div>
@@ -135,22 +135,22 @@
                                     <div class="tab-box">
                                         <div class="product-box2">
                                             <div class="media">
-                                                <a href="">
-                                                <img class="img-fluid blur-up lazyloaded" src="{{asset('tesst/'.$product->product_image )}}" alt=""></a>
+                                                <a href="{{ route('al_product_details',$product->id) }}">
+                                                <img class="img-fluid blur-up lazyloaded" src="{{ asset(Storage::url($product->thumb->image))}}" alt=""></a>
                                                 <div class="media-body align-self-center">
                                                     <div class="rating">
                                                     <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                                     </div>
-                                                    <a href="">
+                                                    <a href="{{ route('al_product_details',$product->id) }}">
                                                         <h6>{{$product->name}}</h6>
                                                     </a>
                                                     <h4>
-                                                     <del>$600.00</del></h4>
-                                                    <ul class="color-variant">
+                                                     {{ $product->price }}Rwf</h4>
+                                                    {{-- <ul class="color-variant">
                                                         <li class="bg-light0"></li>
                                                         <li class="bg-light1"></li>
                                                         <li class="bg-light2"></li>
-                                                    </ul>
+                                                    </ul> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -179,8 +179,8 @@
                 <div class="col">
                     <div class="banner-contain">
                         <h2>2022</h2>
-                        <h3>janiashops trends</h3>
-                        <h4>special offer</h4>
+                        <h3>New Trends & Deals of the Day</h3>
+                        <h4>Special offers & Discounts </h4>
                     </div>
                 </div>
             </div>
@@ -199,7 +199,7 @@
                     </svg>
                     <div class="media-body">
                         <h4>free shipping</h4>
-                        <p>free shipping in rwanda</p>
+                        <p>Free delivery across kigali</p>
                     </div>
                 </div>
             </div>
@@ -229,7 +229,7 @@
                     </svg>
                     <div class="media-body">
                         <h4>24 X 7 service</h4>
-                        <p>online service for new customer</p>
+                        <p>24/7 service (Call us any time any day)</p>
                     </div>
                 </div>
             </div>
@@ -257,7 +257,7 @@
                     </svg>
                     <div class="media-body">
                         <h4>festival offer</h4>
-                        <p>new online special festival offer</p>
+                        <p>New online special festice offers </p>
                     </div>
                 </div>
             </div>
@@ -275,8 +275,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="title2">
-                    <h4>recent story</h4>
-                    <h2 class="title-inner2">latest blog</h2>
+                    <h4>Fashion For You</h4>
+                    <h2 class="title-inner2">Janiya Partners/Ambassadors </h2>
                 </div>
                 <div class="slide-3 no-arrow">
                     <div class="col-md-12">
@@ -292,7 +292,7 @@
                         <div class="blog-details">
                             <h4>25 January 2018</h4>
                             <a href="#">
-                                <p>Lorem ipsum dolor sit consectetur adipiscing elit,</p>
+                                <p>Tracy Gasaro</p>
                             </a>
                         </div>
                     </div>
@@ -309,7 +309,7 @@
                         <div class="blog-details">
                             <h4>25 January 2018</h4>
                             <a href="#">
-                                <p>Lorem ipsum dolor sit consectetur adipiscing elit,</p>
+                                <p> Media Personality </p>
                             </a>
                         </div>
                     </div>
@@ -326,7 +326,7 @@
                         <div class="blog-details">
                             <h4>25 January 2018</h4>
                             <a href="#">
-                                <p>Lorem ipsum dolor sit consectetur adipiscing elit,</p>
+                                <p>Plus size Model </p>
                             </a>
                         </div>
                     </div>
@@ -343,7 +343,7 @@
                         <div class="blog-details">
                             <h4>25 January 2018</h4>
                             <a href="#">
-                                <p>Lorem ipsum dolor sit consectetur adipiscing elit,</p>
+                                <p>Journalist</p>
                             </a>
                         </div>
                     </div>
