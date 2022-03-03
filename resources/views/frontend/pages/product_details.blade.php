@@ -569,44 +569,6 @@
     </div>
     <!-- recently purchase product -->
 
-
-    <!-- sticky cart bottom start -->
-    <div class="sticky-bottom-cart d-sm-block d-none">
-        <div class="container">
-            <div class="cart-content row">
-                <div class="product-image col-md-4">
-                    <img src="{{ asset('assets/images/pro3/1.jpg')}}" class="img-fluid" alt="">
-                    <div class="content d-lg-block d-none">
-                        <h5>{{$product->name}}</h5>
-                    </div>
-                </div>
-                <div class="selection-section col-md-3">
-                    <div class="form-group mb-0 w-100">
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose size</option>
-                            {{-- @foreach ($product->attributes as $item)
-                            <option>{{__('Color: ').$item->color->color_name.__(', Size: ').$item->size->size._(', Price: ').$item->price.__(' RWF')}}</option>
-                            @endforeach --}}
-                        </select>
-                    </div>
-                </div>
-                <div class="selection-section col-md-3">
-                    <div class="form-group mb-0 w-100">
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose Color</option>
-                            {{-- @foreach ($product->attributes as $item)
-                            <option>{{__('Color: ').$item->color->color_name.__(', Size: ').$item->size->size._(', Price: ').$item->price.__(' RWF')}}</option>
-                            @endforeach --}}
-                        </select>
-                    </div>
-                </div>
-                <div class="add-btn col-md-2">
-                    <a href="{{route('add.to.cart',$product->id)}}" class="btn btn-solid btn-sm">add to
-                        cart</a>
-                </div>
-            </div>
-        </div>
-    </div>
     @endsection
 
     @section('scripts')

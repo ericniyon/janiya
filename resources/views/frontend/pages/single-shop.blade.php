@@ -1,7 +1,7 @@
 @extends('frontend.base')
 
 @section('title')
-<title>Product Shop</title>
+<title>{{$vendor->shop_name}}</title>
 @endsection
 @section('content')
 <div class="breadcrumb-section">

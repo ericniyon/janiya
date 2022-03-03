@@ -46,9 +46,7 @@ class HomeController extends Controller
 
     public function shopsList()
     {
-        $shops = Vendor::where('confirmed',1)->where('active',1)
-                        ->orderBy('shop_name')->simplePaginate(20);
-        return view('frontend.pages.shops-list', compact('shops'));
+        return view('frontend.pages.shops-list');
     }
 
     public function becomeAffiliate()
