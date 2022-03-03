@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Product;
-use App\Models\ProductValiations;
-use App\Models\User;
+use App\Models\Store;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,11 +14,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stores', function (Blueprint $table) {
+        Schema::create('shop_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(ProductValiations::class)->constrained();
-            $table->integer('quantity');
+            $table->string('orderNo')->unique();
+            $table->foreignIdFor(Store::class)->constrained();
+            $table->decimal('total_amount', 12, 0);
+            $table->boolean('payment_confirmed')->default(false);
+            $table->enum('status', ['Pending', 'Approved','Denied'])->default('Pending');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stores');
+        Schema::dropIfExists('shop_orders');
     }
 };

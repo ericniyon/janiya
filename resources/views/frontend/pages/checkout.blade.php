@@ -36,43 +36,60 @@
                                 <h3>Billing Details</h3>
                             </div>
                             <div class="row check-out">
-                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <div class="field-label">First Name</div>
-                                    <input type="text" name="cuastomer_first_name" value="" placeholder="">
+                                <div class="form-group col-12">
+                                    <div class="field-label">Full Name</div>
+                                    <input type="text" name="name" placeholder="Your Full Names" 
+                                    value="{{old('name',Auth::user()?Auth::user()->name:'')}}"
+                                    class="@error('name') is-invalid @enderror">
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <div class="field-label">Last Name</div>
-                                    <input type="text" name="cuastomer_last_name" value="" placeholder="">
-                                </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <div class="field-label">Phone</div>
-                                    <input type="text" name="cuastomer_email" value="" placeholder="">
+                                    <div class="field-label">Phone Number</div>
+                                    <input type="tel" name="phone" placeholder="Ex: 0780808080" 
+                                    value="{{old('phone',Auth::user()?Auth::user()->phone:'')}}"
+                                    class="@error('phone') is-invalid @enderror">
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Email Address</div>
-                                    <input type="text" name="cuastomer_address" value="" placeholder="">
+                                    <input type="email" name="email" placeholder="Ex: name@domain.com" 
+                                    value="{{old('email',Auth::user()?Auth::user()->email:'')}}"
+                                    class="@error('email') is-invalid @enderror">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                                    @enderror
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                    <div class="field-label">Country</div>
-                                    <select>
-                                        <option>India</option>
-                                        <option>South Africa</option>
-                                        <option>United State</option>
-                                        <option>Australia</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group col-12">
                                     <div class="field-label">Address</div>
-                                    <input type="text" name="cuastomer_phone" value="" placeholder="Street address">
+                                    <input type="text" name="address" placeholder="Kicukiro, Niboye, St Joseph" 
+                                    value="{{old('address',Auth::user()?Auth::user()->address1:'')}}"
+                                    class="@error('address') is-invalid @enderror">
+                                    @error('address')
+                                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                    <div class="field-label">Town/City</div>
-                                    <input type="text" name="field-name" value="" placeholder="">
+                                    <div class="field-label">Street Address</div>
+                                    <input type="text" name="street" placeholder="Ex: KK 1 Ave" 
+                                    value="{{old('street',Auth::user()?Auth::user()->street_name:'')}}"
+                                    class="@error('street') is-invalid @enderror">
+                                    @error('street')
+                                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                                    @enderror
                                 </div>
-                                {{-- <div class="form-group col-md-6 col-sm-6 col-xs-6">
-                                    <div class="field-label">State / County</div>
-                                    <input type="text" name="field-name" value="" placeholder="">
-                                </div> --}}
+                                <div class="form-group col-md-6 col-sm-6 col-xs-6">
+                                    <div class="field-label">Neighborhood</div>
+                                    <input type="text" name="neighborhood" placeholder="Ex: Rugando" 
+                                    value="{{old('neighborhood',Auth::user()?Auth::user()->neighborhood:'')}}"
+                                    class="@error('neighborhood') is-invalid @enderror">
+                                    @error('neighborhood')
+                                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12 col-xs-12">
@@ -82,26 +99,18 @@
                                         <div>Product <span>Total</span></div>
                                     </div>
                                     <ul class="qty">
-                                        <li>Pink Slim Shirt × 1 <span>25.10RWF</span></li>
-                                        <li>SLim Fit Jeans × 1 <span>555.00RWF</span></li>
+                                        @foreach (\Cart::getContent() as $item)
+                                        <li>{{$item->model->name}} <strong>x</strong> {{$item->quantity}} <span>{{money($item->price*$item->quantity)}}</span></li>
+                                        @endforeach
                                     </ul>
                                     <ul class="sub-total">
-                                        <li>Subtotal <span class="count">380.10RWF</span></li>
-                                        <li>Shipping
-                                            <div class="shipping">
-                                                <div class="shopping-option">
-                                                    <input type="checkbox" name="free-shipping" id="free-shipping">
-                                                    <label for="free-shipping">Free Shipping</label>
-                                                </div>
-                                                <div class="shopping-option">
-                                                    <input type="checkbox" name="local-pickup" id="local-pickup">
-                                                    <label for="local-pickup">Local Pickup</label>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        <li>Sub Total <span class="count">{{money(\Cart::getTotal())}}</span></li>
+                                        @if (Session::has('coupon'))
+                                           <li>Discount: <span class="count">{{money(getDiscount())}}</span></li> 
+                                        @endif
                                     </ul>
                                     <ul class="total">
-                                        <li>Total <span class="count">620.00RWF</span></li>
+                                        <li>Total Amount To Pay<span class="count">{{money(\Cart::getTotal() - getDiscount())}}</span></li>
                                     </ul>
                                 </div>
                                 <div class="payment-box">
@@ -112,6 +121,9 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="checkout-form">
+                @livewire('front.checkout-discounts')
             </div>
         </div>
     </div>

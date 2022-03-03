@@ -5,126 +5,104 @@ use Livewire\WithFileUploads;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductImage;
 use App\Models\ProductSize;
-use App\Models\ProductValiations;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use Livewire\Component;
-
 class AddProduct extends Component
 {
     use WithFileUploads;
-    protected $listeners = ['AddProduct' => '$refresh'];
+    public $colorsLoop, $sizesLoop, $colors, $sizes, $categories;
+    public $name, $price, $product_category_id, $description, $product_image = []; 
 
-    public $valuations, $name, $description,$product_image, $product_category_id, $quantity, $price,$product_color, $product_size, $product_name;
-    public $updateMode = false;
-    public $inputs = [];
-    public $i = 1;
-
-
-    public function add($i)
+    public function mount()
     {
-        $i = $i + 1;
-        $this->i = $i;
-        array_push($this->inputs ,$i);
-        // $this->valuations[] = [];
-
+        $this->colorsLoop = [[]];
+        $this->sizesLoop = [[]];
+        $this->colors = Color::select('color_name','id')->get();
+        $this->sizes = ProductSize::orderBy('size')->get();
+        $this->categories = ProductCategory::all();
     }
 
-    public function remove($i)
+    public function addNewRow()
     {
-        unset($this->inputs[$i]);
+        $this->colorsLoop[] = [];
     }
 
-
-
-
-    private function resetInputFields(){
-
-
-        $this->name = '';
-        $this->description = '';
-        $this->product_category_id = '';
-        $this->quantity = '';
-        $this->price = '';
-        $this->product_color = '';
-        $this->product_name = '';
-        $this->product_size = '';
-        $this->product_image = '';
+    public function removeRow($index)
+    {
+        unset($this->colorsLoop[$index]);
+        $this->colorsLoop = array_values($this->colorsLoop);
     }
 
+    public function FunctionName($fields)
+    {
+        $this->validateOnly($fields,[
+            'name'=>'string|unique:products,name|min:3|max:220',
+            'price'=>'required|integer|min:500|max:500000',
+            'product_category_id'=>'required|integer',
+            'description'=>'string|required|min:10|max:5000',
+            'product_image.*'=>'image|mimes:png,jpg,webp|required',
+            'colorsLoop.*.color'=>'required|integer',
+            'colorsLoop.*.quantity'=>'required|integer',
+            'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
+            'colorsLoop.*.size'=>'required|integer',
+        ]);
+    }
 
     public function store()
     {
-        $images = new Product();
-        $validation = $this->validate([
-    		'description'		    =>	'required',
-    		'name'			        =>	'required',
-    		'product_category_id'	=>	'required',
-    		'product_image'	=>	'image|max:1024',
-
-    	]);
-
-
-        $filename = "";
-        if ($this->product_image) {
-            $filename = $this->product_image->store('products', 'public');
-        } else {
-            $filename = Null;
-        }
-
-
-
+        $this->validate([
+            'name'=>'string|unique:products,name|min:3|max:220',
+            'price'=>'required|integer|min:500|max:500000',
+            'product_category_id'=>'required|integer',
+            'description'=>'string|required|min:10|max:5000',
+            'product_image.*'=>'image|mimes:png,jpg,webp|required',
+            'colorsLoop.*.color'=>'required|integer',
+            'colorsLoop.*.quantity'=>'required|integer',
+            'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
+            'colorsLoop.*.size'=>'required|integer',
+        ]);
 
         $product = Product::create([
-            'name' => $this->name,
-            'description' => $this->description,
-            'product_image' => $filename,
-            'product_category_id' => $this->product_category_id
+            'name'=>$this->name, 
+            'slug'=>str()->slug($this->name), 
+            'price'=>$this->price, 
+            'description'=>$this->description,
+            'product_image'=>'null', 
+            'product_category_id'=>$this->product_category_id
         ]);
-        // $result = $images->create();
-        // dd($result);
-        // return session()->flash('message', 'Records Has Been Inserted Successfully.');
 
-        // $name = md5($this->product_image . microtime()).'.'.$this->product_image->extension();
+        if ($this->product_image) {
+            foreach ($this->product_image as $key => $image) {
+                $photo = $image->store('public/products/gallery');
+                ProductImage::create([
+                    'image' => $photo,
+                    'product_id'=>$product->id
+                ]);
+            }
+        }
 
-        // $this->product_image->storeAs('photos', $name);
-
-        // $product = Product::create($products);
-
-        foreach ($this->quantity as $key => $value) {
-
-
-            ProductValiations::create([
-                'quantity' => $this->quantity[$key],
-                'price' => $this->price[$key],
-                'product_size' => $this->product_size[$key],
-                'product_color' => $this->product_color[$key],
-
-                'product_name' => $product->id,
-
+        foreach($this->colorsLoop as $key=>$item){
+            $color_image = $item['image']->store('public/products/gallery/color');
+            $product->attributes()->create([
+                'color_id'=>$item['color'],
+                'product_size_id'=>$item['size'],
+                'quantity'=>$item['quantity'],
+                'image'=>$color_image,
             ]);
         }
-        $this->inputs = [];
-        // dd($this->product_category_id);
 
-
-    	$this->resetInputFields();
+        $this->reset();
         session()->flash('message', 'Data Created Successfully.');
-
-
-
         session()->flash('message', 'Records Has Been Inserted Successfully.');
+        return to_route('admin.dashboard');
     }
 
 
     public function render()
     {
-        $colors = Color::all();
-        $sizes = ProductSize::all();
-        $this->categories = ProductCategory::all();
-
-        return view('livewire.admin.add-product', compact('colors', 'sizes'));
+        return view('livewire.admin.add-product');
     }
 }

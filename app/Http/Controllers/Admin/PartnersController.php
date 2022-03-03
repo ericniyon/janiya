@@ -52,7 +52,7 @@ class PartnersController extends Controller
         ]);
         if ($request->hasFile('logo')) {
             if ($user->profile) {
-                Storage::disk()->delete($user->profile);
+                Storage::delete($user->profile);
             }
             $fileName = str()->slug($request->promo_code).time().'.'.$request->logo->extension();
             $profile = $request->logo->storeAs('users_profile',$fileName,'public');

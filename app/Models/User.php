@@ -26,6 +26,10 @@ class User extends Authenticatable
         'sales',
         'clicks',
         'active',
+        'partner_total_sales',
+        'address1',
+        'neighborhood',
+        'street_name',
         'profile',
         'password',
     ];
@@ -48,4 +52,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the commission associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function commission()
+    {
+        return $this->belongsTo(Commission::class);
+    }
+
+    /**
+     * Get all of the orders for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

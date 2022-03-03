@@ -13,14 +13,14 @@ class ProductCategory extends Model
     protected $fillable = ['category_name', 'category_image'];
 
     /**
-     * Get all of the products for the ProductCategory
+     * Get all of the product for the ProductCategory
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function products()
     {
-        return $this->hasMany(Product::class, 'product_category_id', 'id');
+        return $this->hasMany(Product::class);
     }
 
-
+    
 }

@@ -64,8 +64,9 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'string', 'min:10', 'max:12', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'shop_name' => ['required', 'string', 'min:3', 'max:120', 'unique:vendors'],
+            'phone' => ['required', 'string', 'min:10', 'max:12',],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -73,10 +74,11 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'shop_name' => $request->shop_name,
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
         Auth::guard('vendor')->login($user);
 

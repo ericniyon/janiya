@@ -128,154 +128,6 @@
 
                         </ul>
                         <div class="tab-content-cls">
-                            {{-- <div id="tab-1" class="tab-content active default">
-                                <div class="row product-tab">
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="product-page(no-sidebar).html"><img
-                                                        class="img-fluid blur-up lazyload"
-                                                        src="../assets/images/nursery/pro/1.jpg" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i
-                                                            class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    </div><a href="product-page(no-sidebar).html">
-                                                        <h6>Slim Fit Cotton Shirt</h6>
-                                                    </a>
-                                                    <h4>$500.00</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="product-page(no-sidebar).html"><img
-                                                        class="img-fluid blur-up lazyload"
-                                                        src="../assets/images/nursery/pro/2.jpg" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i
-                                                            class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    </div><a href="product-page(no-sidebar).html">
-                                                        <h6>Slim Fit Cotton Shirt</h6>
-                                                    </a>
-                                                    <h4>$500.00 <del>$600.00</del></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="product-page(no-sidebar).html"><img
-                                                        class="img-fluid blur-up lazyload"
-                                                        src="../assets/images/nursery/pro/3.jpg" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i
-                                                            class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    </div><a href="product-page(no-sidebar).html">
-                                                        <h6>Slim Fit Cotton Shirt</h6>
-                                                    </a>
-                                                    <h4>$500.00</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="product-page(no-sidebar).html"><img
-                                                        class="img-fluid blur-up lazyload"
-                                                        src="../assets/images/nursery/pro/4.jpg" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i
-                                                            class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    </div><a href="product-page(no-sidebar).html">
-                                                        <h6>Slim Fit Cotton Shirt</h6>
-                                                    </a>
-                                                    <h4>$500.00</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="product-page(no-sidebar).html"><img
-                                                        class="img-fluid blur-up lazyload"
-                                                        src="../assets/images/nursery/pro/5.jpg" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i
-                                                            class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    </div><a href="product-page(no-sidebar).html">
-                                                        <h6>Slim Fit Cotton Shirt</h6>
-                                                    </a>
-                                                    <h4>$500.00</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="product-page(no-sidebar).html"><img
-                                                        class="img-fluid blur-up lazyload"
-                                                        src="../assets/images/nursery/pro/6.jpg" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i
-                                                            class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    </div><a href="product-page(no-sidebar).html">
-                                                        <h6>Slim Fit Cotton Shirt</h6>
-                                                    </a>
-                                                    <h4>$500.00</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="product-page(no-sidebar).html"><img
-                                                        class="img-fluid blur-up lazyload"
-                                                        src="../assets/images/nursery/pro/7.jpg" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i
-                                                            class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    </div><a href="product-page(no-sidebar).html">
-                                                        <h6>Slim Fit Cotton Shirt</h6>
-                                                    </a>
-                                                    <h4>$500.00 <del>$600.00</del></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="product-page(no-sidebar).html"><img
-                                                        class="img-fluid blur-up lazyload"
-                                                        src="../assets/images/nursery/pro/1.jpg" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i
-                                                            class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    </div><a href="product-page(no-sidebar).html">
-                                                        <h6>Slim Fit Cotton Shirt</h6>
-                                                    </a>
-                                                    <h4>$500.00</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                             @foreach ($product_categories as $item)
                             <div id="tab-{{$item->id}}" class="tab-content active default" style="display: block;">
                                 <div class="row product-tab mt-5">
@@ -283,17 +135,16 @@
                                     <div class="tab-box">
                                         <div class="product-box2">
                                             <div class="media">
-                                                <a href="{{route('product_details', $product->id)}}"><img class="img-fluid blur-up lazyloaded" src="{{asset('tesst/'.$product->product_image )}}" alt=""></a>
+                                                <a href="">
+                                                <img class="img-fluid blur-up lazyloaded" src="{{asset('tesst/'.$product->product_image )}}" alt=""></a>
                                                 <div class="media-body align-self-center">
-                                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                                    <a href="{{route('product_details',$product->id)}}">
+                                                    <div class="rating">
+                                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <a href="">
                                                         <h6>{{$product->name}}</h6>
                                                     </a>
-
                                                     <h4>
-
-
-
                                                      <del>$600.00</del></h4>
                                                     <ul class="color-variant">
                                                         <li class="bg-light0"></li>
@@ -303,7 +154,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     @empty

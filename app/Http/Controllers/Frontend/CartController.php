@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Darryldecode\Cart\Cart;
 
 class CartController extends Controller
 {
@@ -26,6 +27,9 @@ class CartController extends Controller
      */
     public function cart()
     {
+        if (\Cart::isEmpty()) {
+            return to_route('shop')->with('warning','Your cart is empty! shop something into it!!');
+        }
         return view('frontend.pages.cart');
     }
 

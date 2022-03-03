@@ -1,7 +1,8 @@
 @extends('backend.base')
+@section('title')
+<title>Product Categories</title>
+@endsection
 @section('content')
-
-
 <div class="container-fluid">
     <div class="page-header">
         <div class="row">
@@ -53,7 +54,7 @@
                                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="needs-validation" action="{{route('save-category')}}" method="POST" enctype="multipart/form-data">
+                                    <form class="needs-validation" action="{{route('admin.save-category')}}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form">
                                             <div class="form-group">

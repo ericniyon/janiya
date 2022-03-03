@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AffilitesController;
 use App\Http\Controllers\Admin\ColorsController;
 use App\Http\Controllers\Admin\PartnersController;
+use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ShopsController;
 use App\Http\Controllers\Admins\AdminController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -24,38 +25,17 @@ use App\Http\Controllers\Vendors\StoresController;
 */
 
 // Frontend routes
-Route::get('/', [HomeController::class, 'index'] )->name('home');
-
-
-
-
-
-
-
+Route::get('/', [HomeController::class, 'index'] )->middleware('referral')->name('home');
 
 // products routes
-
-Route::get('product/category', [AdminController::class, 'product_category'] )->name('product-category');
-Route::post('save-category', [AdminController::class, 'save_category'] )->name('save-category');
-
-
-// products routes
-Route::view('test','frontend.pages.nurse');
-Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
-Route::get('shop-product', [HomeController::class, 'shop'] )->name('shop');
-Route::get('product_details/{id}', [HomeController::class, 'product_details'] )->name('product_details');
-
-
-
+Route::get('shop/products', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
+Route::get('shops',[HomeController::class,'shopsList'])->name('shops.list');
+Route::get('shops/{vendor}',[HomeController::class,'singleShop'])->name('shops.list.single');
+// Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
+Route::get('shop/{vendor}/{product}',[HomeController::class,'singleProduct'])->name('product.single');
 // all about colors
 Route::get('colors', [ColorsController::class, 'colors'] )->name('colors');
 Route::post('save-color', [ColorsController::class, 'save_colors'] )->name('save-color');
-
-
-// all about size
-Route::get('sizes', [Size::class, 'size'] )->name('size');
-Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
-
 // cart
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
@@ -63,22 +43,27 @@ Route::patch('update-cart', [CartController::class, 'update'])->name('update.car
 Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
 
 // checkout
-Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-
-
-
+Route::get('checkout', [CheckoutController::class, 'checkout'])->middleware('auth')->name('checkout');
+Route::get('guest-checkout', [CheckoutController::class, 'checkout'])->name('checkout.guest');
 Route::post('purchase', [CheckoutController::class, 'payment'])->name('purchase');
+Route::view('thankyou','front.thankyou')->name('thankyou');
+Route::view('order-cancelled','front.thankyou')->name('cancelled');
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
-
 
 // Admin's routes
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
-
-
     Route::get('/dashboard', function () {
         return view('backend.pages.admin_dashboard');
     })->name('dashboard');
-
+    Route::get('sizes', [Size::class, 'size'] )->name('size');
+    Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
+    Route::get('product/category', [AdminController::class, 'product_category'] )->name('product-category');
+    Route::post('save-category', [AdminController::class, 'save_category'] )->name('save-category');
+    Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
+    Route::view('products','backend.admin.products')->name('products.all');
+    Route::get('products/{product}',[ProductsController::class,'show'])->name('products.single');
+    Route::put('products/{attribute}',[ProductsController::class,'updateAttribute'])->name('products.update');
+    Route::post('products/{product}',[ProductsController::class,'newAttribute'])->name('products.new');
 
     Route::view('/shops','backend.admin.shops')->name('shops');
     Route::view('/shops/add-new-shop','backend.admin.addEditShops')->name('shops.add');
@@ -101,7 +86,11 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name('vendor.')->group(function(){
     Route::view('/dashboard','backend.vendors.index')->name('dashboard');
     Route::get('store/add-products',[StoresController::class,'index'])->name('store');
+    Route::get('store/products/{product}',[StoresController::class,'shop'])->name('store.single');
     Route::view('store/my-shop','backend.vendors.shop')->name('shop');
+
+    Route::view('orders','backend.vendors.orders')->name('orders');
+    Route::get('orders/view/{order}',[StoresController::class,'singleOrder'])->name('orders.single');
 
     // coupons
     Route::view('coupons','backend.vendors.coupons')->name('coupons');
@@ -110,12 +99,21 @@ Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name(
 // Normal Users's routes
 Route::middleware('auth')->group(function(){
     // Route::view('/my-orders')->name('orders');
+    Route::get('/dashboard', function () {return view('frontend.pages.dashboard'); })->name('dashboard');
+    Route::put('become-affiate',[HomeController::class, 'becomeAffiliate'])->name('affiliate');
+    Route::get('my-orders',[HomeController::class,'orders'])->name('cliet.orders');
+    Route::get('my-orders/{order}',[HomeController::class,'singleOrders'])->name('orders.single');
+    Route::view('profile', 'frontend.pages.profile')->name('profile');
+    Route::put('profile',[HomeController::class, 'updateProfile'])->name('profile.update');
+    Route::view('update-password', 'frontend.pages.password')->name('profile.password');
+    Route::put('update-password',[HomeController::class, 'updatePassword'])->name('profile.password.update');
 });
 
-Route::get('/dashboard', function () {
-    return view('backend.pages.admin_dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 
 
 require __DIR__.'/auth.php';
+
+Route::fallback(function(){
+    return to_route('shop');
+});

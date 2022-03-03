@@ -18,8 +18,15 @@
                         <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
                             My Account
                             <ul class="onhover-show-div">
+                                @guest
                                 <li><a href="/login">Login</a></li>
                                 <li><a href="/register">register</a></li>
+                                @else
+                                <li><a href="/dashboard">Dashboard</a></li>
+                                @if (is_null(Auth::user()->affiliate_link))
+                                <li><a href="/register">Become Affiates</a></li>
+                                @endif
+                                @endguest
                             </ul>
                         </li>
                     </ul>
@@ -170,8 +177,9 @@
                             </div>
                         </div>
                         <div class="brand-logo">
-                            <a href="index.html"><img src="{{asset('assets/img/janiya-logo.jpg')}}"
-                                    class="img-fluid blur-up lazyload" alt=""></a>
+                            <a href="index.html">
+                                <img src="{{asset('assets/img/janiya-logo.jpg')}}" class="img-fluid blur-up lazyload" alt="">
+                            </a>
                         </div>
                     </div>
                     <div class="menu-right pull-right">
@@ -186,11 +194,11 @@
                                     <li><a href="{{route('home')}}">Home</a></li>
 
                                     <li>
-                                        <a href="{{route('shop')}}">shop</a>
+                                        <a href="{{route('shops.list')}}">shops</a>
 
                                     </li>
                                     <li>
-                                        <a href="#">product</a>
+                                        <a href="{{route('shop')}}">products</a>
 
                                     </li>
                                     <li>
@@ -236,50 +244,17 @@
                                             </div>
                                         </div>
                                     </li>
-
-                                    @php $total = 0 @endphp
-                                    @foreach((array) session('cart') as $id => $details)
-                                        @php $total += $details['price'] * $details['quantity'] @endphp
-                                    @endforeach
-
-                                    @if(session('cart'))
                                     <li class="onhover-div mobile-cart">
-                                        <div><img src="../assets/images/icon/cart.png"
-                                            class="img-fluid blur-up lazyload" alt=""> <i
-                                            class="ti-shopping-cart"></i></div>
-                                            <span class="cart_qty_cls">{{ count((array) session('cart')) }}</span>
-                                            <ul class="show-div shopping-cart">
-                                                @foreach(session('cart') as $id => $details)
-
-                                                <li>
-                                                    <div class="media">
-                                                        <a href="#"><img alt="" class="me-3"
-                                                                src="../assets/images/fashion/product/1.jpg"></a>
-                                                        <div class="media-body">
-                                                            <a href="#">
-                                                                <h4>item name</h4>
-                                                            </a>
-                                                            <h4><span>1 x $ 299.00</span></h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="close-circle"><a href="#"><i class="fa fa-times"
-                                                                aria-hidden="true"></i></a></div>
-                                                </li>
-
-                                                @endforeach
-                                                <li>
-                                                    <div class="total">
-                                                        <h5>subtotal : <span>{{$total}}</span></h5>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="buttons"><a href="{{route('cart')}}" class="view-cart">view
-                                                            cart</a> <a href="#" class="checkout">checkout</a></div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    @endif
-
+                                        <div>
+                                            <img src="../assets/images/icon/cart.png"
+                                            class="img-fluid blur-up lazyload" alt=""> 
+                                            <i class="ti-shopping-cart"></i>
+                                        </div>
+                                        @if(!\Cart::isEmpty())
+                                        <span class="cart_qty_cls">{{ \Cart::getContent()->count() }}</span>
+                                        @livewire('front.cart-summary')
+                                        @endif
+                                    </li>
                                 </ul>
                             </div>
                         </div>

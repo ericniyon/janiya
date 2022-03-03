@@ -1,4 +1,7 @@
 @extends('backend.base')
+@section('title')
+<title>Add New Product</title>
+@endsection
 @section('content')
 @livewireStyles
 <div class="container-fluid">

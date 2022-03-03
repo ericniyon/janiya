@@ -1,5 +1,7 @@
-@extends('backend.base')
-
+@extends('backend.vendor_base')
+@section('title')
+<title>Vendor Dashboard</title>
+@endsection
 @section('content')
 
 <div class="container-fluid">

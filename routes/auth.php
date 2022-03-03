@@ -21,7 +21,7 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
 
 Route::get('/vendor/register', [RegisteredUserController::class, 'vendorAccountForm'])
                 ->middleware('guest:vendor')
-                ->name('register');
+                ->name('vendor.register');
 
 Route::post('/vendor/register', [RegisteredUserController::class, 'storeVendor'])
                 ->middleware('guest:vendor');
