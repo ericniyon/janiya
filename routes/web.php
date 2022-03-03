@@ -110,6 +110,7 @@ Route::middleware('auth')->group(function(){
 });
 
 
+Route::get('pro/{id}', [HomeController::class, 'al_product_details'] )->name('al_product_details');
 
 
 require __DIR__.'/auth.php';

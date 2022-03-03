@@ -7,7 +7,7 @@
                         <div class="subscribe">
                             <div>
                                 <h4>KNOW IT ALL FIRST!</h4>
-                                <p>Never Miss Anything From {{config('app.name')}} By Signing Up To Our Newsletter.</p>
+                                <p>Never miss any new trend from {{config('app.name')}} by signing up to our newsletter. </p>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,9 @@
                     </div>
                     <div class="footer-contant">
                         <div class="footer-logo"><img src="{{asset('assets/img/janiya-logo.jpg')}}" alt=""></div>
-                        <p>The ultimate clothing to see the world in.</p>
+                        <p>JANIYA  is a Rwandan B2B and  B2C fast fashion  Factory. The company mainly focuses on women's wear,men's apparel, children's clothes,
+                             home and living clothing,and other fashion items. JANIYA mainly targets Rwanda & East Africa  along with other consumer markets.
+                             The brand was founded in 2012, and since then it has upheld the philosophy that "everyone can enjoy the beauty of fashion."</p>
                         <div class="footer-social">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -55,11 +57,11 @@
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">mens</a></li>
-                                <li><a href="#">womens</a></li>
-                                <li><a href="#">clothing</a></li>
-                                <li><a href="#">accessories</a></li>
-                                <li><a href="#">featured</a></li>
+                                <li><a href="#">Women</a></li>
+                                <li><a href="#">Men</a></li>
+                                <li><a href="#">Kids</a></li>
+                                <li><a href="#">Home & Living</a></li>
+                                <li><a href="#">Beddings</a></li>
                             </ul>
                         </div>
                     </div>
@@ -67,15 +69,18 @@
                 <div class="col">
                     <div class="sub-title">
                         <div class="footer-title">
-                            <h4>why we choose</h4>
+                            <h4>Useful Links</h4>
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">shipping & return</a></li>
-                                <li><a href="#">secure shopping</a></li>
-                                <li><a href="#">gallary</a></li>
-                                <li><a href="#">affiliates</a></li>
-                                <li><a href="#">contacts</a></li>
+                                <li><a href="#">Gallery</a></li>
+                                <li><a href="#">Women </a></li>
+                                <li><a href="#">Men</a></li>
+                                <li><a href="#">Kids</a></li>
+                                <li><a href="#">Home & Living </a></li>
+                                <li><a href="#">About us  </a></li>
+                                <li><a href="#">Contact us  </a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -83,14 +88,14 @@
                 <div class="col">
                     <div class="sub-title">
                         <div class="footer-title">
-                            <h4>store information</h4>
+                            <h4>Contact Us </h4>
                         </div>
                         <div class="footer-contant">
                             <ul class="contact-list">
-                                <li><i class="fa fa-map-marker"></i>Rwanda, Muhanga District
+                                <li><i class="fa fa-map-marker"></i>Rwanda Kigali :
                                 </li>
-                                <li><i class="fa fa-phone"></i>Call Us: <a href="tel:250782779773">250782779773</a></li>
-                                <li><i class="fa fa-envelope-o"></i>Email Us: <a href="mailto:info@janiyashop.rw">info@janiyashop.rw</a></li>
+                                <li><i class="fa fa-phone"></i>Call Us: <a href="tel:250782779773"> +250 785 389 500</a></li>
+                                <li><i class="fa fa-envelope-o"></i>Email Us: <a href="mailto:info@janiyashop.rw">info@janiya.com</a></li>
                             </ul>
                         </div>
                     </div>

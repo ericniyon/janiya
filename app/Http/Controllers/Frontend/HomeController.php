@@ -129,4 +129,11 @@ class HomeController extends Controller
         $order = Order::findOrFail(Crypt::decryptString($order));
         return view('frontend.pages.single-order', compact('order'));
     }
+
+    public function al_product_details($id)
+    {
+        $products = Product::all();
+        $product = Product::find($id);
+        return view('frontend.pages.al_single_product', compact('product','products'));
+    }
 }

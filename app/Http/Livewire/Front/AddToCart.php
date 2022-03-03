@@ -54,16 +54,16 @@ class AddToCart extends Component
 
     public function mount($product)
     {
-        $colorIds = [];
-        $sizeIds = [];
-        foreach ($this->product->valiations()->pluck('color_id') as $value) {
-            array_push($colorIds,$value);
-        }
-        foreach ($this->product->valiations()->pluck('product_size_id') as $value) {
-            array_push($sizeIds,$value);
-        }
-        $this->colors = Color::whereIn('id',$colorIds)->select('id','color_code')->distinct()->get();
-        $this->sizes = ProductSize::whereIn('id',$sizeIds)->select('id','size')->distinct()->get();
+        // $colorIds = [];
+        // $sizeIds = [];
+        // foreach ($this->product->valiations()->pluck('color_id') as $value) {
+        //     array_push($colorIds,$value);
+        // }
+        // foreach ($this->product->valiations()->pluck('product_size_id') as $value) {
+        //     array_push($sizeIds,$value);
+        // }
+        // $this->colors = Color::whereIn('id',$colorIds)->select('id','color_code')->distinct()->get();
+        // $this->sizes = ProductSize::whereIn('id',$sizeIds)->select('id','size')->distinct()->get();
         $this->product = $product;
     }
     public function render()

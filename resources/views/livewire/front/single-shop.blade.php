@@ -57,14 +57,14 @@
                 <div class="product-box">
                     <div class="img-wrapper">
                         <div class="front">
-                            <a href="{{route('product.single',[$vendor->slug,$product->slug])}}">
-                                <img src="{{asset(Storage::url($product->product->thumb->image))}}"
+                            <a href="{{route('al_product_details',$product->product->id)}}">
+                                <img src="{{ asset(Storage::url($product->product->thumb->image))}}"
                                     class="img-fluid blur-up lazyload bg-img"
                                     alt="{{$product->name}}"></a>
                         </div>
                         <div class="back">
-                            <a href="{{route('product.single',[$vendor->slug,$product->slug])}}">
-                                <img src="{{asset(Storage::url($product->product->lastThumb->image))}}"
+                            <a href="{{route('al_product_details',$product->product->id)}}">
+                                <img src="{{ asset(Storage::url($product->product->thumb->image))}}"
                                     class="img-fluid blur-up lazyload bg-img"
                                     alt="{{$product->name}}"></a>
                         </div>
@@ -76,7 +76,7 @@
                                     class="fa fa-star"></i> <i
                                     class="fa fa-star"></i> <i
                                     class="fa fa-star"></i></div>
-                            <a href="product-page(no-sidebar).html">
+                            <a href="{{{{route('al_product_details',$product->product->id)}}}}">
                                 <h6>{{$product->name}}</h6>
                             </a>
                             <p>{{$product->product->description}}</p>

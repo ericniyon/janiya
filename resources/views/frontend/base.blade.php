@@ -36,6 +36,8 @@
 
     <!-- Theme css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/fontawesome.css')}}">
     @stack('extra-css')
     @livewireStyles
 
@@ -108,14 +110,6 @@
     <!-- lazyload js-->
     <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
     <script src="{{ asset('assets/js/sticky-cart-bottom.js') }}"></script>
-    <!-- slick js-->
-    <script src="{{ asset('assets/js/slick.js')}}"></script>
-
-    <!-- menu js-->
-    <script src="{{ asset('assets/js/menu.js')}}"></script>
-
-    <!-- lazyload js-->
-    <script src="{{ asset('assets/js/lazysizes.min.js')}}"></script>
 
     <!-- Bootstrap js-->
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
@@ -124,6 +118,7 @@
     <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme-setting.js') }}"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+
     @yield('scripts')
     @livewireScripts
     <script>
