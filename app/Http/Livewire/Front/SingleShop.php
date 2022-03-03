@@ -10,9 +10,9 @@ class SingleShop extends Component
 {
     use WithPagination;
     public $paginationTheme = 'bootstrap';
-    public $perPage = 30, $searchKey = '', $sortBy = 'name', $sortKey = 'ASC';
+    public $perPage = 25, $searchKey = '', $sortBy = 'name', $sortKey = 'ASC';
     public $queryString = [
-        'perPage'=>['except'=>30],
+        'perPage'=>['except'=>25],
         'searchKey'=>['except'=>''],
         'sortBy'=>['except'=>'name'],
         'sortKey'=>['except'=>'ASC'],
