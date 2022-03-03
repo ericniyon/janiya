@@ -7,8 +7,8 @@
     <ul class="color-variant">
         @foreach ($product->attributes as $item)
             
-        <li class=" active" wire:click="setColor({{$item->id}})"
-            style="background: {{ $item->color->color_code }}"></li>
+        {{-- <li class=" active" wire:click="setColor({{$item->id}})" --}}
+            <li class="active" style="background: {{ $item->color->color_code }}"></li>
         @endforeach
     </ul>
     <div id="selectSize" class="addeffect-section product-description border-product">
@@ -32,12 +32,12 @@
                 </div>
             </div>
         </div>
-        <h6 class="error-message">please select size</h6>
+        {{-- <h6 class="error-message">please select size</h6> --}}
         <div class="size-box">
             <ul>
                 @foreach ($product->attributes as $item)
-                <li><a href="javascript:void(0)" wire:click="setSize({{$item->product_size_id}})" 
-                    >{{ $item->size->size }}</a></li>
+                {{-- <li><a href="javascript:void(0)" wire:click="setSize({{$item->product_size_id}})"  --}}
+                    <li><a href="javascript:void(0)" >{{ $item->size->size }}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -55,8 +55,9 @@
         </div>
     </div>
     <div class="product-buttons">
-        <button type="submit" id="cartEffect" 
-        wire:click.prevent="AddToCart({{$color}},{{$size}},{{$quantity}})" 
+        <button type="submit"  
+        wire:click.prevent="AddToCart({{$quantity}})" 
+        {{-- wire:click.prevent="AddToCart({{$color}},{{$size}},{{$quantity}})"  --}}
             class="btn btn-solid hover-solid btn-animation ">
             <i class="fa fa-shopping-cart me-1" aria-hidden="true">
             </i> add to cart</button>
