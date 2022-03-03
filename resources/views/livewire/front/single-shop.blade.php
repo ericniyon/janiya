@@ -76,7 +76,7 @@
                                     class="fa fa-star"></i> <i
                                     class="fa fa-star"></i> <i
                                     class="fa fa-star"></i></div>
-                            <a href="{{{{route('al_product_details',$product->product->id)}}}}">
+                            <a href="{{route('al_product_details',$product->product->id)}}">
                                 <h6>{{$product->name}}</h6>
                             </a>
                             <p>{{$product->product->description}}</p>

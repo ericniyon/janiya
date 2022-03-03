@@ -192,8 +192,8 @@
                                             <span class="badge badge-grey-color">{{$vendor->shop_name}}</span>
                                             <span class="label-text">in {{$product->product->product_categories->category_name}}</span>
                                         </div>
-                                        @livewire('front.add-to-cart',
-                                        ['product' => $product], key($product->id))
+                                        {{-- @livewire('front.add-to-cart',
+                                        ['product' => $product], key($product->id)) --}}
                                         <div class="product-count">
                                             <ul>
                                                 <li>
