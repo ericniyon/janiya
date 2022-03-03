@@ -6,7 +6,7 @@
         <div class="block-content">
             <ul>
                 <li class="active"><a href="{{url('/dashboard')}}">Account Info</a></li>
-                <li><a href="#">My Orders</a></li>
+                <li><a href="{{route('cliet.orders')}}">My Orders</a></li>
                 <li><a href="#">My Wishlist</a></li>
                 <li><a href="{{route('profile')}}">My Profile</a></li>
                 @if (Auth::user()->promo_code)

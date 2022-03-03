@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Color;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductSize;
@@ -12,6 +13,7 @@ use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -35,6 +37,18 @@ class HomeController extends Controller
     public function shop()
     {
         return view('frontend.pages.shop');
+    }
+
+    public function singleShop(Vendor $vendor)
+    {
+        return view('frontend.pages.single-shop', compact('vendor'));
+    }
+
+    public function shopsList()
+    {
+        $shops = Vendor::where('confirmed',1)->where('active',1)
+                        ->orderBy('shop_name')->simplePaginate(20);
+        return view('frontend.pages.shops-list', compact('shops'));
     }
 
     public function becomeAffiliate()
@@ -105,5 +119,16 @@ class HomeController extends Controller
         
         $user->update(['password'=>Hash::make($request->password)]);
         return to_route('dashboard')->with('success','Password Updated Successfuly!');
+    }
+
+    public function orders()
+    {
+        return view('frontend.pages.orders');
+    }
+
+    public function singleOrders($order)
+    {
+        $order = Order::findOrFail(Crypt::decryptString($order));
+        return view('frontend.pages.single-order', compact('order'));
     }
 }

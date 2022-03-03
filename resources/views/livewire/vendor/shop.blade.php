@@ -22,8 +22,8 @@
             @forelse ($item->valiations as $var)
             <tr>
               <th scope="row">{{$loop->iteration}}</th>
-              <td>{{$var->color->color_name}}</td>
-              <td>{{$var->size->size}}</td>
+              <td>{{$var->color()->exists()?$var->color->color_name:''}}</td>
+              <td>{{$var->size()->exists()?$var->size->size:''}}</td>
               <td>{{$var->quantity}}</td>
               <td>edit</td>
             </tr> 

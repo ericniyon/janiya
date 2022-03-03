@@ -25,42 +25,17 @@ class CheckoutController extends Controller
     }
 
 
-    public function payment(Request $request)
+    public function payment(Request $req)
     {
-        $amount = \Cart::getTotal() - getDiscount();
-        $order = Order::create([
-            'user_id'=>Auth::check()?Auth::id():null,
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'address'=>$request->address,
-            'street'=>$request->street,
-            'neighborhood'=>$request->neighborhood,
-            'promoter'=>Cookie::has('referredBy')?referencedBy()->id:NULL,
-            'discount'=>getDiscount()==0?NULL:getDiscount(),
-            'total'=>$amount,
+        $this->validate($req,[
+            'name'=>'required|string|min:3|max:120',
+            'email'=>'email|string|required|min:5|max:120',
+            'phone'=>"required_without:email|sometimes|string|size:10|starts_with:078,079,072,073",
+            'address'=>'required|string|min:3|max:255',
+            'street'=>'required|string|min:3|max:100',
+            'neighborhood'=>'required|string|min:3|max:120',
         ]);
-        foreach(\Cart::getContent() as $item){
-            $order->items()->create([
-                'product_id'=>$item->id,
-                'price'=>$item->price,
-                'shop'=>$item->model->id,
-                'color'=>$item->attributes['color'],
-                'size'=>$item->attributes['size'],
-                'quantity'=>$item->quantity,
-            ]);
-        }
-        if(Cookie::has('referredBy')){
-            referencedBy()->increment('partner_total_sales');
-        }
-
-        if(Cookie::has('ref')){
-            $user = User::where('affiliate_link',Cookie::get('ref'))->first();
-            if ($user) {
-                $user->increment('sales');
-            }
-        }
-
+        $amount = \Cart::getTotal() - getDiscount();
         $request = [
             'tx_ref' => time(),
             'amount' => $amount,
@@ -69,7 +44,7 @@ class CheckoutController extends Controller
                 'color' => 'blue'
             ],
             'payment_options' => 'card',
-            'redirect_url' => 'http://localhost:8000/proccesspayment',
+            'redirect_url' => config('app.url').':8000/proccesspayment',
             'customer' => [
                 'email' => 'niyoeri6@gmail.com',
 
@@ -119,21 +94,16 @@ class CheckoutController extends Controller
 
             if ($res->status == 'success') {
                  $link = $res->data->link;
-                return redirect($link);
-            }
-            if ($res->status == 'cancelled') {
-                return redirect('home');
+                 return redirect($link);
+                }
+                if ($res->status == 'cancelled') {
+                    return redirect('home');
            }
             else{
-
+                $this->insterOrderIntoTable($req,'Error');
                 echo "We can not proccess your payment";
             }
-            Mail::queue(new CustomerNewOrder($order));
-            \Cart::clear();
-            if(Session::has('coupon')){
-                session()->forget('coupon');
-            }
-            Session::flash('success','Order placed successfuly!');
+            
             return redirect()->back()->with('alert', 'Success');
 
     }
@@ -146,12 +116,11 @@ class CheckoutController extends Controller
       $tx_ref= $request->tx_ref;
       $txid= $request->transaction_id;
       if($status == 'cancelled'){
-
-
-       return redirect('/');
+       return redirect('/shop');
      }
      elseif($status == 'failed'){
          echo "Transaction failed";
+         $this->insterOrderIntoTable($request,'Error',NULL);
        }
      elseif($status == 'successful'){
          echo "Transaction successful";
@@ -178,7 +147,7 @@ class CheckoutController extends Controller
          $result= json_decode($response);
         //  return $result->data;
          if ($result->data->status == 'successful') {
-
+            $this->insterOrderIntoTable($request,'Paid','Card');
              Transaction::create([
                 'tx_ref' => $result->data->tx_ref,
                 'amount' => $result->data->amount,
@@ -195,6 +164,7 @@ class CheckoutController extends Controller
          }
          else{
              echo "We could not procces your payment";
+             $this->insterOrderIntoTable($request,'Error','Card');
          }
 
       }
@@ -203,18 +173,47 @@ class CheckoutController extends Controller
        }
   }
 
-  public function markAsPaid(Order $order)
+  public function insterOrderIntoTable(Request $request, $status,$payment = NULL)
   {
-      $order->update(['Status'=>'Paid']);
-      return redirect('thankyou');
+    $order = Order::create([
+        'user_id'=>Auth::check()?Auth::id():null,
+        'name'=>$request->name,
+        'email'=>$request->email,
+        'phone'=>$request->phone,
+        'address'=>$request->address,
+        'street'=>$request->street,
+        'neighborhood'=>$request->neighborhood,
+        'promoter'=>Cookie::has('referredBy')?referencedBy()->id:NULL,
+        'discount'=>getDiscount()==0?NULL:getDiscount(),
+        'Status'=>$status,
+        'total'=>\Cart::getTotal() - getDiscount(),
+    ]);
+    foreach(\Cart::getContent() as $item){
+        $order->items()->create([
+            'product_id'=>$item->id,
+            'price'=>$item->price,
+            'shop'=>$item->model->id,
+            'color'=>$item->attributes['color'],
+            'size'=>$item->attributes['size'],
+            'quantity'=>$item->quantity,
+        ]);
+    }
+    if(Cookie::has('referredBy')){
+        referencedBy()->increment('partner_total_sales');
+    }
+
+    if(Cookie::has('ref')){
+        $user = User::where('affiliate_link',Cookie::get('ref'))->first();
+        if ($user) {
+            $user->increment('sales');
+        }
+    }
+    // Mail::queue(new CustomerNewOrder($order));
+    \Cart::clear();
+    if(Session::has('coupon')){
+        session()->forget('coupon');
+    }
+    Session::flash('success','Order placed successfuly!');
   }
-
-  public function cancelOrder(Order $order)
-  {
-      $order->update(['Status'=>'Cancelled']);
-      return redirect('order-cancelled');
-  }
-
-
 
 }

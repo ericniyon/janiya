@@ -194,11 +194,11 @@
                                     <li><a href="{{route('home')}}">Home</a></li>
 
                                     <li>
-                                        <a href="{{route('shop')}}">shop</a>
+                                        <a href="{{route('shops.list')}}">shops</a>
 
                                     </li>
                                     <li>
-                                        <a href="#">product</a>
+                                        <a href="{{route('shop')}}">products</a>
 
                                     </li>
                                     <li>

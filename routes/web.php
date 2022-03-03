@@ -28,7 +28,9 @@ use App\Http\Controllers\Vendors\StoresController;
 Route::get('/', [HomeController::class, 'index'] )->middleware('referral')->name('home');
 
 // products routes
-Route::get('shop', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
+Route::get('shop/products', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
+Route::get('shops',[HomeController::class,'shopsList'])->name('shops.list');
+Route::get('shops/{vendor}',[HomeController::class,'singleShop'])->name('shops.list.single');
 // Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
 Route::get('shop/{vendor}/{product}',[HomeController::class,'singleProduct'])->name('product.single');
 // all about colors
@@ -44,10 +46,8 @@ Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remo
 Route::get('checkout', [CheckoutController::class, 'checkout'])->middleware('auth')->name('checkout');
 Route::get('guest-checkout', [CheckoutController::class, 'checkout'])->name('checkout.guest');
 Route::post('purchase', [CheckoutController::class, 'payment'])->name('purchase');
-Route::put('checkout/{order}/change-status',[CheckoutController::class, 'markAsPaid'])->name('order.paid');
-Route::put('checkout/{order}/change-status',[CheckoutController::class, 'cancelOrder'])->name('order.cancelled');
 Route::view('thankyou','front.thankyou')->name('thankyou');
-Route::view('order-cancelled','front.thankyou')->name('thankyou');
+Route::view('order-cancelled','front.thankyou')->name('cancelled');
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 
 // Admin's routes
@@ -89,6 +89,9 @@ Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name(
     Route::get('store/products/{product}',[StoresController::class,'shop'])->name('store.single');
     Route::view('store/my-shop','backend.vendors.shop')->name('shop');
 
+    Route::view('orders','backend.vendors.orders')->name('orders');
+    Route::get('orders/view/{order}',[StoresController::class,'singleOrder'])->name('orders.single');
+
     // coupons
     Route::view('coupons','backend.vendors.coupons')->name('coupons');
 });
@@ -98,6 +101,8 @@ Route::middleware('auth')->group(function(){
     // Route::view('/my-orders')->name('orders');
     Route::get('/dashboard', function () {return view('frontend.pages.dashboard'); })->name('dashboard');
     Route::put('become-affiate',[HomeController::class, 'becomeAffiliate'])->name('affiliate');
+    Route::get('my-orders',[HomeController::class,'orders'])->name('cliet.orders');
+    Route::get('my-orders/{order}',[HomeController::class,'singleOrders'])->name('orders.single');
     Route::view('profile', 'frontend.pages.profile')->name('profile');
     Route::put('profile',[HomeController::class, 'updateProfile'])->name('profile.update');
     Route::view('update-password', 'frontend.pages.password')->name('profile.password');

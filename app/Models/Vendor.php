@@ -28,6 +28,16 @@ class Vendor extends Authenticatable
 
         public function boughtProducts()
         {
-            return $this->hasMany(Store::class, 'foreign_key', 'local_key');
+            return $this->hasMany(Store::class, 'vendor_id', 'id');
+        }
+
+        /**
+         * Get all of the orderItems for the Vendor
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\HasMany
+         */
+        public function orderItems()
+        {
+            return $this->hasMany(OrderItem::class, 'shop', 'id');
         }
 }

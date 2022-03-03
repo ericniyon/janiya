@@ -26,7 +26,8 @@ return new class extends Migration
             $table->foreignId('promoter')->nullable()->constrained('users');
             $table->integer('discount')->nullable();
             $table->decimal('total', 10, 0);
-            $table->enum('Status', ['Pending', 'Paid','On Delivery', 'Completed', 'Cancelled'])->default('Pending');
+            $table->enum('payment_method', ['On Delivery', 'Card', 'Phone'])->nullable()->default('On Delivery');
+            $table->enum('Status', ['Pending', 'Paid','On Delivery', 'Completed', 'Error', 'Cancelled'])->default('Pending');
             $table->softDeletes();
             $table->timestamps();
         });
