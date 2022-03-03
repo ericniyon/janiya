@@ -182,12 +182,12 @@
                 <div class="product-box">
                     <div class="img-wrapper">
                         <div class="front">
-                            <a href="#"><img src="../assets/images/pro3/35.jpg"
+                            <a href="#"><img src="{{ asset(Storage::url($product->product->thumb->image))}}"
                                     class="img-fluid blur-up lazyload bg-img"
                                     alt=""></a>
                         </div>
                         <div class="back">
-                            <a href="#"><img src="../assets/images/pro3/36.jpg"
+                            <a href="#"><img src="{{ asset(Storage::url($product->product->thumb->image))}}"
                                     class="img-fluid blur-up lazyload bg-img"
                                     alt=""></a>
                         </div>

@@ -150,7 +150,7 @@
                                                         <h6>{{$product->name}}</h6>
                                                     </a>
 
-                                                    <h4> {{$product->product_categories->price}} <del>$600.00</del></h4>
+                                                    <h4> {{$product->product_categories->price}}</h4>
                                                     <ul class="color-variant">
                                                         <li class="bg-light0"></li>
                                                         <li class="bg-light1"></li>
