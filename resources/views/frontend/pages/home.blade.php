@@ -54,8 +54,10 @@
             <div class="col-md-4">
                 <a href="#">
                     <div class="collection-banner p-left">
-                        <div class="img-part bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ asset('assets/img/women.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;">
-                            <img src="{{ asset('assets/img/women.png')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;">
+                        <div class="img-part bg-size blur-up lazyloaded" 
+                        style="background-image: url(&quot;{{ asset('assets/img/women.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;">
+                            <img src="{{ asset('assets/img/women.jpg')}}" 
+                            class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;">
                         </div>
                         <div class="contain-banner banner-3">
                             <div>
@@ -131,26 +133,21 @@
                             @foreach ($product_categories as $item)
                             <div id="tab-{{$item->id}}" class="tab-content active default" style="display: block;">
                                 <div class="row product-tab mt-5">
-                                    @forelse ( $item->products()->limit(4)->inRandomOrder()->get() as $product )
+                                    @forelse ( $item->storeProducts()->limit(4)->inRandomOrder()->get() as $product )
                                     <div class="tab-box">
                                         <div class="product-box2">
                                             <div class="media">
-                                                <a href="{{ route('al_product_details',$product->id) }}">
-                                                <img class="img-fluid blur-up lazyloaded" src="{{ asset(Storage::url($product->thumb->image))}}" alt=""></a>
+                                                <a href="{{ route('product.single',[$product->shop->slug,$product->slug]) }}">
+                                                <img class="img-fluid blur-up lazyloaded" src="{{ asset(Storage::url($product->product->thumb->image))}}" alt=""></a>
                                                 <div class="media-body align-self-center">
                                                     <div class="rating">
                                                     <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                                     </div>
-                                                    <a href="{{ route('al_product_details',$product->id) }}">
+                                                    <a href="{{ route('product.single',[$product->shop->slug,$product->slug]) }}">
                                                         <h6>{{$product->name}}</h6>
                                                     </a>
                                                     <h4>
-                                                     {{ $product->price }}Rwf</h4>
-                                                    {{-- <ul class="color-variant">
-                                                        <li class="bg-light0"></li>
-                                                        <li class="bg-light1"></li>
-                                                        <li class="bg-light2"></li>
-                                                    </ul> --}}
+                                                     {{ $product->product->price }}Rwf</h4>
                                                 </div>
                                             </div>
                                         </div>

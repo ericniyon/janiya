@@ -23,7 +23,7 @@
                     @foreach(\Cart::getContent() as $item)
                         <tr data-id="{{ $item->id }}">
                             <td data-th="Product" class="d-flex">
-                                <img src="{{asset(Storage::url($item->model->product->thumb->image))}}" 
+                                <img src="{{asset(Storage::url($item->model->thumb->image))}}" 
                                 width="50" height="50" class="img-responsive rounded" 
                                 style="margin-right: 0.7rem!important"/>
                                 <div class="row d-flex flex-column">

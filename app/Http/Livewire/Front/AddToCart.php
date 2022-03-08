@@ -14,15 +14,15 @@ class AddToCart extends Component
     public $product, $sizes, $colors;
     public $quantity = 1, $color, $size;
 
-    public function setColor($color)
-    {
-        $this->color = $color;
-    }
+    // public function setColor($color)
+    // {
+    //     $this->color = $color;
+    // }
     
-    public function setSize($size)
-    {
-        $this->size = $size;
-    }
+    // public function setSize($size)
+    // {
+    //     $this->size = $size;
+    // }
 
     public function increase()
     {
@@ -36,18 +36,20 @@ class AddToCart extends Component
         }
     }
 
-    public function AddToCart($color,$size,$quantity)
+    // public function AddToCart($color,$size,$quantity)
+    public function AddToCart($quantity)
     {
-        if (is_null($color)) {
-            $this->emit('alert',['type'=>'error','message'=>'Select Color first']);
-            return;
-        }
-        if (is_null($size)) {
-            $this->emit('alert',['type'=>'error','message'=>'Choose Size that you want']);
-            return;
-        }
+        // if (is_null($color)) {
+        //     $this->emit('alert',['type'=>'error','message'=>'Select Color first']);
+        //     return;
+        // }
+        // if (is_null($size)) {
+        //     $this->emit('alert',['type'=>'error','message'=>'Choose Size that you want']);
+        //     return;
+        // }
 
-        $this->addToCartTrait($this->product,$color,$size,$quantity);
+        $this->addToCartTrait($this->product,$quantity);
+        // $this->addToCartTrait($this->product,$color,$size,$quantity);
 
         return to_route('shop');
     }

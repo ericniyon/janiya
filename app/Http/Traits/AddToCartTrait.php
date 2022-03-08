@@ -6,18 +6,19 @@ use App\Models\ProductSize;
 use Darryldecode\Cart\Cart;
 trait AddToCartTrait
 {
-    public function addToCartTrait($productModel, $color,$size,$quantity)
+    // public function addToCartTrait($productModel, $color,$size,$quantity)
+    public function addToCartTrait($productModel,$quantity)
     {
-        $colr = Color::findOrFail($color);
-        $sze = ProductSize::findOrFail($size);
+        // $colr = Color::findOrFail($color);
+        // $sze = ProductSize::findOrFail($size);
         \Cart::add(array(
             'id'=>$productModel->id,
             'name'=>$productModel->name,
-            'price'=>$productModel->product->price,
+            'price'=>$productModel->price,
             'quantity' => $quantity,
             'attributes'=>array(
-                'color'=>$colr->color_name,
-                'size'=>$sze->size
+                'color'=>'Red',
+                'size'=>'M'
             ),
             'associatedModel' => $productModel,
         ));
