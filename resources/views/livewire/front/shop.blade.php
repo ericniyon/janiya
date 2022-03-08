@@ -8,11 +8,11 @@
                 <h3 class="collapse-block-title">Shops</h3>
                 <div class="collection-collapse-block-content">
                     <div class="collection-brand-filter">
+
                         @foreach ($shops as $item)
-                            
                         <div class="form-check collection-filter-checkbox">
                             <input type="radio" value="{{$item->id}}" class="form-check-input"
-                             name="shop_name" 
+                             name="shop_name"
                              wire:model="shop_name"
                              id="shop{{$item->id}}">
                             <label class="form-check-label" for="shop{{$item->id}}">{{$item->shop_name}}</label>
@@ -29,8 +29,8 @@
                     <div class="collection-brand-filter">
                         @foreach ($categories as $item)
                         <div class="form-check collection-filter-checkbox">
-                            <input type="checkbox" value="{{$item->id}}" 
-                            name="category" 
+                            <input type="checkbox" value="{{$item->id}}"
+                            name="category"
                             wire:model="category"
                             class="form-check-input"
                              id="category{{$item->id}}">
@@ -54,12 +54,10 @@
         </div>
         <!-- silde-bar colleps block end here -->
         <!-- side-bar single product slider start -->
-        @livewire('front.new-products')
+        {{-- @livewire('front.new-products') --}}
         <!-- side-bar single product slider end -->
         <!-- side-bar banner start here -->
-        <div class="collection-sidebar-banner">
-            <a href="#"><img src="{{ asset('assets/images/side-banner.png')}}" class="img-fluid blur-up lazyload" alt=""></a>
-        </div>
+
         <!-- side-bar banner end here -->
     </div>
     <div class="collection-content col">
@@ -138,33 +136,33 @@
                                         <div class="img-wrapper" style="height: 14rem">
                                             <div class="front">
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"  --}}
-                                                    <a href="{{route('al_product_details',$store->product->id)}}" 
-                                                    class="bg-size blur-up lazyloaded" 
-                                                style="background-image: url(&quot;{{asset(Storage::url($store->product->thumb->image))}}&quot;); 
+                                                    <a href="{{route('al_product_details',$store->product->id)}}"
+                                                    class="bg-size blur-up lazyloaded"
+                                                style="background-image: url(&quot;{{asset(Storage::url($store->product->thumb->image))}}&quot;);
                                                 background-size: cover; background-position: center center; display: block;">
                                                 <img src="{{asset(Storage::url($store->product->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="back">
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"  --}}
-                                                    <a href="{{route('al_product_details',$store->product->id)}}" 
-                                                    class="bg-size blur-up lazyloaded" 
-                                                style="background-image: url(&quot;{{asset(Storage::url($store->product->thumb->image))}}&quot;); 
+                                                <a href="{{route('al_product_details',$store->product->id)}}"
+                                                    class="bg-size blur-up lazyloaded"
+                                                style="background-image: url(&quot;{{asset(Storage::url($store->product->thumb->image))}}&quot;);
                                                 background-size: cover; background-position: center center; display: block;">
                                                 <img src="{{asset(Storage::url($store->product->lastThumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="cart-info cart-wrap">
-                                                <a href="#" title="Add to Wishlist"><i class="ti-shopping-cart" aria-hidden="true"></i></a> 
-                                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-heart"></i></button> 
+                                                <a href="#" title="Add to Wishlist"><i class="ti-shopping-cart" aria-hidden="true"></i></a>
+                                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-heart"></i></button>
                                                 <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a>
                                             </div>
                                         </div>
                                         <div class="product-detail">
                                             <div class="text-center">
                                                 <div class="rating">
-                                                    <i class="fa fa-star"></i> 
-                                                    <i class="fa fa-star"></i> 
-                                                    <i class="fa fa-star"></i> 
-                                                    <i class="fa fa-star"></i> 
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                                 <h5>{{number_format($store->product->price)}} Rwf</h5>
@@ -179,7 +177,9 @@
                                 @empty
                                    <div class="col-md-12 d-flex align-items-center justify-content-center">
                                        <h4 class="m-5">No products found!</h4>
-                                   </div> 
+                                   </div>
+
+
                                 @endforelse
                             </div>
                         </div>

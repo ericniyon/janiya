@@ -46,28 +46,9 @@
     <div class="page-wrapper">
         <div class="authentication-box">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-5 p-0 card-left" >
-                        <div class="card bg-primary" style="background-color: #690c27!important">
-                            <div class="svg-icon d-flex justify-content-center align-items-center">
-                                <img src="{{asset('assets/img/janiya-logo.jpg')}}" height="130" width="130"  
-                                class="rounded-circle" alt="">
-                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                viewBox="0 0 468.52 468.52" style="enable-background:new 0 0 468.52 468.52;" xml:space="preserve">
-                                </svg>
-                            </div>
-    
-                            <div class="single-item">
-                                <div>
-                                    <div>
-                                        <h3>Welcome to {{config('app.name')}}</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7 p-0 card-right">
+                <div class="row " style="justify-content: center">
+
+                    <div class="col-md-8 p-0 card-right">
                         @yield('content')
                     </div>
                 </div>

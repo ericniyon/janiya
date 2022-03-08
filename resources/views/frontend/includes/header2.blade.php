@@ -247,7 +247,7 @@
                                     <li class="onhover-div mobile-cart">
                                         <div>
                                             <img src="../assets/images/icon/cart.png"
-                                            class="img-fluid blur-up lazyload" alt=""> 
+                                            class="img-fluid blur-up lazyload" alt="">
                                             <i class="ti-shopping-cart"></i>
                                         </div>
                                         @if(!\Cart::isEmpty())

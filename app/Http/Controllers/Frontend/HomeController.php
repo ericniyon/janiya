@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Order;
@@ -55,7 +56,7 @@ class HomeController extends Controller
         $user->update([
             'affiliate_link'=>str()->lower($this->getName($user))
         ]);
-        return back()->with('success','Welcome to '.config('app.name').' family! please read our terms and 
+        return back()->with('success','Welcome to '.config('app.name').' family! please read our terms and
         condition regarding to affiliate and partnership');
     }
 
@@ -114,7 +115,7 @@ class HomeController extends Controller
                 }
             }],
         ]);
-        
+
         $user->update(['password'=>Hash::make($request->password)]);
         return to_route('dashboard')->with('success','Password Updated Successfuly!');
     }
@@ -135,5 +136,26 @@ class HomeController extends Controller
         $products = Product::all();
         $product = Product::find($id);
         return view('frontend.pages.al_single_product', compact('product','products'));
+    }
+
+    public function about()
+    {
+
+        return view('frontend.pages.about');
+    }
+
+    public function contact()
+    {
+
+        return view('frontend.pages.contact');
+    }
+
+    public function categorised($catId)
+    {
+
+        $catId = ProductCategory::findOrFail(Crypt::decryptString($catId));
+        $products_list = Product::where('product_category_id', $catId->id)->get();
+        // return $catId->id;
+        return view('frontend.pages.categorised', compact('products_list'));
     }
 }

@@ -2,7 +2,9 @@
 @section('title')
 <title>Janiya | Shop</title>
 @endsection
-
+@push('extra-css')
+    @livewireStyles
+@endpush
 @section('content')
 <section class="p-0">
     <div class="slide-1 home-slider">
@@ -16,7 +18,7 @@
                                 <div>
                                     <h4>Janiya Campaigns save upto 10% as janiya Partner</h4>
                                     <h1 style="color: #fff">Best Selling </h1><a href="#"
-                                        class="btn btn-outline btn-classic">shop now</a>
+                                        class="btn btn-outline btn-classic">Read more</a>
                                 </div>
                             </div>
                         </div>
@@ -48,62 +50,39 @@
 
 
 <!-- product section -->
-<section class="ratio_45 mb-5">
-    <div class="container">
-        <div class="row partition3">
-            <div class="col-md-4">
-                <a href="#">
-                    <div class="collection-banner p-left">
-                        <div class="img-part bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ asset('assets/img/women.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;">
-                            <img src="{{ asset('assets/img/women.png')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;">
-                        </div>
-                        <div class="contain-banner banner-3">
-                            <div>
-                                <h4></h4>
-                                <h2 style="color: #611228">Women</h2>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#">
-                    <div class="collection-banner p-left text-start">
-                        <div class="img-part bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ asset('assets/img/men.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;">
-                            <img src="{{ asset('assets/img/mens.jpg')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;">
-                        </div>
-                        <div class="contain-banner banner-3">
-                            <div>
-                                <h4></h4>
-                                <h2 style="color: #611228">Men</h2>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#">
-                    <div class="collection-banner p-left">
-                        <div class="img-part bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ asset('assets/img/women.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;">
-                            <img src="{{ asset('assets/img/kids.jpg')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;">
-                        </div>
-                        <div class="contain-banner banner-3">
-                            <div>
-                                {{-- <h4>minimum 50% off</h4> --}}
-                                <h2 style="color: #611228">Kids</h2>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+
+
+{{-- ===================== --}}
+<div class="title1 section-t-space">
+    <h4>special offer</h4>
+    <h2 class="title-inner1">today's deal</h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="product-para">
+                <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
             </div>
         </div>
     </div>
-</section>
+</div>
 <!-- product section end -->
+
+<section class="section-b-space ratio_asos">
+    <div class="collection-wrapper">
+        <div class="container">
+            @livewire('front.shop')
+        </div>
+    </div>
+</section>
+
+
 
 
 <!--  tab section  -->
-<section class="p-0">
+{{-- <section class="p-0">
     <div class="tab-bg tab-grey-bg">
         <div class="container-fluid">
             <div class="row">
@@ -146,11 +125,7 @@
                                                     </a>
                                                     <h4>
                                                      {{ $product->price }}Rwf</h4>
-                                                    {{-- <ul class="color-variant">
-                                                        <li class="bg-light0"></li>
-                                                        <li class="bg-light1"></li>
-                                                        <li class="bg-light2"></li>
-                                                    </ul> --}}
+
                                                 </div>
                                             </div>
                                         </div>
@@ -169,7 +144,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!--  tab section end -->
 <section class="p-0">
     <div class="full-banner parallax text-center p-left">
@@ -267,94 +242,72 @@
 
 
 
-
-
-<!-- blog section -->
-<section class="blog ratio2_3 slick-default-margin">
-    <div class="container">
+<section class="collection section-b-space ratio_square ">
+    <div class="container mt-5">
         <div class="row">
-            <div class="col-md-12">
-                <div class="title2">
-                    <h4>Fashion For You</h4>
-                    <h2 class="title-inner2">Janiya Partners/Ambassadors </h2>
+            <div class="col">
+                <div class="title4">
+                    <h4>recent story</h4>
+                    <h2 class="title-inner4">from the blog</h2>
+                    <div class="line"><span></span></div>
                 </div>
-                <div class="slide-3 no-arrow">
-                    <div class="col-md-12">
-                        <a href="#">
-                            <div class="classic-effect">
-                                <div>
-                                    <img alt="" src="{{ asset('assets/img/MSG00561.jpg')}}"
-                                        class="img-fluid blur-up lazyload bg-img">
-                                </div>
-                                <span></span>
-                            </div>
-                        </a>
-                        <div class="blog-details">
-                            <h4>25 January 2018</h4>
-                            <a href="#">
-                                <p>Tracy Gasaro</p>
-                            </a>
-                        </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="row partition-collection section-t-space">
+            <div class="col-lg-3 col-md-6">
+                <div class="collection-block">
+                    <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/7.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/7.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
+                    <div class="collection-content">
+                        <h4>(20 products)</h4>
+                        <h3>fashion</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p><a href="category-page.html" class="btn btn-outline">Read more !</a>
                     </div>
-                    <div class="col-md-12">
-                        <a href="#">
-                            <div class="classic-effect">
-                                <div>
-                                    <img alt="" src="{{ asset('assets/img/MSG00505.jpg')}}"
-                                        class="img-fluid blur-up lazyload bg-img">
-                                </div>
-                                <span></span>
-                            </div>
-                        </a>
-                        <div class="blog-details">
-                            <h4>25 January 2018</h4>
-                            <a href="#">
-                                <p> Media Personality </p>
-                            </a>
-                        </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="collection-block">
+                    <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/8.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/8.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
+                    <div class="collection-content">
+                        <h4>(20 products)</h4>
+                        <h3>fashion</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p><a href="category-page.html" class="btn btn-outline">Read more !</a>
                     </div>
-                    <div class="col-md-12">
-                        <a href="#">
-                            <div class="classic-effect">
-                                <div>
-                                    <img alt="" src="{{ asset('assets/img/MSG01391.jpg')}}"
-                                        class="img-fluid blur-up lazyload bg-img">
-                                </div>
-                                <span></span>
-                            </div>
-                        </a>
-                        <div class="blog-details">
-                            <h4>25 January 2018</h4>
-                            <a href="#">
-                                <p>Plus size Model </p>
-                            </a>
-                        </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="collection-block">
+                    <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/9.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/9.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
+                    <div class="collection-content">
+                        <h4>(20 products)</h4>
+                        <h3>fashion</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p><a href="category-page.html" class="btn btn-outline">Read more !</a>
                     </div>
-                    <div class="col-md-12">
-                        <a href="#">
-                            <div class="classic-effect">
-                                <div>
-                                    <img alt="" src="{{ asset('assets/img/MSG00561.jpg')}}"
-                                        class="img-fluid blur-up lazyload bg-img">
-                                </div>
-                                <span></span>
-                            </div>
-                        </a>
-                        <div class="blog-details">
-                            <h4>25 January 2018</h4>
-                            <a href="#">
-                                <p>Journalist</p>
-                            </a>
-                        </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="collection-block">
+                    <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/11.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/11.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
+                    <div class="collection-content">
+                        <h4>(20 products)</h4>
+                        <h3>fashion</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p><a href="category-page.html" class="btn btn-outline">Read more !</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- blog section -->
+
 <!-- blog section end-->
 
 
 <!-- instagram section -->
-
+@section('scripts')
+@livewireScripts
+@endsection
 @endsection
