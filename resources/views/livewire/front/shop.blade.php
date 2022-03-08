@@ -146,7 +146,7 @@
                                             </div>
                                             <div class="back">
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"  --}}
-                                                    <a href="{{route('al_product_details',$store->product->id)}}" 
+                                                    <a href="{{ route('product.single',[$product->shop->slug,$product->slug]) }}" 
                                                     class="bg-size blur-up lazyloaded" 
                                                 style="background-image: url(&quot;{{asset(Storage::url($store->product->thumb->image))}}&quot;); 
                                                 background-size: cover; background-position: center center; display: block;">
@@ -169,7 +169,7 @@
                                                 </div>
                                                 <h5>{{number_format($store->product->price)}} Rwf</h5>
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"> --}}
-                                                    <a href="{{route('al_product_details',$store->product->id)}}">
+                                                    <a href="{{ route('product.single',[$product->shop->slug,$product->slug]) }}">
                                                     <h6>{{$store->name}}</h6>
                                                 </a>
                                             </div>

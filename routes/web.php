@@ -25,7 +25,7 @@ use App\Http\Controllers\Vendors\StoresController;
 */
 
 // Frontend routes
-Route::get('/', [HomeController::class, 'index'] )->middleware('referral')->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware('referral')->name('home');
 
 // products routes
 Route::get('shop/products', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');

@@ -22,5 +22,8 @@ class ProductCategory extends Model
         return $this->hasMany(Product::class);
     }
 
-    
+    public function storeProducts()
+    {
+        return $this->hasManyThrough(Store::class, Product::class);
+    }
 }

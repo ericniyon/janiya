@@ -22,11 +22,12 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $arr = [];
         $product_categories = ProductCategory::with('products')->get();
-        $products = Store::with('product')->get();
+
         $shops = Vendor::where('confirmed',1)->where('active',1)->get();
 
-        return view('frontend.pages.home', compact('product_categories', 'products','shops'));
+        return view('frontend.pages.home', compact('product_categories','shops'));
     }
     // this function will return product by it id
     public function singleProduct(Vendor $vendor, Store $product)
