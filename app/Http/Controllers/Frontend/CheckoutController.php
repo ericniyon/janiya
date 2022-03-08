@@ -94,6 +94,7 @@ class CheckoutController extends Controller
 
             if ($res->status == 'success') {
                  $link = $res->data->link;
+                 $this->insterOrderIntoTable($req,'Completed');
                  return redirect($link);
                 }
                 if ($res->status == 'cancelled') {
@@ -120,7 +121,6 @@ class CheckoutController extends Controller
      }
      elseif($status == 'failed'){
          echo "Transaction failed";
-         $this->insterOrderIntoTable($request,'Error',NULL);
        }
      elseif($status == 'successful'){
          echo "Transaction successful";
@@ -147,7 +147,6 @@ class CheckoutController extends Controller
          $result= json_decode($response);
         //  return $result->data;
          if ($result->data->status == 'successful') {
-            $this->insterOrderIntoTable($request,'Paid','Card');
              Transaction::create([
                 'tx_ref' => $result->data->tx_ref,
                 'amount' => $result->data->amount,
@@ -173,7 +172,7 @@ class CheckoutController extends Controller
        }
   }
 
-  public function insterOrderIntoTable(Request $request, $status,$payment = NULL)
+  public function insterOrderIntoTable(Request $request, $status)
   {
     $order = Order::create([
         'user_id'=>Auth::check()?Auth::id():null,
@@ -192,7 +191,8 @@ class CheckoutController extends Controller
         $order->items()->create([
             'product_id'=>$item->id,
             'price'=>$item->price,
-            'shop'=>$item->model->id,
+            'shop'=>1,
+            // 'shop'=>$item->model->id,
             'color'=>$item->attributes['color'],
             'size'=>$item->attributes['size'],
             'quantity'=>$item->quantity,

@@ -62,8 +62,11 @@
             <div class="col-md-4">
                 <a href="#">
                     <div class="collection-banner p-left">
-                        <div class="img-part bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ asset('assets/img/women.jpg')}}&quot;); background-size: cover; background-position: center center; display: block;">
-                            <img src="{{ asset('assets/img/women.png')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;">
+                        <div class="img-part bg-size blur-up lazyloaded" 
+                        style="background-image: url(&quot;{{ asset('assets/img/women.jpg')}}&quot;);
+                         background-size: cover; background-position: center center; display: block;">
+                            <img src="{{ asset('assets/img/women.jpg')}}" 
+                            class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;">
                         </div>
                         <div class="contain-banner banner-3">
                             <div>

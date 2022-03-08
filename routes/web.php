@@ -25,13 +25,14 @@ use App\Http\Controllers\Vendors\StoresController;
 */
 
 // Frontend routes
-Route::get('/', [HomeController::class, 'index'] )->middleware('referral')->name('home');
+// Route::get('/', [HomeController::class, 'index'] )->middleware('referral')->name('home');
 Route::get('about', [HomeController::class, 'about'] )->name('about');
 Route::get('contact', [HomeController::class, 'contact'] )->name('contact');
 Route::get('categories/products/{catId}', [HomeController::class, 'categorised'] )->name('categories-products');
 
 
 
+Route::get('/', [HomeController::class, 'index'])->middleware('referral')->name('home');
 
 // products routes
 Route::get('shop/products', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');

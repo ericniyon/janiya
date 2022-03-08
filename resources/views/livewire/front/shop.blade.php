@@ -138,17 +138,17 @@
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"  --}}
                                                     <a href="{{route('al_product_details',$store->product->id)}}"
                                                     class="bg-size blur-up lazyloaded"
-                                                style="background-image: url(&quot;{{asset(Storage::url($store->product->thumb->image))}}&quot;);
+                                                style="background-image: url(&quot;{{asset('storage/products/gallery/'.$store->image)}}&quot;);
                                                 background-size: cover; background-position: center center; display: block;">
                                                 <img src="{{asset(Storage::url($store->product->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="back">
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"  --}}
-                                                <a href="{{route('al_product_details',$store->product->id)}}"
+                                                    <a href=""
                                                     class="bg-size blur-up lazyloaded"
-                                                style="background-image: url(&quot;{{asset(Storage::url($store->product->thumb->image))}}&quot;);
+                                                style="background-image: url(&quot;{{asset('storage/products/gallery/4GMabZTJ1EuaheS2LUyHZfFkdD1V8ntVpQyrWdtC.jpg')}}&quot;);
                                                 background-size: cover; background-position: center center; display: block;">
-                                                <img src="{{asset(Storage::url($store->product->lastThumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                                                <img src="{{asset('storage/products/gallery/4GMabZTJ1EuaheS2LUyHZfFkdD1V8ntVpQyrWdtC.jpg')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="cart-info cart-wrap">
                                                 <a href="#" title="Add to Wishlist"><i class="ti-shopping-cart" aria-hidden="true"></i></a>
@@ -167,7 +167,7 @@
                                                 </div>
                                                 <h5>{{number_format($store->product->price)}} Rwf</h5>
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"> --}}
-                                                    <a href="{{route('al_product_details',$store->product->id)}}">
+                                                    <a href="">
                                                     <h6>{{$store->name}}</h6>
                                                 </a>
                                             </div>

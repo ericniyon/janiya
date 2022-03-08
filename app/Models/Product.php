@@ -41,7 +41,7 @@ class Product extends Model
     {
         return $this->hasOne(ProductImage::class)->latestOfMany();
     }
-    
+
     public function attributes()
     {
         return $this->hasMany(ProductAttribute::class);

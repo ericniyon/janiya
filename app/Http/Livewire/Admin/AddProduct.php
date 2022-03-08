@@ -14,7 +14,7 @@ class AddProduct extends Component
 {
     use WithFileUploads;
     public $colorsLoop, $sizesLoop, $colors, $sizes, $categories;
-    public $name, $price, $product_category_id, $description, $product_image = []; 
+    public $name, $price, $product_category_id, $description, $product_image = [];
 
     public function mount()
     {
@@ -53,24 +53,24 @@ class AddProduct extends Component
 
     public function store()
     {
-        $this->validate([
-            'name'=>'string|unique:products,name|min:3|max:220',
-            'price'=>'required|integer|min:500|max:500000',
-            'product_category_id'=>'required|integer',
-            'description'=>'string|required|min:10|max:5000',
-            'product_image.*'=>'image|mimes:png,jpg,webp|required',
-            'colorsLoop.*.color'=>'required|integer',
-            'colorsLoop.*.quantity'=>'required|integer',
-            'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
-            'colorsLoop.*.size'=>'required|integer',
-        ]);
+        // $this->validate([
+        //     'name'=>'string|unique:products,name|min:3|max:220',
+        //     'price'=>'required|integer|min:500|max:500000',
+        //     'product_category_id'=>'required|integer',
+        //     'description'=>'string|required|min:10|max:5000',
+        //     'product_image.*'=>'image|mimes:png,jpg,webp|required',
+        //     'colorsLoop.*.color'=>'required|integer',
+        //     'colorsLoop.*.quantity'=>'required|integer',
+        //     'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
+        //     'colorsLoop.*.size'=>'required|integer',
+        // ]);
 
         $product = Product::create([
-            'name'=>$this->name, 
-            'slug'=>str()->slug($this->name), 
-            'price'=>$this->price, 
+            'name'=>$this->name,
+            'slug'=>str()->slug($this->name),
+            'price'=>$this->price,
             'description'=>$this->description,
-            'product_image'=>'null', 
+            'product_image'=>'null',
             'product_category_id'=>$this->product_category_id
         ]);
 

@@ -24,7 +24,7 @@
                             <div>
                                 <a href="{{route('admin.products.single',$product->slug)}}"
                                      class="btn btn-primary px-1"><i class="fas fa-eye"></i></a>
-                                <button wire:click="delete({{$product->id}})" class="btn btn-danger btn-sm" 
+                                <button wire:click="delete({{$product->id}})" class="btn btn-danger btn-sm"
                                     wire:loading.attr="disabled" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()">
                                     <i class="fa fa-trash"></i>
                                 </button>
@@ -36,7 +36,7 @@
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <h3 class="m-5">No product yet</h3>
                 </div>
-                @endforelse                   
+                @endforelse
             </div>
             <div class="row">
                 {{$products->links()}}
