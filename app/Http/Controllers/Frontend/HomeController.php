@@ -23,11 +23,15 @@ class HomeController extends Controller
     public function index()
     {
         $arr = [];
+        $stocks = Store::all()->pluck('product_id');
+
+        $products = Product::whereNotIn('id', $stocks)->inRandomOrder()->limit(12)->get();
+
         $product_categories = ProductCategory::with('products')->get();
 
         $shops = Vendor::where('confirmed',1)->where('active',1)->get();
 
-        return view('frontend.pages.home', compact('product_categories','shops'));
+        return view('frontend.pages.home1', compact('product_categories','shops', 'products'));
     }
     // this function will return product by it id
     public function singleProduct(Vendor $vendor, Store $product)
@@ -56,7 +60,7 @@ class HomeController extends Controller
         $user->update([
             'affiliate_link'=>str()->lower($this->getName($user))
         ]);
-        return back()->with('success','Welcome to '.config('app.name').' family! please read our terms and 
+        return back()->with('success','Welcome to '.config('app.name').' family! please read our terms and
         condition regarding to affiliate and partnership');
     }
 
@@ -115,7 +119,7 @@ class HomeController extends Controller
                 }
             }],
         ]);
-        
+
         $user->update(['password'=>Hash::make($request->password)]);
         return to_route('dashboard')->with('success','Password Updated Successfuly!');
     }
@@ -134,7 +138,28 @@ class HomeController extends Controller
     public function al_product_details($id)
     {
         $products = Product::all();
-        $product = Product::find($id);
+        $product = Product::find(Crypt::decryptString($id));
+
         return view('frontend.pages.al_single_product', compact('product','products'));
+    }
+    public function about()
+    {
+
+        return view('frontend.pages.about');
+    }
+
+    public function contact()
+    {
+
+        return view('frontend.pages.contact');
+    }
+
+    public function categorised($catId)
+    {
+
+        $catId = ProductCategory::findOrFail(Crypt::decryptString($catId));
+        $products_list = Product::where('product_category_id', $catId->id)->get();
+        $category_name = $catId->category_name;
+        return view('frontend.pages.categorised', compact('products_list','category_name'));
     }
 }

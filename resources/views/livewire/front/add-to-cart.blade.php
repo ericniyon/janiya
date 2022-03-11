@@ -6,7 +6,7 @@
     <h3 class="price-detail">{{ money($product->price) }}</h3>
     <ul class="color-variant">
         @foreach ($product->attributes as $item)
-            
+
         {{-- <li class=" active" wire:click="setColor({{$item->id}})" --}}
             <li class="active" style="background: {{ $item->color->color_code }}"></li>
         @endforeach
@@ -55,8 +55,8 @@
         </div>
     </div>
     <div class="product-buttons">
-        <button type="submit"  
-        wire:click.prevent="AddToCart({{$quantity}})" 
+        <button type="submit"
+        wire:click.prevent="AddToCart({{$quantity}})"
         {{-- wire:click.prevent="AddToCart({{$color}},{{$size}},{{$quantity}})"  --}}
             class="btn btn-solid hover-solid btn-animation ">
             <i class="fa fa-shopping-cart me-1" aria-hidden="true">
@@ -65,3 +65,8 @@
             <i class="fa fa-bookmark fz-16 me-2" aria-hidden="true"></i>wishlist</a>
     </div>
 </form>
+
+<div class="added-notification">
+    <img src="../assets/images/fashion/pro/1.jpg" class="img-fluid" alt="">
+    <h3>added to cart</h3>
+</div>

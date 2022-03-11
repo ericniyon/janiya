@@ -70,7 +70,7 @@
                     </h6>
                 </div>
                 <ul class="sidebar-menu">
-                    <li><a class="sidebar-header" href="/admin"><i data-feather="home"></i><span>Dashboard</span></a></li>
+                    <li><a class="sidebar-header" href="{{route('vendor.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
                     <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Shops</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
                             <li><a href="{{route('vendor.shop')}}"><i class="fa fa-circle"></i>My Shop</a></li>
@@ -95,7 +95,7 @@
                     {{-- @endauth --}}
                 </ul>
             </div>
-        </div>        
+        </div>
         <!-- Page Sidebar Ends-->
 
 

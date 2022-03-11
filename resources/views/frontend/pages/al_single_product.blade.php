@@ -45,22 +45,22 @@
                         <div class="row">
                             <div class="col-12 p-0">
                                 <div class="slider-nav">
-                                    
+
                                     @foreach ($product->images as $image)
                                     <div>
                                         <img src="{{ asset(Storage::url($image->image))}}" alt=""
                                             class="img-fluid blur-up lazyload">
                                         </div>
                                     @endforeach
-                                    
-                                    
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 rtl-text">
                         <div class="product-right">
-                            
+
                             <h2>{{ $product->name }}</h2>
                             <div class="rating-section">
                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -69,8 +69,8 @@
                                 <h6>120 ratings</h6>
                             </div>
                             @livewire('front.add-to-cart',
-                                        ['product' => $product], key($product->id))
-                            
+                                        ['product' => $product], key(Crypt::encryptString($product->id)))
+
                             <div class="product-count">
                                 <ul>
                                     <li>
@@ -79,7 +79,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            
+
                             <div class="border-product">
                                 <h6 class="product-title">shipping info</h6>
                                 <ul class="shipping-info">
@@ -94,14 +94,14 @@
                                 <div class="product-icon">
                                     <ul class="product-social">
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        {{-- <li><a href="#"><i class="fa fa-google-plus"></i></a></li> --}}
                                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                         <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                        {{-- <li><a href="#"><i class="fa fa-rss"></i></a></li> --}}
                                     </ul>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -122,8 +122,8 @@
                                     class="icofont icofont-ui-home"></i>Details</a>
                             <div class="material-border"></div>
                         </li>
-                        
-                        
+
+
                         <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab"
                                 href="#top-review" role="tab" aria-selected="false"><i
                                     class="icofont icofont-contacts"></i>Write Review</a>
@@ -164,10 +164,10 @@
                                 cursive language which looks great on a white color.</p>
                             <div class="single-product-tables">
 
-                                
+
                             </div>
                         </div>
-                        
+
                         <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
                             <form class="theme-form">
                                 <div class="form-row row">
@@ -229,12 +229,12 @@
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
-                                <a href="{{route('al_product_details',$product->id)}}">
+                                <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}">
                                     <img src="{{ asset(Storage::url($product->thumb->image))}}"
                                         class="img-fluid blur-up lazyload bg-img" alt=""></a>
                             </div>
                             <div class="back">
-                                <a href="{{route('al_product_details',$product->id)}}">
+                                <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}">
                                     <img src="{{ asset(Storage::url($product->thumb->image))}}"
                                         class="img-fluid blur-up lazyload bg-img" alt=""></a>
                             </div>
@@ -248,7 +248,7 @@
                             </div>
                         </div>
                         <div class="product-detail">
-                            
+
                             <a href="product-page(no-sidebar).html">
                                 <h6>{{$product->name}}</h6>
                             </a>
@@ -262,7 +262,7 @@
                     </div>
                 </div>
                 @endforeach
-                
+
             </div>
         </div>
     </section>

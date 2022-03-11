@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class SingleShop extends Component
 {
-    public $product, $name, $colorsLoop, $sizesLoop, $categories; 
+    public $product, $name, $colorsLoop, $sizesLoop, $categories;
 
     public function mount($product)
     {
@@ -34,7 +34,7 @@ class SingleShop extends Component
     public function updated($fields)
     {
         $this->validateOnly($fields,[
-            'name'=>'string|unique:stores,name|min:3|max:220',
+            // 'name'=>'string|unique:stores,name|min:3|max:220',
             'sizesLoop.*.attribute'=>'required|integer',
             'sizesLoop.*.quantity'=>'required|integer|min:5',
         ]);
@@ -43,13 +43,13 @@ class SingleShop extends Component
     public function store()
     {
         $this->validate([
-            'name'=>'string|unique:stores,name|min:3|max:220',
+            // 'name'=>'string|unique:stores,name|min:3|max:220',
             'sizesLoop.*.attribute'=>'required|integer',
             'sizesLoop.*.quantity'=>'required|integer|min:5',
         ]);
         $store = Store::create([
-            'name'=>$this->name,
-            'slug'=>str()->slug($this->name),
+            'name'=>$this->product->name,
+            'slug'=>str()->slug($this->product->name),
             'vendor_id'=>Auth::guard('vendor')->id(),
             'product_id'=>$this->product->id,
         ]);

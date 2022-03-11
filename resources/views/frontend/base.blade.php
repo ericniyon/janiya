@@ -52,7 +52,7 @@
 
 
     <!-- header2 start -->
-    @include('frontend.includes.header2')
+    @include('frontend.includes.nav')
     <!-- header2 end -->
 
 
@@ -102,7 +102,7 @@
     <!-- tap to top end -->
 
     <!-- latest jquery-->
-    
+
     <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/slick.js') }}"></script>
     <!-- menu js-->

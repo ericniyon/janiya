@@ -18,7 +18,7 @@ class AddToCart extends Component
     // {
     //     $this->color = $color;
     // }
-    
+
     // public function setSize($size)
     // {
     //     $this->size = $size;
@@ -51,7 +51,7 @@ class AddToCart extends Component
         $this->addToCartTrait($this->product,$quantity);
         // $this->addToCartTrait($this->product,$color,$size,$quantity);
 
-        return to_route('shop');
+        return to_route('cart');
     }
 
     public function mount($product)

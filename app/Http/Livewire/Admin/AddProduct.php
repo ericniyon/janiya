@@ -14,7 +14,7 @@ class AddProduct extends Component
 {
     use WithFileUploads;
     public $colorsLoop, $sizesLoop, $colors, $sizes, $categories;
-    public $name, $price, $product_category_id, $description, $product_image = []; 
+    public $name, $price, $product_category_id, $description, $product_image = [];
 
     public function mount()
     {
@@ -66,11 +66,11 @@ class AddProduct extends Component
         ]);
 
         $product = Product::create([
-            'name'=>$this->name, 
-            'slug'=>str()->slug($this->name), 
-            'price'=>$this->price, 
+            'name'=>$this->name,
+            'slug'=>str()->slug($this->name),
+            'price'=>$this->price,
             'description'=>$this->description,
-            'product_image'=>'null', 
+            'product_image'=>'null',
             'product_category_id'=>$this->product_category_id
         ]);
 
@@ -90,7 +90,7 @@ class AddProduct extends Component
                 'color_id'=>$item['color'],
                 'product_size_id'=>$item['size'],
                 'quantity'=>$item['quantity'],
-                'image'=>$color_image,
+                'image'=> $color_image,
             ]);
         }
 
