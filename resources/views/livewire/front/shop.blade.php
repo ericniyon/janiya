@@ -5,38 +5,44 @@
             <!-- brand filter start -->
             <div class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left" aria-hidden="true"></i> back</span></div>
             <div class="collection-collapse-block open">
-                <h3 class="collapse-block-title">Shops</h3>
+                <h3 class="collapse-block-title">Categories</h3>
                 <div class="collection-collapse-block-content">
-                    <div class="collection-brand-filter">
-
-                        @foreach ($shops as $item)
+                    <ul class="collection-brand-filter">
+                        @foreach ($this->categories as $item)
+                        {{-- <li>
+                            <a href="{{ route('shop',['store'=>$item->slug]) }}">{{ $item->shop_name }}</a>
+                        </li> --}}
                         <div class="form-check collection-filter-checkbox">
-                            <input type="radio" value="{{$item->id}}" class="form-check-input"
-                             name="shop_name"
-                             wire:model="shop_name"
-                             id="shop{{$item->id}}">
-                            <label class="form-check-label" for="shop{{$item->id}}">{{$item->shop_name}}</label>
+                            <a href="{{ route('categories-products', $item->id) }}">
+                                <input type="radio" value="{{$item->id}}" class="form-check-input">
+                            </a>
+
+                            <a href="{{ route('categories-products', Crypt::encryptString($item->id)) }}">
+                                <label class="form-check-label" for="shop{{$item->id}}">
+                                    {{$item->category_name}}
+                            </label>
+                            </a>
                         </div>
                         @endforeach
-                    </div>
+                    </ul>
                 </div>
             </div>
             <!-- color filter start here -->
             <!-- size filter start here -->
             <div class="collection-collapse-block border-0 open">
-                <h3 class="collapse-block-title">Categories</h3>
+                <h3 class="collapse-block-title">Shop</h3>
                 <div class="collection-collapse-block-content">
                     <div class="collection-brand-filter">
-                        @foreach ($categories as $item)
+                        {{-- @foreach ($shops as $item)
                         <div class="form-check collection-filter-checkbox">
                             <input type="checkbox" value="{{$item->id}}"
                             name="category"
                             wire:model="category"
                             class="form-check-input"
                              id="category{{$item->id}}">
-                            <label class="form-check-label" for="category{{$item->id}}">{{ucfirst($item->category_name)}}</label>
+                            <label class="form-check-label" for="category{{$item->id}}">{{ucfirst($item->shop_name)}}</label>
                         </div>
-                        @endforeach
+                        @endforeach --}}
                     </div>
                 </div>
             </div>
@@ -66,7 +72,7 @@
                 <div class="col-sm-12">
                     @if ($shop_name)
                     <div class="top-banner-wrapper">
-                        <a href="#"><img src="{{ asset('assets/images/mega-menu/2.jpg')}}" class="img-fluid blur-up lazyloaded" alt=""></a>
+                        <a href="#"></a>
                         <div class="top-banner-content small-section">
                             <h4>BIGGEST DEALS ON TOP BRANDS</h4>
                             <p>The trick to choosing the best wear for yourself is to keep in mind your
@@ -91,7 +97,7 @@
                                 <div class="col-12">
                                     <div class="product-filter-content">
                                         <div class="search-count">
-                                            <h5>Showing Products 1-24 of 10 Result</h5>
+                                            <h5>Showing {{ $products->count() }} Result</h5>
                                         </div>
                                         <div class="collection-view">
                                             <ul>
@@ -130,34 +136,43 @@
                         </div>
                         <div class="product-wrapper-grid">
                             <div class="row margin-res">
+
                                 @forelse ($products as $store)
                                 <div class="col-xl-3 col-6 col-grid-box">
                                     <div class="product-box">
                                         <div class="img-wrapper" style="height: 14rem">
                                             <div class="front">
-                                                {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"  --}}
-                                                    <a href="{{route('al_product_details',$store->product->id)}}"
+                                                {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}" {{asset(Storage::url($store->product->lastThumb->image))}} {{asset(Storage::url($store->product->thumb->image))}} --}}
+                                                    <a href="{{route('al_product_details',Crypt::encryptString($store->id))}}"
                                                     class="bg-size blur-up lazyloaded"
-                                                style="background-image: url(&quot;{{asset('storage/products/gallery/'.$store->image)}}&quot;);
+                                                style="background-image: url(&quot;&quot;);
                                                 background-size: cover; background-position: center center; display: block;">
-                                                <img src="{{asset(Storage::url($store->product->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                                                <img src="{{asset(Storage::url($store->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="back">
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"  --}}
-                                                    <a href=""
+                                                    <a href="{{route('al_product_details',Crypt::encryptString($store->id))}}"
                                                     class="bg-size blur-up lazyloaded"
-                                                style="background-image: url(&quot;{{asset('storage/products/gallery/4GMabZTJ1EuaheS2LUyHZfFkdD1V8ntVpQyrWdtC.jpg')}}&quot;);
+                                                style="background-image: url(&quot;&quot;);
                                                 background-size: cover; background-position: center center; display: block;">
-                                                <img src="{{asset('storage/products/gallery/4GMabZTJ1EuaheS2LUyHZfFkdD1V8ntVpQyrWdtC.jpg')}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                                                <img src="{{asset(Storage::url($store->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="cart-info cart-wrap">
-                                                <a href="#" title="Add to Wishlist"><i class="ti-shopping-cart" aria-hidden="true"></i></a>
-                                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-heart"></i></button>
-                                                <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a>
+                                                <a href="{{route('al_product_details', Crypt::encryptString($store->id))}}" title="Add to cart" >
+                                                    <i class="ti-shopping-cart" aria-hidden="true"></i></a>
+
+                                                <button data-toggle="modal" data-target="#addtocart" title=" Add to Wishlist"><i class="ti-heart"></i></button>
+
                                             </div>
                                         </div>
                                         <div class="product-detail">
                                             <div class="text-center">
+
+                                                {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"> --}}
+                                                <h5>{{number_format($store->price)}} Rwf</h5>
+                                                    <a href="{{route('al_product_details',$store->id)}}">
+                                                    <h6>{{$store->name}}</h6>
+                                                </a>
                                                 <div class="rating">
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -165,11 +180,6 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                 </div>
-                                                <h5>{{number_format($store->product->price)}} Rwf</h5>
-                                                {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"> --}}
-                                                    <a href="">
-                                                    <h6>{{$store->name}}</h6>
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -178,8 +188,6 @@
                                    <div class="col-md-12 d-flex align-items-center justify-content-center">
                                        <h4 class="m-5">No products found!</h4>
                                    </div>
-
-
                                 @endforelse
                             </div>
                         </div>

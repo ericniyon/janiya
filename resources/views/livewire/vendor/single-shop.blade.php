@@ -1,14 +1,14 @@
 <div class="body">
     <form wire:submit.prevent="store" method="POST" class="row">
         @csrf
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="">Desired Name</label>
             <input type="text" wire:model="name" name="name" value="{{old('name')}}" class="form-control
             @error('name') is-invalid @enderror" required>
             @error('name')
                 <span class="invalid-feedback" role="alert">{{$message}}</span>
             @enderror
-        </div>
+        </div> --}}
         @foreach($sizesLoop as $index=>$item)
         <div class="row">
             <div class="form-group col-md-6">

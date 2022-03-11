@@ -1,7 +1,7 @@
 @extends('frontend.base')
 
 @section('title')
-<title>Product Shop</title>
+<title>Shops</title>
 @endsection
 @push('extra-css')
     @livewireStyles

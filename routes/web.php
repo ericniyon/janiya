@@ -25,18 +25,10 @@ use App\Http\Controllers\Vendors\StoresController;
 */
 
 // Frontend routes
-// Route::get('/', [HomeController::class, 'index'] )->middleware('referral')->name('home');
-Route::get('about', [HomeController::class, 'about'] )->name('about');
-Route::get('contact', [HomeController::class, 'contact'] )->name('contact');
-Route::get('categories/products/{catId}', [HomeController::class, 'categorised'] )->name('categories-products');
-
-
-
 Route::get('/', [HomeController::class, 'index'])->middleware('referral')->name('home');
 
 // products routes
 Route::get('shop/products', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
-
 Route::get('shops',[HomeController::class,'shopsList'])->name('shops.list');
 Route::get('shops/{vendor}',[HomeController::class,'singleShop'])->name('shops.list.single');
 // Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
@@ -51,7 +43,7 @@ Route::patch('update-cart', [CartController::class, 'update'])->name('update.car
 Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
 
 // checkout
-Route::get('checkout', [CheckoutController::class, 'checkout'])->middleware('auth')->name('checkout');
+Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('guest-checkout', [CheckoutController::class, 'checkout'])->name('checkout.guest');
 Route::post('purchase', [CheckoutController::class, 'payment'])->name('purchase');
 Route::view('thankyou','front.thankyou')->name('thankyou');
@@ -119,10 +111,11 @@ Route::middleware('auth')->group(function(){
 
 
 Route::get('pro/{id}', [HomeController::class, 'al_product_details'] )->name('al_product_details');
+Route::get('about', [HomeController::class, 'about'] )->name('about');
+Route::get('contact', [HomeController::class, 'contact'] )->name('contact');
+Route::get('categories/products/{catId}', [HomeController::class, 'categorised'] )->name('categories-products');
 
 
 require __DIR__.'/auth.php';
 
-Route::fallback(function(){
-    return to_route('shop');
-});
+

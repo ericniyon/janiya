@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Order;
@@ -24,11 +23,15 @@ class HomeController extends Controller
     public function index()
     {
         $arr = [];
+        $stocks = Store::all()->pluck('product_id');
+
+        $products = Product::whereNotIn('id', $stocks)->inRandomOrder()->limit(12)->get();
+
         $product_categories = ProductCategory::with('products')->get();
 
         $shops = Vendor::where('confirmed',1)->where('active',1)->get();
 
-        return view('frontend.pages.home', compact('product_categories','shops'));
+        return view('frontend.pages.home1', compact('product_categories','shops', 'products'));
     }
     // this function will return product by it id
     public function singleProduct(Vendor $vendor, Store $product)
@@ -135,10 +138,10 @@ class HomeController extends Controller
     public function al_product_details($id)
     {
         $products = Product::all();
-        $product = Product::find($id);
+        $product = Product::find(Crypt::decryptString($id));
+
         return view('frontend.pages.al_single_product', compact('product','products'));
     }
-
     public function about()
     {
 
@@ -156,7 +159,7 @@ class HomeController extends Controller
 
         $catId = ProductCategory::findOrFail(Crypt::decryptString($catId));
         $products_list = Product::where('product_category_id', $catId->id)->get();
-        // return $catId->id;
-        return view('frontend.pages.categorised', compact('products_list'));
+        $category_name = $catId->category_name;
+        return view('frontend.pages.categorised', compact('products_list','category_name'));
     }
 }

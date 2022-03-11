@@ -18,30 +18,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
 
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/fontawesome.css')}}">
 
     <!--Slick slider css-->
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/fontawesome.css')}}">
-    <!-- Animate icon -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick.css')}}">
-
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick-theme.css')}}">
-    <!-- Themify icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/price-range.css')}}">
 
-    <!-- Bootstrap css -->
+    <!-- Animate icon -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css')}}">
+
+    <!-- Themify icon -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/themify-icons.css')}}">
 
-    <!-- Theme css -->
-
+    <!-- Bootstrap css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css')}}">
+
+    <!-- Theme css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 
-
-
-
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/fontawesome.css')}}">
     @stack('extra-css')
     @livewireStyles
 
@@ -105,35 +101,23 @@
     </div>
     <!-- tap to top end -->
 
+    <!-- latest jquery-->
 
-   <!-- latest jquery-->
-   <script src="{{ asset('assets/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/slick.js') }}"></script>
+    <!-- menu js-->
+    <script src="{{ asset('assets/js/menu.js') }}"></script>
+    <!-- lazyload js-->
+    <script src="{{ asset('assets/js/lazysizes.min.js') }}"></script>
+    <script src="{{ asset('assets/js/sticky-cart-bottom.js') }}"></script>
 
+    <!-- Bootstrap js-->
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 
-   <script src="{{ asset('assets/js/menu.js')}}"></script>
-   <!-- fly cart ui jquery-->
-
-   <script src="{{ asset('assets/js/lazysizes.min.js')}}"></script>
-   <!-- menu js-->
-   <script src="{{ asset('assets/js/price-range.js')}}"></script>
-   <script src="{{ asset('assets/js/slick.js')}}"></script>
-   <!-- lazyload js-->
-
-   <!-- Bootstrap js-->
-   <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-
-   <!-- Bootstrap Notification js-->
-   <script src="{{ asset('assets/js/bootstrap-notify.min.js')}}"></script>
-
-   <!-- Fly cart js-->
-   <script src="{{ asset('assets/js/fly-cart.js')}}"></script>
-
-   <!-- Theme js-->
-   <script src="{{ asset('assets/js/theme-setting.js')}}"></script>
-   <script src="{{ asset('assets/js/script.js')}}"></script>
-
-
-
+    <!-- Bootstrap Notification js-->
+    <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ asset('assets/js/theme-setting.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
 
     @yield('scripts')
     @livewireScripts

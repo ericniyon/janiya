@@ -2,6 +2,8 @@
 @section('title')
 <title>Janiya | Shop</title>
 @endsection
+
+
 @push('extra-css')
     @livewireStyles
 @endpush
@@ -18,7 +20,7 @@
                                 <div>
                                     <h4>Janiya Campaigns save upto 10% as janiya Partner</h4>
                                     <h1 style="color: #fff">Best Selling </h1><a href="#"
-                                        class="btn btn-outline btn-classic">Read more</a>
+                                        class="btn btn-outline btn-classic">shop now</a>
                                 </div>
                             </div>
                         </div>
@@ -47,28 +49,21 @@
     </div>
 </section>
 <!-- Home slider end -->
-
-
-<!-- product section -->
-
-
-{{-- ===================== --}}
 <div class="title1 section-t-space">
     <h4>special offer</h4>
-    <h2 class="title-inner1">today's deal</h2>
+    <h2 class="title-inner1">our products</h2>
 </div>
 
-<div class="container">
+{{-- <div class="container">
     <div class="row">
         <div class="col-lg-6 offset-lg-3">
             <div class="product-para">
-                <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                <p class="text-center">The trick to choosing the best wear for yourself is to keep in mind your body type,
+                     individual style, occasion and also the time of day or weather. </p>
             </div>
         </div>
     </div>
-</div>
-<!-- product section end -->
+</div> --}}
 
 <section class="section-b-space ratio_asos">
     <div class="collection-wrapper">
@@ -79,71 +74,8 @@
 </section>
 
 
-
-
 <!--  tab section  -->
-{{-- <section class="p-0">
-    <div class="tab-bg tab-grey-bg">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col">
-                    <div class="title4">
-                        <h2 class="title-inner4">special products</h2>
-                        <div class="line"><span></span></div>
-                    </div>
-                    <div class="theme-tab">
-                        <ul class="tabs tab-title">
 
-                            @if ($product_categories->count()>0)
-                            <li class="current"><a href="*">All</a></li>
-
-                            @foreach ($product_categories as $item)
-
-                            <li class=""><a href="tab-{{$item->id}}">{{$item->category_name}}</a></li>
-                            @endforeach
-                            @else
-
-                            @endif
-
-                        </ul>
-                        <div class="tab-content-cls">
-                            @foreach ($product_categories as $item)
-                            <div id="tab-{{$item->id}}" class="tab-content active default" style="display: block;">
-                                <div class="row product-tab mt-5">
-                                    @forelse ( $item->storeProducts()->limit(4)->inRandomOrder()->get() as $product )
-                                    <div class="tab-box">
-                                        <div class="product-box2">
-                                            <div class="media">
-                                                <a href="{{ route('product.single',[$product->shop->slug,$product->slug]) }}">
-                                                <img class="img-fluid blur-up lazyloaded" src="{{ asset(Storage::url($product->product->thumb->image))}}" alt=""></a>
-                                                <div class="media-body align-self-center">
-                                                    <div class="rating">
-                                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    </div>
-                                                    <a href="{{ route('product.single',[$product->shop->slug,$product->slug]) }}">
-                                                        <h6>{{$product->name}}</h6>
-                                                    </a>
-                                                    <h4>
-                                                     {{ $product->product->price }}Rwf</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @empty
-
-                                    @endforelse
-
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> --}}
 <!--  tab section end -->
 <section class="p-0">
     <div class="full-banner parallax text-center p-left">
@@ -241,72 +173,661 @@
 
 
 
-<section class="collection section-b-space ratio_square ">
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col">
-                <div class="title4">
-                    <h4>recent story</h4>
-                    <h2 class="title-inner4">from the blog</h2>
-                    <div class="line"><span></span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
 
-        <div class="row partition-collection section-t-space">
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/7.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/7.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p><a href="category-page.html" class="btn btn-outline">Read more !</a>
-                    </div>
+<section class="section-b-space">
+    <div class="container">
+        <div class="row multiple-slider">
+            <div class="col-lg-3 col-sm-6">
+                <div class="theme-card">
+                    <h5 class="title-border">new products</h5>
+                    <div class="offer-slider slide-1 slick-initialized slick-slider"><button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="display: block;">Previous</button><div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 1080px; transform: translate3d(-216px, 0px, 0px);"><div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/5.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/1-.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/54.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/1.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/33.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/4.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/5.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/1-.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/54.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-cloned" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/1.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/33.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/4.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/5.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/1-.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/54.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div></div></div><button class="slick-next slick-arrow" aria-label="Next" type="button" style="display: block;">Next</button></div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/8.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/8.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p><a href="category-page.html" class="btn btn-outline">Read more !</a>
-                    </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="theme-card">
+                    <h5 class="title-border">feature product</h5>
+                    <div class="offer-slider slide-1 slick-initialized slick-slider"><button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="display: block;">Previous</button><div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 1080px; transform: translate3d(-216px, 0px, 0px);"><div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/7.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/8.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/25.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/42.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/44.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/6.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/7.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/8.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/25.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-cloned" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/42.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/44.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/6.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/7.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/8.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/25.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div></div></div><button class="slick-next slick-arrow" aria-label="Next" type="button" style="display: block;">Next</button></div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/9.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/9.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p><a href="category-page.html" class="btn btn-outline">Read more !</a>
-                    </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="theme-card">
+                    <h5 class="title-border">best seller</h5>
+                    <div class="offer-slider slide-1 slick-initialized slick-slider"><button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="display: block;">Previous</button><div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 1080px; transform: translate3d(-216px, 0px, 0px);"><div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/13.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/14.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/16.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/10.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/11.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/12.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/13.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/14.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/16.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-cloned" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/10.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/11.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/12.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/13.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/14.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/16.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                        </div></div></div></div></div><button class="slick-next slick-arrow" aria-label="Next" type="button" style="display: block;">Next</button></div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/11.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/11.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p><a href="category-page.html" class="btn btn-outline">Read more !</a>
-                    </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="theme-card">
+                    <h5 class="title-border">on sale</h5>
+                    <div class="offer-slider slide-1 slick-initialized slick-slider"><button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="display: block;">Previous</button><div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 1080px; transform: translate3d(-216px, 0px, 0px);"><div class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/53.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/78.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/66.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/57.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/54.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="0"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/46.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="0">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/53.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/78.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/66.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-cloned" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/57.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/54.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/46.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div><div class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 216px;"><div><div style="width: 100%; display: inline-block;">
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/53.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00 <del>$600.00</del></h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/78.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <a href="product-page(no-sidebar).html" tabindex="-1"><img class="img-fluid blur-up lazyloaded" src="../assets/images/fashion/product/66.jpg" alt=""></a>
+                                <div class="media-body align-self-center">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="product-page(no-sidebar).html" tabindex="-1">
+                                        <h6>Slim Fit Cotton Shirt</h6>
+                                    </a>
+                                    <h4>$500.00</h4>
+                                </div>
+                            </div>
+                        </div></div></div></div></div><button class="slick-next slick-arrow" aria-label="Next" type="button" style="display: block;">Next</button></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- blog section -->
-
-<!-- blog section end-->
-
-
-<!-- instagram section -->
 @section('scripts')
 @livewireScripts
 @endsection
+<!-- instagram section -->
+
 @endsection

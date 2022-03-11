@@ -26,15 +26,15 @@
               <td>{{$var->size()->exists()?$var->size->size:''}}</td>
               <td>{{$var->quantity}}</td>
               <td>edit</td>
-            </tr>
+            </tr> 
             @empty
-
+                
             @endforelse
         </tbody>
       </table>
     </div>
   </div>
   @empty
-
+      
   @endforelse
 </div>

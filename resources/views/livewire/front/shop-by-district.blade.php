@@ -16,8 +16,8 @@
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="collection-block">
                 <div>
-                    <img src="{{asset($vendor->profile?Storage::url($vendor->profile):'assets/images/default-shop.jpg')}}" 
-                    class="img-fluid blur-up lazyload bg-img" 
+                    <img src="{{asset($vendor->profile?Storage::url($vendor->profile):'assets/images/default-shop.jpg')}}"
+                    class="img-fluid blur-up lazyload bg-img"
                     alt="{{$vendor->shop_name}}">
                 </div>
                 <div class="collection-content">

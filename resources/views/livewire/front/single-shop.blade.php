@@ -52,18 +52,18 @@
     </div>
     <div class="product-wrapper-grid">
         <div class="row margin-res">
-            @forelse ($products as $product) 
+            @forelse ($products as $product)
             <div class="col-xl-3 col-6 col-grid-box">
                 <div class="product-box">
                     <div class="img-wrapper">
                         <div class="front">
-                            <a href="{{route('al_product_details',$product->product->id)}}">
+                            <a href="{{route('al_product_details',Crypt::encryptString($product->product->id))}}">
                                 <img src="{{ asset(Storage::url($product->product->thumb->image))}}"
                                     class="img-fluid blur-up lazyload bg-img"
                                     alt="{{$product->name}}"></a>
                         </div>
                         <div class="back">
-                            <a href="{{route('al_product_details',$product->product->id)}}">
+                            <a href="{{route('al_product_details',Crypt::encryptString($product->product->id))}}">
                                 <img src="{{ asset(Storage::url($product->product->thumb->image))}}"
                                     class="img-fluid blur-up lazyload bg-img"
                                     alt="{{$product->name}}"></a>
@@ -76,7 +76,7 @@
                                     class="fa fa-star"></i> <i
                                     class="fa fa-star"></i> <i
                                     class="fa fa-star"></i></div>
-                            <a href="{{route('al_product_details',$product->product->id)}}">
+                            <a href="{{route('al_product_details',Crypt::encryptString($product->product->id))}}">
                                 <h6>{{$product->name}}</h6>
                             </a>
                             <p>{{$product->product->description}}</p>

@@ -1,4 +1,4 @@
-<footer class="footer-light">
+<footer class="footer-light mt-5">
     <div class="light-layout">
         <div class="container">
             <section class="small-section border-section border-top-0">
@@ -53,15 +53,18 @@
                 <div class="col offset-xl-1">
                     <div class="sub-title">
                         <div class="footer-title">
-                            <h4>my account</h4>
+                            <h4>out categories</h4>
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">Women</a></li>
+                                @foreach (App\Models\ProductCategory::all() as $category)
+                                    <li><a href="{{ route('categories-products', Crypt::encryptString($category->id)) }}">{{ $category->category_name }}</a></li>
+                                @endforeach
+                                {{-- <li><a href="#">Women</a></li>
                                 <li><a href="#">Men</a></li>
                                 <li><a href="#">Kids</a></li>
                                 <li><a href="#">Home & Living</a></li>
-                                <li><a href="#">Beddings</a></li>
+                                <li><a href="#">Beddings</a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -111,7 +114,27 @@
                         <p><i class="fa fa-copyright" aria-hidden="true"></i> 2021 {{config('app.name')}}</p>
                     </div>
                 </div>
-                
+                <div class="col-xl-6 col-md-6 col-sm-12">
+                    <div class="payment-card-bottom">
+                        <ul>
+                            <li>
+                                <a href="#"><img src="../assets/images/icon/visa.png" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="../assets/images/icon/mastercard.png" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="../assets/images/icon/paypal.png" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="../assets/images/icon/american-express.png" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="../assets/images/icon/discover.png" alt=""></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

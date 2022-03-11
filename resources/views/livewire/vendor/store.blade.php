@@ -14,7 +14,7 @@
                 <div class="col-12 col-md-4 mt-1">
                     <div class="row">
                         <div class="col-md-5">
-                            <img src="" class="rounded img-responsive w-100"
+                            <img src="{{asset(Storage::url($product->thumb->image))}}" class="rounded img-responsive w-100"
                              height="150">
                             <h5 class="text-center">{{$product->name}}</h5>
                             <h4 class="text-center font-weight-bold"></h4>
@@ -34,7 +34,7 @@
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <h3 class="m-5">No product yet</h3>
                 </div>
-                @endforelse
+                @endforelse                   
             </div>
             <div class="row">
                 {{$products->links()}}
