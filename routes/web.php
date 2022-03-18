@@ -38,7 +38,7 @@ Route::get('colors', [ColorsController::class, 'colors'] )->name('colors');
 Route::post('save-color', [ColorsController::class, 'save_colors'] )->name('save-color');
 // cart
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
-Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::post('add-to-cart/{product}', [CartController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
 

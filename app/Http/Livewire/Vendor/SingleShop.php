@@ -11,57 +11,69 @@ use Livewire\Component;
 
 class SingleShop extends Component
 {
-    public $product, $name, $colorsLoop, $sizesLoop, $categories;
+    public $product, $name, $quantity1, $items, $categories;
+
+    public $messages =  ["items.*.order_quantity.lte" => "Requested quantity not available",];
 
     public function mount($product)
     {
-        $this->sizesLoop = [[]];
+        $this->items = [[]];
         $this->product = $product;
         $this->categories = ProductCategory::select('id','category_name')->get();
     }
 
     public function addNewRow()
     {
-        $this->sizesLoop[] = [];
+        $this->items[] = [];
+    }
+
+    public function updatedItems($value, $nested)
+    {
+        $data = explode(".", $nested);
+        if ($data[1] == 'attribute') {
+            $this->quantity1 = ProductAttribute::where('id', $value)->pluck("quantity")->first();
+            $this->items[$data[0]] = [
+                'finalquantity' => $this->quantity1,
+                'attribute' => $this->items[$data[0]]['attribute'],
+                // 'order_quantity' =>$this->items[$data[0]]['order_quantity'],
+            ];
+        }
     }
 
     public function removeRow($index)
     {
-        unset($this->sizesLoop[$index]);
-        $this->sizesLoop = array_values($this->sizesLoop);
+        unset($this->items[$index]);
+        $this->items = array_values($this->items);
     }
 
     public function updated($fields)
     {
         $this->validateOnly($fields,[
-            // 'name'=>'string|unique:stores,name|min:3|max:220',
-            'sizesLoop.*.attribute'=>'required|integer',
-            'sizesLoop.*.quantity'=>'required|integer|min:5',
+            'items.*.attribute'=>'required|integer',
+            'items.*.order_quantity'=>'required|integer|min:5|lte:items.*.finalquantity',
         ]);
     }
 
     public function store()
     {
         $this->validate([
-            // 'name'=>'string|unique:stores,name|min:3|max:220',
-            'sizesLoop.*.attribute'=>'required|integer',
-            'sizesLoop.*.quantity'=>'required|integer|min:5',
+            'items.*.attribute'=>'required|integer',
+            'items.*.order_quantity'=>'required|integer|min:5|lte:items.*.finalquantity',
         ]);
         $store = Store::create([
-            'name'=>$this->product->name,
-            'slug'=>str()->slug($this->product->name),
             'vendor_id'=>Auth::guard('vendor')->id(),
             'product_id'=>$this->product->id,
         ]);
-        foreach($this->sizesLoop as $key=>$item){
+        foreach($this->items as $key=>$item){
             $attribute = ProductAttribute::findOrFail($item['attribute']);
             $stored_item = $store->valiations()->create([
-                'product_size_id'=>$attribute->product_size_id,
-                'color_id'=>$attribute->color_id,
-                'quantity'=>$item['quantity'],
+                'product_attribute_id'=>$attribute->id,
+                'quantity'=>$item['order_quantity'],
+                'size'=>$attribute->size,
+                'color'=>$attribute->color,
             ]);
 
-            $attribute->update(['quantity'=>$attribute->quantity - $item['quantity']]);
+            $attribute->update(['quantity'=>$attribute->quantity - $item['order_quantity']]);
         }
 
         $store->orders()->create([

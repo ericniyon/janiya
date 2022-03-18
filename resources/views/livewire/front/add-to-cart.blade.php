@@ -1,14 +1,17 @@
-<form>
+<form action="{{route('add.to.cart',$product->id)}}" method="POST">
+    @csrf
     <div class="label-section">
         <span class="badge badge-grey-color">#1 Best seller</span>
         <span class="label-text">in fashion</span>
     </div>
-    <h3 class="price-detail">{{ money($product->price) }}</h3>
+    <h3 class="price-detail">{{ money($product->price) }} productID:{{$product->id}}</h3>
     <ul class="color-variant">
-        @foreach ($product->attributes as $item)
-
-        {{-- <li class=" active" wire:click="setColor({{$item->id}})" --}}
-            <li class="active" style="background: {{ $item->color->color_code }}"></li>
+        @foreach ($colors as $item)
+        <label for="color{{$item->id}}">
+            <li class="active" style="background: {{ $item->color }}">
+                <input type="radio" required name="color" id="color{{$item->id}}" hidden
+                value="{{ $item->color }}">
+            </li></label>
         @endforeach
     </ul>
     <div id="selectSize" class="addeffect-section product-description border-product">
@@ -35,9 +38,11 @@
         {{-- <h6 class="error-message">please select size</h6> --}}
         <div class="size-box">
             <ul>
-                @foreach ($product->attributes as $item)
-                {{-- <li><a href="javascript:void(0)" wire:click="setSize({{$item->product_size_id}})"  --}}
-                    <li><a href="javascript:void(0)" >{{ $item->size->size }}</a></li>
+                @foreach ($sizes as $item)
+                <label for="size{{$item->id}}"><li>
+                        {{ $item->size }}
+                        <input type="radio" required id="size{{$item->id}}" name="size" hidden value="{{ $item->size }}">
+                    </li></label>
                 @endforeach
             </ul>
         </div>
@@ -47,7 +52,8 @@
                         class="btn quantity-left-minus" data-type="minus" data-field=""
                         wire:click.prevent="descrease" @if ($quantity==1) disabled @endif><i
                             class="ti-angle-left"></i></button> </span>
-                <input type="text" name="quantity" wire:model.lazy="quantity" class="form-control input-number" value="1">
+                <input type="text" name="quantity" wire:model.lazy="quantity" required
+                class="form-control input-number" value="1" min="1">
                 <span class="input-group-prepend"><button type="button" wire:click.prevent="increase"
                         class="btn quantity-right-plus" data-type="plus" data-field=""><i
                             class="ti-angle-right"></i></button></span>
@@ -55,12 +61,8 @@
         </div>
     </div>
     <div class="product-buttons">
-        <button type="submit"
-        wire:click.prevent="AddToCart({{$quantity}})"
-        {{-- wire:click.prevent="AddToCart({{$color}},{{$size}},{{$quantity}})"  --}}
-            class="btn btn-solid hover-solid btn-animation ">
-            <i class="fa fa-shopping-cart me-1" aria-hidden="true">
-            </i> add to cart</button>
+        <button type="submit" class="btn btn-solid hover-solid btn-animation ">
+            <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i> add to cart</button>
         <a href="#" class="btn btn-solid">
             <i class="fa fa-bookmark fz-16 me-2" aria-hidden="true"></i>wishlist</a>
     </div>
