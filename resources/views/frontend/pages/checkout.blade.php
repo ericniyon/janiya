@@ -38,7 +38,7 @@
                             <div class="row check-out">
                                 <div class="form-group col-12">
                                     <div class="field-label">Full Name</div>
-                                    <input type="text" name="name" placeholder="Your Full Names" 
+                                    <input type="text" name="name" placeholder="Your Full Names"
                                     value="{{old('name',Auth::user()?Auth::user()->name:'')}}"
                                     class="@error('name') is-invalid @enderror">
                                     @error('name')
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Phone Number</div>
-                                    <input type="tel" name="phone" placeholder="Ex: 0780808080" 
+                                    <input type="tel" name="phone" placeholder="Ex: 0780808080"
                                     value="{{old('phone',Auth::user()?Auth::user()->phone:'')}}"
                                     class="@error('phone') is-invalid @enderror">
                                     @error('phone')
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Email Address</div>
-                                    <input type="email" name="email" placeholder="Ex: name@domain.com" 
+                                    <input type="email" name="email" placeholder="Ex: name@domain.com"
                                     value="{{old('email',Auth::user()?Auth::user()->email:'')}}"
                                     class="@error('email') is-invalid @enderror">
                                     @error('email')
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="form-group col-12">
                                     <div class="field-label">Address</div>
-                                    <input type="text" name="address" placeholder="Kicukiro, Niboye, St Joseph" 
+                                    <input type="text" name="address" placeholder="Kicukiro, Niboye, St Joseph"
                                     value="{{old('address',Auth::user()?Auth::user()->address1:'')}}"
                                     class="@error('address') is-invalid @enderror">
                                     @error('address')
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                     <div class="field-label">Street Address</div>
-                                    <input type="text" name="street" placeholder="Ex: KK 1 Ave" 
+                                    <input type="text" name="street" placeholder="Ex: KK 1 Ave"
                                     value="{{old('street',Auth::user()?Auth::user()->street_name:'')}}"
                                     class="@error('street') is-invalid @enderror">
                                     @error('street')
@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                     <div class="field-label">Neighborhood</div>
-                                    <input type="text" name="neighborhood" placeholder="Ex: Rugando" 
+                                    <input type="text" name="neighborhood" placeholder="Ex: Rugando"
                                     value="{{old('neighborhood',Auth::user()?Auth::user()->neighborhood:'')}}"
                                     class="@error('neighborhood') is-invalid @enderror">
                                     @error('neighborhood')
@@ -106,7 +106,7 @@
                                     <ul class="sub-total">
                                         <li>Sub Total <span class="count">{{money(\Cart::getTotal())}}</span></li>
                                         @if (Session::has('coupon'))
-                                           <li>Discount: <span class="count">{{money(getDiscount())}}</span></li> 
+                                           <li>Discount: <span class="count">{{money(getDiscount())}}</span></li>
                                         @endif
                                     </ul>
                                     <ul class="total">

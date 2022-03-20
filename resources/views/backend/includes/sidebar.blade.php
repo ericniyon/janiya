@@ -30,7 +30,7 @@
                             <span>Product Attributes</span> <i class="fa fa-angle-right pull-right"></i>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a href="{{route('colors')}}">
+                            <li><a href="{{route('admin.colors')}}">
                                 <span>Colors</span></a>
                             </li>
                             <li><a href="{{route('admin.size')}}">

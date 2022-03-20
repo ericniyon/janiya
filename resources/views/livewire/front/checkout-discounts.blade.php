@@ -7,7 +7,7 @@
                 <div>
                     <span>{{session()->get('error')}}</span>
                 </div>
-                <button type="button" class="close position-absolute pull-right btn btn-outline-none" 
+                <button type="button" class="close position-absolute pull-right btn btn-outline-none"
                 data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,7 +17,7 @@
             <div class="alert alert-info alert-dismissible d-flex justify-content-between w-100 fade show"
                 role="alert" id="my-alert">
                 <span>{{session()->get('success')}}</span>
-                <button type="button" class="close position-absolute pull-right btn btn-outline-none" 
+                <button type="button" class="close position-absolute pull-right btn btn-outline-none"
                 data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -64,7 +64,7 @@
             <div class="alert alert-danger alert-dismissible fade show"
              role="alert" id="my-alert">
                 <span>{{session()->get('error1')}}</span>
-                <button type="button" class="close position-absolute pull-right btn btn-outline-none" 
+                <button type="button" class="close position-absolute pull-right btn btn-outline-none"
                 data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -74,7 +74,7 @@
             <div class="alert alert-success alert-dismissible fade show"
              role="alert" id="my-alert">
                 <span>{{session()->get('success1')}}</span>
-                <button type="button" class="close position-absolute pull-right btn btn-outline-none" 
+                <button type="button" class="close position-absolute pull-right btn btn-outline-none"
                 data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -86,16 +86,16 @@
                     <h5>You were referred By <strong>{{referencedBy()->name}}</strong></h5>
                     <h5>Your Promo Code <strong>{{referencedBy()->promo_code}}</strong></h5>
                 </div>
-                <button class="btn btn-outline-none text-danger" 
+                <button class="btn btn-outline-none text-danger"
                 wire:click="removePromoCode">Cancel</button>
             </div>
             @else
             <h3>Referred by star or Social media influencer??</h3>
-            <h4>Enter you PromoCode here!</h4>
+            <h4>Enter PromoCode here!</h4>
             <form action="" wire:submit.prevent="addPromoCode" method="POST" class="mt-3">
                 @csrf
                 <div class="form-group">
-                    <label for="input">Enter your PromoCode</label>
+                    <label for="input">Enter Promo Code</label>
                     <input type="text" id="input" name="promo_code" wire:model.lazy="promo_code" value="{{old('promo_code')}}"
                      class="form-control @error('promo_code') is-invalid @enderror">
                      @error('promo_code')

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Front;
 
 use App\Http\Traits\AddToCartTrait;
 use App\Models\Color;
+use App\Models\ProductAttribute;
 use App\Models\ProductSize;
 use Darryldecode\Cart\Cart;
 use Livewire\Component;
@@ -14,15 +15,15 @@ class AddToCart extends Component
     public $product, $sizes, $colors;
     public $quantity = 1, $color, $size;
 
-    // public function setColor($color)
-    // {
-    //     $this->color = $color;
-    // }
+    public function setColor($color)
+    {
+        $this->color = $color;
+    }
 
-    // public function setSize($size)
-    // {
-    //     $this->size = $size;
-    // }
+    public function setSize($size)
+    {
+        $this->size = $size;
+    }
 
     public function increase()
     {
@@ -36,36 +37,10 @@ class AddToCart extends Component
         }
     }
 
-    // public function AddToCart($color,$size,$quantity)
-    public function AddToCart($quantity)
-    {
-        // if (is_null($color)) {
-        //     $this->emit('alert',['type'=>'error','message'=>'Select Color first']);
-        //     return;
-        // }
-        // if (is_null($size)) {
-        //     $this->emit('alert',['type'=>'error','message'=>'Choose Size that you want']);
-        //     return;
-        // }
-
-        $this->addToCartTrait($this->product,$quantity);
-        // $this->addToCartTrait($this->product,$color,$size,$quantity);
-
-        return to_route('cart');
-    }
-
     public function mount($product)
     {
-        // $colorIds = [];
-        // $sizeIds = [];
-        // foreach ($this->product->valiations()->pluck('color_id') as $value) {
-        //     array_push($colorIds,$value);
-        // }
-        // foreach ($this->product->valiations()->pluck('product_size_id') as $value) {
-        //     array_push($sizeIds,$value);
-        // }
-        // $this->colors = Color::whereIn('id',$colorIds)->select('id','color_code')->distinct()->get();
-        // $this->sizes = ProductSize::whereIn('id',$sizeIds)->select('id','size')->distinct()->get();
+        $this->colors = ProductAttribute::where('product_id',$this->product->id)->select('id','color')->distinct()->get();
+        $this->sizes = ProductAttribute::where('product_id',$this->product->id)->select('id','size')->distinct()->get();
         $this->product = $product;
     }
     public function render()

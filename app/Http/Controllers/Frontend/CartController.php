@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AddToCartTrait;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Darryldecode\Cart\Cart;
 
 class CartController extends Controller
 {
+    use AddToCartTrait;
      /**
      * Write code on Method
      *
@@ -38,22 +40,19 @@ class CartController extends Controller
      *
      * @return response()
      */
-    public function addToCart($id)
+    public function addToCart(Request $request,$product)
     {
-        $cart = session()->get('cart', []);
+        // dd($product);
+        $this->validate($request,[
+            'color'=>'string',
+            'size'=>'string',
+            'quantity'=>'integer|min:1',
+        ]);
+        $product = Product::findOrFail($product);
+        // dd($product->id);
+        $this->addToCartTrait($product,$request->color,$request->size,$request->quantity);
 
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                "name" => 'one',
-                "quantity" => 1,
-                "price" => 200,
-                
-            ];
-        }
-
-        session()->put('cart', $cart);
+        return to_route('cart');
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
