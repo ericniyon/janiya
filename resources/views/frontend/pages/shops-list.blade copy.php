@@ -1,29 +1,60 @@
+@extends('frontend.base')
+
+@section('title')
+<title>Shops</title>
+@endsection
+@push('extra-css')
+    @livewireStyles
+@endpush
+@section('content')
+
+
+<section class="container">
+<div class="full-banner small-banner p-left">
+<img src="{{ asset('assets/img/kids.jpg') }}" alt="" class="bg-img blur-up lazyload">
+<div class="container">
 <div class="row">
+<div class="col">
+<div class="banner-contain app-detail">
+<h3 class="font-fraunces">huge saving</h3>
+<h4>special offer</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section-b-space ratio_asos">
+    <div class="collection-wrapper">
+        <div class="container">
+          <div class="row">
     <div class="col-sm-3 collection-filter">
         <!-- side-bar colleps block stat -->
         <div class="collection-filter-block">
             <!-- brand filter start -->
-            <div class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left" aria-hidden="true"></i> back</span></div>
+            <div class="collection-mobile-back">
+                <span class="filter-back">
+                    <i class="fa fa-angle-left" aria-hidden="true">
+                        </i> back</span></div>
             <div class="collection-collapse-block open">
                 <h3 class="collapse-block-title">Categories</h3>
                 <div class="collection-collapse-block-content">
                     <ul class="collection-brand-filter">
-                        @foreach ($categories as $item)
-                        {{-- <li>
-                            <a href="{{ route('shop',['store'=>$item->slug]) }}">{{ $item->shop_name }}</a>
-                        </li> --}}
-                        <div class="form-check collection-filter-checkbox">
-                            <a href="{{ route('categories-products', $item->id) }}">
-                                <input type="radio" value="{{$item->id}}" class="form-check-input">
-                            </a>
 
-                            <a href="{{ route('categories-products', Crypt::encryptString($item->id)) }}">
-                                <label class="form-check-label" for="shop{{$item->id}}">
-                                    {{$item->category_name}}
+                        @foreach (App\Models\ProductCategory::all() as $category)
+                        <div class="form-check collection-filter-checkbox">
+                            <a href="" >
+                                <input type="radio" value="{{$category->id}}" class="form-check-input">
+                            </a>
+                            <a href="{{ route('categories-products',  Crypt::encryptString($category->id)) }}" {{ $category->id }} >
+                                <label class="form-check-label" for="shop{{$category->id}}">
+                                    {{$category->category_name}}
                             </label>
                             </a>
                         </div>
                         @endforeach
+
                     </ul>
                 </div>
             </div>
@@ -33,48 +64,34 @@
                 <h3 class="collapse-block-title">Shop</h3>
                 <div class="collection-collapse-block-content">
                     <div class="collection-brand-filter">
-                        {{-- @foreach ($shops as $item)
+                        @foreach ($shops as $shop)
                         <div class="form-check collection-filter-checkbox">
-                            <input type="checkbox" value="{{$item->id}}"
-                            name="category"
-                            wire:model="category"
-                            class="form-check-input"
-                             id="category{{$item->id}}">
-                            <label class="form-check-label" for="category{{$item->id}}">{{ucfirst($item->shop_name)}}</label>
+                            <a href="" >
+                                <input type="radio" value="{{$shop->id}}" class="form-check-input">
+                            </a>
+                            <a href="{{ route('shops-products',  Crypt::encryptString($shop->id)) }}" {{ $shop->id }} >
+                                <label class="form-check-label" for="shop{{$shop->id}}">
+                                    {{$shop->name}}
+                            </label>
+                            </a>
                         </div>
-                        @endforeach --}}
+                        @endforeach
                     </div>
                 </div>
             </div>
-            <!-- price filter start here -->
-            {{-- <div class="collection-collapse-block border-0 open">
-                <h3 class="collapse-block-title">price</h3>
-                <div class="collection-collapse-block-content">
-                    <div class="wrapper mt-3">
-                        <div class="range-slider">
-                            <span class="irs js-irs-0"><span class="irs"><span class="irs-line" tabindex="-1"><span class="irs-line-left"></span><span class="irs-line-mid"></span><span class="irs-line-right"></span></span><span class="irs-min" style="visibility: hidden;">$0</span><span class="irs-max" style="visibility: hidden;">$1.500</span><span class="irs-from" style="visibility: visible; left: 0%;">$0</span><span class="irs-to" style="visibility: visible; left: 81.9672%;">$1.500</span><span class="irs-single" style="visibility: hidden; left: 35.6557%;">$0 - $1.500</span></span><span class="irs-grid"></span><span class="irs-bar" style="left: 1.63934%; width: 96.7213%;"></span><span class="irs-shadow shadow-from" style="display: none;"></span><span class="irs-shadow shadow-to" style="display: none;"></span><span class="irs-slider from" style="left: 0%;"></span><span class="irs-slider to" style="left: 96.7213%;"></span></span><input type="text" class="js-range-slider irs-hidden-input" value="" readonly="">
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
-        <!-- silde-bar colleps block end here -->
-        <!-- side-bar single product slider start -->
-        {{-- @livewire('front.new-products') --}}
-        <!-- side-bar single product slider end -->
-        <!-- side-bar banner start here -->
 
-        <!-- side-bar banner end here -->
+        </div>
+
     </div>
     <div class="collection-content col">
         <div class="page-main-content">
             <div class="row">
                 <div class="col-sm-12">
-                    @if ($shop_name)
+
                     <div class="top-banner-wrapper">
                         <a href="#"></a>
                         <div class="top-banner-content small-section">
-                            <h4>BIGGEST DEALS ON TOP BRANDS</h4>
+                            <h4>BIGGEST DEALS ON TOP BRANDS </h4>
                             <p>The trick to choosing the best wear for yourself is to keep in mind your
                                 body type, individual style, occasion and also the time of day or
                                 weather.
@@ -85,7 +102,6 @@
                                 heart’s content on Multikart. </p>
                         </div>
                     </div>
-                    @endif
                     <div class="collection-product-wrapper">
                         <div class="product-top-filter">
                             <div class="row">
@@ -94,6 +110,8 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <form action="{{ route('shops.list') }}" id="form">
+
                                 <div class="col-12">
                                     <div class="product-filter-content">
                                         <div class="search-count">
@@ -113,14 +131,16 @@
                                                 <li><img src="{{ asset('assets/images/icon/6.png')}}" alt="" class="product-6-layout-view"></li>
                                             </ul>
                                         </div>
+
                                         <div class="product-page-per-view">
-                                            <select>
-                                                <option value="High to low">24 Products Par Page
+                                            <select  name="sortBy" id="sortBy">
+                                                <option value="">---- Sort by price ----</option>
+                                                <option value="HighToLow">Higher Price to Lower
                                                 </option>
-                                                <option value="Low to High">50 Products Par Page
+                                                <option value="LowToHigh">Lower Price To Higher
                                                 </option>
-                                                <option value="Low to High">100 Products Par Page
-                                                </option>
+                                                {{-- <option value="Low to High">100 Products Par Page
+                                                </option> --}}
                                             </select>
                                         </div>
                                         <div class="product-page-filter">
@@ -132,6 +152,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                        </form>
+
                             </div>
                         </div>
                         <div class="product-wrapper-grid">
@@ -202,3 +224,51 @@
         </div>
     </div>
 </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+
+@endsection
+@section('scripts')
+<script>
+    $('#sortBy').change(function() {
+        var sort = $("#sortBy").val();
+        window.location = "{{ url(''.$route.'') }}?sort="+sort;
+    })
+</script>
+<script>
+    function loadingData(page) {
+        $.ajax({
+            url: '?page='+page,
+            type: 'get',
+            beforeSend:function(){
+                $('.ajax-load').show()
+            }
+        })
+        .done(function(data){
+            if(data.html == ''){
+                $('ajax-load').html('No more products available')
+                return;
+            }
+            $('ajax-load').hide()
+            $('product-data').append(data.html)
+
+        })
+        .fail(function(){
+            alert('Something went wrong')
+        })
+    }
+
+    var page = 1;
+    $(window).scroll(function(){
+        if($(winow).scrollTop() + $(window).height()+120>=$(document).height()){
+            page++;
+            loadingData(page)
+        }
+    })
+</script>
+@endsection
