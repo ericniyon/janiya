@@ -25,7 +25,7 @@ class HomeController extends Controller
         $arr = [];
         $stocks = Store::all()->pluck('product_id');
 
-        $products = Product::whereNotIn('id', $stocks)->inRandomOrder()->limit(12)->get();
+        $products = Product::whereNotIn('id', $stocks)->inRandomOrder()->limit(8)->get();
 
         $product_categories = ProductCategory::with('products')->get();
 
@@ -49,9 +49,35 @@ class HomeController extends Controller
         return view('frontend.pages.single-shop', compact('vendor'));
     }
 
-    public function shopsList()
+    public function shopsList(Request $request)
     {
-        return view('frontend.pages.shops-list');
+        // return $request->all();
+        $shops = Store::all();
+        $categories = ProductCategory::all();
+
+        $sort = '';
+
+        if($request->sort != null){
+            $sort = $request->sort;
+        }
+        if($categories == null ){
+            return view('errors.404');
+        }
+        else{
+            if($sort == 'HighToLow'){
+                $products = Product::orderBy('price', 'ASC')->paginate(6);
+            }
+            elseif($sort == 'LowToHigh'){
+                $products = Product::orderBy('price', 'DESC')->paginate(6);
+            }
+            else{
+            $products = Product::all();
+
+            }
+        }
+
+        $route = 'shops';
+        return view('frontend.pages.shops-list', ['categories'=> $categories, 'products' => $products, 'shops' => $shops,'route'=> $route]);
     }
 
     public function becomeAffiliate()
@@ -138,7 +164,9 @@ class HomeController extends Controller
     public function al_product_details($id)
     {
         $products = Product::all();
-        $product = Product::find(Crypt::decryptString($id));
+        $product = Product::with('rel_products')->find(Crypt::decryptString($id));
+
+        // return $product;
 
         return view('frontend.pages.al_single_product', compact('product','products'));
     }
@@ -161,5 +189,33 @@ class HomeController extends Controller
         $products_list = Product::where('product_category_id', $catId->id)->get();
         $category_name = $catId->category_name;
         return view('frontend.pages.categorised', compact('products_list','category_name'));
+    }
+
+    public function shoped($shopId)
+    {
+
+        $shopId = Store::findOrFail(Crypt::decryptString($shopId));
+
+        $product_ids = Store::find($shopId)->pluck('product_id');
+
+        $shop_name = Store::find($shopId)->pluck('name');
+
+
+        $products_list = Product::whereIn('id', $product_ids)->get();
+
+        return view('frontend.pages.shopssearched', compact('products_list', 'shop_name'));
+    }
+
+    public function shopFilter(Request $request)
+    {
+        $data = $request->all();
+
+        $sortByUrl = '';
+
+        if(!empty($data['sortBy']))
+        {
+            $sortByUrl = '&sortBy='.$data['sortBy'];
+        }
+        return redirect()->route('shops.list'.$sortByUrl);
     }
 }

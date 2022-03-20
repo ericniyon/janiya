@@ -1,34 +1,4 @@
-@extends('frontend.base')
-
-@section('title')
-<title>Shops</title>
-@endsection
-@push('extra-css')
-    @livewireStyles
-@endpush
-@section('content')
-
-
-<section class="container">
-<div class="full-banner small-banner p-left">
-<img src="{{ asset('assets/img/kids.jpg') }}" alt="" class="bg-img blur-up lazyload">
-<div class="container">
 <div class="row">
-<div class="col">
-<div class="banner-contain app-detail">
-<h3 class="font-fraunces">huge saving</h3>
-<h4>special offer</h4>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<section class="section-b-space ratio_asos">
-    <div class="collection-wrapper">
-        <div class="container">
-          <div class="row">
     <div class="col-sm-3 collection-filter">
         <!-- side-bar colleps block stat -->
         <div class="collection-filter-block">
@@ -133,11 +103,10 @@
                                         </div>
 
                                         <div class="product-page-per-view">
-                                            <select  name="sortBy" id="sortBy">
-                                                <option value="">---- Sort by price ----</option>
-                                                <option value="HighToLow">Higher Price to Lower
+                                            <select onchange="this.form.submit()" name="sortBy" id="sortBy">
+                                                <option value="HighToLow">24 Products Par Page
                                                 </option>
-                                                <option value="LowToHigh">Lower Price To Higher
+                                                <option value="LowToHigh">50 Products Par Page
                                                 </option>
                                                 {{-- <option value="Low to High">100 Products Par Page
                                                 </option> --}}
@@ -213,11 +182,6 @@
                                 @endforelse
                             </div>
                         </div>
-
-                            <div class="loaded" style="display: none">
-                                <h4>Loading ......</h4>
-                            </div>
-
                         <div class="product-pagination">
                             <div class="theme-paggination-block">
                                 {{-- {{$products->link()}} --}}
@@ -231,49 +195,3 @@
 </div>
 
 
-
-        </div>
-    </div>
-</section>
-
-
-@endsection
-@section('scripts')
-<script>
-    $('#sortBy').change(function() {
-        var sort = $("#sortBy").val();
-        window.location = "{{ url(''.$route.'') }}?sort="+sort;
-    })
-</script>
-<script>
-    function loadingData(page) {
-        $.ajax({
-            url: '?page='+page,
-            type: 'get',
-            beforeSend:function(){
-                $('.ajax-load').show()
-            }
-        })
-        .done(function(data){
-            if(data.html == ''){
-                $('ajax-load').html('No more products available')
-                return;
-            }
-            $('ajax-load').hide()
-            $('product-data').append(data.html)
-
-        })
-        .fail(function(){
-            alert('Something went wrong')
-        })
-    }
-
-    var page = 1;
-    $(window).scroll(function(){
-        if($(winow).scrollTop() + $(window).height()+120>=$(document).height()){
-            page++;
-            loadingData(page)
-        }
-    })
-</script>
-@endsection

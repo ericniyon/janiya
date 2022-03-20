@@ -30,7 +30,7 @@
 <section class="section-b-space ratio_asos">
     <div class="collection-wrapper">
         <div class="container">
-            @livewire('front.shop')
+            @livewire('categories')
         </div>
     </div>
 </section>

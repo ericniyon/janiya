@@ -13,10 +13,10 @@
         <tbody>
             @forelse ($shops as $vendor)
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">{{ $vendor->id }}</th>
               <td>
                 <div class="d-flex align-items-center">
-                  <img class="mr-3 rounded-circle lazyloaded blur-up" height="30" width="30" 
+                  <img class="mr-3 rounded-circle lazyloaded blur-up" height="30" width="30"
                 src="{{$vendor->profile?asset(Storage::url($vendor->profile)):'../assets/images/dashboard/man.png'}}" alt="#">
                 {{$vendor->shop_name}}</td>
                 </div>
@@ -37,15 +37,15 @@
                   <a href="{{route('admin.shops.edit',$vendor->id)}}" class="btn btn-primary btn-sm">
                       <i class="fa fa-edit"></i>
                   </a>
-                  <button wire:click="delete({{$vendor->id}})" class="btn btn-danger btn-sm" 
+                  <button wire:click="delete({{$vendor->id}})" class="btn btn-danger btn-sm"
                       wire:loading.attr="disabled" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()">
                       <i class="fa fa-delete"></i>
                   </button>
                 </div>
               </td>
-            </tr> 
+            </tr>
             @empty
-                
+
             @endforelse
         </tbody>
       </table>

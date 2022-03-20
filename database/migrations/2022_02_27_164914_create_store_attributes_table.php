@@ -20,6 +20,10 @@ return new class extends Migration
             $table->foreignIdFor(Store::class)->constrained();
             $table->foreignIdFor(ProductAttribute::class)->constrained();
             $table->integer('quantity')->unsigned();
+            $table->string('size');
+            $table->string('color');
+
+
             $table->timestamps();
         });
     }

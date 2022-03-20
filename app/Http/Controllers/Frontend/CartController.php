@@ -49,7 +49,7 @@ class CartController extends Controller
                 "name" => 'one',
                 "quantity" => 1,
                 "price" => 200,
-                
+
             ];
         }
 
@@ -87,5 +87,10 @@ class CartController extends Controller
             }
             session()->flash('success', 'Product removed successfully');
         }
+    }
+
+    public function cartContents(Request $request)
+    {
+        return $request->all();
     }
 }

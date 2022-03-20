@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="product-slick">
-                            @foreach ($product->images as $image)
+                            @foreach ($product->attributes as $image)
                             <div>
                                 <img src="{{ asset(Storage::url($image->image))}}" alt=""
                                     class="img-fluid blur-up lazyload image_zoom_cls-{{ $image->id }}">
@@ -46,7 +46,7 @@
                             <div class="col-12 p-0">
                                 <div class="slider-nav">
 
-                                    @foreach ($product->images as $image)
+                                    @foreach ($product->attributes as $image)
                                     <div>
                                         <img src="{{ asset(Storage::url($image->image))}}" alt=""
                                             class="img-fluid blur-up lazyload">
@@ -75,7 +75,7 @@
                                 <ul>
                                     <li>
                                         <img src="../assets/images/icon/truck.png" class="img-fluid" alt="image">
-                                        <span class="lang">Free shipping for orders above $500 USD</span>
+                                        <span class="lang">Free shipping for orders above 2000 Rwf</span>
                                     </li>
                                 </ul>
                             </div>
@@ -135,27 +135,9 @@
                             aria-labelledby="top-home-tab">
                             <div class="product-tab-discription">
                                 <div class="part">
-                                    <p>The Model is wearing a white blouse from our stylist's collection, see the image
-                                        for a mock-up of what the actual blouse would look like.it has text written on
-                                        it in a black cursive language which looks great on a white color.</p>
+                                    <p>{{$product->description}}</p>
                                 </div>
-                                <div class="part">
-                                    <h5 class="inner-title">fabric:</h5>
-                                    <p>Art silk is manufactured by synthetic fibres like rayon. It's light in weight and
-                                        is soft on the skin for comfort in summers.Art silk is manufactured by synthetic
-                                        fibres like rayon. It's light in weight and is soft on the skin for comfort in
-                                        summers.</p>
-                                </div>
-                                <div class="part">
-                                    <h5 class="inner-title">size & fit:</h5>
-                                    <p>The model (height 5'8") is wearing a size S</p>
-                                </div>
-                                <div class="part">
-                                    <h5 class="inner-title">Material & Care:</h5>
-                                    <p>Top fabric: pure cotton</p>
-                                    <p>Bottom fabric: pure cotton</p>
-                                    <p>Hand-wash</p>
-                                </div>
+
                             </div>
                         </div>
                         <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
@@ -224,7 +206,7 @@
                 </div>
             </div>
             <div class="row search-product">
-                @foreach ($products as $product)
+                @foreach ($product->rel_products as $product)
                 <div class="col-xl-2 col-md-4 col-6">
                     <div class="product-box">
                         <div class="img-wrapper">

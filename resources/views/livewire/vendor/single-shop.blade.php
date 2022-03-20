@@ -1,4 +1,9 @@
 <div class="body">
+        @if (session()->has('message'))
+        <div class="alert alert-success">
+          {{ session('message') }}
+        </div>
+    @endif
     <form wire:submit.prevent="store" method="POST" class="row">
         @csrf
         {{-- <div class="form-group">
@@ -19,8 +24,8 @@
                 <option value="">Select Product Valiation</option>
                 @foreach ($product->attributes()->where('quantity','>',3)->get() as $item)
                     <option value="{{$item->id}}">
-                        Size: {{$item->size->size}},
-                        Color: {{$item->color->color_name}}
+                        Size: {{$item->size}},
+                        Color: {{$item->color}}
                     </option>
                 @endforeach
                 </select>
@@ -34,7 +39,8 @@
                 name="sizesLoop[{{$index}}][quantity]"
                 wire:model.lazy="sizesLoop.{{$index}}.quantity" id="quantity"
                 class="form-control @error('sizesLoop.'.$index.'quantity') is-invalid @enderror">
-                @error('sizesLoop.'.$index.'quantity')
+                
+                @error('sizesLoop[{{$index}}][quantity]')
                     <span class="invalid-feedback" role="alert">{{$message}}</span>
                 @enderror
             </div>

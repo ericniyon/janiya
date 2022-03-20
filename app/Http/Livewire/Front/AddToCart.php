@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Front;
 
 use App\Http\Traits\AddToCartTrait;
 use App\Models\Color;
+use App\Models\ProductAttribute;
 use App\Models\ProductSize;
 use Darryldecode\Cart\Cart;
 use Livewire\Component;
@@ -56,17 +57,9 @@ class AddToCart extends Component
 
     public function mount($product)
     {
-        // $colorIds = [];
-        // $sizeIds = [];
-        // foreach ($this->product->valiations()->pluck('color_id') as $value) {
-        //     array_push($colorIds,$value);
-        // }
-        // foreach ($this->product->valiations()->pluck('product_size_id') as $value) {
-        //     array_push($sizeIds,$value);
-        // }
-        // $this->colors = Color::whereIn('id',$colorIds)->select('id','color_code')->distinct()->get();
-        // $this->sizes = ProductSize::whereIn('id',$sizeIds)->select('id','size')->distinct()->get();
         $this->product = $product;
+        $this->colors = ProductAttribute::where('product_id',$this->product->id)->select('id','color')->distinct()->get();
+        $this->sizes = ProductAttribute::where('product_id',$this->product->id)->select('id','size')->distinct()->get();
     }
     public function render()
     {

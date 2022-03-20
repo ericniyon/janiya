@@ -17,11 +17,14 @@ class StoreAttribute extends Model
         'pre_order',
         'order_confirmed',
         'pre_order_confirmed',
+        'product_attribute_id',
+        'size',
+        'color'
     ];
 
-    public function color()
+    public function attributes()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(ProductAttribute::class);
     }
 
     public function size()

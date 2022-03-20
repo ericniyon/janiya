@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductSize;
+use App\Models\ProductAttribute;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -14,7 +15,7 @@ class AddProduct extends Component
 {
     use WithFileUploads;
     public $colorsLoop, $sizesLoop, $colors, $sizes, $categories;
-    public $name, $price, $product_category_id, $description, $product_image = [];
+    public $name, $price, $product_category_id,$factory_price, $description, $product_image = [];
 
     public function mount()
     {
@@ -41,13 +42,14 @@ class AddProduct extends Component
         $this->validateOnly($fields,[
             'name'=>'string|unique:products,name|min:3|max:220',
             'price'=>'required|integer|min:500|max:500000',
+            'factory_price'=>'required|integer|min:500|max:500000',
             'product_category_id'=>'required|integer',
             'description'=>'string|required|min:10|max:5000',
             'product_image.*'=>'image|mimes:png,jpg,webp|required',
-            'colorsLoop.*.color'=>'required|integer',
-            'colorsLoop.*.quantity'=>'required|integer',
+            'colorsLoop.*.color'=>'required|string',
+            'colorsLoop.*.quantity'=>'required|string',
             'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
-            'colorsLoop.*.size'=>'required|integer',
+            'colorsLoop.*.size'=>'required|string',
         ]);
     }
 
@@ -56,19 +58,21 @@ class AddProduct extends Component
         $this->validate([
             'name'=>'string|unique:products,name|min:3|max:220',
             'price'=>'required|integer|min:500|max:500000',
+            'factory_price'=>'required|integer|min:500|max:500000',
             'product_category_id'=>'required|integer',
             'description'=>'string|required|min:10|max:5000',
             'product_image.*'=>'image|mimes:png,jpg,webp|required',
-            'colorsLoop.*.color'=>'required|integer',
-            'colorsLoop.*.quantity'=>'required|integer',
+            'colorsLoop.*.color'=>'required|string',
+            'colorsLoop.*.quantity'=>'required|string',
             'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
-            'colorsLoop.*.size'=>'required|integer',
+            'colorsLoop.*.size'=>'required|string',
         ]);
 
         $product = Product::create([
             'name'=>$this->name,
             'slug'=>str()->slug($this->name),
             'price'=>$this->price,
+            'factory_price'=>$this->factory_price,
             'description'=>$this->description,
             'product_image'=>'null',
             'product_category_id'=>$this->product_category_id
@@ -87,17 +91,18 @@ class AddProduct extends Component
         foreach($this->colorsLoop as $key=>$item){
             $color_image = $item['image']->store('public/products/gallery/color');
             $product->attributes()->create([
-                'color_id'=>$item['color'],
-                'product_size_id'=>$item['size'],
+                'color'=>$item['color'],
+                'size'=>$item['size'],
                 'quantity'=>$item['quantity'],
                 'image'=> $color_image,
+                'product_id'=>$product->id
             ]);
         }
 
         $this->reset();
         session()->flash('message', 'Data Created Successfully.');
         session()->flash('message', 'Records Has Been Inserted Successfully.');
-        return to_route('admin.dashboard');
+        return to_route('admin.add-product');
     }
 
 

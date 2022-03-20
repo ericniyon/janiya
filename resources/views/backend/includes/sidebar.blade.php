@@ -5,8 +5,7 @@
     <div class="sidebar custom-scrollbar">
         <div class="sidebar-user text-center">
             <div>
-                <img class="img-60 rounded-circle lazyloaded blur-up"
-                src="../assets/images/dashboard/man.png" alt="#">
+
             </div>
             <h6 class="mt-3 f-14">
             </h6>
@@ -42,33 +41,31 @@
             </li>
             <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Sales</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
-                    <li><a href="order.html"><i class="fa fa-circle"></i>Orders</a></li>
-                    <li><a href="transactions.html"><i class="fa fa-circle"></i>Transactions</a></li>
+                    <li><a href="{{ route('admin.allorders') }}"><i class="fa fa-circle"></i>Orders</a></li>
+                    <li><a href="{{ route('admin.admin-transaction') }}"><i class="fa fa-circle"></i>Transactions</a></li>
                 </ul>
+            </li>
+            <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Janiya Shops</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+                            <li><a href="{{route('admin.shops')}}"><i class="fa fa-circle"></i>Shops</a></li>
+                            <li><a href="{{ route('admin.shops.add') }}"><i class="fa fa-circle"></i>Add Shop</a></li>
+                        </ul>
             </li>
             <li><a class="sidebar-header" href=""><i data-feather="user-plus"></i><span>Users</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
-                    <li>
-                        <a href="#"><i class="fa fa-circle"></i>
-                            <span>Janiya Shops</span> <i class="fa fa-angle-right pull-right"></i>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a href="{{route('admin.shops')}}"><i class="fa fa-circle"></i>Shops</a></li>
-                            <li><a href="create-vendors.html"><i class="fa fa-circle"></i>Add Shop</a></li>
-                        </ul>
-                    </li>
+
                     <li><a href="{{route('admin.affiliator')}}"><i class="fa fa-circle"></i>Affiliators</a></li>
                     <li><a href="{{route('admin.partners')}}"><i class="fa fa-circle"></i>Partners</a></li>
                 </ul>
             </li>
-            <li><a class="sidebar-header" href="reports.html"><i data-feather="bar-chart"></i><span>Reports</span></a></li>
-            <li><a class="sidebar-header" href=""><i data-feather="settings" ></i><span>Settings</span><i class="fa fa-angle-right pull-right"></i></a>
-                <ul class="sidebar-submenu">
+            {{-- <li><a class="sidebar-header" href="reports.html"><i data-feather="bar-chart"></i</i><span>Reports</span></a></li> --}}
+            {{-- <li><a class="sidebar-header" href=""><i data-feather="settings" ></i><span>Settings</span><i class="fa fa-angle-right pull-right"></i></a> --}}
+                {{-- <ul class="sidebar-submenu">
                     <li><a href="profile.html"><i class="fa fa-circle"></i>Profile</a></li>
-                </ul>
-            </li>
-            <li><a class="sidebar-header" href="invoice.html"><i data-feather="archive"></i><span>Invoice</span></a>
-            </li>
+                </ul> --}}
+            {{-- </li> --}}
+            {{-- <li><a class="sidebar-header" href="invoice.html"><i data-feather="archive"></i><span>Invoice</span></a>
+            </li> --}}
         </ul>
     </div>
 </div>

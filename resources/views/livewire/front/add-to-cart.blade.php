@@ -5,10 +5,10 @@
     </div>
     <h3 class="price-detail">{{ money($product->price) }}</h3>
     <ul class="color-variant">
-        @foreach ($product->attributes as $item)
+        @foreach ($colors as $item)
 
         {{-- <li class=" active" wire:click="setColor({{$item->id}})" --}}
-            <li class="active" style="background: {{ $item->color->color_code }}"></li>
+            <li class="active" style="background: {{ $item->color }}"></li>
         @endforeach
     </ul>
     <div id="selectSize" class="addeffect-section product-description border-product">
@@ -35,9 +35,11 @@
         {{-- <h6 class="error-message">please select size</h6> --}}
         <div class="size-box">
             <ul>
-                @foreach ($product->attributes as $item)
-                {{-- <li><a href="javascript:void(0)" wire:click="setSize({{$item->product_size_id}})"  --}}
-                    <li><a href="javascript:void(0)" >{{ $item->size->size }}</a></li>
+                @foreach ($sizes as $item)
+                <li><a href="javascript:void(0)" > {{ $item->size }}
+                    <input type="radio" name="size" value="{{ $item->size }}" id="">
+                </a></li>
+                    {{-- <li><a href="javascript:void(0)" >{{ $item->size }}</a></li> --}}
                 @endforeach
             </ul>
         </div>

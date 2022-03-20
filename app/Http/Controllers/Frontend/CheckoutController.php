@@ -85,9 +85,9 @@ class CheckoutController extends Controller
             $response = curl_exec($curl);
             curl_close($curl);
 
-            echo "<pre>";
-            echo $response;
-            echo "</pre>";
+            // echo "<pre>";
+            // echo $response;
+            // echo "</pre>";
 
             $res= json_decode($response);
 
@@ -104,7 +104,7 @@ class CheckoutController extends Controller
                 $this->insterOrderIntoTable($req,'Error');
                 echo "We can not proccess your payment";
             }
-            
+
             return redirect()->back()->with('alert', 'Success');
 
     }
@@ -187,17 +187,17 @@ class CheckoutController extends Controller
         'Status'=>$status,
         'total'=>\Cart::getTotal() - getDiscount(),
     ]);
-    foreach(\Cart::getContent() as $item){
-        $order->items()->create([
-            'product_id'=>$item->id,
-            'price'=>$item->price,
-            'shop'=>1,
-            // 'shop'=>$item->model->id,
-            'color'=>$item->attributes['color'],
-            'size'=>$item->attributes['size'],
-            'quantity'=>$item->quantity,
-        ]);
-    }
+    // foreach(\Cart::getContent() as $item){
+    //     $order->items()->create([
+    //         'product_id'=>$item->id,
+    //         'price'=>$item->price,
+    //         'shop'=>1,
+    //         // 'shop'=>$item->model->id,
+    //         'color'=>$item->attributes['color'],
+    //         'size'=>$item->attributes['size'],
+    //         'quantity'=>$item->quantity,
+    //     ]);
+    // }
     if(Cookie::has('referredBy')){
         referencedBy()->increment('partner_total_sales');
     }

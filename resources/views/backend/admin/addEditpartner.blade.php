@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="page-header-left">
-                    <h3>Dashboard
+                    <h3>NEW SHOP
                         <small>{{config('app.name')}}</small>
                     </h3>
                 </div>
@@ -20,7 +20,7 @@
             <div class="col-lg-6">
                 <ol class="breadcrumb pull-right">
                     <li class="breadcrumb-item"><a href="{{route('admin.partners.add')}}"><i data-feather="home"></i></a></li>
-                    <li class="breadcrumb-item active">Partners</li>
+                    <li class="breadcrumb-item active">New Shop</li>
                 </ol>
             </div>
         </div>
@@ -31,22 +31,22 @@
         <div class="card">
             <div class="card-body">
                 <div class="digital-add needs-validation">
-                    <form class="digits" 
-                    action="{{isset($user)?route('admin.partners.update',$user->id):route('admin.partners.store')}}"  
+                    <form class="digits"
+                    action="{{isset($user)?route('admin.partners.update',$user->id):route('admin.partners.store')}}"
                     method="POST" enctype="multipart/form-data">
                     @csrf
-                    @isset($user) 
+                    @isset($user)
                     @method('put')
                     @endisset
-                    <div class="form-group">
-                        <label for="promo_code" class="col-form-label pt-0"><span>*</span>Promo Code</label>
-                        <input name="promo_code" value="{{isset($user)?$user->promo_code:old('promo_code')}}" class="form-control @error('promo_code')
-                            is-invalid @enderror" id="promo_code" type="text" required="">
-                        @error('promo_code')
-                            <span class="invalid-feedback" role="alert">{{$message}}</span>
-                        @enderror
-                    </div>
                     <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="promo_code" class="col-form-label pt-0"><span>*</span>Promo Code</label>
+                            <input name="promo_code" value="{{isset($user)?$user->promo_code:old('promo_code')}}" class="form-control @error('promo_code')
+                                is-invalid @enderror" id="promo_code" type="text" required="">
+                            @error('promo_code')
+                                <span class="invalid-feedback" role="alert">{{$message}}</span>
+                            @enderror
+                        </div>
                         <div class="form-group col-md-4">
                             <label for="name" class="col-form-label pt-0"><span>*</span> Full Names</label>
                             <input name="name" value="{{isset($user)?$user->name:old('name')}}" class="form-control @error('name')
@@ -71,14 +71,14 @@
                                 <span class="invalid-feedback" role="alert">{{$message}}</span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label pt-0"> Profile Image</label>
-                        <input name="profile" class="form-control @error('profile')
-                            is-invalid @enderror" id="profile" type="file">
-                        @error('profile')
-                            <span class="invalid-feedback" role="alert">{{$message}}</span>
-                        @enderror
+                        <div class="form-group col-md-4">
+                            <label class="col-form-label pt-0"> Profile Image</label>
+                            <input name="profile" class="form-control @error('profile')
+                                is-invalid @enderror" id="profile" type="file">
+                            @error('profile')
+                                <span class="invalid-feedback" role="alert">{{$message}}</span>
+                            @enderror
+                        </div>
                     </div>
                     {{-- <div class="dropzone" id="singleFileUpload" >
                         <div class="dz-message needsclick"><i class="fa fa-cloud-upload"></i>

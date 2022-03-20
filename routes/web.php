@@ -50,14 +50,19 @@ Route::view('thankyou','front.thankyou')->name('thankyou');
 Route::view('order-cancelled','front.thankyou')->name('cancelled');
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 
+Route::get('admin/profile', [AdminController::class, 'profile'] )->name('admin-profile');
 // Admin's routes
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
-    Route::get('/dashboard', function () {
-        return view('backend.pages.admin_dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('sizes', [Size::class, 'size'] )->name('size');
     Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
     Route::get('product/category', [AdminController::class, 'product_category'] )->name('product-category');
+    Route::get('all/orders',[AdminController::class, 'admin_orders'])->name('allorders');
+    Route::get('all/transaction',[AdminController::class, 'admin_transactions'])->name('admin-transaction');
+
+
+
+
     Route::post('save-category', [AdminController::class, 'save_category'] )->name('save-category');
     Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
     Route::view('products','backend.admin.products')->name('products.all');
@@ -91,9 +96,12 @@ Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name(
 
     Route::view('orders','backend.vendors.orders')->name('orders');
     Route::get('orders/view/{order}',[StoresController::class,'singleOrder'])->name('orders.single');
+    Route::post('my-store/{id}',[StoresController::class,'storeUpdates'])->name('store_update');
+
 
     // coupons
     Route::view('coupons','backend.vendors.coupons')->name('coupons');
+
 });
 
 // Normal Users's routes
@@ -114,7 +122,9 @@ Route::get('pro/{id}', [HomeController::class, 'al_product_details'] )->name('al
 Route::get('about', [HomeController::class, 'about'] )->name('about');
 Route::get('contact', [HomeController::class, 'contact'] )->name('contact');
 Route::get('categories/products/{catId}', [HomeController::class, 'categorised'] )->name('categories-products');
+Route::get('shops/products/{shopId}', [HomeController::class, 'shoped'] )->name('shops-products');
 
+Route::get('cart/content',  [CartController::class, 'cartContents'])->name('add-to-cart');
 
 require __DIR__.'/auth.php';
 
