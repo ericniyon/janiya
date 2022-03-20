@@ -10,7 +10,8 @@ class ColorsController extends Controller
 {
     public function colors()
     {
-        return view('backend.pages.colors');
+        $colors = Color::orderBy('color_name')->get();
+        return view('backend.pages.colors',compact('colors'));
     }
 
     public function save_colors(Request $request)
@@ -21,5 +22,11 @@ class ColorsController extends Controller
 
         $color->save();
         return redirect()->back()->with('message', 'Color have been generated successfully');
+    }
+
+    public function delete_colors(Color $color)
+    {
+        $color->delete();
+        return back()->with('success','Product Color Deleted Successfully!');
     }
 }

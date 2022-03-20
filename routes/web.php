@@ -33,9 +33,6 @@ Route::get('shops',[HomeController::class,'shopsList'])->name('shops.list');
 Route::get('shops/{vendor}',[HomeController::class,'singleShop'])->name('shops.list.single');
 // Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
 Route::get('shop/{vendor}/{product}',[HomeController::class,'singleProduct'])->name('product.single');
-// all about colors
-Route::get('colors', [ColorsController::class, 'colors'] )->name('colors');
-Route::post('save-color', [ColorsController::class, 'save_colors'] )->name('save-color');
 // cart
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::post('add-to-cart/{product}', [CartController::class, 'addToCart'])->name('add.to.cart');
@@ -57,6 +54,10 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     })->name('dashboard');
     Route::get('sizes', [Size::class, 'size'] )->name('size');
     Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
+    Route::delete('save-size/{size}', [Size::class, 'delete_size'] )->name('delete-size');
+    Route::get('colors', [ColorsController::class, 'colors'] )->name('colors');
+    Route::post('save-color', [ColorsController::class, 'save_colors'] )->name('save-color');
+    Route::delete('color/{color}', [ColorsController::class, 'delete_colors'] )->name('delete-color');
     Route::get('product/category', [AdminController::class, 'product_category'] )->name('product-category');
     Route::post('save-category', [AdminController::class, 'save_category'] )->name('save-category');
     Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
