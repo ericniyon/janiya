@@ -65,6 +65,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('products/{product}',[ProductsController::class,'show'])->name('products.single');
     Route::put('products/{attribute}',[ProductsController::class,'updateAttribute'])->name('products.update');
     Route::post('products/{product}',[ProductsController::class,'newAttribute'])->name('products.new');
+    Route::put('products/{product}/update',[ProductsController::class,'updateProduct'])->name('products.update.item');
 
     Route::view('/shops','backend.admin.shops')->name('shops');
     Route::view('/shops/add-new-shop','backend.admin.addEditShops')->name('shops.add');

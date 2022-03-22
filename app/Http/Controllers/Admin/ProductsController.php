@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductAttribute;
+use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductSize;
 use Illuminate\Http\Request;
@@ -15,9 +16,8 @@ class ProductsController extends Controller
 {
     public function show(Product $product)
     {
-        $sizes = ProductSize::select('size','id')->orderBy('size')->get();
-        $colors = Color::select('color_name','id')->orderBy('color_name')->get();
-        return view('backend.admin.view-single-product', compact('product','sizes','colors'));
+        $categories = ProductCategory::select('category_name','id')->orderBy('category_name')->get();
+        return view('backend.admin.view-single-product', compact('product','categories'));
     }
 
     public function updateAttribute(Request $request,ProductAttribute $attribute,)
@@ -55,6 +55,7 @@ class ProductsController extends Controller
         } else{
             $color_image=null;
         }
+
         $product->attributes()->create([
             'color_id'=>$request->color,
             'product_size_id'=>$request->size,
@@ -77,18 +78,17 @@ class ProductsController extends Controller
 
     public function updateProduct(Request $request,Product $product)
     {
-        // $product = Product::findOrFail($product);
         $this->validate($request,[
             'name'=>'required|string|unique:products,name,'.$product->id,
             'price'=>'required|integer|min:500|max:500000',
             'details'=>'string|required|min:10|max:5000',
             'image.*'=>'image|mimes:png,jpg,webp|sometimes',
         ]);
-
+        // dd($product->name);
         $product->update([
-            'name'=>$request->name, 
-            'slug'=>str()->slug($request->name), 
-            'price'=>$request->price, 
+            'name'=>$request->name,
+            'slug'=>str()->slug($request->name),
+            'price'=>$request->price,
             'description'=>$request->details,
         ]);
 
@@ -107,6 +107,6 @@ class ProductsController extends Controller
             }
         }
 
-        return to_route('admin.products.single',$product)->with('success',$product->name.' Updated Successfully!');
+        return to_route('admin.products.single',$product->slug)->with('success',$product->name.' Updated Successfully!');
     }
 }

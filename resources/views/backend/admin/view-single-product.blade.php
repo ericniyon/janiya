@@ -1,7 +1,7 @@
 @extends('backend.base')
 @section('title')
 <title>View {{$product->name}}</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
@@ -80,25 +80,25 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                                    <tr class="@if($attribute->quantity < 10) bg-danger
                                      @elseif($attribute->quantity<20) bg-warning @endif">
                                        <td>{{$loop->iteration}}</td>
-                                       <td>{{$attribute->size->size}}</td>
-                                       <td>{{$attribute->color->color_name}}</td>
+                                       <td>{{$attribute->size}}</td>
+                                       <td>{{$attribute->color}}</td>
                                        <td>{{$attribute->quantity}}</td>
                                        <td><a href="#" data-toggle="modal" data-target="#update{{$attribute->id}}">Edit</a></td>
-                                   </tr> 
+                                   </tr>
                                    <div class="modal fade" id="update{{$attribute->id}}" tabindex="-1" role="dialog" aria-labelledby="update{{$attribute->id}}Label" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                       <div class="modal-content">
                                         <div class="modal-header">
                                           <h5 class="modal-title" id="update{{$attribute->id}}Label">
-                                            Update {{$product->name}}, 
-                                            {{$attribute->size->size}}, 
-                                            {{$attribute->color->color_name}}
+                                            Update {{$product->name}},
+                                            {{$attribute->size}},
+                                            {{$attribute->color}}
                                           </h5>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <form action="{{route('admin.products.update',$attribute->id)}}" method="POST" 
+                                        <form action="{{route('admin.products.update',$attribute->id)}}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
@@ -129,7 +129,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                                     </div>
                                   </div>
                                 @empty
-                                    
+
                                 @endforelse
                             </tbody>
                         </table>
@@ -139,7 +139,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
         </div>
     </div>
 </div>
-<div class="modal fade" id="updateProduct" tabindex="-1" role="dialog" 
+<div class="modal fade" id="updateProduct" tabindex="-1" role="dialog"
 aria-labelledby="updateProductLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -150,46 +150,51 @@ aria-labelledby="updateProductLabel" aria-hidden="true">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{route('admin.products.new',$product->slug)}}" 
+        <form action="{{route('admin.products.update.item',$product->slug)}}"
             method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label>Color</label>
-                        <select name="color" required 
-                        class="form-control show-tick ms @error('color') is-invalid @enderror">
-                            <option value="">Choose Color</option>
-                            @foreach ($colors as $item)
-                                <option value="{{$item->id}}">{{$item->color_name}}</option>
-                            @endforeach
-                        </select>
-                        @error('color')
+                        <label>Product Name</label>
+                        <input type="text" name="name"
+                        value="{{old('name',$product->name)}}" class="form-control
+                        @error('name') is-invalid @enderror">
+                        @error('name')
                             <span class="invalid-feedback" role="alert">{{$message}}</span>
                         @enderror
                     </div>
                     <div class="form-group col-md-4">
-                        <label>Size</label>
-                        <select name="size" required
-                        class="form-control show-tick ms @error('size') is-invalid @enderror">
-                            <option value="">Size</option>
-                            @foreach ($sizes as $item)
-                                <option value="{{$item->id}}">{{$item->size}}</option>
-                            @endforeach
-                        </select>
-                        @error('size')
+                        <label>Product Price</label>
+                        <input type="text" name="price" value="{{old('price',$product->price)}}" class="form-control
+                        @error('price') is-invalid @enderror">
+                        @error('price')
                             <span class="invalid-feedback" role="alert">{{$message}}</span>
                         @enderror
                     </div>
                     <div class="form-group col-md-4">
-                        <label >Quantity</label>
-                        <input type="number" value="{{old('quantity')}}" name="quantity" 
-                        id="quantity"  required 
-                        class="form-control @error('quantity') is-invalid @enderror">
-                        @error('quantity')
+                        <label>Category</label>
+                        <select name="category" required
+                        class="form-control show-tick ms @error('category') is-invalid @enderror">
+                            <option value="">Product Category</option>
+                            @foreach ($categories as $item)
+                                <option value="{{$item->id}}" {{$item->id == $product->product_category_id?"selected":''}}>
+                                    {{$item->category_name}}</option>
+                            @endforeach
+                        </select>
+                        @error('category')
                             <span class="invalid-feedback" role="alert">{{$message}}</span>
                         @enderror
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="details">Product Description</label>
+                    <textarea name="details" id="" cols="30" rows="5" class="form-control
+                    @error('details') is-invalid @enderror">{{old('details',$product->description)}}</textarea>
+                    @error('details')
+                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="">New Image</label>
