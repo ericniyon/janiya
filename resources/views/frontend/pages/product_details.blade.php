@@ -142,7 +142,7 @@
                                             <img src="{{ asset(Storage::url($product->product->thumb->image))}}" alt=""
                                                 class="img-fluid blur-up lazyload image_zoom_cls-0">
                                         </div>
-                                        @foreach ($product->product->images as $image) 
+                                        @foreach ($product->product->images as $image)
                                         <div>
                                             <img src="{{ asset(Storage::url($image->image))}}" alt=""
                                                 class="img-fluid blur-up lazyload image_zoom_cls-0">
@@ -156,7 +156,7 @@
                                                     <img src="{{ asset(Storage::url($product->product->thumb->image))}}" alt=""
                                                         class="img-fluid blur-up lazyload">
                                                 </div>
-                                                @foreach ($product->product->images as $image) 
+                                                @foreach ($product->product->images as $image)
                                                 <div><img src="{{ asset(Storage::url($image->image))}}" alt=""
                                                     class="img-fluid blur-up lazyload"></div>
                                                 @endforeach

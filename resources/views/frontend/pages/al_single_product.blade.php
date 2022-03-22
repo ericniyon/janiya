@@ -66,7 +66,7 @@
                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
                                 </div>
-                                <h6>120 ratings</h6>
+                                <h6>120 ratings </h6>
                             </div>
                             @livewire('front.add-to-cart',
                                         ['product' => $product], key(Crypt::encryptString($product->id)))
