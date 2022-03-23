@@ -6,7 +6,7 @@
                 <div class="col-12 col-md-4">
                     <div class="row">
                         <div class="col-6 d-flex flex-column justify-content-between">
-                            <img src="{{asset(Storage::url($product->thumb->image))}}" class="rounded img-responsive w-100"
+                            <img src="{{$product->thumb()->exists()? asset(Storage::url($product->thumb->image)): asset('assets/images/2.jpg')}}" class="rounded img-responsive w-100"
                             height="150">
                             <h5 class="px-1 text-center">{{$product->name}}</h5>
                             <h5 class="badge badge-pill badge-secondary px-1">{{$product->price.__(' Rwf')}}</h5>
@@ -24,6 +24,8 @@
                             <div>
                                 <a href="{{route('admin.products.single',$product->slug)}}"
                                      class="btn btn-primary px-1"><i class="fa fa-eye fa-1x"></i></a>
+
+                                     
                                 <button wire:click="delete({{$product->id}})" class="btn btn-danger btn-sm"
                                     wire:loading.attr="disabled" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()">
                                     <i class="fa fa-trash"></i>

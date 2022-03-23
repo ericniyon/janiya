@@ -41,7 +41,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                 </div>
                 <div class="row card-body pt-0 mt-0">
                     <div class="col-5 d-flex flex-column justify-content-between">
-                        <img src="{{asset(Storage::url($product->thumb->image))}}" class="rounded img-responsive w-100"
+                        <img src="{{$product->thumb()->exists()? asset(Storage::url($product->thumb->image)): asset('assets/images/2.jpg')}}" class="rounded img-responsive w-100"
                         height="150">
                     </div>
                     <div class="col-7 d-flex flex-column justify-content-between">
@@ -98,14 +98,14 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <form action="{{route('admin.products.update',$attribute->id)}}" method="POST"
+                                        <form action="{{route('admin.attributtes.update',$attribute->id)}}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label for="">Insert New Value to update {{$attribute->quantity}}</label>
-                                                    <input name="quantity" required value="{{old('quantity',$attribute->quantity)}}"
+                                                    <input name="quantity" value="{{old('quantity',$attribute->quantity)}}"
                                                      class="form-control @error('quantity') is-invalid @enderror" type="number">
                                                      @error('quantity')
                                                          <span class="invalid-feedback" role="alert">{{$message}}</span>
@@ -122,7 +122,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                                             </div>
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                              <button type="submit" class="btn btn-primary">Save changes</button>
+                                              <button onclick="this.form.submit()" class="btn btn-primary">Save changes</button>
                                             </div>
                                         </form>
                                       </div>
@@ -139,6 +139,8 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
         </div>
     </div>
 </div>
+
+
 <div class="modal fade" id="updateProduct" tabindex="-1" role="dialog"
 aria-labelledby="updateProductLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -150,18 +152,18 @@ aria-labelledby="updateProductLabel" aria-hidden="true">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{route('admin.products.new',$product->slug)}}"
+        <form action="{{route('admin.product.update',$product->slug)}}"
             method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label>Color</label>
-                        <select name="color" required
-                        class="form-control show-tick ms @error('color') is-invalid @enderror">
+                        <select
+                        class="form-control show-tick ms ">
                             <option value="">Choose Color</option>
                             @foreach ($colors as $item)
-                                <option value="{{$item->id}}">{{$item->color_name}}</option>
+                                <option value=""></option>
                             @endforeach
                         </select>
                         @error('color')
@@ -170,11 +172,11 @@ aria-labelledby="updateProductLabel" aria-hidden="true">
                     </div>
                     <div class="form-group col-md-4">
                         <label>Size</label>
-                        <select name="size" required
-                        class="form-control show-tick ms @error('size') is-invalid @enderror">
+                        <select
+                        class="form-control show-tick ms >
                             <option value="">Size</option>
                             @foreach ($sizes as $item)
-                                <option value="{{$item->id}}">{{$item->size}}</option>
+                                <option value="">{{$item->size}}</option>
                             @endforeach
                         </select>
                         @error('size')
@@ -183,9 +185,9 @@ aria-labelledby="updateProductLabel" aria-hidden="true">
                     </div>
                     <div class="form-group col-md-4">
                         <label >Quantity</label>
-                        <input type="number" value="{{old('quantity')}}" name="quantity"
-                        id="quantity"  required
-                        class="form-control @error('quantity') is-invalid @enderror">
+                        <input type="number"
+                        id="quantity"
+                        class="form-control">
                         @error('quantity')
                             <span class="invalid-feedback" role="alert">{{$message}}</span>
                         @enderror
@@ -193,8 +195,8 @@ aria-labelledby="updateProductLabel" aria-hidden="true">
                 </div>
                 <div class="form-group">
                     <label for="">New Image</label>
-                    <input name="image" accept="image/*"
-                     class="form-control @error('image') is-invalid @enderror" type="file">
+                    <input accept="image/*"
+                     class="form-control" type="file">
                      @error('image')
                          <span class="invalid-feedback" role="alert">{{$message}}</span>
                      @enderror

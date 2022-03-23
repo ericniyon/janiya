@@ -1,12 +1,8 @@
 @extends('frontend.base')
 @section('title')
 <title>
-    @foreach ($shop_name as $name)
-
-    {{ $name }}
-    @endforeach
-
-    | shop</title>
+{{ $vendorId->shop_name }} shop
+</title>
 @endsection
 
 @section('content')
@@ -23,7 +19,9 @@
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Categorized</li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{$vendorId->shop_name}} shop
+                        </li>
                     </ol>
                 </nav>
             </div>
@@ -35,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 product-related">
-                <h2> RESULTS </h2>
+                <h2> {{ $vendorId->shop_name }} shop</h2>
             </div>
         </div>
         <div class="row search-product">
@@ -68,6 +66,7 @@
                     </div>
                 </div>
             </div>
+
             @endforeach
             @else
             <div class="text-center">
@@ -75,6 +74,10 @@
             </div>
             @endif
 
+
+<div class="d-flex justify-content-center">
+    {!! $products_list->links() !!}
+</div>
 
         </div>
     </div>

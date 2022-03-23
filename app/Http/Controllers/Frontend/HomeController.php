@@ -52,8 +52,10 @@ class HomeController extends Controller
     public function shopsList(Request $request)
     {
         // return $request->all();
-        $shops = Store::all();
+        $shops = Vendor::all();
         $categories = ProductCategory::all();
+
+        $products_ids = Store::all()->pluck('product_id');
 
         $sort = '';
 
@@ -65,13 +67,13 @@ class HomeController extends Controller
         }
         else{
             if($sort == 'HighToLow'){
-                $products = Product::orderBy('price', 'ASC')->paginate(6);
+                $products = Product::whereIn('id', $products_ids)->orderBy('price', 'DESC')->simplePaginate(12);
             }
             elseif($sort == 'LowToHigh'){
-                $products = Product::orderBy('price', 'DESC')->paginate(6);
+                $products = Product::whereIn('id', $products_ids)->orderBy('price', 'ASC')->simplePaginate(12);
             }
             else{
-            $products = Product::all();
+            $products = Product::whereIn('id', $products_ids)->simplePaginate(12);
 
             }
         }
@@ -186,24 +188,27 @@ class HomeController extends Controller
     {
 
         $catId = ProductCategory::findOrFail(Crypt::decryptString($catId));
-        $products_list = Product::where('product_category_id', $catId->id)->get();
+        $products_list = Product::where('product_category_id', $catId->id)->simplePaginate(12);
         $category_name = $catId->category_name;
         return view('frontend.pages.categorised', compact('products_list','category_name'));
     }
 
     public function shoped($shopId)
-    {
+    {   
 
-        $shopId = Store::findOrFail(Crypt::decryptString($shopId));
+        $vendorId = Vendor::findOrFail(Crypt::decryptString($shopId));
+        // $vendorId = Vendor::all()->pluck('id');
 
-        $product_ids = Store::find($shopId)->pluck('product_id');
+        $product_ids = Store::where('vendor_id',$vendorId->id)->pluck('id');
+        // return $product_ids;
+        // $product_ids = Store::find($shopId)->pluck('product_id');
 
-        $shop_name = Store::find($shopId)->pluck('name');
+        // $shop_name = Vendor::find($vendorId)->pluck('shop_name');
 
 
-        $products_list = Product::whereIn('id', $product_ids)->get();
+        $products_list = Product::whereIn('id', $product_ids)->simplePaginate(12);
 
-        return view('frontend.pages.shopssearched', compact('products_list', 'shop_name'));
+        return view('frontend.pages.shopssearched', compact('products_list', 'vendorId'));
     }
 
     public function shopFilter(Request $request)

@@ -42,7 +42,7 @@
                          <label class="col-form-label pt-0"><span>*</span> Product Image</label>
                          <img src="" alt="" srcset="" id="preview-image-before-upload" height="70">
                          <input wire:model="product_image" type="file"  accept="image/*"
-                         name="product_image" id="image" class=" form-control @error('product_image') is-invalid @enderror" >
+                         name="product_image" id="image" class=" form-control @error('product_image') is-invalid @enderror" required>
                      </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                     <input type="file" accept="image/*" value="colorsLoop[{{$index}}][image]"
                     name="colorsLoop[{{$index}}][image]"
                     wire:model.lazy="colorsLoop.{{$index}}.image" id="image"
-                    class="form-control @error('colorsLoop.'.$index.'image') is-invalid @enderror">
+                    class="form-control @error('colorsLoop.'.$index.'image') is-invalid @enderror" required>
                     @error('colorsLoop.'.$index.'image')
                         <span class="invalid-feedback" role="alert">{{$message}}</span>
                     @enderror
@@ -75,7 +75,7 @@
                     class="form-control show-tick ms @error('colorsLoop.'.$index.'.color') is-invalid @enderror">
                         <option value="">Choose Color</option>
                         @foreach ($colors as $item)
-                            <option value="{{$item->color_code}}">{{$item->color_name}}</option>
+                            <option value="{{$item->color_name}}">{{$item->color_name}}</option>
                         @endforeach
                     </select>
                     @error('colorsLoop.'.$index.'.color')

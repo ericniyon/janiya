@@ -43,11 +43,10 @@ class ProductsController extends Controller
 
     public function newAttribute(Request $request, Product $product)
     {
+
+
         $this->validate($request,[
-            'size'=>'integer|required',
-            'color'=>'integer|required',
             'image'=>'sometimes|image|mimes:png,jpg,webp|max:750',
-            'quantity'=>'required|integer',
         ]);
 
         if ($request->hasFile('image')) {
@@ -55,15 +54,17 @@ class ProductsController extends Controller
         } else{
             $color_image=null;
         }
-        $product->attributes()->create([
-            'color_id'=>$request->color,
-            'product_size_id'=>$request->size,
+        $product->attributes()->update([
+            'color'=>$request->color,
+            'size'=>$request->size,
             'quantity'=>$request->quantity,
             'image'=>$color_image,
         ]);
 
         return back()->with('success','Product updated Successfully!');
     }
+
+
 
     // public function updateColor(Request $request,Product $product,$color)
     // {
@@ -77,7 +78,7 @@ class ProductsController extends Controller
 
     public function updateProduct(Request $request,Product $product)
     {
-        // $product = Product::findOrFail($product);
+        return $request->all();        // $product = Product::findOrFail($product);
         $this->validate($request,[
             'name'=>'required|string|unique:products,name,'.$product->id,
             'price'=>'required|integer|min:500|max:500000',
@@ -86,9 +87,9 @@ class ProductsController extends Controller
         ]);
 
         $product->update([
-            'name'=>$request->name, 
-            'slug'=>str()->slug($request->name), 
-            'price'=>$request->price, 
+            'name'=>$request->name,
+            'slug'=>str()->slug($request->name),
+            'price'=>$request->price,
             'description'=>$request->details,
         ]);
 
@@ -107,6 +108,6 @@ class ProductsController extends Controller
             }
         }
 
-        return to_route('admin.products.single',$product)->with('success',$product->name.' Updated Successfully!');
+        return redirect()->back()->with('success',$product->name.' Updated Successfully!');
     }
 }

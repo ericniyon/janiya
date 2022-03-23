@@ -30,15 +30,13 @@ Route::get('/', [HomeController::class, 'index'])->middleware('referral')->name(
 // products routes
 Route::get('shop/products', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
 Route::get('shops',[HomeController::class,'shopsList'])->name('shops.list');
+// Route::view('/shops','frontend.pages.shops-list')->name('shops.list');
 Route::get('shops/{vendor}',[HomeController::class,'singleShop'])->name('shops.list.single');
 // Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
 Route::get('shop/{vendor}/{product}',[HomeController::class,'singleProduct'])->name('product.single');
-// all about colors
-Route::get('colors', [ColorsController::class, 'colors'] )->name('colors');
-Route::post('save-color', [ColorsController::class, 'save_colors'] )->name('save-color');
 // cart
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
-Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::post('add-to-cart/{product}', [CartController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
 
@@ -56,6 +54,10 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('sizes', [Size::class, 'size'] )->name('size');
     Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
+    Route::delete('save-size/{size}', [Size::class, 'delete_size'] )->name('delete-size');
+    Route::get('colors', [ColorsController::class, 'colors'] )->name('colors');
+    Route::post('save-color', [ColorsController::class, 'save_colors'] )->name('save-color');
+    Route::delete('color/{color}', [ColorsController::class, 'delete_colors'] )->name('delete-color');
     Route::get('product/category', [AdminController::class, 'product_category'] )->name('product-category');
     Route::get('all/orders',[AdminController::class, 'admin_orders'])->name('allorders');
     Route::get('all/transaction',[AdminController::class, 'admin_transactions'])->name('admin-transaction');
@@ -67,7 +69,8 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
     Route::view('products','backend.admin.products')->name('products.all');
     Route::get('products/{product}',[ProductsController::class,'show'])->name('products.single');
-    Route::put('products/{attribute}',[ProductsController::class,'updateAttribute'])->name('products.update');
+    Route::put('products/{attribute}',[ProductsController::class,'updateAttribute'])->name('attributtes.update');
+    Route::put('update/products/{product}',[ProductsController::class,'updateProduct'])->name('product.update');
     Route::post('products/{product}',[ProductsController::class,'newAttribute'])->name('products.new');
 
     Route::view('/shops','backend.admin.shops')->name('shops');
@@ -85,6 +88,9 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     // Affiliator
     Route::get('affiliators',[AffilitesController::class,'index'])->name('affiliator');
+    // both orders for janiya and shops
+    Route::get('shops-orders',[AdminController::class,'shopsOrder'])->name('shops-orders');
+    Route::get('janiya-orders',[AdminController::class,'janiyaOrders'])->name('janiya-orders');
 });
 
 // Vendor's routes

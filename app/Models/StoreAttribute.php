@@ -8,27 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class StoreAttribute extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'store_id',
-        'product_size_id',
-        'color_id',
-        'quantity',
-        'new_quantity',
-        'pre_order',
-        'order_confirmed',
-        'pre_order_confirmed',
-        'product_attribute_id',
-        'size',
-        'color'
-    ];
 
-    public function attributes()
+    protected $fillable = ['store_id', 'product_attribute_id', 'quantity', 'size', 'color'];
+
+    public function product()
     {
-        return $this->belongsTo(ProductAttribute::class);
+        return $this->belongsTo(ProductAttribute::class,'product_attribute_id','id');
     }
 
-    public function size()
+    public function store()
     {
-        return $this->belongsTo(ProductSize::class,'product_size_id','id');
+        return $this->belongsTo(Store::class,'store_id','id');
     }
 }

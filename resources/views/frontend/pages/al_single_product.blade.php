@@ -212,12 +212,12 @@
                         <div class="img-wrapper">
                             <div class="front">
                                 <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}">
-                                    <img src="{{ asset(Storage::url($product->thumb->image))}}"
+                                    <img src="{{$product->thumb()->exists()? asset(Storage::url($product->thumb->image)): asset('assets/images/2.jpg')}}"
                                         class="img-fluid blur-up lazyload bg-img" alt=""></a>
                             </div>
                             <div class="back">
                                 <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}">
-                                    <img src="{{ asset(Storage::url($product->thumb->image))}}"
+                                    <img src="{{$product->thumb()->exists()? asset(Storage::url($product->thumb->image)): asset('assets/images/2.jpg')}}"
                                         class="img-fluid blur-up lazyload bg-img" alt=""></a>
                             </div>
                             <div class="cart-info cart-wrap">

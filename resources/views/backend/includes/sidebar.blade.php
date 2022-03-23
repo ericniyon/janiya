@@ -29,7 +29,7 @@
                             <span>Product Attributes</span> <i class="fa fa-angle-right pull-right"></i>
                         </a>
                         <ul class="sidebar-submenu">
-                            <li><a href="{{route('colors')}}">
+                            <li><a href="{{route('admin.colors')}}">
                                 <span>Colors</span></a>
                             </li>
                             <li><a href="{{route('admin.size')}}">
@@ -56,6 +56,12 @@
 
                     <li><a href="{{route('admin.affiliator')}}"><i class="fa fa-circle"></i>Affiliators</a></li>
                     <li><a href="{{route('admin.partners')}}"><i class="fa fa-circle"></i>Partners</a></li>
+                </ul>
+            </li><li><a class="sidebar-header" href=""><i data-feather="user-plus"></i><span>Orders</span><i class="fa fa-angle-right pull-right"></i></a>
+                <ul class="sidebar-submenu">
+
+                    <li><a href="{{route('admin.shops-orders')}}"><i class="fa fa-circle"></i>Shops orders</a></li>
+                    <li><a href="{{route('admin.janiya-orders')}}"><i class="fa fa-circle"></i>Janiya orders</a></li>
                 </ul>
             </li>
             {{-- <li><a class="sidebar-header" href="reports.html"><i data-feather="bar-chart"></i</i><span>Reports</span></a></li> --}}

@@ -11,6 +11,7 @@ use App\Models\ProductSize;
 use App\Models\Transaction;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\ShopOrder;
 
 use Illuminate\Http\Request;
 
@@ -98,5 +99,15 @@ public function save_category(Request $request)
         $transactions = Transaction::paginate(10);
 
         return view('backend.admin.transactions', compact('transactions'));
+    }
+    public function shopsOrder()
+    {
+
+        return view('backend.admin.orders');
+    }
+    public function janiyaOrders()
+    {
+        $orders = ShopOrder::paginate(10);
+        return view('backend.admin.janiyaorders', compact('orders'));
     }
 }
