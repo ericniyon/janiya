@@ -7,6 +7,8 @@ use App\Models\Color;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductAttribute;
+use App\Models\StoreAttribute;
 use App\Models\ProductSize;
 use App\Models\Store;
 use App\Models\User;
@@ -25,7 +27,7 @@ class HomeController extends Controller
         $arr = [];
         $stocks = Store::all()->pluck('product_id');
 
-        $products = Product::whereNotIn('id', $stocks)->inRandomOrder()->limit(12)->get();
+        $products = Product::whereNotIn('id', $stocks)->inRandomOrder()->limit(8)->get();
 
         $product_categories = ProductCategory::with('products')->get();
 
@@ -49,9 +51,37 @@ class HomeController extends Controller
         return view('frontend.pages.single-shop', compact('vendor'));
     }
 
-    public function shopsList()
+    public function shopsList(Request $request)
     {
-        return view('frontend.pages.shops-list');
+        // return $request->all();
+        $shops = Vendor::all();
+        $categories = ProductCategory::all();
+
+        $products_ids = Store::all()->pluck('product_id');
+
+        $sort = '';
+
+        if($request->sort != null){
+            $sort = $request->sort;
+        }
+        if($categories == null ){
+            return view('errors.404');
+        }
+        else{
+            if($sort == 'HighToLow'){
+                $products = Product::whereIn('id', $products_ids)->orderBy('price', 'DESC')->simplePaginate(12);
+            }
+            elseif($sort == 'LowToHigh'){
+                $products = Product::whereIn('id', $products_ids)->orderBy('price', 'ASC')->simplePaginate(12);
+            }
+            else{
+            $products = Product::whereIn('id', $products_ids)->simplePaginate(12);
+
+            }
+        }
+
+        $route = 'shops';
+        return view('frontend.pages.shops-list', ['categories'=> $categories, 'products' => $products, 'shops' => $shops,'route'=> $route]);
     }
 
     public function becomeAffiliate()
@@ -138,7 +168,10 @@ class HomeController extends Controller
     public function al_product_details($id)
     {
         $products = Product::all();
-        $product = Product::find(Crypt::decryptString($id));
+        $product = StoreAttribute::find(Crypt::decryptString($id));
+        $all_product = StoreAttribute::find(Crypt::decryptString($id));
+// tobe continuewed 
+        // return $product;
 
         return view('frontend.pages.al_single_product', compact('product','products'));
     }
@@ -158,8 +191,39 @@ class HomeController extends Controller
     {
 
         $catId = ProductCategory::findOrFail(Crypt::decryptString($catId));
-        $products_list = Product::where('product_category_id', $catId->id)->get();
+        $products_list = Product::where('product_category_id', $catId->id)->simplePaginate(12);
         $category_name = $catId->category_name;
         return view('frontend.pages.categorised', compact('products_list','category_name'));
+    }
+
+    public function shoped($shopId)
+    {
+
+        $vendorId = Vendor::findOrFail(Crypt::decryptString($shopId));
+        // $vendorId = Vendor::all()->pluck('id');
+
+        $store_ids = Store::where('vendor_id',$vendorId->id)->pluck('id');
+        // return $store_ids;
+        // $product_ids = Store::find($shopId)->pluck('product_id');
+
+        $shop_name = Vendor::find($vendorId)->pluck('shop_name');
+
+
+        $products_list = StoreAttribute::whereIn('store_id', $store_ids)->simplePaginate(12);
+
+        return view('frontend.pages.shopssearched', compact('products_list', 'vendorId','shop_name'));
+    }
+
+    public function shopFilter(Request $request)
+    {
+        $data = $request->all();
+
+        $sortByUrl = '';
+
+        if(!empty($data['sortBy']))
+        {
+            $sortByUrl = '&sortBy='.$data['sortBy'];
+        }
+        return redirect()->route('shops.list'.$sortByUrl);
     }
 }

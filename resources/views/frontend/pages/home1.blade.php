@@ -53,7 +53,7 @@
 
 
     <!-- collection banner -->
-    <section class="banner-padding banner-furniture ratio2_1">
+    {{-- <section class="banner-padding banner-furniture ratio2_1">
         <div class="container-fluid">
             <div class="row partition4">
                 <div class="col-lg-3 col-md-6">
@@ -122,15 +122,17 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- collection banner end -->
 
 
     <!-- Paragraph-->
-    <div class="title1 section-t-space">
-        <h4>special offer</h4>
-        <h2 class="title-inner1">today's deal</h2>
-    </div>
+<div class="title2 mt-5">
+ <h4>recent story</h4>
+ <h2 class="title-inner2">trending products</h2>
+ {{-- <hr role="tournament6"> --}}
+</div>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
@@ -145,15 +147,45 @@
 
 
     <!-- Product section -->
+{{--
+<section class="collection section-b-space ratio_square ">
+        <div class="container">
+            <div class="row partition-collection">
+                <div class="col-lg-3 col-md-6">
+                    <div class="collection-block">
+                        <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/1.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/1.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
+                        <div class="product-detail">
+                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                        <a href="">
+                            <h6></h6>
+                        </a>
+                        <h4></h4>
+                    </div>
+                        <div class="collection-content">
+                            <h4>fashion (20 products)</h4>
+                            <a href="category-page.html" class="btn btn-outline">shop now !</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section> --}}
+
+
+
     <section class="pt-0 section-b-space ratio_asos">
         <div class="container">
             <div class="row game-product grid-products">
                 @if ($products->count()>0)
                 @foreach ($products as $product)
-                <div class="product-box col-xl-2 col-lg-3 col-sm-4 col-6">
+                <div class="product-box col-xl-3 col-lg-4 col-sm-6 col-6">
                     <div class="img-wrapper">
                         <div class="front">
-                            <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}"><img src="{{asset(Storage::url($product->thumb->image))}}"
+                            <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}">
+                                <img src="{{$product->thumb()->exists()? asset(Storage::url($product->thumb->image)): asset('assets/images/2.jpg')}}"
                                     class="img-fluid blur-up lazyload bg-img" alt=""></a>
                         </div>
                         <div class="cart-info cart-wrap">
@@ -212,44 +244,8 @@
     <section class="tools_product bg-title section-b-space">
         <div class="container">
             <div class="row multiple-slider">
-                <div class="col-xl-4 col-lg-4 col-md-12">
-                    <div class="theme-card">
-                        <h5 class="title-border">Under $20 | Free delivery</h5>
-                        <div class="offer-slider slide-1">
-                            @if ($product_categories->count()>0)
-                            @foreach ($product_categories as $category)
-                            <div>
-                                @forelse ( $category->products()->limit(4)->inRandomOrder()->get() as $product )
 
-                                <div class="media">
-                                    <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}"><img class="img-fluid blur-up lazyload"
-                                            src="{{asset(Storage::url($product->thumb->image))}}" alt=""></a>
-                                    <div class="media-body align-self-center">
-                                        <div class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}">
-                                            <h6>{{ $product->product_name }}</h6>
-                                        </a>
-                                        <h4>{{ $product->price }} Rwf</h4>
-                                    </div>
-                                </div>
-                                @empty
-                                <p>No product found in this category</p>
-                                @endforelse
-                            </div>
-                            @endforeach
-                            @else
-
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-8 col-lg-8 col-md-12">
+                <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="theme-tab">
                         <div class="bg-title-part">
                             <h5 class="title-border">RECOMMENDATIONS FOR YOU</h5>
@@ -271,12 +267,13 @@
                             @foreach ($product_categories as $item)
                             <div id="tab-{{ $item->id }}" class="tab-content active default">
                                 <div class="product-4 game-product product-m no-arrow">
-                                    @forelse ( $item->products()->limit(4)->inRandomOrder()->get() as $product )
+                                    @if ( $item->products()->count()>3)
+                                @forelse ( $item->products()->limit(4)->inRandomOrder()->get() as $product )
                                     <div class="product-box">
                                         <div class="img-wrapper">
                                             <div class="front">
                                                 <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}"><img
-                                                        src="{{asset(Storage::url($product->thumb->image))}}"
+                                                        src="{{$product->thumb()->exists()? asset(Storage::url($product->thumb->image)): asset('assets/images/2.jpg')}}"
                                                         class="img-fluid blur-up lazyload bg-img" alt=""></a>
                                             </div>
                                             <div class="cart-info cart-wrap">
@@ -303,8 +300,11 @@
                                         </div>
                                     </div>
                                     @empty
-                                    <p>OOps ! There is no product yet </p>
+
                                     @endforelse
+                                    @else
+
+                                    @endif
                                 </div>
                             </div>
                             @endforeach
@@ -400,7 +400,7 @@
 
 
     <!-- instagram section -->
-    <section class="instagram ratio_square">
+    {{-- <section class="instagram ratio_square">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 p-0">
@@ -482,7 +482,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- instagram section end -->
 
 

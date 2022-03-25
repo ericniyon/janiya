@@ -28,7 +28,7 @@
     <div class="container">
         <div class="checkout-page">
             <div class="checkout-form">
-                <form action="{{route('purchase')}}" method="POST">
+                <form action="{{route('purchase')}}" method="POST" id="orderForm">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6 col-sm-12 col-xs-12">
@@ -105,18 +105,19 @@
                                     </ul>
                                     <ul class="sub-total">
                                         <li>Sub Total <span class="count">{{money(\Cart::getTotal())}}</span></li>
+
                                         @if (Session::has('coupon'))
                                            <li>Discount: <span class="count">{{money(getDiscount())}}</span></li>
                                         @endif
                                     </ul>
+                                    <ul class="sub-total">
+                                        <li>Amount of delivery <span class="count">2000 Rwf</span></li>
+                                    </ul>
                                     <ul class="total">
-                                        <li>Total Amount To Pay<span class="count">{{money(\Cart::getTotal() - getDiscount())}}</span></li>
+                                        <li>Total Amount To Pay<span class="count">{{money(\Cart::getTotal() - getDiscount() + 2000)}}</span></li>
                                     </ul>
                                 </div>
-                                <div class="payment-box">
 
-                                    <div class="text-end"><button type="submit" class="btn-solid btn">Place Order</button></div>
-                                </div>
                             </div>
                         </div>
                     </div>

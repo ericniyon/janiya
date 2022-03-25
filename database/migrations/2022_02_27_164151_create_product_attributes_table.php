@@ -19,10 +19,10 @@ return new class extends Migration
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Product::class)->constrained();
-            $table->foreignIdFor(Color::class)->constrained();
-            $table->foreignIdFor(ProductSize::class)->constrained();
-            $table->string('image')->nullable();
-            $table->integer('quantity')->unsigned();
+            $table->string('color');
+            $table->string('size');
+            $table->string('image');
+            $table->string('quantity');
             $table->timestamps();
         });
     }

@@ -30,7 +30,10 @@
 
     <!-- Chartist css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/chartist.css')}}">
+    <!-- Datatables css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/datatables.css') }}">
 
+    <!-- Bootstrap css-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css')}}">
     @livewireStyles
@@ -85,8 +88,10 @@
 <script src="{{ asset('assets/js/icons/feather-icon/feather.min.js')}}"></script>
 <script src="{{ asset('assets/js/icons/feather-icon/feather-icon.js')}}"></script>
 
+<!-- Datatable js-->
 <!-- Sidebar jquery-->
 <script src="{{ asset('assets/js/sidebar-menu.js')}}"></script>
+<script src="{{ asset('assets/js/datatables/jquery.dataTables.min.js') }}"></script>
 
 <!--chartist js-->
 <script src="{{ asset('assets/js/chart/chartist/chartist.js')}}"></script>

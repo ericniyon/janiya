@@ -29,13 +29,13 @@
             <div class="row">
                     <div class="col-xl-3 col-md-6 xl-50">
                         <div class="card o-hidden widget-cards">
-                            <div class="bg-warning card-body">
+                            <div class=" card-body" style="background: #D0B5BD">
                                 <div class="media static-top-widget row">
                                     <div class="icons-widgets col-4">
-                                        <div class="align-self-center text-center"><i data-feather="navigation" class="font-warning"></i></div>
+                                        <div class="align-self-center text-center"><i data-feather="navigation" class="font-primary"></i></div>
                                     </div>
-                                    <div class="media-body col-8"><span class="m-0">Earnings</span>
-                                        <h3 class="mb-0">$ <span class="counter">6659</span><small> This Month</small></h3>
+                                    <div class="media-body col-8"><span class="m-0 text-light">TOTAL REVENUE</span>
+                                        <h3 class="mb-0">Rwf <span class="counter">{{ App\Models\Transaction::all()->sum('amount') }}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -43,13 +43,13 @@
                     </div>
                     <div class="col-xl-3 col-md-6 xl-50">
                         <div class="card o-hidden  widget-cards">
-                            <div class="bg-secondary card-body">
+                            <div class="card-body" style="background: #C9ABB4">
                                 <div class="media static-top-widget row">
                                     <div class="icons-widgets col-4">
                                         <div class="align-self-center text-center"><i data-feather="box" class="font-secondary"></i></div>
                                     </div>
-                                    <div class="media-body col-8"><span class="m-0">Products</span>
-                                        <h3 class="mb-0">$ <span class="counter">9856</span><small> This Month</small></h3>
+                                    <div class="media-body col-8"><span class="m-0 text-light">TOTAL ORDERS</span>
+                                        <h3 class="mb-0"> <span class="counter">{{ App\Models\Order::all()->count() }}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -57,13 +57,19 @@
                     </div>
                     <div class="col-xl-3 col-md-6 xl-50">
                         <div class="card o-hidden widget-cards">
-                            <div class="bg-primary card-body">
+                            <div class=" card-body" style="background: #C9ABB4">
                                 <div class="media static-top-widget row">
                                     <div class="icons-widgets col-4">
                                         <div class="align-self-center text-center"><i data-feather="message-square" class="font-primary"></i></div>
                                     </div>
-                                    <div class="media-body col-8"><span class="m-0">Messages</span>
-                                        <h3 class="mb-0">$ <span class="counter">893</span><small> This Month</small></h3>
+                                    <div class="media-body col-8"><span class="m-0 text-light">AVG. REVENUE</span>
+                                        <h3 class="mb-0">Rwf <span class="counter">
+                                            @if (App\Models\Transaction::all()->count()>0 && App\Models\Transaction::sum('amount')>0)
+                                            {{ App\Models\Transaction::all()->count()>0 && App\Models\Transaction::sum('amount')>0 }}
+                                            @else
+                                            0
+                                            @endif
+                                        </span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -71,13 +77,13 @@
                     </div>
                     <div class="col-xl-3 col-md-6 xl-50">
                         <div class="card o-hidden widget-cards">
-                            <div class="bg-danger card-body">
+                            <div class="card-body" style="background: #C9ABB4">
                                 <div class="media static-top-widget row">
                                     <div class="icons-widgets col-4">
                                         <div class="align-self-center text-center"><i data-feather="users" class="font-danger"></i></div>
                                     </div>
-                                    <div class="media-body col-8"><span class="m-0">New Vendors</span>
-                                        <h3 class="mb-0">$ <span class="counter">45631</span><small> This Month</small></h3>
+                                    <div class="media-body col-8"><span class="m-0 text-light">Transactions</span>
+                                        <h3 class="mb-0"> <span class="counter">{{ App\Models\Transaction::all()->count() }}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +103,15 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="value-graph">
-                                            <h3>42% <span><i class="fa fa-angle-up font-primary"></i></span></h3>
+                                            <h3>
+                                                @if (App\Models\OrderItem::all()->sum('quantity')>0 && App\Models\ProductAttribute::all()->sum('quantity') > 0)
+                                                {{ App\Models\ProductAttribute::all()->sum('quantity') + App\Models\OrderItem::all()->sum('quantity') / 100 }}
+                                                @else
+
+                                                0%
+                                                @endif
+
+                                                <span><i class="fa fa-angle-up font-primary"></i></span></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +120,7 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <span>Sales Last Month</span>
-                                        <h2 class="mb-0">9054</h2>
+                                        <h2 class="mb-0">{{ App\Models\ProductAttribute::all()->sum('quantity') }}</h2>
                                         <p>0.25% <span><i class="fa fa-angle-up"></i></span></p>
                                         <h5 class="f-w-600">Gross sales of August</h5>
 
@@ -231,7 +245,7 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Sales Status</h5>
+                                <h5>Lifetime Sales</h5>
                                 <div class="card-header-right">
                                     <ul class="list-unstyled card-option">
                                         <li><i class="icofont icofont-simple-left"></i></li>
@@ -247,185 +261,91 @@
                                 <div class="row">
                                     <div class="col-xl-3 col-sm-6 xl-50">
                                         <div class="order-graph">
-                                            <h6>Orders By Location</h6>
                                             <div class="chart-block chart-vertical-center">
-                                                <canvas id="myDoughnutGraph"></canvas>
+                                                <div id="piechart" style="width: 100%; height: 400px"></div>
                                             </div>
-                                            <div class="order-graph-bottom">
-                                                <div class="media">
-                                                    <div class="order-color-primary"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0">Saint Lucia <span class="pull-right">$157</span></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="order-color-secondary"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0">Kenya <span class="pull-right">$347</span></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="order-color-danger"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0">Liberia<span class="pull-right">$468</span></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="order-color-warning"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0">Christmas Island<span class="pull-right">$742</span></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="order-color-success"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0">Saint Helena <span class="pull-right">$647</span></h6>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-sm-6 xl-50">
-                                        <div class="order-graph sm-order-space">
-                                            <h6>Sales By Location</h6>
-                                            <div class="peity-chart-dashboard text-center">
-                                                <span class="pie-colours-1">4,7,6,5</span>
+                                        <div class="order-graph">
+                                            <div class="chart-block chart-vertical-center">
+                                                <div id="linechart" style="width: 100%; height: 400px"></div>
                                             </div>
-                                            <div class="order-graph-bottom sales-location">
-                                                <div class="media">
-                                                    <div class="order-shape-primary"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0 me-0">Germany <span class="pull-right">25%</span></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="order-shape-secondary"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0 me-0">Brasil <span class="pull-right">10%</span></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="order-shape-danger"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0 me-0">United Kingdom<span class="pull-right">34%</span></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="order-shape-warning"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0 me-0">Australia<span class="pull-right">5%</span></h6>
-                                                    </div>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="order-shape-success"></div>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0 me-0">Canada <span class="pull-right">25%</span></h6>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="col-xl-6 xl-100">
                                         <div class="order-graph xl-space">
-                                            <h6>Revenue for last month</h6>
-                                            <div class="ct-4 flot-chart-container"></div>
+                                                <div id="areachart" style="width: 100%; height: 400px"></div>
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="code-box-copy">
-                                    <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#example-head2" title="" data-original-title="Copy"><i class="icofont icofont-copy-alt"></i></button>
-                                    <pre class=" language-html"><code class=" language-html" id="example-head2">&lt;div class="row"&gt;
-   &lt;div class="col-xl-3 col-sm-6 xl-50"&gt;
-      &lt;div class="order-graph"&gt;
-         &lt;h6&gt;Orders By Location&lt;/h6&gt;
-         &lt;div class="chart-block chart-vertical-center"&gt;
-            &lt;canvas id="myDoughnutGraph"&gt;&lt;/canvas&gt;
-         &lt;/div&gt;
-         &lt;div class="order-graph-bottom"&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-color-primary"&gt;&lt;/div&gt;
-               &lt;div class="media-body"&gt;
-                  &lt;h6 class="mb-0"&gt;Saint Lucia &lt;span class="pull-right"&gt;$157&lt;/span&gt;&lt;/h6&gt;
-               &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-color-secondary"&gt;&lt;/div&gt;
-               &lt;div class="media-body"&gt;
-                  &lt;h6 class="mb-0"&gt;Kenya &lt;span class="pull-right"&gt;$347&lt;/span&gt;&lt;/h6&gt;
-               &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-color-danger"&gt;&lt;/div&gt;
-               &lt;div class="media-body"&gt;
-                  &lt;h6 class="mb-0"&gt;Liberia&lt;span class="pull-right"&gt;$468&lt;/span&gt;&lt;/h6&gt;
-               &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-color-warning"&gt;&lt;/div&gt;
-               &lt;div class="media-body"&gt;
-                  &lt;h6 class="mb-0"&gt;Christmas Island&lt;span class="pull-right"&gt;$742&lt;/span&gt;&lt;/h6&gt;
-               &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-color-success"&gt;&lt;/div&gt;
-               &lt;div class="media-body"&gt;
-                  &lt;h6 class="mb-0"&gt;Saint Helena &lt;span class="pull-right"&gt;$647&lt;/span&gt;&lt;/h6&gt;
-               &lt;/div&gt;
-            &lt;/div&gt;
-         &lt;/div&gt;
-      &lt;/div&gt;
-   &lt;/div&gt;
-   &lt;div class="col-xl-3 col-sm-6 xl-50"&gt;
-      &lt;div class="order-graph sm-order-space"&gt;
-         &lt;h6&gt;Sales By Location&lt;/h6&gt;
-         &lt;div class="peity-chart-dashboard text-center"&gt;
-            &lt;span class="pie-colours-1"&gt;4,7,6,5&lt;/span&gt;
-         &lt;/div&gt;
-         &lt;div class="order-graph-bottom sales-location"&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-shape-primary"&gt;&lt;/div&gt;
-                  &lt;div class="media-body"&gt;
-                     &lt;h6 class="mb-0 me-0"&gt;Germany &lt;span class="pull-right"&gt;25%&lt;/span&gt;&lt;/h6&gt;
-                  &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-shape-secondary"&gt;&lt;/div&gt;
-               &lt;div class="media-body"&gt;
-                  &lt;h6 class="mb-0 me-0"&gt;Brasil &lt;span class="pull-right"&gt;10%&lt;/span&gt;&lt;/h6&gt;
-               &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-shape-danger"&gt;&lt;/div&gt;
-                  &lt;div class="media-body"&gt;
-                     &lt;h6 class="mb-0 me-0"&gt;United Kingdom&lt;span class="pull-right"&gt;34%&lt;/span&gt;&lt;/h6&gt;
-                  &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-shape-warning"&gt;&lt;/div&gt;
-               &lt;div class="media-body"&gt;
-                  &lt;h6 class="mb-0 me-0"&gt;Australia&lt;span class="pull-right"&gt;5%&lt;/span&gt;&lt;/h6&gt;
-               &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="media"&gt;
-               &lt;div class="order-shape-success"&gt;&lt;/div&gt;
-               &lt;div class="media-body"&gt;
-                  &lt;h6 class="mb-0 me-0"&gt;Canada &lt;span class="pull-right"&gt;25%&lt;/span&gt;&lt;/h6&gt;
-               &lt;/div&gt;
-            &lt;/div&gt;
-         &lt;/div&gt;
-      &lt;/div&gt;
-   &lt;/div&gt;
-   &lt;div class="col-xl-6 xl-100"&gt;
-      &lt;div class="order-graph xl-space"&gt;
-         &lt;h6&gt;Revenue for last month&lt;/h6&gt;
-         &lt;div class="ct-4 flot-chart-container"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                                </div>
+
                             </div>
                         </div>
                     </div>
 
                 </div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+// chart for shopps orders
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+
+      function drawChart() {
+        var dataset1 = google.visualization.arrayToDataTable([
+          ['Year', 'Sales'],
+          <?php echo $dataset1;  ?>
+        ]);
+
+        var options = {
+          title: 'Orders By Shops',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          colors: ['#D0B5BD','#D0B5BD', '#06243E', '#A5A5A5', '#FF8084', '#13C9CA'],
+          is3D: true
+        };
+        var chart1 = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart1.draw(dataset1, options);
+
+// chart for shopps sales
+        var dataset2 = google.visualization.arrayToDataTable([
+          ['Year', 'Sales'],
+          <?php echo $dataset2;  ?>
+        ]);
+
+        var options2 = {
+          title: 'Sales By Shops',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          colors: ['#630D26', '#06243E', '#A5A5A5', '#FF8084', '#13C9CA']
+        };
+        var chart2 = new google.visualization.LineChart(document.getElementById('linechart'));
+
+        chart2.draw(dataset2, options2);
+
+        // chart for overll revenue
+         var dataset3 = google.visualization.arrayToDataTable([
+          ['Year', 'Sales'],
+          <?php echo $dataset3;  ?>
+        ]);
+
+        var options3 = {
+          title: 'Revenue for last month',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          colors: ['#630D26', '#06243E', '#A5A5A5', '#FF8084', '#13C9CA']
+        };
+        var chart3 = new google.visualization.AreaChart(document.getElementById('areachart'));
+
+        chart3.draw(dataset3, options3);
+      }
+
+    </script>
 @endsection

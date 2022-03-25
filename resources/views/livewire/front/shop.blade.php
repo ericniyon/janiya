@@ -3,27 +3,22 @@
         <!-- side-bar colleps block stat -->
         <div class="collection-filter-block">
             <!-- brand filter start -->
+            <h4 class="text-gray-700 fw-bolder">FILTERS</h4>
+
             <div class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left" aria-hidden="true"></i> back</span></div>
+
             <div class="collection-collapse-block open">
                 <h3 class="collapse-block-title">Categories</h3>
                 <div class="collection-collapse-block-content">
                     <ul class="collection-brand-filter">
-                        @foreach ($this->categories as $item)
-                        {{-- <li>
-                            <a href="{{ route('shop',['store'=>$item->slug]) }}">{{ $item->shop_name }}</a>
-                        </li> --}}
                         <div class="form-check collection-filter-checkbox">
-                            <a href="{{ route('categories-products', $item->id) }}">
-                                <input type="radio" value="{{$item->id}}" class="form-check-input">
+                            <a href="">
+                                <input value="0,25" type="radio" name="pricefilter" id="under25" wire:model="filters.price" class="form-check-input">
                             </a>
-
-                            <a href="{{ route('categories-products', Crypt::encryptString($item->id)) }}">
-                                <label class="form-check-label" for="shop{{$item->id}}">
-                                    {{$item->category_name}}
-                            </label>
-                            </a>
+                                <label class="form-check-label ps-2" for="under25">
+                            Under $25
+                        </label>
                         </div>
-                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -33,14 +28,14 @@
                 <h3 class="collapse-block-title">Shop</h3>
                 <div class="collection-collapse-block-content">
                     <div class="collection-brand-filter">
-                        {{-- @foreach ($shops as $item)
+                        {{-- @foreach ($shops as $shop)
                         <div class="form-check collection-filter-checkbox">
-                            <input type="checkbox" value="{{$item->id}}"
+                            <input type="checkbox" value="{{$shop->id}}"
                             name="category"
                             wire:model="category"
                             class="form-check-input"
-                             id="category{{$item->id}}">
-                            <label class="form-check-label" for="category{{$item->id}}">{{ucfirst($item->shop_name)}}</label>
+                             id="category{{$shop->id}}">
+                            <label class="form-check-label" for="category{{$shop->id}}">{{ $shop->name }}</label>
                         </div>
                         @endforeach --}}
                     </div>
@@ -70,7 +65,7 @@
         <div class="page-main-content">
             <div class="row">
                 <div class="col-sm-12">
-                    @if ($shop_name)
+                    {{-- @if ($shop_name) --}}
                     <div class="top-banner-wrapper">
                         <a href="#"></a>
                         <div class="top-banner-content small-section">
@@ -85,7 +80,7 @@
                                 heart’s content on Multikart. </p>
                         </div>
                     </div>
-                    @endif
+                    {{-- @endif --}}
                     <div class="collection-product-wrapper">
                         <div class="product-top-filter">
                             <div class="row">
@@ -97,7 +92,7 @@
                                 <div class="col-12">
                                     <div class="product-filter-content">
                                         <div class="search-count">
-                                            <h5>Showing {{ $products->count() }} Result</h5>
+                                            <h5>Showing  Result</h5>
                                         </div>
                                         <div class="collection-view">
                                             <ul>
@@ -137,63 +132,43 @@
                         <div class="product-wrapper-grid">
                             <div class="row margin-res">
 
-                                @forelse ($products as $store)
-                                <div class="col-xl-3 col-6 col-grid-box">
-                                    <div class="product-box">
-                                        <div class="img-wrapper" style="height: 14rem">
-                                            <div class="front">
-                                                {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}" {{asset(Storage::url($store->product->lastThumb->image))}} {{asset(Storage::url($store->product->thumb->image))}} --}}
-                                                    <a href="{{route('al_product_details',Crypt::encryptString($store->id))}}"
-                                                    class="bg-size blur-up lazyloaded"
-                                                style="background-image: url(&quot;&quot;);
-                                                background-size: cover; background-position: center center; display: block;">
-                                                <img src="{{asset(Storage::url($store->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
-                                            </div>
-                                            <div class="back">
-                                                {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"  --}}
-                                                    <a href="{{route('al_product_details',Crypt::encryptString($store->id))}}"
-                                                    class="bg-size blur-up lazyloaded"
-                                                style="background-image: url(&quot;&quot;);
-                                                background-size: cover; background-position: center center; display: block;">
-                                                <img src="{{asset(Storage::url($store->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
-                                            </div>
-                                            <div class="cart-info cart-wrap">
-                                                <a href="{{route('al_product_details', Crypt::encryptString($store->id))}}" title="Add to cart" >
-                                                    <i class="ti-shopping-cart" aria-hidden="true"></i></a>
 
-                                                <button data-toggle="modal" data-target="#addtocart" title=" Add to Wishlist"><i class="ti-heart"></i></button>
-
-                                            </div>
-                                        </div>
-                                        <div class="product-detail">
-                                            <div class="text-center">
-
-                                                {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"> --}}
-                                                <h5>{{number_format($store->price)}} Rwf</h5>
-                                                    <a href="{{route('al_product_details',$store->id)}}">
-                                                    <h6>{{$store->name}}</h6>
-                                                </a>
-                                                <div class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @empty
-                                   <div class="col-md-12 d-flex align-items-center justify-content-center">
-                                       <h4 class="m-5">No products found!</h4>
-                                   </div>
-                                @endforelse
                             </div>
                         </div>
                         <div class="product-pagination">
                             <div class="theme-paggination-block">
-                                {{-- {{$products->link()}} --}}
+                                {{-- {{$products->link()}}
+<script>
+    function loadingData(page) {
+        $.ajax({
+            url: '?page='+page,
+            type: 'get',
+            beforeSend:function(){
+                $('.ajax-load').show()
+            }
+        })
+        .done(function(data){
+            if(data.html == ''){
+                $('ajax-load').html('No more products available')
+                return;
+            }
+            $('ajax-load').hide()
+            $('product-data').append(data.html)
+
+        })
+        .fail(function(){
+            alert('Something went wrong')
+        })
+    }
+
+    var page = 1;
+    $(window).scroll(function(){
+        if($(winow).scrollTop() + $(window).height()+120>=$(document).height()){
+            page++;
+            loadingData(page)
+        }
+    })
+</script> --}}
                             </div>
                         </div>
                     </div>

@@ -85,9 +85,9 @@ class CheckoutController extends Controller
             $response = curl_exec($curl);
             curl_close($curl);
 
-            echo "<pre>";
-            echo $response;
-            echo "</pre>";
+            // echo "<pre>";
+            // echo $response;
+            // echo "</pre>";
 
             $res= json_decode($response);
 
@@ -104,7 +104,7 @@ class CheckoutController extends Controller
                 $this->insterOrderIntoTable($req,'Error');
                 echo "We can not proccess your payment";
             }
-            
+
             return redirect()->back()->with('alert', 'Success');
 
     }

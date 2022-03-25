@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Commission;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->after('promo_code',function($table){
-                $table->foreignId('commission_id')->nullable()->constrained();
-            });
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('factory_price')->default(0);
         });
     }
 
@@ -28,9 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_commission_id_foreign');
-            $table->dropColumn('commission_id');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('factory_price');
         });
     }
 };

@@ -98,7 +98,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <form action="{{route('admin.products.update',$attribute->id)}}" method="POST"
+                                        <form action="" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
