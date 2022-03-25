@@ -18,7 +18,7 @@
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
                             {{$vendorId->shop_name}} shop
                         </li>
@@ -44,12 +44,12 @@
                 <div class="product-box">
                     <div class="img-wrapper">
                         <div class="front">
-                            <a href="{{route('al_product_details', Crypt::encryptString($product->id))}}" class="bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ asset(Storage::url($product->thumb->image))}}&quot;); background-size: cover; background-position: center center; display: block;">
-                                <img src="{{ asset(Storage::url($product->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                            <a href="{{route('al_product_details', Crypt::encryptString($product->product->id))}}" class="bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ asset(Storage::url($product->product->image))}}&quot;); background-size: cover; background-position: center center; display: block;">
+                                <img src="{{ asset(Storage::url($product->product->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                         </div>
                         <div class="back">
-                            <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}" class="bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ asset(Storage::url($product->thumb->image))}}&quot;); background-size: cover; background-position: center center; display: block;">
-                                <img src="{{ asset(Storage::url($product->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                            <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}" class="bg-size blur-up lazyloaded" style="background-image: url(&quot;{{ asset(Storage::url($product->product->image))}}&quot;); background-size: cover; background-position: center center; display: block;">
+                                <img src="{{ asset(Storage::url($product->product->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                         </div>
                         <div class="cart-info cart-wrap">
                             <button data-bs-toggle="modal" data-bs-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
@@ -59,9 +59,9 @@
                     <div class="product-detail">
                         <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                         <a href="">
-                            <h6>{{ $product->name }}</h6>
+                            <h6>{{ $product->product->product->name }}| <span>in stock ({{ $product->quantity }})</span></h6>
                         </a>
-                        <h4>{{ $product->price }}Rwf</h4>
+                        <h4>{{ $product->product->product->price }}Rwf</h4>
 
                     </div>
                 </div>

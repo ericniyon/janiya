@@ -56,10 +56,10 @@ class Product extends Model
     {
         return $this->hasManyThrough(Color::class, ProductAttribute::class);
     }
-    public function size()
-    {
-        return $this->hasManyThrough(productSize::class, ProductAttribute::class);
-    }
+    // public function size()
+    // {
+    //     return $this->hasManyThrough(productSize::class, ProductAttribute::class);
+    // }
 
     public function shops()
     {
@@ -74,6 +74,6 @@ class Product extends Model
          */
         public function rel_products()
         {
-            return $this->hasMany(Product::class, 'product_category_id', 'product_category_id')->limit(6);
+            return $this->hasMany(Product::class, 'product_category_id', 'product_category_id')->limit(12);
         }
 }

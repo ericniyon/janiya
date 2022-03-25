@@ -20,4 +20,9 @@ class StoreAttribute extends Model
     {
         return $this->belongsTo(Store::class,'store_id','id');
     }
+
+    public function rel_products()
+    {
+        return $this->belongsTo(Store::class,'store_id','id');
+    }
 }

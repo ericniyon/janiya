@@ -3,13 +3,12 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
-use App\Models\Order;
 use App\Models\ShopOrder;
+use App\Models\Order;
 
-
-
-class Orders extends Component
+class JaniyaOrders extends Component
 {
+
     public $active = 1, $payment_confirmed = '';
     public $searchKey = '', $from = '', $until = '', $perPage = 10, $status = "";
 
@@ -26,8 +25,8 @@ class Orders extends Component
 
     public function changeStatus($status, $order)
     {
-        $order = ShopOrder::findOrFail($order);
-        $order->update(['status'=>$status]);
+        $order = Order::findOrFail($order);
+        $order->update(['Status'=>$status]);
         session()->flash('message', 'Order status changed successfully!');
 
     }
@@ -40,10 +39,11 @@ class Orders extends Component
         // $this->emit('alert',['type'=>'success','message'=>'']);
     }
 
+
     public function render()
     {
-        $orders = ShopOrder::when($this->searchKey, function($query){
-                        return $query->where('total_amount','like','%'.$this->searchKey.'%')
+        $orders = Order::where('store_attributes_id', null)->when($this->searchKey, function($query){
+                        return $query->where('name','like','%'.$this->searchKey.'%')
                                     ->orWhere('orderNo','like','%'.$this->searchKey.'%')
                                     ;
                     })->when($this->from, function($query1){
@@ -51,9 +51,9 @@ class Orders extends Component
                     })->when($this->until, function($query2){
                         return $query2->whereDate('created_at','<=',$this->until);
                     })->when($this->status, function($query3){
-                        return $query3->where('status',$this->status);
+                        return $query3->where('Status',$this->status);
                     })->orderByDesc('created_at')
                     ->paginate(10);
-        return view('livewire.admin.orders', compact('orders'));
+        return view('livewire.admin.janiya-orders', compact('orders'));
     }
 }

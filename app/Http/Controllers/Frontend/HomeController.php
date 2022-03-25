@@ -7,6 +7,8 @@ use App\Models\Color;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductAttribute;
+use App\Models\StoreAttribute;
 use App\Models\ProductSize;
 use App\Models\Store;
 use App\Models\User;
@@ -166,8 +168,9 @@ class HomeController extends Controller
     public function al_product_details($id)
     {
         $products = Product::all();
-        $product = Product::with('rel_products')->find(Crypt::decryptString($id));
-
+        $product = StoreAttribute::find(Crypt::decryptString($id));
+        $all_product = StoreAttribute::find(Crypt::decryptString($id));
+// tobe continuewed 
         // return $product;
 
         return view('frontend.pages.al_single_product', compact('product','products'));
@@ -194,21 +197,21 @@ class HomeController extends Controller
     }
 
     public function shoped($shopId)
-    {   
+    {
 
         $vendorId = Vendor::findOrFail(Crypt::decryptString($shopId));
         // $vendorId = Vendor::all()->pluck('id');
 
-        $product_ids = Store::where('vendor_id',$vendorId->id)->pluck('id');
-        // return $product_ids;
+        $store_ids = Store::where('vendor_id',$vendorId->id)->pluck('id');
+        // return $store_ids;
         // $product_ids = Store::find($shopId)->pluck('product_id');
 
-        // $shop_name = Vendor::find($vendorId)->pluck('shop_name');
+        $shop_name = Vendor::find($vendorId)->pluck('shop_name');
 
 
-        $products_list = Product::whereIn('id', $product_ids)->simplePaginate(12);
+        $products_list = StoreAttribute::whereIn('store_id', $store_ids)->simplePaginate(12);
 
-        return view('frontend.pages.shopssearched', compact('products_list', 'vendorId'));
+        return view('frontend.pages.shopssearched', compact('products_list', 'vendorId','shop_name'));
     }
 
     public function shopFilter(Request $request)

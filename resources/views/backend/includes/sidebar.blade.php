@@ -41,7 +41,7 @@
             </li>
             <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Sales</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
-                    <li><a href="{{ route('admin.allorders') }}"><i class="fa fa-circle"></i>Orders</a></li>
+                    {{-- <li><a href="{{ route('admin.allorders') }}"><i class="fa fa-circle"></i>Orders</a></li> --}}
                     <li><a href="{{ route('admin.admin-transaction') }}"><i class="fa fa-circle"></i>Transactions</a></li>
                 </ul>
             </li>

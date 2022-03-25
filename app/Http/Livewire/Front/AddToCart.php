@@ -42,8 +42,6 @@ class AddToCart extends Component
         $this->colors = ProductAttribute::where('product_id',$this->product->id)->select('id','color')->distinct()->get();
         $this->sizes = ProductAttribute::where('product_id',$this->product->id)->select('id','size')->distinct()->get();
         $this->product = $product;
-        $this->colors = ProductAttribute::where('product_id',$this->product->id)->select('id','color')->distinct()->get();
-        $this->sizes = ProductAttribute::where('product_id',$this->product->id)->select('id','size')->distinct()->get();
     }
     public function render()
     {

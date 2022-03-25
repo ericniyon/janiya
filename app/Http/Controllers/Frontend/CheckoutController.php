@@ -187,17 +187,17 @@ class CheckoutController extends Controller
         'Status'=>$status,
         'total'=>\Cart::getTotal() - getDiscount(),
     ]);
-    // foreach(\Cart::getContent() as $item){
-    //     $order->items()->create([
-    //         'product_id'=>$item->id,
-    //         'price'=>$item->price,
-    //         'shop'=>1,
-    //         // 'shop'=>$item->model->id,
-    //         'color'=>$item->attributes['color'],
-    //         'size'=>$item->attributes['size'],
-    //         'quantity'=>$item->quantity,
-    //     ]);
-    // }
+    foreach(\Cart::getContent() as $item){
+        $order->items()->create([
+            'product_id'=>$item->id,
+            'price'=>$item->price,
+            'shop'=>1,
+            // 'shop'=>$item->model->id,
+            'color'=>$item->attributes['color'],
+            'size'=>$item->attributes['size'],
+            'quantity'=>$item->quantity,
+        ]);
+    }
     if(Cookie::has('referredBy')){
         referencedBy()->increment('partner_total_sales');
     }

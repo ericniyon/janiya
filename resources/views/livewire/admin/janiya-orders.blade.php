@@ -1,13 +1,12 @@
 <div class="card">
-
     <div class="card-header">
-         @if (session()->has('message'))
+        @if (session()->has('message'))
         <div class="alert alert-success">
           {{ session('message') }}
         </div>
         @endif
         <div class="row">
-            <h5>Store Clients Orders</h5>
+            <h5>Janiya Clients Orders</h5>
         </div>
         <div class="row mt-2">
             <div class="col-md-1">
@@ -36,8 +35,11 @@
                 <select wire:model.lazy="status" id="" class="form-control">
                     <option value="">All</option>
                     <option value="Pending">Pending</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Deneid">Deneid</option>
+                    <option value="Paid">Paid</option>
+                    <option value="On Delivery">On Delivery</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Error">Error</option>
+                    <option value="Cancelled">Cancelled</option>
                 </select>
             </div>
         </div>
@@ -49,14 +51,15 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Order No</th>
-                    <th scope="col">Stock/Name</th>
-                    <th scope="col">Stock Contact Info</th>
-                    {{-- <th scope="col">Discount</th> --}}
-                    <th scope="col">Total Amount((Rwf)</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email and Phone Number</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Street</th>
                     <th scope="col">Size</th>
-                    <th scope="col">Quantity</th>
                     <th scope="col">Color</th>
-                    <th scope="col">Payment Status</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Neighborhood</th>
+                    <th scope="col">Payment Method</th>
                     <th scope="col">Order Status</th>
                     <th scope="col">Date</th>
                   </tr>
@@ -75,69 +78,77 @@
                       </td>
                       <td>
                           <div class="d-flex flex-column">
-                            <span>{{$order->store->name}}</span>
+                            <span>{{$order->name}}</span>
                             <div class="d-flex">
-                              <a href="">{{$order->store->shop->shop_name}}</a>
-                              <a href="tel:{{$order->phone}}">{{$order->phone}}</a>
+                              <a href="">{{$order->shop_name}}</a>
+                              {{-- <a >{{$order->phone}}</a> --}}
                             </div>
                           </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column">
-                          <span>{{$order->store->shop->email}}</span>
+                          <span>{{$order->email}}</span>
                           <div class="d-flex">
-                            <span>{{$order->store->shop->phone}}</span>
+                            <span>{{$order->phone}}</span>
                           </div>
                         </div>
                       </td>
-                      <td>{{$order->total_amount}}</td>
+                      <td>{{$order->address}}</td>
                       <td>
-                          @foreach ($order->store->valiations as $item)
+                        {{ $order->street }}
+                    </td>
+                    <td>
+                        @forelse ($order->items as $item)
                         {{ $item->size }}
-                          @endforeach
-                      </td><td>
-                          @foreach ($order->store->valiations as $item)
-                        {{ $item->quantity }}
-                          @endforeach
-                      </td><td>
-                          @foreach ($order->store->valiations as $item)
+                        @empty
+                        <span>-</span>
+                        @endforelse
+                    </td>
+                    <td>
+                        @forelse ($order->items as $item)
                         {{ $item->color }}
-                          @endforeach
-                      </td>
-                      <td>
-                          @if ($order->payment_confirmed == 1)
-                            <span class="badge badge-secondary">
-                                Payed
-                                <input type="checkbox" wire:click="confirm({{$order->id}})" {{$order->payment_confirmed?'checked':''}} >
-                            </span>
-
-                          @else
-                            <span class="badge badge-warning">Not Payed
-
-                                <input type="checkbox" wire:click="confirm({{$order->id}})" >
-                            </span>
-
-                          @endif
-                          {{-- <input type="checkbox" wire:click="confirm({{$order->id}})" {{$order->payment_confirmed?'checked':''}} > --}}
-                      </td>
+                        @empty
+                        <span>-</span>
+                        @endforelse
+                    </td>
+                    <td>
+                        @forelse ($order->items as $item)
+                        {{ $item->quantity }}
+                        @empty
+                        <span>-</span>
+                        @endforelse
+                    </td>
+                    <td>
+                        {{ $order->neighborhood }}
+                    </td>
+                    <td>
+                        {{ $order->payment_method }}
+                    </td>
                       <td>
                         <div class="dropdown show">
                             <a class="btn btn-secondary bt-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{$order->status}}
+                                {{$order->Status}}
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                              <button {{($order->status=='Approved')?'disabled':''}} class="dropdown-item"
+                              <button {{($order->Status=='Paid')?'disabled':''}} class="dropdown-item"
                               wire:click.prevent="changeStatus('Pending',{{$order->id}})">Pending
                               </button>
-                              <button {{($order->status=='Approved')?'disabled':''}} wire:click.prevent="changeStatus('Approved',{{$order->id}})"
-                                 class="dropdown-item">Approved
-
+                              <button {{($order->Status=='Paid')?'disabled':''}} wire:click.prevent="changeStatus('Paid',{{$order->id}})"
+                                 class="dropdown-item">Paid
                               </button>
-                              <button {{($order->status=='Approved')?'disabled':''}} wire:click.prevent="changeStatus('Denied',{{$order->id}})"
-                                 class="dropdown-item">Denied
+                              <button {{($order->Status=='Paid')?'disabled':''}} wire:click.prevent="changeStatus('On Delivery',{{$order->id}})"
+                                 class="dropdown-item">On Delivery
                               </button>
-
+                              <button {{($order->Status=='Paid')?'disabled':''}} wire:click.prevent="changeStatus('Completed',{{$order->id}})"
+                                class="dropdown-item">Completed
+                              </button>
+                              <button {{($order->Status=='Paid')?'disabled':''}} class="dropdown-item"
+                              wire:click.prevent="changeStatus('Error',{{$order->id}})">Error
+                              </button>
+                              <button {{($order->Status=='Paid')?'disabled':''}} class="dropdown-item"
+                              wire:click.prevent="changeStatus('Cancelled',{{$order->id}})">Cancelled
+                              </button>
                             </div>
                           </div>
                       </td>
