@@ -4,14 +4,17 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\ShopOrder;
+use App\Mail\OredrApproved;
+use Illuminate\Support\Facades\Mail;
 
 
 
 class Orders extends Component
 {
     public $active = 1, $payment_confirmed = '';
-    public $searchKey = '', $from = '', $until = '', $perPage = 10, $status = "";
+    public $searchKey = '', $from = '', $until = '', $perPage = 10, $status = "", $vendor='';
 
 
     public $queryString = [
@@ -29,6 +32,8 @@ class Orders extends Component
         $order = ShopOrder::findOrFail($order);
         $order->update(['status'=>$status]);
         session()->flash('message', 'Order status changed successfully!');
+        $user = $order->store->shop;
+        Mail::to($user)->send(new OredrApproved($order));
 
     }
 

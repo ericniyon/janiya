@@ -133,6 +133,11 @@ Route::get('shops/products/{shopId}', [HomeController::class, 'shoped'] )->name(
 
 Route::get('cart/content',  [CartController::class, 'cartContents'])->name('add-to-cart');
 
+Route::get('invoce', function(){
+    return view('email.orderMail');
+});
+
+
 require __DIR__.'/auth.php';
 
 
