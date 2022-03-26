@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\ShopOrder;
 use App\Mail\OredrApproved;
+use App\Mail\OrederRecept;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -43,6 +44,9 @@ class Orders extends Component
         $shop->update(['payment_confirmed'=>!$shop->payment_confirmed]);
         session()->flash('message', 'Order Payment status changed successfully!');
         // $this->emit('alert',['type'=>'success','message'=>'']);
+        $user = $shop->store->shop;
+
+        Mail::to($user)->send(new OrederRecept($shop));
     }
 
     public function render()
