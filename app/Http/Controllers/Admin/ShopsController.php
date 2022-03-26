@@ -26,23 +26,24 @@ class ShopsController extends Controller
             $profile = $request->logo->storeAs('vendors',$fileName,'public');
         }
         Vendor::create([
-            'name'=>$request->name, 
-            'shop_name'=>$request->shop, 
+            'name'=>$request->name,
+            'shop_name'=>$request->shop,
             'slug'=>str()->slug($request->shop),
-            'email'=>$request->email, 
-            'phone'=>$request->phone, 
-            'confirmed'=>1, 
-            'active'=>1, 
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'confirmed'=>1,
+            'active'=>1,
             'details'=>$request->details,
-            'profile'=>$profile, 
+            'profile'=>$profile,
             'password'=>Hash::make($password),
         ]);
 
         return back()->with('success','Vendor Added Successfully!');
     }
 
-    public function edit(Vendor $vendor)
+    public function edit($id)
     {
+        $vendor = Vendor::find($id);
         return view('backend.admin.addEditShops', compact('vendor'));
     }
 
@@ -66,10 +67,10 @@ class ShopsController extends Controller
             $profile = $vendor->profile;
         }
         $vendor->update([
-            'name'=>$request->name, 
+            'name'=>$request->name,
             'slug'=>str()->slug($request->shop),
-            'shop_name'=>$request->shop, 
-            'email'=>$request->email, 
+            'shop_name'=>$request->shop,
+            'email'=>$request->email,
             'phone'=>$request->phone,
             'details'=>$request->details,
             'profile'=>$profile,

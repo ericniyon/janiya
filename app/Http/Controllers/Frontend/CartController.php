@@ -87,4 +87,9 @@ class CartController extends Controller
             session()->flash('success', 'Product removed successfully');
         }
     }
+
+    public function cartContents(Request $request)
+    {
+        return $request->all();
+    }
 }

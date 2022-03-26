@@ -13,23 +13,19 @@ class Shop extends Component
 {
     use WithPagination;
     public $paginationTheme = 'bootstrap';
+    public $shops = [];
     public $perPage = 25, $search = '';
-    public $categories, $products, $shops;
-    public $shop_name, $category, $category_name = [];
-    public $queryString = [
-        'search'=>['except'=>''],
-        'perPage'=>['except'=>25],
-        'filters'
-    ];
+
+    public $queryString = ['filters'];
 
     public array $filterOptions = [
-        'category_name' => ['blue'],
+        'prices' => ['0,25', '25,50'],
     ];
 
     public array $filters = array();
 
     public array $arrayFilterToMerge = [
-        'category_name' => [],
+        'prices' => [],
     ];
 
     public $orderSelect ;
@@ -39,34 +35,28 @@ class Shop extends Component
         'direction' => 'desc'
     ];
 
-    public function mount()
-    {
-        // $this->products = Store::all();
-
-        // $this->products = Store::whereHas('valiations',function($query){
-        //     $query->where('order_confirmed',1);
-        // })
-        // ->with('valiations')
-        // ->get();
-
-        $stocks = Store::all()->pluck('product_id');
-
-        $this->products = Product::whereNotIn('id', $stocks)->inRandomOrder()->limit(12)->get();
-
-        $this->shops = Vendor::select('shop_name','id')->inRandomOrder()->orderBy('shop_name')->limit(5)->get();
-        $this->categories = ProductCategory::select('category_name','id')->inRandomOrder()->orderBy('category_name')->limit(5)->get();
-
-        // $this->categories = ProductCategory::select('id','category_name')->get();
-    }
-
-    public function updatedShop($category_name)
-    {
-        $this->products = Product::where('product_category_id',$category_name)->get();
-    }
 
     public function render()
     {
-        return view('livewire.front.shop');
+        return view('livewire.front.shop', [
+            'shops' => Store::all(),
+            "products" => Store::whereIn('product_id',[0,2])
+        ]);
+    }
+
+    public function mount()
+    {
+        $this->filters = array_marge($this->filterToMerge, $this->filters);
+    }
+
+    public function updated($name, $value)
+    {
+        $this->resetPage();
+    }
+
+    public function updatedFiltersPrice($value)
+    {
+        $this->filters['price'] = explode(',',$this->filters['price']);
     }
 }
 

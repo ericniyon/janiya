@@ -8,6 +8,9 @@ use App\Models\Store;
 use App\Models\StoreAttribute;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\OrderNotification;
 
 class SingleShop extends Component
 {
@@ -81,6 +84,9 @@ class SingleShop extends Component
         ]);
         session()->flash('success',$this->product->name.' Added into store successfully!');
         $this->reset();
+        // return $store;
+        $user = User::first();
+        Notification::send($user, new OrderNotification('Eric NIYONKURU', 'Kimihurura', '0787283351'));
         return to_route('vendor.store');
     }
     public function render()

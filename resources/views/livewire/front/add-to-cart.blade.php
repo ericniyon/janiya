@@ -4,7 +4,7 @@
         <span class="badge badge-grey-color">#1 Best seller</span>
         <span class="label-text">in fashion</span>
     </div>
-    <h3 class="price-detail">{{ money($product->price) }} productID:{{$product->id}}</h3>
+    <h3 class="price-detail">{{ money($product->price) }} </h3>
     <ul class="color-variant">
         @foreach ($colors as $item)
         <label for="color{{$item->id}}">

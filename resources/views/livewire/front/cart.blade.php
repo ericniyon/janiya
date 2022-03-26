@@ -23,7 +23,7 @@
                     @foreach(\Cart::getContent() as $item)
                         <tr data-id="{{ $item->id }}">
                             <td data-th="Product" class="d-flex">
-                                <img src="{{asset(Storage::url($item->model->thumb->image))}}"
+                                <img src="{{$item->model->thumb()->exists()? asset(Storage::url($item->model->thumb->image)): asset('assets/images/2.jpg')}}"
                                 width="50" height="50" class="img-responsive rounded"
                                 style="margin-right: 0.7rem!important"/>
                                 <div class="row d-flex flex-column">
@@ -78,7 +78,7 @@
         </div>
     </div>
     <div class="row cart-buttons">
-        <div class="col-6"><a href="{{route('shop')}}" class="btn btn-solid">continue shopping</a></div>
+        <div class="col-6"><a href="{{route('shops.list')}}" class="btn btn-solid">continue shopping</a></div>
         <div class="col-6"><a href="{{route('checkout')}}" class="btn btn-solid">check out</a></div>
     </div>
     <div class="row mt-3">

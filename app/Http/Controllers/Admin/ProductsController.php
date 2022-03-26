@@ -43,11 +43,10 @@ class ProductsController extends Controller
 
     public function newAttribute(Request $request, Product $product)
     {
+
+
         $this->validate($request,[
-            'size'=>'integer|required',
-            'color'=>'integer|required',
             'image'=>'sometimes|image|mimes:png,jpg,webp|max:750',
-            'quantity'=>'required|integer',
         ]);
 
         if ($request->hasFile('image')) {
@@ -66,15 +65,8 @@ class ProductsController extends Controller
         return back()->with('success','Product updated Successfully!');
     }
 
-    // public function updateColor(Request $request,Product $product,$color)
-    // {
-    //     $this->validate($request,[
-    //         'quantity'=>'required|integer',
-    //     ]);
-    //     $color = Color::findOrFail($color);
-    //     $product->colors()->updateExistingPivot($color,['quantity'=>$request->quantity]);
-    //     return back()->with('success',$color->color_name.' Quantity Updated Successfully!');
-    // }
+
+
 
     public function updateProduct(Request $request,Product $product)
     {

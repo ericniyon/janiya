@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-md-7 d-flex flex-column justify-content-between">
                             <div>
-                                <h5><strong>Price: </strong>{{$product->price}}</h5>
+                                <h5><strong>Price: </strong>{{$product->factory_price}}</h5>
                                 <h5><strong>Category: </strong>{{$product->product_categories->category_name}}</h5>
                                 {{-- <h5><strong>Quantity: </strong>{{$product->attributes->sum('quantity')}}</h5> --}}
                             </div>
@@ -34,7 +34,7 @@
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <h3 class="m-5">No product yet</h3>
                 </div>
-                @endforelse                   
+                @endforelse
             </div>
             <div class="row">
                 {{$products->links()}}

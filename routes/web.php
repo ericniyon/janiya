@@ -30,6 +30,7 @@ Route::get('/', [HomeController::class, 'index'])->middleware('referral')->name(
 // products routes
 Route::get('shop/products', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
 Route::get('shops',[HomeController::class,'shopsList'])->name('shops.list');
+// Route::view('/shops','frontend.pages.shops-list')->name('shops.list');
 Route::get('shops/{vendor}',[HomeController::class,'singleShop'])->name('shops.list.single');
 // Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
 Route::get('shop/{vendor}/{product}',[HomeController::class,'singleProduct'])->name('product.single');
@@ -47,11 +48,10 @@ Route::view('thankyou','front.thankyou')->name('thankyou');
 Route::view('order-cancelled','front.thankyou')->name('cancelled');
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 
+Route::get('admin/profile', [AdminController::class, 'profile'] )->name('admin-profile');
 // Admin's routes
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
-    Route::get('/dashboard', function () {
-        return view('backend.pages.admin_dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('sizes', [Size::class, 'size'] )->name('size');
     Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
     Route::delete('save-size/{size}', [Size::class, 'delete_size'] )->name('delete-size');
@@ -59,11 +59,18 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::post('save-color', [ColorsController::class, 'save_colors'] )->name('save-color');
     Route::delete('color/{color}', [ColorsController::class, 'delete_colors'] )->name('delete-color');
     Route::get('product/category', [AdminController::class, 'product_category'] )->name('product-category');
+    Route::get('all/orders',[AdminController::class, 'admin_orders'])->name('allorders');
+    Route::get('all/transaction',[AdminController::class, 'admin_transactions'])->name('admin-transaction');
+
+
+
+
     Route::post('save-category', [AdminController::class, 'save_category'] )->name('save-category');
     Route::get('product/product', [AdminController::class, 'product_product'] )->name('add-product');
     Route::view('products','backend.admin.products')->name('products.all');
     Route::get('products/{product}',[ProductsController::class,'show'])->name('products.single');
-    Route::put('products/{attribute}',[ProductsController::class,'updateAttribute'])->name('products.update');
+    Route::put('products/{attribute}',[ProductsController::class,'updateAttribute'])->name('attributtes.update');
+    Route::put('update/products/{product}',[ProductsController::class,'updateProduct'])->name('product.update');
     Route::post('products/{product}',[ProductsController::class,'newAttribute'])->name('products.new');
     Route::put('products/{product}/update',[ProductsController::class,'updateProduct'])->name('products.update.item');
 
@@ -82,6 +89,9 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     // Affiliator
     Route::get('affiliators',[AffilitesController::class,'index'])->name('affiliator');
+    // both orders for janiya and shops
+    Route::get('shops-orders',[AdminController::class,'shopsOrder'])->name('shops-orders');
+    Route::get('janiya-orders',[AdminController::class,'janiyaOrders'])->name('janiya-orders');
 });
 
 // Vendor's routes
@@ -93,9 +103,12 @@ Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name(
 
     Route::view('orders','backend.vendors.orders')->name('orders');
     Route::get('orders/view/{order}',[StoresController::class,'singleOrder'])->name('orders.single');
+    Route::post('my-store/{id}',[StoresController::class,'storeUpdates'])->name('store_update');
+
 
     // coupons
     Route::view('coupons','backend.vendors.coupons')->name('coupons');
+
 });
 
 // Normal Users's routes
@@ -116,7 +129,9 @@ Route::get('pro/{id}', [HomeController::class, 'al_product_details'] )->name('al
 Route::get('about', [HomeController::class, 'about'] )->name('about');
 Route::get('contact', [HomeController::class, 'contact'] )->name('contact');
 Route::get('categories/products/{catId}', [HomeController::class, 'categorised'] )->name('categories-products');
+Route::get('shops/products/{shopId}', [HomeController::class, 'shoped'] )->name('shops-products');
 
+Route::get('cart/content',  [CartController::class, 'cartContents'])->name('add-to-cart');
 
 require __DIR__.'/auth.php';
 

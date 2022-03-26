@@ -106,7 +106,15 @@
                     <button class="btn btn-sm btn-solid">Submit Your Code</button>
                 </div>
             </form>
+
             @endif
+
+
         </div>
     </div>
 </div>
+<div class="payment-box">
+                <div class="text-end">
+                    <button type="submit" class="btn-solid btn" onclick="document.getElementById('orderForm').submit()">Place Order</button>
+                </div>
+            </div>
