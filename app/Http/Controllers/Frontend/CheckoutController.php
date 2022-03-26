@@ -191,8 +191,8 @@ class CheckoutController extends Controller
         $order->items()->create([
             'product_id'=>$item->id,
             'price'=>$item->price,
-            'shop'=>1,
-            // 'shop'=>$item->model->id,
+            // 'shop'=>1,
+            'shop'=>$item->model->shop?$item->model->shop->oldestOfMany()->id:1,
             'color'=>$item->attributes['color'],
             'size'=>$item->attributes['size'],
             'quantity'=>$item->quantity,
