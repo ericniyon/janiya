@@ -48,9 +48,9 @@ Route::view('thankyou','front.thankyou')->name('thankyou');
 Route::view('order-cancelled','front.thankyou')->name('cancelled');
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 
-Route::get('admin/profile', [AdminController::class, 'profile'] )->name('admin-profile');
 // Admin's routes
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
+    Route::get('profile', [AdminController::class, 'profile'] )->name('admin-profile');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('sizes', [Size::class, 'size'] )->name('size');
     Route::post('save-size', [Size::class, 'save_size'] )->name('save-size');
