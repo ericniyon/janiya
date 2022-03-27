@@ -8,6 +8,8 @@ trait AddToCartTrait
 {
     public function addToCartTrait($productModel, $color,$size,$quantity)
     {
+        // $colr = Color::findOrFail($color);
+        // $sze = ProductSize::findOrFail($size);
         \Cart::add(array(
             'id'=>$productModel->id,
             'name'=>$productModel->name,

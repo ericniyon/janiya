@@ -14,14 +14,13 @@ use Livewire\Component;
 class AddProduct extends Component
 {
     use WithFileUploads;
-
     public $colorsLoop, $sizesLoop, $colors, $sizes, $categories;
     public $name, $price, $product_category_id,$factory_price, $description, $product_image = [];
-
 
     public function mount()
     {
         $this->colorsLoop = [[]];
+        $this->sizesLoop = [[]];
         $this->colors = Color::select('color_name','id')->get();
         $this->sizes = ProductSize::orderBy('size')->get();
         $this->categories = ProductCategory::all();
@@ -38,7 +37,7 @@ class AddProduct extends Component
         $this->colorsLoop = array_values($this->colorsLoop);
     }
 
-    public function updated($fields)
+    public function FunctionName($fields)
     {
         $this->validateOnly($fields,[
             'name'=>'string|unique:products,name|min:3|max:220',
