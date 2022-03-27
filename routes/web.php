@@ -108,6 +108,8 @@ Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name(
 
     // coupons
     Route::view('coupons','backend.vendors.coupons')->name('coupons');
+    Route::get('orders/invoice',[StoresController::class,'invoice'])->name('orders.invoice');
+    Route::get('invoice_details/{id}',[StoresController::class,'invoice_details'])->name('details.invoice');
 
 });
 

@@ -14,6 +14,8 @@ use App\Models\ProductAttribute;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use App\Models\VendorInvoice;
+
 
 class StoresController extends Controller
 {
@@ -57,5 +59,16 @@ class StoresController extends Controller
         $order = Order::findOrFail(Crypt::decryptString($order));
         $items = $order->items()->where('shop',Auth::guard('vendor')->id())->orderByDesc('created_at')->get();
         return view('backend.vendors.single-order', compact('items','order'));
+    }
+    public function invoice()
+    {
+        // $items = $order->items()->where('shop',Auth::guard('vendor')->id())->orderByDesc('created_at')->get();
+        return view('backend.vendors.invoices');
+    }
+    public function invoice_details($id)
+    {
+        $invoice = VendorInvoice::find($id);
+        // $items = $order->items()->where('shop',Auth::guard('vendor')->id())->orderByDesc('created_at')->get();
+        return view('backend.vendors.invoce', compact('invoice'));
     }
 }

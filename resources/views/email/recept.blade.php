@@ -126,12 +126,12 @@
      <tr>
        <td class="row"><span style="color:#777;font-size:11px;"></span><br>{{ $item->product->product->name }}</td>
        <td class="row">{{ $item->color }} | {{ $item->size }}</td>
-       <td class="row">{{ $item->product->product->price }}Rwf <span style="color:#777">X</span> {{ $item->quantity }} </td>
-       <td class="row" id="loop">{{ $item->product->product->price * $item->quantity }} Rwf</td>
+       <td class="row">{{ $item->product->product->factory_price }}Rwf <span style="color:#777">X</span> {{ $item->quantity }} </td>
+       <td class="row" id="loop">{{ $item->product->product->factory_price * $item->quantity }} Rwf</td>
      </tr>
      @php
 
-         $totals = $totals + $item->product->product->price * $item->quantity
+         $totals = $totals + $item->product->product->factory_price * $item->quantity
      @endphp
      @endforeach
   </table><br>
@@ -146,11 +146,11 @@
             <td style="text-align:right">{{ $totals }}</td>
 
           </tr>
-          <tr>
+          {{-- <tr>
             <td><strong>Shipping fee :</strong></td>
             <td style="text-align:right">2000Rwf</td>
 
-          </tr>
+          </tr> --}}
           <tr>
             <td><strong>Tax 0.00Rwf:</strong></td>
             <td style="text-align:right">0.00Rwf</td>

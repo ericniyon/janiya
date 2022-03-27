@@ -9,7 +9,7 @@
     <meta name="keywords" content="{{config('app.name')}}">
     <meta name="author" content="{{config('app.name')}}">
     <link rel="icon" href="{{asset('assets/img/janiya-logo.jpg')}}" type="image/x-icon">
-    <link rel="shortcut icon" href=".{{asset('assets/img/janiya-logo.jpg')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/img/janiya-logo.jpg')}}" type="image/x-icon">
 
     @yield('title')
 

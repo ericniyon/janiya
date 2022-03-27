@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\ShopOrder;
+use App\Models\VendorInvoice;
 use App\Mail\OredrApproved;
 use App\Mail\OrederRecept;
 use Illuminate\Support\Facades\Mail;
@@ -47,6 +48,11 @@ class Orders extends Component
         $user = $shop->store->shop;
 
         Mail::to($user)->send(new OrederRecept($shop));
+
+        VendorInvoice::create([
+            'shop_id' => $shop->id,
+            'vendor_id' =>  $shop->store->shop->id
+        ]);
     }
 
     public function render()
