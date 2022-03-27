@@ -6,7 +6,7 @@ use App\Models\ProductSize;
 use Darryldecode\Cart\Cart;
 trait AddToCartTrait
 {
-    public function addToCartTrait($productModel, $color,$size,$quantity)
+    public function addToCartTrait($productModel, $color,$size,$quantity,$vendor)
     {
         \Cart::add(array(
             'id'=>$productModel->id,
@@ -15,7 +15,8 @@ trait AddToCartTrait
             'quantity' => $quantity,
             'attributes'=>array(
                 'color'=>$color,
-                'size'=>$size
+                'size'=>$size,
+                'shop'=>$vendor,
             ),
             'associatedModel' => $productModel,
         ));

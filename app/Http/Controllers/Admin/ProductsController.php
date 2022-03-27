@@ -74,9 +74,9 @@ class ProductsController extends Controller
             'name'=>'required|string|unique:products,name,'.$product->id,
             'price'=>'required|integer|min:500|max:500000',
             'details'=>'string|required|min:10|max:5000',
-            'image.*'=>'image|mimes:png,jpg,webp|sometimes',
+            'image'=>'image|mimes:png,jpg,webp|sometimes',
         ]);
-        // dd($product->name);
+
         $product->update([
             'name'=>$request->name,
             'slug'=>str()->slug($request->name),
@@ -84,19 +84,16 @@ class ProductsController extends Controller
             'description'=>$request->details,
         ]);
 
-        if($request->hasFile('images')) {
-            $images = ProductImage::where('product_id',$product->id)->get();
-            foreach($images as $img){
-                Storage::delete($img->image);
-                $img->delete();
+        if($request->hasFile('image')) {
+            if($product->images()->exists()){
+                Storage::delete($product->images->image);
+                $product->images->delete();
             }
-            foreach ($request->images as $image) {
-                $photo = $image->store('public/products/gallery');
-                $product->images()->create([
-                    // 'product_id'=>$product->id,
-                    'image' => $photo,
-                ]);
-            }
+            $photo = $request->file('image')->store('public/products/gallery');
+            $product->images()->create([
+                'product_id'=>$product->id,
+                'image' => $photo,
+            ]);
         }
 
         return to_route('admin.products.single',$product->slug)->with('success',$product->name.' Updated Successfully!');
