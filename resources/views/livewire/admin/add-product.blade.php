@@ -32,6 +32,7 @@
                          <select class="custom-select form-control" required="" wire:model="product_category_id" name="product_category_id[]">
                              <option value="">--Select--</option>
                              @foreach (App\Models\ProductCategory::all() as $item)
+
                              <option value="{{$item->id}}">{{$item->category_name}}</option>
                              @endforeach
                          </select>
@@ -62,16 +63,15 @@
                     <label >Image</label>
                     <input type="file" accept="image/*" value="colorsLoop[{{$index}}][image]"
                     name="colorsLoop[{{$index}}][image]"
-                    wire:model.debounce.500="colorsLoop.{{$index}}.image"
+                    wire:model.lazy="colorsLoop.{{$index}}.image" id="image"
                     class="form-control @error('colorsLoop.'.$index.'image') is-invalid @enderror" required>
-
                     @error('colorsLoop.'.$index.'image')
                         <span class="invalid-feedback" role="alert">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="form-group col-md-3">
                     <label>Color</label>
-                    <select name="colorsLoop[{{$index}}][color]" wire:model.debounce.500="colorsLoop.{{$index}}.color"
+                    <select name="colorsLoop[{{$index}}][color]" wire:model.lazy="colorsLoop.{{$index}}.color"
                     class="form-control show-tick ms @error('colorsLoop.'.$index.'.color') is-invalid @enderror">
                         <option value="">Choose Color</option>
                         @foreach ($colors as $item)
@@ -84,7 +84,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label>Size</label>
-                    <select name="colorsLoop[{{$index}}][size]" wire:model.debounce.500="colorsLoop.{{$index}}.size"
+                    <select name="colorsLoop[{{$index}}][size]" wire:model.lazy="colorsLoop.{{$index}}.size"
                     class="form-control show-tick ms @error('colorsLoop.'.$index.'.size') is-invalid @enderror">
                         <option value="">Size</option>
                         @foreach ($sizes as $item)
@@ -99,7 +99,7 @@
                     <label >Quantity</label>
                     <input type="number" value="colorsLoop[{{$index}}][quantity]"
                     name="colorsLoop[{{$index}}][quantity]"
-                    wire:model.debounce.500="colorsLoop.{{$index}}.quantity"
+                    wire:model.lazy="colorsLoop.{{$index}}.quantity" id="quantity"
                     class="form-control @error('colorsLoop.'.$index.'quantity') is-invalid @enderror">
 
                     @error('colorsLoop.'.$index.'quantity')
@@ -107,8 +107,7 @@
                     @enderror
                 </div>
                 <div class="form-group col-md-1 pt-3 d-flex justify-content-end align-items-center">
-                    <button class="btn btn-outline-none text-success p-2 mr-2"
-                    wire:click.prevent="addNewRow">
+                    <button class="btn btn-outline-none text-success p-2 mr-2" wire:click.prevent="addNewRow">
                         <i class="fa fa-plus"></i>
                     </button>
                     <button class="btn btn-outline-none p-2 text-danger"
