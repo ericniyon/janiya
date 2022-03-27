@@ -98,13 +98,13 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <form action="" method="POST"
+                                        <form action="{{route('admin.attributtes.update',$attribute->id)}}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for="">Insert New Value to update {{$attribute->quantity}}</label>
+                                                    <label for="">Insert New Attribute Quantity</label>
                                                     <input name="quantity" required value="{{old('quantity',$attribute->quantity)}}"
                                                      class="form-control @error('quantity') is-invalid @enderror" type="number">
                                                      @error('quantity')
@@ -112,7 +112,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                                                      @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="">Insert New Value to update {{$attribute->quantity}}</label>
+                                                    <label for="">New Attribute image</label>
                                                     <input name="image" accept="images/*"
                                                      class="form-control @error('image') is-invalid @enderror" type="file">
                                                      @error('image')

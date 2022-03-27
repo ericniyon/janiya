@@ -76,9 +76,7 @@
                                 </div>
                                 <h6>120 ratings </h6>
                             </div>
-                            @livewire('front.add-to-cart',
-                                        ['product' => $product], key(Crypt::encryptString($product->id)))
-
+                            @livewire('front.add-to-cart',['product' => $product], key($product->id))
                             <div class="product-count">
                                 <ul>
                                     <li>

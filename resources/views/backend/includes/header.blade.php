@@ -35,7 +35,8 @@
 
                     </div>
                     <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
-                        <li><a href="{{ route('admin-profile') }}"><i data-feather="user"></i>Edit Profile</a></li>
+                        <li><a href=""><i data-feather="user"></i>Edit Profile</a></li>
+                        {{-- <li><a href="{{ route('admin-profile') }}"><i data-feather="user"></i>Edit Profile</a></li> --}}
                         <li><a href="#"><i data-feather="settings"></i>Settings</a></li>
                         <li><a href="
                             @if (Auth::guard('admin')->check())
