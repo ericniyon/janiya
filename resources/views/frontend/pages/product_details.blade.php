@@ -31,10 +31,10 @@
             <div class="container">
                 @foreach ($images as $image)
 {{-- {{ $image }} --}}
-                    <div>
+                    {{-- <div>
                         <img src="{{ asset(Storage::url($image->image))}}" alt=""
                             class="img-fluid blur-up lazyload image_zoom_cls-">
-                    </div>
+                    </div> --}}
                 @endforeach
                 <div class="row">
                     <div class="col-lg-6">
