@@ -29,13 +29,7 @@
     <section>
         <div class="collection-wrapper">
             <div class="container">
-                @foreach ($images as $image)
-{{-- {{ $image }} --}}
-                    <div>
-                        <img src="{{ asset(Storage::url($image->image))}}" alt=""
-                            class="img-fluid blur-up lazyload image_zoom_cls-">
-                    </div>
-                @endforeach
+                
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="product-slick">

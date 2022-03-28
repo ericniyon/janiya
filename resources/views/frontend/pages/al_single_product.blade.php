@@ -32,7 +32,7 @@
         <div class="collection-wrapper">
             <div class="container">
  @foreach ($product as $image)
-{{ $image }}
+
                             {{-- <div>
                                 <img src="{{ asset(Storage::url($image->image))}}" alt=""
                                     class="img-fluid blur-up lazyload image_zoom_cls-">
@@ -41,25 +41,25 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="product-slick">
-                            @foreach ($product as $image)
+                            {{-- @foreach ($product as $image)
 
-                            {{-- <div>
+                            <div>
                                 <img src="{{ asset(Storage::url($image->image))}}" alt=""
                                     class="img-fluid blur-up lazyload image_zoom_cls-">
-                                </div> --}}
-                                    @endforeach
+                                </div>
+                                    @endforeach --}}
 
                         </div>
                         <div class="row">
                             <div class="col-12 p-0">
                                 <div class="slider-nav">
 
-                                    {{-- @foreach ($product->attributes as $image)
+                                    @foreach ($product->attributes as $image)
                                     <div>
                                         <img src="{{ asset(Storage::url($image->image))}}" alt=""
                                             class="img-fluid blur-up lazyload">
                                         </div>
-                                    @endforeach --}}
+                                    @endforeach
 
 
                                 </div>
@@ -76,7 +76,9 @@
                                 </div>
                                 <h6>120 ratings </h6>
                             </div>
-                            @livewire('front.add-to-cart',['product' => $product], key($product->id))
+                            @livewire('front.add-to-cart',
+                                        ['product' => $product], key(Crypt::encryptString($product->id)))
+
                             <div class="product-count">
                                 <ul>
                                     <li>
