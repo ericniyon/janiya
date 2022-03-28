@@ -9,7 +9,7 @@
         @foreach ($colors as $item)
         <label for="color{{$item->id}}">
             <li class="active" style="background: {{ $item->color }}">
-                <input type="radio" required name="color" id="color{{$item->id}}" hidden
+                <input type="radio" required name="color" id="color{{$loop->iteration}}" hidden
                 value="{{ $item->color }}">
             </li></label>
         @endforeach
@@ -41,7 +41,7 @@
                 @foreach ($sizes as $item)
                 <label for="size{{$item->id}}"><li>
                         {{ $item->size }}
-                        <input type="radio" required id="size{{$item->id}}" name="size" hidden value="{{ $item->size }}">
+                        <input type="radio" required id="size{{$loop->iteration}}" name="size" hidden value="{{ $item->size }}">
                     </li></label>
                 @endforeach
             </ul>

@@ -7,6 +7,7 @@ use App\Models\Color;
 use App\Models\ProductAttribute;
 use App\Models\ProductSize;
 use Darryldecode\Cart\Cart;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class AddToCart extends Component
@@ -39,8 +40,10 @@ class AddToCart extends Component
 
     public function mount($product)
     {
-        $this->colors = ProductAttribute::where('product_id',$this->product->id)->select('id','color')->distinct()->get();
-        $this->sizes = ProductAttribute::where('product_id',$this->product->id)->select('id','size')->distinct()->get();
+        $this->colors = ProductAttribute::where('product_id',$this->product->id)
+        ->select(DB::raw('DISTINCT(color)'))->get();
+        $this->sizes = ProductAttribute::where('product_id',$this->product->id)
+        ->select(DB::raw('DISTINCT(size)'))->get();
         $this->product = $product;
     }
     public function render()

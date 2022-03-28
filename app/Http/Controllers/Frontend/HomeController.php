@@ -40,11 +40,13 @@ class HomeController extends Controller
     {
         $vendor = Vendor::findOrFail(Crypt::decryptString($vendor));
         $product = Store::findOrFail(Crypt::decryptString($product));
+        $imageIDs = $product->valiations->pluck('product_attribute_id');
+        $images = ProductAttribute::whereIn('id',$imageIDs)->select(DB::raw('DISTINCT(image)'))->get();
         $colors = StoreAttribute::where('store_id',$product->id)
-        ->addSelect(DB::raw('DISTINCT(color)'),'id')->get();
+        ->addSelect(DB::raw('DISTINCT(color)'))->get();
         $sizes = StoreAttribute::where('store_id',$product->id)
-        ->addSelect(DB::raw('DISTINCT(size)'),'id')->get();
-        return view('frontend.pages.product_details', compact('vendor','product','colors','sizes'));
+        ->addSelect(DB::raw('DISTINCT(size)'))->get();
+        return view('frontend.pages.product_details', compact('vendor','product','colors','sizes','images'));
     }
     // this function will return product by it id
     public function shop()

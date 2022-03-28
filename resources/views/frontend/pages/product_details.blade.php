@@ -29,39 +29,37 @@
     <section>
         <div class="collection-wrapper">
             <div class="container">
- @foreach ($product as $image)
+                @foreach ($images as $image)
 {{-- {{ $image }} --}}
-                            {{-- <div>
-                                <img src="{{ asset(Storage::url($image->image))}}" alt=""
-                                    class="img-fluid blur-up lazyload image_zoom_cls-">
-                                </div> --}}
-                                    @endforeach
+                    <div>
+                        <img src="{{ asset(Storage::url($image->image))}}" alt=""
+                            class="img-fluid blur-up lazyload image_zoom_cls-">
+                    </div>
+                @endforeach
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="product-slick">
                             <div>
                                 <img src="{{ asset(Storage::url($product->product->images->image))}}" alt=""
                                     class="img-fluid blur-up lazyload image_zoom_cls-">
-                                </div>
-                            @foreach ($product as $image)
-
-                            {{-- <div>
+                            </div>
+                            @foreach ($images as $image)
+                            <div>
                                 <img src="{{ asset(Storage::url($image->image))}}" alt=""
                                     class="img-fluid blur-up lazyload image_zoom_cls-">
-                                </div> --}}
-                                    @endforeach
-
+                            </div>
+                            @endforeach
                         </div>
                         <div class="row">
                             <div class="col-12 p-0">
                                 <div class="slider-nav">
 
-                                    {{-- @foreach ($product->attributes as $image)
+                                    @foreach ($images as $image)
                                     <div>
                                         <img src="{{ asset(Storage::url($image->image))}}" alt=""
                                             class="img-fluid blur-up lazyload">
                                         </div>
-                                    @endforeach --}}
+                                    @endforeach
 
 
                                 </div>
@@ -89,7 +87,7 @@
                                     @foreach ($colors as $item)
                                     <label for="color{{$item->id}}">
                                         <li class="active" style="background: {{ $item->color }}">
-                                            <input type="radio" required name="color" id="color{{$item->id}}" hidden
+                                            <input type="radio" required name="color" id="color{{$loop->iteration}}" hidden
                                             value="{{ $item->color }}">
                                         </li></label>
                                     @endforeach
@@ -122,7 +120,7 @@
                                             @foreach ($sizes as $item)
                                             <label for="size{{$item->id}}"><li>
                                                     {{ $item->size }}
-                                                    <input type="radio" required id="size{{$item->id}}" name="size" hidden value="{{ $item->size }}">
+                                                    <input type="radio" required id="size{{$loop->iteration}}" name="size" hidden value="{{ $item->size }}">
                                                 </li></label>
                                             @endforeach
                                         </ul>
