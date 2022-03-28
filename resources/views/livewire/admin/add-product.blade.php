@@ -63,7 +63,7 @@
                     <label >Image</label>
                     <input type="file" accept="image/*" value="colorsLoop[{{$index}}][image]"
                     name="colorsLoop[{{$index}}][image]"
-                    wire:model.lazy="colorsLoop.{{$index}}.image" id="image"
+                    wire:model.lazy="colorsLoop.{{$index}}.image"
                     class="form-control @error('colorsLoop.'.$index.'image') is-invalid @enderror" required>
                     @error('colorsLoop.'.$index.'image')
                         <span class="invalid-feedback" role="alert">{{$message}}</span>
@@ -99,7 +99,7 @@
                     <label >Quantity</label>
                     <input type="number" value="colorsLoop[{{$index}}][quantity]"
                     name="colorsLoop[{{$index}}][quantity]"
-                    wire:model.lazy="colorsLoop.{{$index}}.quantity" id="quantity"
+                    wire:model.lazy="colorsLoop.{{$index}}.quantity"
                     class="form-control @error('colorsLoop.'.$index.'quantity') is-invalid @enderror">
 
                     @error('colorsLoop.'.$index.'quantity')
