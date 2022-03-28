@@ -27,7 +27,8 @@
                                 width="50" height="50" class="img-responsive rounded"
                                 style="margin-right: 0.7rem!important"/>
                                 <div class="row d-flex flex-column">
-                                    <h4 class="">{{ $item->model->name }}</h4>
+                                    <h5 class="">{{ $item->model->name }}</h5>
+                                    {{-- <span><strong>Shop:{{ $item->attributes['shop'] }}</strong></span> --}}
                                     <div class="d-flex">
                                         <strong>Color: &nbsp;&nbsp;</strong>{{ $item->attributes['color'] }},&nbsp;&nbsp;&nbsp;&nbsp;
                                         <strong class="mr-2">Size:&nbsp;</strong> {{ $item->attributes['size'] }}
