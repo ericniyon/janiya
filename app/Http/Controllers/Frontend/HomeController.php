@@ -36,9 +36,17 @@ class HomeController extends Controller
         return view('frontend.pages.home1', compact('product_categories','shops', 'products'));
     }
     // this function will return product by it id
-    public function singleProduct(Vendor $vendor, Store $product)
+    public function singleProduct($vendor, $product)
     {
-        return view('frontend.pages.product_details', compact('vendor','product'));
+        $vendor = Vendor::findOrFail(Crypt::decryptString($vendor));
+        $product = Store::findOrFail(Crypt::decryptString($product));
+        $imageIDs = $product->valiations->pluck('product_attribute_id');
+        $images = ProductAttribute::whereIn('id',$imageIDs)->select(DB::raw('DISTINCT(image)'))->get();
+        $colors = StoreAttribute::where('store_id',$product->id)
+        ->addSelect(DB::raw('DISTINCT(color)'))->get();
+        $sizes = StoreAttribute::where('store_id',$product->id)
+        ->addSelect(DB::raw('DISTINCT(size)'))->get();
+        return view('frontend.pages.product_details', compact('vendor','product','colors','sizes','images'));
     }
     // this function will return product by it id
     public function shop()
@@ -69,13 +77,21 @@ class HomeController extends Controller
         }
         else{
             if($sort == 'HighToLow'){
-                $products = Product::whereIn('id', $products_ids)->orderBy('price', 'DESC')->simplePaginate(12);
+                $products = Store::whereHas('product', function($query){ $query->orderBy('price', 'DESC');
+                })->select('id','vendor_id','product_id')->distinct('product_id')
+                ->simplePaginate(12);
+                // $products = Product::whereIn('id', $products_ids)->orderBy('price', 'DESC')->simplePaginate(12);
             }
             elseif($sort == 'LowToHigh'){
-                $products = Product::whereIn('id', $products_ids)->orderBy('price', 'ASC')->simplePaginate(12);
+                $products = Store::whereHas('product', function($query){ $query->orderBy('price', 'ASC');
+                })->select('id','vendor_id','product_id')->distinct('product_id')
+                ->simplePaginate(12);
+                // $products = Product::whereIn('id', $products_ids)->orderBy('price', 'ASC')->simplePaginate(12);
             }
             else{
-            $products = Product::whereIn('id', $products_ids)->simplePaginate(12);
+                $products = Store::select('id','vendor_id','product_id')->distinct('product_id')
+                ->simplePaginate(12);
+            // $products = Product::whereIn('id', $products_ids)->simplePaginate(12);
 
             }
         }
@@ -168,9 +184,9 @@ class HomeController extends Controller
     public function al_product_details($id)
     {
         $products = Product::all();
-        $product = StoreAttribute::find(Crypt::decryptString($id));
-        $all_product = StoreAttribute::find(Crypt::decryptString($id));
-// tobe continuewed 
+        $product = Product::find(Crypt::decryptString($id));
+        // $all_product = StoreAttribute::find(Crypt::decryptString($id));
+// tobe continuewed
         // return $product;
 
         return view('frontend.pages.al_single_product', compact('product','products'));

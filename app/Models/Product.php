@@ -24,7 +24,7 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->hasOne(ProductImage::class);
     }
 
     public function thumb()

@@ -50,7 +50,8 @@ class CartController extends Controller
         ]);
         $product = Product::findOrFail($product);
         // dd($product->id);
-        $this->addToCartTrait($product,$request->color,$request->size,$request->quantity);
+        $vendor = $request->has('vendor')?$request->vendor:NULL;
+        $this->addToCartTrait($product,$request->color,$request->size,$request->quantity,$vendor);
 
         return to_route('cart');
         return redirect()->back()->with('success', 'Product added to cart successfully!');

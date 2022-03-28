@@ -144,23 +144,23 @@
                                     <div class="product-box">
                                         <div class="img-wrapper" style="height: 14rem">
                                             <div class="front">
-                                                {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}" {{asset(Storage::url($store->product->lastThumb->image))}} {{asset(Storage::url($store->product->thumb->image))}} --}}
-                                                    <a href="{{route('al_product_details',Crypt::encryptString($store->id))}}"
+                                                {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}" {{asset(Storage::url($store->product->lastproduct->images->image))}} {{asset(Storage::url($store->product->product->images->image))}} --}}
+                                                    <a href="{{route('product.single',[Crypt::encryptString($store->vendor_id),Crypt::encryptString($store->id)])}}"
                                                     class="bg-size blur-up lazyloaded"
                                                 style="background-image: url(&quot;&quot;);
                                                 background-size: cover; background-position: center center; display: block;">
-                                                <img src="{{asset(Storage::url($store->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                                                <img src="{{asset(Storage::url($store->product->images->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="back">
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"  --}}
-                                                    <a href="{{route('al_product_details',Crypt::encryptString($store->id))}}"
+                                                    <a href="{{route('product.single',[Crypt::encryptString($store->vendor_id),Crypt::encryptString($store->id)])}}"
                                                     class="bg-size blur-up lazyloaded"
                                                 style="background-image: url(&quot;&quot;);
                                                 background-size: cover; background-position: center center; display: block;">
-                                                <img src="{{asset(Storage::url($store->thumb->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
+                                                <img src="{{asset(Storage::url($store->product->images->image))}}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></a>
                                             </div>
                                             <div class="cart-info cart-wrap">
-                                                <a href="{{route('al_product_details', Crypt::encryptString($store->id))}}" title="Add to cart" >
+                                                <a href="" title="Add to cart" >
                                                     <i class="ti-shopping-cart" aria-hidden="true"></i></a>
 
                                                 <button data-toggle="modal" data-target="#addtocart" title=" Add to Wishlist"><i class="ti-heart"></i></button>
@@ -171,9 +171,9 @@
                                             <div class="text-center">
 
                                                 {{-- <a href="{{route('product.single',[$store->shop->slug,$store->slug])}}"> --}}
-                                                <h5>{{number_format($store->price)}} Rwf</h5>
-                                                    <a href="{{route('al_product_details',$store->id)}}">
-                                                    <h6>{{$store->name}}</h6>
+                                                <h5>{{number_format($store->product->price)}} Rwf</h5>
+                                                    <a href="{{route('product.single',[Crypt::encryptString($store->vendor_id),Crypt::encryptString($store->id)])}}">
+                                                    <h6>{{$store->product->name}}</h6>
                                                 </a>
                                                 <div class="rating">
                                                     <i class="fa fa-star"></i>
