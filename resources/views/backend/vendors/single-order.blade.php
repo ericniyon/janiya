@@ -50,11 +50,11 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex">
-                                            <img src="{{asset(Storage::url($item->product->product->thumb->image))}}" 
+                                            <img src=""
                                             height="40" width="40" class="rounded" alt="">
                                             <span class="mx-1"></span>
                                             <div class="d-flex flex-column">
-                                                <span>{{$item->product->name}}</span>
+                                                <span></span>
                                                 <span><strong>Shop: &nbsp;&nbsp;</strong>{{$item->shopName->shop_name}}</span>
                                             </div>
                                         </div>

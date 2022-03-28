@@ -15,8 +15,16 @@
                     <option value="">Select Product Valiation</option>
                     @foreach ($product->attributes()->where('quantity','>',3)->get() as $item)
                         <option value="{{$item->id}}">Size: {{$item->size}},  Color: {{$item->color}}</option>
+
                     @endforeach
                 </select>
+
+                <div class="info">
+                    @foreach ($product->attributes()->where('quantity','>',3)->get() as $item)
+                    <span>{{ $item->color }}|{{ $item->size }}&backcong;<small>{{ $item->quantity }}</small></span>
+                    @endforeach
+                </div>
+
                 @error('items.'.$index.'attribute')
                     <span class="invalid-feedback" role="alert">{{$message}}</span>
                 @enderror

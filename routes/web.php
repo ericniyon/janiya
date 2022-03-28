@@ -127,6 +127,8 @@ Route::middleware('auth')->group(function(){
 });
 
 
+
+
 Route::get('pro/{id}', [HomeController::class, 'al_product_details'] )->name('al_product_details');
 Route::get('about', [HomeController::class, 'about'] )->name('about');
 Route::get('contact', [HomeController::class, 'contact'] )->name('contact');
@@ -137,6 +139,15 @@ Route::get('cart/content',  [CartController::class, 'cartContents'])->name('add-
 
 Route::get('invoce', function(){
     return view('email.orderMail');
+});
+
+Route::get('failed', function(){
+    return view('frontend.pages.failed');
+});
+
+
+Route::get('payment_success', function(){
+    return view('frontend.pages.payment_success');
 });
 
 

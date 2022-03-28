@@ -52,32 +52,23 @@
                                                         <input type="hidden" name="product_attribute_id" value="{{ $var->product_attribute_id }}">
 
                                                         <div class="form">
-                                                            <div class="form-group">
+                                                            <div class="form-group" hidden>
                                                                 <label for="validationCustom01" class="mb-1">Color :</label>
 
-                                                                <select name="color" id="" class="form-control">
-                                                                    <option value="">----- Select Color -----</option>
-                                                                    <option value="Red">Red</option>
-                                                                    <option value="Blue">Blue</option>
-                                                                    <option value="Black">Black</option>
-
+                                                                <select name="color"  id="" class="form-control">
+                                                                                                                                                                                                        <option value="{{ $var->color }}">{{ $var->color }}</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="form-group mb-0">
+                                                            <div class="form-group mb-0" hidden>
                                                                 <label for="validationCustom02" class="mb-1">Size :</label>
 
                                                                 <select name="size" id="" class="form-control">
-                                                                    <option value="">----- Select Size -----</option>
-                                                                    <option value="S">SM</option>
-
-                                                                    <option value="L">L</option>
-                                                                    <option value="XL">XL</option>
-
+                                                                    <option value="{{ $var->size }}">{{ $var->size }}</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group mb-0">
                                                                 <label for="validationCustom02" class="mb-1">Quantity :</label>
-                                                                <input class="form-control" name="quantity" id="validationCustom02" type="number">
+                                                                <input class="form-control" name="quantity" id="validationCustom02" type="number" value="{{ $var->quantity }}">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

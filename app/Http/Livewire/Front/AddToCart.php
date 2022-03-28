@@ -19,6 +19,7 @@ class AddToCart extends Component
     public function setColor($color)
     {
         $this->color = $color;
+        
     }
 
     public function setSize($size)

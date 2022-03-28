@@ -48,9 +48,9 @@ class CheckoutController extends Controller
             'customer' => [
                 'email' => 'niyoeri6@gmail.com',
 
-             ],
+            ],
             'meta' => [
-               'price' => $amount
+            'price' => $amount
             ],
 
             'customizations' => [
@@ -94,7 +94,7 @@ class CheckoutController extends Controller
 
             if ($res->status == 'success') {
                  $link = $res->data->link;
-                 $this->insterOrderIntoTable($req,'Completed');
+                 $this->insterOrderIntoTable($req,'Pending');
                  return redirect($link);
                 }
                 if ($res->status == 'cancelled') {
@@ -111,19 +111,22 @@ class CheckoutController extends Controller
 
 
     public function proccess(Request $request)
-  {
+{
 
-      $status= $request->status;
-      $tx_ref= $request->tx_ref;
-      $txid= $request->transaction_id;
-      if($status == 'cancelled'){
-       return redirect('/shop');
-     }
-     elseif($status == 'failed'){
-         echo "Transaction failed";
+    $status= $request->status;
+    $tx_ref= $request->tx_ref;
+    $txid= $request->transaction_id;
+
+    $final_status = '';
+
+    if($status == 'cancelled'){
+    return redirect('/shop');
+    }
+    elseif($status == 'failed'){
+        //  echo "Transaction failed";
+        return redirect('failed');
        }
      elseif($status == 'successful'){
-         echo "Transaction successful";
          $curl = curl_init();
          curl_setopt_array($curl, array(
              CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/{$txid}/verify",
@@ -145,7 +148,7 @@ class CheckoutController extends Controller
            curl_close($curl);
 
          $result= json_decode($response);
-        //  return $result->data;
+        //  return $result->data->status;
          if ($result->data->status == 'successful') {
              Transaction::create([
                 'tx_ref' => $result->data->tx_ref,
@@ -157,9 +160,9 @@ class CheckoutController extends Controller
                 'phone_number' => $result->data->customer->phone_number,
                 'email' => $result->data->customer->email,
                 'status' => $result->data->status,
-             ]);
+            ]);
 
-
+            return redirect('payment_success');
          }
          else{
              echo "We could not procces your payment";
@@ -187,9 +190,13 @@ class CheckoutController extends Controller
         'Status'=>$status,
         'total'=>\Cart::getTotal() - getDiscount(),
     ]);
+    // echo \Cart::getContent();
+
+    $request->Session()->put('order_id',$order->id);
+
     foreach(\Cart::getContent() as $item){
         $order->items()->create([
-            'product_id'=>$item->id,
+            'product_id'=> $item->store ? $item->store : null,
             'price'=>$item->price,
 
             'shop'=>$item->attributes['shop'],
@@ -197,6 +204,8 @@ class CheckoutController extends Controller
             'size'=>$item->attributes['size'],
             'quantity'=>$item->quantity,
         ]);
+
+        // echo $order;
     }
     if(Cookie::has('referredBy')){
         referencedBy()->increment('partner_total_sales');

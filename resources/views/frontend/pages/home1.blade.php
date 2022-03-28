@@ -205,7 +205,7 @@
                         <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}">
                             <h6>{{ $product->name }}</h6>
                         </a>
-                        <h4>{{ $product->price }}</h4>
+                        <h4>{{ money($product->price) }}</h4>
                     </div>
                 </div>
                 @endforeach

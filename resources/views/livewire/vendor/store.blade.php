@@ -14,8 +14,8 @@
                 <div class="col-12 col-md-4 mt-1">
                     <div class="row">
                         <div class="col-md-5">
-                            <img src="{{asset(Storage::url($product->thumb->image))}}" class="rounded img-responsive w-100"
-                             height="150">
+                            <img src="{{$product->thumb()->exists() ? asset(Storage::url($product->thumb->image)) : asset('assets/images/2.jpg')}}" class="rounded img-responsive w-100"
+                            height="150">
                             <h5 class="text-center">{{$product->name}}</h5>
                             <h4 class="text-center font-weight-bold"></h4>
                         </div>

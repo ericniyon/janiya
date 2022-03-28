@@ -13,17 +13,17 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <input type="search" wire:model.debounce.500="searchKey" id="" class="form-control" 
+                <input type="search" wire:model.debounce.500="searchKey" id="" class="form-control"
                 placeholder="search order">
             </div>
             <div class="col-md-3 d-flex align-items-center">
                 <label for="" class="mt-2 mr-2">From: </label>
-                <input type="date" wire:model.lazy="from" id="" class="form-control" 
+                <input type="date" wire:model.lazy="from" id="" class="form-control"
                 min='2022-01-01' max="{{date('Y-d-m')}}">
             </div>
             <div class="col-md-3 d-flex align-items-center">
                 <label for="" class="mt-2 mr-2">To: </label>
-                <input type="date" wire:model.lazy="until" id="" class="form-control" 
+                <input type="date" wire:model.lazy="until" id="" class="form-control"
                 min='2022-01-01' max="{{date('Y-d-m')}}">
             </div>
             <div class="col-md-2">
@@ -59,7 +59,7 @@
                     <tr>
                       <th scope="row">{{$loop->iteration}}</th>
                       <td>
-                          <a href="{{route('vendor.orders.single',\Crypt::encryptString($order->id))}}" class="d-flex flex-column">
+                          <a href="{{route('vendor.orders.single',Crypt::encryptString($order->id))}}" class="d-flex flex-column">
                             <span>{{$order->orderNo}}</span>
                             <span><strong class="mr-1">Items: </strong>
                             {{$order->items()->where('shop',Auth::guard('vendor')->id())->count()}}
@@ -94,9 +94,9 @@
                             <a class="btn btn-secondary bt-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{$order->Status}}
                             </a>
-                          
+
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                              <button {{($order->Status=='Paid')?'disabled':''}} class="dropdown-item" 
+                              <button {{($order->Status=='Paid')?'disabled':''}} class="dropdown-item"
                               wire:click.prevent="changeStatus('Pending',{{$order->id}})">Pending
                               </button>
                               <button {{($order->Status=='Paid')?'disabled':''}} wire:click.prevent="changeStatus('Paid',{{$order->id}})"
@@ -105,22 +105,22 @@
                               <button {{($order->Status=='Paid')?'disabled':''}} wire:click.prevent="changeStatus('On Delivery',{{$order->id}})"
                                  class="dropdown-item">On Delivery
                               </button>
-                              <button {{($order->Status=='Paid')?'disabled':''}} wire:click.prevent="changeStatus('Completed',{{$order->id}})" 
+                              <button {{($order->Status=='Paid')?'disabled':''}} wire:click.prevent="changeStatus('Completed',{{$order->id}})"
                                 class="dropdown-item">Completed
                               </button>
-                              <button {{($order->Status=='Paid')?'disabled':''}} class="dropdown-item" 
+                              <button {{($order->Status=='Paid')?'disabled':''}} class="dropdown-item"
                               wire:click.prevent="changeStatus('Error',{{$order->id}})">Error
                               </button>
-                              <button {{($order->Status=='Paid')?'disabled':''}} class="dropdown-item" 
+                              <button {{($order->Status=='Paid')?'disabled':''}} class="dropdown-item"
                               wire:click.prevent="changeStatus('Cancelled',{{$order->id}})">Cancelled
                               </button>
                             </div>
                           </div>
                       </td>
                       <td>{{$order->created_at}}</td>
-                    </tr> 
+                    </tr>
                     @empty
-                        
+
                     @endforelse
                 </tbody>
               </table>

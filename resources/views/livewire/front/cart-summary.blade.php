@@ -3,7 +3,7 @@
     <li>
         <div class="media">
             <div class="media-body">
-                <h4>{{$item->model->name}}</h4>
+                {{-- <h4>{{$item->model->name}}</h4> --}}
                 {{-- <a href="#">
                 </a> --}}
                 <h4><span>{{$item->quantity}} x {{$item->price}} Rwf</span></h4>
