@@ -25,8 +25,6 @@
         </div>
     </div>
     <!-- breadcrumb End -->
-
-
     <!-- section start -->
     <section>
         <div class="collection-wrapper">
@@ -80,7 +78,7 @@
                                 </div>
                                 <h6>120 ratings </h6>
                             </div>
-                            <form action="{{route('add.to.cart',$product->id)}}" method="POST">
+                            <form action="{{route('add.to.cart',$product->id)}}" method="POST" id="Add-to-cart-form">
                                 @csrf
                                 <div class="label-section">
                                     <span class="badge badge-grey-color">#1 Best seller</span>
@@ -96,7 +94,7 @@
                                         </li></label>
                                     @endforeach
                                 </ul>
-                                <input type="text" value="{{$vendor->id}}" name="vendor">
+                                <input type="hidden" value="{{$vendor->id}}" name="vendor">
                                 <div id="selectSize" class="addeffect-section product-description border-product">
                                     <h6 class="product-title size-text">select size <span>
                                         <a href="" data-bs-toggle="modal"
@@ -138,7 +136,8 @@
                                     </div>
                                 </div>
                                 <div class="product-buttons">
-                                    <button type="submit" class="btn btn-solid hover-solid btn-animation ">
+                                    <button type="submit" class="btn btn-solid hover-solid btn-animation"
+                                   >
                                         <i class="fa fa-shopping-cart me-1" aria-hidden="true"></i> add to cart</button>
                                     <a href="#" class="btn btn-solid">
                                         <i class="fa fa-bookmark fz-16 me-2" aria-hidden="true"></i>wishlist</a>
