@@ -253,4 +253,3 @@
     </div>
     <!-- added to cart notification -->
 @endsection
-
