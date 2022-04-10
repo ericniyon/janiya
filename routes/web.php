@@ -105,9 +105,11 @@ Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name(
     Route::get('orders/view/{order}',[StoresController::class,'singleOrder'])->name('orders.single');
     Route::post('my-store/{id}',[StoresController::class,'storeUpdates'])->name('store_update');
 
-
     // coupons
     Route::view('coupons','backend.vendors.coupons')->name('coupons');
+    // Shopping Cart
+    Route::view('shopping-cart', 'backend.vendors.cart')->name('cart');
+    Route::view('order-checkout', 'backend.vendors.checkout')->name('checkout');
 
 });
 

@@ -12,7 +12,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OrderNotification;
 use App\Mail\OrderMail;
+use App\Models\Product;
 use Illuminate\Support\Facades\Mail;
+use Darryldecode\Cart\Cart;
 
 class SingleShop extends Component
 {
@@ -61,34 +63,50 @@ class SingleShop extends Component
 
     public function store()
     {
-        $this->validate([
-            'items.*.attribute'=>'required|integer',
-            'items.*.order_quantity'=>'required|integer|min:5|lte:items.*.finalquantity',
-        ]);
-        $store = Store::create([
-            'vendor_id'=>Auth::guard('vendor')->id(),
-            'product_id'=>$this->product->id,
-        ]);
+        // $this->validate([
+        //     'items.*.attribute'=>'required|integer',
+        //     'items.*.order_quantity'=>'required|integer|min:5|lte:items.*.finalquantity',
+        // ]);
+
         foreach($this->items as $key=>$item){
             $attribute = ProductAttribute::findOrFail($item['attribute']);
-            $stored_item = $store->valiations()->create([
-                'product_attribute_id'=>$attribute->id,
-                'quantity'=>$item['order_quantity'],
-                'size'=>$attribute->size,
-                'color'=>$attribute->color,
-            ]);
-
-            $attribute->update(['quantity'=>$attribute->quantity - $item['order_quantity']]);
+            \Cart::add(array(
+                'id' => $attribute->id, // inique row ID
+                'name' => $this->product->name,
+                'price' => $this->product->price,
+                'quantity' => $item['order_quantity'],
+                'attributes' => array(
+                    'productID'=>$this->product->id,
+                    'size'=>$attribute->size,
+                    'color'=>$attribute->color,
+                ),
+                'associatedModel' => $attribute,
+            ));
         }
+        // $store = Store::create([
+        //     'vendor_id'=>Auth::guard('vendor')->id(),
+        //     'product_id'=>$this->product->id,
+        // ]);
+        // foreach($this->items as $key=>$item){
+        //     $attribute = ProductAttribute::findOrFail($item['attribute']);
+        //     $stored_item = $store->valiations()->create([
+        //         'product_attribute_id'=>$attribute->id,
+        //         'quantity'=>$item['order_quantity'],
+        //         'size'=>$attribute->size,
+        //         'color'=>$attribute->color,
+        //     ]);
 
-        $store->orders()->create([
-            'total_amount'=>$store->product->price * $store->valiations()->sum('quantity'),
-        ]);
-        session()->flash('success',$this->product->name.' Added into store successfully!');
+        //     $attribute->update(['quantity'=>$attribute->quantity - $item['order_quantity']]);
+        // }
+
+        // $store->orders()->create([
+        //     'total_amount'=>$store->product->price * $store->valiations()->sum('quantity'),
+        // ]);
+        session()->flash('success',$this->product->name.' Added into Cart successfully!');
         $this->reset();
         // return $store;
-        $user = $store->shop;
-        Mail::to($user)->send(new OrderMail($store));
+        // $user = $store->shop;
+        // Mail::to($user)->send(new OrderMail($store));
 
         // Notification::send($user, new OrderMail('Eric NIYONKURU', 'Kimihurura', '0787283351'));
         return to_route('vendor.store');

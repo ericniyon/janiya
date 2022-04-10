@@ -31,7 +31,7 @@
             </div>
             <input name="items[{{$index}}][finalquantity]" type="hidden"
             wire:model="items.{{$index}}.finalquantity" class="form-control">
-            <div class="form-group col-md-1 pt-3 d-flex justify-content-end align-items-center">
+            <div class="form-group col-md-2 pt-3 d-flex justify-content-end align-items-center">
                 <button class="btn btn-outline-none text-success p-2 mr-2" wire:click.prevent="addNewRow">
                     <i class="fa fa-plus"></i>
                 </button>
@@ -44,7 +44,8 @@
         </div>
         @endforeach
         <div class="form-group">
-            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-sm btn-secondary">Submit</button>
         </div>
     </form>
 </div>
