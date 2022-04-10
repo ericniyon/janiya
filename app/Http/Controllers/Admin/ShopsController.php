@@ -37,7 +37,6 @@ class ShopsController extends Controller
             'profile'=>$profile,
             'password'=>Hash::make($password),
         ]);
-
         return back()->with('success','Vendor Added Successfully!');
     }
 

@@ -13,6 +13,35 @@
 
                 <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize-2"></i></a></li>
 
+                @if (Auth::guard('vendor')->check() && !Cart::isEmpty())
+                <li class="onhover-dropdown"><i data-feather="shopping-cart"></i>
+                    <span class="badge badge-pill badge-primary pull-right notification-badge">{{Cart::getContent()->count()}}</span>
+                    <span class="dot"></span>
+                    <ul class="notification-dropdown onhover-show-div p-0">
+                        <li>Shopping Cart Content<span class="badge badge-pill badge-primary pull-right">{{Cart::getContent()->count()}}</span></li>
+                        @foreach (Cart::getContent() as $item)
+                        <li>
+                            <div class="media">
+                                <div class="media-body">
+                                    <h6 class="mt-0 d-flex text-secondary"><span>
+                                        <i class="shopping-color" data-feather="shopping-bag"></i>
+                                        </span>
+                                        <span class="d-flex justify-content-between w-100">
+                                            <span>{{$item->name}}, {{$item->attributes['size'].__(', ').$item->attributes['color']}}</span><span>{{$item->quantity}} X {{number_format($item->price)}}Rwf</span>
+                                        </span>
+                                    </h6>
+                                    {{-- <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer.</p> --}}
+                                </div>
+                            </div>
+                        </li>
+                        @endforeach
+                        <li class="txt-dark d-flex justify-content-between">
+                            {{-- <a href="{{route('vendor.checkout')}}">Checkout</a> --}}
+                            <a href="{{route('vendor.cart')}}">View Cart</a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
                 <li class="onhover-dropdown"><i data-feather="bell"></i><span class="badge badge-pill badge-primary pull-right notification-badge">3</span><span class="dot"></span>
                     <ul class="notification-dropdown onhover-show-div p-0">
                         <li>Notification <span class="badge badge-pill badge-primary pull-right">3</span></li>
