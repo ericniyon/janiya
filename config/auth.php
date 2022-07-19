@@ -49,7 +49,12 @@ return [
         'vendor' => [
             'driver' => 'session',
             'provider' => 'vendors',
+        ],        
+        'userApi' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
         ],
+
     ],
 
     /*
