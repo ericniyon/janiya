@@ -70,7 +70,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = Vendor::create([
+        $user = Vendor::create([ 
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,

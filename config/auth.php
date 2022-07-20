@@ -53,7 +53,17 @@ return [
         'userApi' => [
             'driver' => 'jwt',
             'provider' => 'users',
+        ],      
+        'vendorApi' => [
+            'driver' => 'jwt',
+            'provider' => 'vendors',
+        ],     
+        'adminApi' => [
+            'driver' => 'jwt',
+            'provider' => 'vendors',
         ],
+
+
 
     ],
 
