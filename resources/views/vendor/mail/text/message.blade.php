@@ -9,22 +9,6 @@
     {{-- Body --}}
     {{ $slot }}
 
-    {{-- Subcopy --}}
-    @isset($subcopy)
-        @slot('subcopy')
-            @component('mail::subcopy')
-                {{ $subcopy }}
-            @endcomponent
-        @endslot
-    @endisset
-
-
-    @slot('table')
-    @component('mail::table')
-    {{ $subcopy }}
-    @endcomponent
-    @endslot
-
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')

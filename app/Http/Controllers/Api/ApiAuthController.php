@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ResetApiPassword;
+
 
 class ApiAuthController extends Controller
 {
@@ -19,7 +24,7 @@ class ApiAuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:userApi', ['except' => ['login','register']]);
+        $this->middleware('auth:userApi', ['except' => ['login','register','sendRestLink','checkPin','resetPassword']]);
     }
 
     /**
@@ -98,5 +103,142 @@ class ApiAuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth('userApi')->factory()->getTTL() * 60
         ]);
+    }
+
+    public function sendRestLink(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'email' => 'required|exists:users,email'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        $password_reset = \DB::table('password_resets')
+                ->where('email', $request->email)
+                ->delete();
+
+        $token = random_int(100000, 999999);
+        $password_reset = \DB::table('password_resets')->insert([
+            'email' =>$request->email,
+            'token' =>$token,
+            'created_at' => Carbon::now()
+        ]);
+
+        if ($password_reset) {
+            // Mail::to($request->all()['email'])->send(new ResetApiPassword($token));
+
+            return response()->json(
+                [
+                    'success' => true, 
+                    'message' => "Please check your email for a 6 digit pin"
+                ], 
+                200
+            );
+        }
+
+        return response()->json([
+                'message' => 'Successfully set reset link token',
+                'token' => $token
+            ]);
+    }
+
+    public function checkPin(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'pin' => 'required|exists:password_resets,token|min:6|max:6',
+            'email' => 'required|exists:password_resets,email'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $check = \DB::table('password_resets')->where([
+            ['token', $request->all()['pin']],
+            ['email', $request->all()['email']],
+        ]);
+
+        if ($check->exists()) {
+            $difference = Carbon::now()->diffInSeconds($check->first()->created_at);
+            if ($difference > 3600) {
+                return response()->json(['success' => false, 'message' => "Token Expired"], 400);
+            }
+    
+            \DB::table('password_resets')->where([
+                ['token', $request->all()['pin']],
+                ['email', $request->all()['email']],
+            ])->delete();
+            $token = \Str::random(64);
+    
+            \DB::table('password_resets')->insert([
+                'email' =>$request->email,
+                'token' =>$token,
+                'created_at' => Carbon::now()
+            ]);
+
+            return response()->json(
+                [
+                    'success' => true, 
+                    'message' => "You can now reset your password",
+                    'token' => $token,
+                ], 
+                200
+                );
+        } else {
+            return response()->json(
+                [
+                    'success' => false, 
+                    'message' => "Invalid token"
+                ], 
+                401
+            );
+        }
+    }
+
+    public function resetPassword(Request $request)
+    {        
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'token' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'message' => $validator->errors()], 422);
+        }
+
+        $check = \DB::table('password_resets')->where([
+            ['token', $request->all()['token']],
+            ['email', $request->all()['email']],
+        ]);
+
+        if (!$check->exists()) {
+            return response()->json(
+                [
+                    'success' => false, 
+                    'message' => "Invalid token"
+                ], 
+                401
+            );
+        }
+
+        \DB::table('password_resets')->where([
+            ['token', $request->all()['token']],
+            ['email', $request->all()['email']],
+        ])->delete();
+
+        $user = User::where('email',$request->email);
+        $user->update([
+            'password'=>Hash::make($request->password)
+        ]);
+
+        return response()->json(
+            [
+                'success' => true, 
+                'message' => "Your password has been reset"
+            ], 
+            200
+        );
     }
 }
