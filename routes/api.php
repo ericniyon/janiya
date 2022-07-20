@@ -58,15 +58,15 @@ Route::group([
  
     Route::post(
         '/forgot-password', 
-        [ApiAuthController::class, 'sendRestLink']
+        [ApiVendorAuthController::class, 'sendRestLink']
     );
     Route::post(
         '/pin-check', 
-        [ApiAuthController::class, 'checkPin']
+        [ApiVendorAuthController::class, 'checkPin']
     );
     Route::post(
         '/reset-password', 
-        [ApiAuthController::class, 'resetPassword']
+        [ApiVendorAuthController::class, 'resetPassword']
     );
 });
 
@@ -83,14 +83,14 @@ Route::group([
 
     Route::post(
         '/forgot-password', 
-        [ApiAuthController::class, 'sendRestLink']
+        [ApiAdminAuthController::class, 'sendRestLink']
     );
     Route::post(
         '/pin-check', 
-        [ApiAuthController::class, 'checkPin']
+        [ApiAdminAuthController::class, 'checkPin']
     );
     Route::post(
         '/reset-password', 
-        [ApiAuthController::class, 'resetPassword']
+        [ApiAdminAuthController::class, 'resetPassword']
     );
 });

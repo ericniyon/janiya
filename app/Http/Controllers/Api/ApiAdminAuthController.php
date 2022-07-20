@@ -81,7 +81,7 @@ class ApiAdminAuthController extends Controller
     public function sendRestLink(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'email' => 'required|exists:vendors,email'
+            'email' => 'required|exists:admins,email'
         ]);
 
         if ($validator->fails()) {
@@ -201,7 +201,7 @@ class ApiAdminAuthController extends Controller
             ['email', $request->all()['email']],
         ])->delete();
 
-        $user = Vendor::where('email',$request->email);
+        $user = Admin::where('email',$request->email);
         $user->update([
             'password'=>Hash::make($request->password)
         ]);
