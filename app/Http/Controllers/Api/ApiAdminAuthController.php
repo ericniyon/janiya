@@ -31,6 +31,59 @@ class ApiAdminAuthController extends Controller
      * 
      * @return \Illuminate\Http\JsonResponse
      */
+
+    /**
+     * @OA\Post(
+     * path="/api/admin/login",
+     * summary="Sign in",
+     * description="Login by email, password",
+     * operationId="authAdminLogin",
+     * tags={"Admin Auth"}, 
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="use email confirmation to be authenticated",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="password",
+     *          description="use password confirmation to be authenticated",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull logged in."
+     *     ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function login(Request $req)
     {
         $validator = Validator::make($req->all(),[
@@ -53,6 +106,37 @@ class ApiAdminAuthController extends Controller
      * Log the user out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse
+     */
+      /**
+     * @OA\Get(
+     *      path="/api/admin/logout",
+     *      operationId="logoutAdmin",
+     *      tags={"Admin Auth"},
+     *      summary="Get out of System",
+     *      description="Take out of sytem the users",
+     *      security={{"bearer_token":{}}},
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     *     )
      */
     public function logout()
     {
@@ -78,6 +162,49 @@ class ApiAdminAuthController extends Controller
     }
 
 
+    /**
+     * @OA\Post(
+     * path="/api/admin/forgot-password",
+     * summary="Request reset pin",
+     * description="Request by email",
+     * operationId="PinReqAdmin",
+     * tags={"Admin Auth"}, 
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="use email to generate pin",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull pin request."
+     *     ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function sendRestLink(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -116,6 +243,58 @@ class ApiAdminAuthController extends Controller
             ]);
     }
 
+    /**
+     * @OA\Post(
+     * path="/api/admin/pin-check",
+     * summary="check reset pin",
+     * description="check by email, pin",
+     * operationId="PinCheckAdmin",
+     * tags={"Admin Auth"}, 
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="use email to check pin",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="pin",
+     *          description="use pin received via email to check if valid",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull pin request."
+     *     ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function checkPin(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -169,6 +348,76 @@ class ApiAdminAuthController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     * path="/api/admin/reset-password",
+     * summary="reset forgotten password",
+     * description="reset password by email, newPassword, and token",
+     * operationId="PasswordResetAdmin",
+     * tags={"Admin Auth"}, 
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="use email to reset password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="token",
+     *          description="use token from check pin request to reset password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="password",
+     *          description="set new password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="password_confirmation",
+     *          description="confirm new password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull pin request."
+     *     ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function resetPassword(Request $request)
     {        
         $validator = Validator::make($request->all(), [

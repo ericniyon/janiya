@@ -31,6 +31,61 @@ class ApiVendorAuthController extends Controller
      * 
      * @return \Illuminate\Http\JsonResponse
      */
+
+    /**
+     * @OA\Post(
+     * path="/api/vendor/login",
+     * summary="Sign in",
+     * description="Login by email, password",
+     * operationId="authVendorLogin",
+     * tags={"Vendor Auth"}, 
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="use email confirmation to be authenticated",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="password",
+     *          description="use password confirmation to be authenticated",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull logged in."
+     *     ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
+
+
     public function login(Request $req)
     {
         $validator = Validator::make($req->all(),[
@@ -48,7 +103,90 @@ class ApiVendorAuthController extends Controller
 
         return $this->respondWithToken($token);
     }
-
+    /**
+     * @OA\Post(
+     *      path="/api/vendor/register",
+     *      operationId="registerVendor",
+     *      tags={"Vendor Auth"},
+     *      summary="Register new vendor",
+     *      description="Register new record and return inserted data", 
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="use email as a part of your credential",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="name",
+     *          description="use name as a part of you profile",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="shop_name",
+     *          description="shop name must be unique",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="phone",
+     *          description="use telephone as a part of you contact",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="password",
+     *          description="use password as a part of you credential",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="password_confirmation",
+     *          description="use password confirmation to confirm password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function register(Request $req)
     {
         $validator = Validator::make($req->all(),[
@@ -78,6 +216,38 @@ class ApiVendorAuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+
+      /**
+     * @OA\Get(
+     *      path="/api/vendor/logout",
+     *      operationId="logoutVendor",
+     *      tags={"Vendor Auth"},
+     *      summary="Get out of System",
+     *      description="Take out of sytem the users",
+     *      security={{"bearer_token":{}}},
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     *     )
+     */
     public function logout()
     {
         auth('vendorApi')->logout();
@@ -100,6 +270,52 @@ class ApiVendorAuthController extends Controller
             'expires_in' => auth('vendorApi')->factory()->getTTL() * 60
         ]);
     }
+
+
+    /**
+     * @OA\Post(
+     * path="/api/vendor/forgot-password",
+     * summary="Request reset pin",
+     * description="Request by email",
+     * operationId="PinReqVendor",
+     * tags={"Vendor Auth"}, 
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="use email to generate pin",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull pin request."
+     *     ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
+
 
     public function sendRestLink(Request $request)
     {
@@ -138,6 +354,60 @@ class ApiVendorAuthController extends Controller
                 'token' => $token
             ]);
     }
+
+
+    /**
+     * @OA\Post(
+     * path="/api/vendor/pin-check",
+     * summary="check reset pin",
+     * description="check by email, pin",
+     * operationId="PinCheckVendor",
+     * tags={"Vendor Auth"}, 
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="use email to check pin",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="pin",
+     *          description="use pin received via email to check if valid",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull pin request."
+     *     ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
 
     public function checkPin(Request $request)
     {
@@ -191,6 +461,78 @@ class ApiVendorAuthController extends Controller
             );
         }
     }
+
+
+    /**
+     * @OA\Post(
+     * path="/api/vendor/reset-password",
+     * summary="reset forgotten password",
+     * description="reset password by email, newPassword, and token",
+     * operationId="PasswordResetVendor",
+     * tags={"Vendor Auth"}, 
+     *      @OA\Parameter(
+     *          name="email",
+     *          description="use email to reset password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="token",
+     *          description="use token from check pin request to reset password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="password",
+     *          description="set new password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Parameter(
+     *          name="password_confirmation",
+     *          description="confirm new password",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull pin request."
+     *     ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
 
     public function resetPassword(Request $request)
     {        
