@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiVendorAuthController;
 use App\Http\Controllers\Api\ApiAdminAuthController;
 use App\Http\Controllers\Api\Admin\AdminController;
+use App\Http\Controller\Api\Admin\ShopController;
 use App\Http\Controllers\Api\ProAttController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
@@ -117,3 +118,6 @@ Route::group([
     Route::post('/addSize', [ProAttController::class,'save_size']);
     Route::delete('/deleteSize/{id}', [ProAttController::class,'delete_size']);
     Route::get('/size', [ProAttController::class,'showSize']);
+
+    //Shops route
+    Route::get('/shops', [ShopController::class,'show']);
