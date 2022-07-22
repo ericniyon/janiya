@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiVendorAuthController;
 use App\Http\Controllers\Api\ApiAdminAuthController;
+use App\Http\Controllers\Api\Admin\AdminController;
+use App\Http\Controllers\Api\ProAttController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 
@@ -31,15 +35,15 @@ Route::group([
     Route::get('/logout', [ApiAuthController::class,'logout']);
 
     Route::post(
-        '/forgot-password', 
+        '/forgot-password',
         [ApiAuthController::class, 'sendRestLink']
     );
     Route::post(
-        '/pin-check', 
+        '/pin-check',
         [ApiAuthController::class, 'checkPin']
     );
     Route::post(
-        '/reset-password', 
+        '/reset-password',
         [ApiAuthController::class, 'resetPassword']
     );
 
@@ -55,17 +59,17 @@ Route::group([
     Route::post('/login', [ApiVendorAuthController::class,'login']);
     Route::post('/register', [ApiVendorAuthController::class,'register']);
     Route::get('/logout', [ApiVendorAuthController::class,'logout']);
- 
+
     Route::post(
-        '/forgot-password', 
+        '/forgot-password',
         [ApiVendorAuthController::class, 'sendRestLink']
     );
     Route::post(
-        '/pin-check', 
+        '/pin-check',
         [ApiVendorAuthController::class, 'checkPin']
     );
     Route::post(
-        '/reset-password', 
+        '/reset-password',
         [ApiVendorAuthController::class, 'resetPassword']
     );
 });
@@ -82,15 +86,34 @@ Route::group([
     Route::get('/logout', [ApiAdminAuthController::class,'logout']);
 
     Route::post(
-        '/forgot-password', 
+        '/forgot-password',
         [ApiAdminAuthController::class, 'sendRestLink']
     );
     Route::post(
-        '/pin-check', 
+        '/pin-check',
         [ApiAdminAuthController::class, 'checkPin']
     );
     Route::post(
-        '/reset-password', 
+        '/reset-password',
         [ApiAdminAuthController::class, 'resetPassword']
     );
+
+    Route::get('/allTransaction', [AdminController::class,'all_transaction']);
 });
+
+    //product route
+    Route::post('/addProduct', [ProductController::class,'store']);
+    Route::get('/products', [ProductController::class,'show']);
+
+    //category route
+    Route::post('/addCategory', [CategoryController::class,'store']);
+    Route::get('/categories', [CategoryController::class,'show']);
+
+    //color and size route
+    Route::post('/addColor', [ProAttController::class,'save_color']);
+    Route::get('/colors', [ProAttController::class,'showColor']);
+    Route::delete('/deleteColor/{id}', [ProAttController::class,'delete_color']);
+
+    Route::post('/addSize', [ProAttController::class,'save_size']);
+    Route::delete('/deleteSize/{id}', [ProAttController::class,'delete_size']);
+    Route::get('/size', [ProAttController::class,'showSize']);

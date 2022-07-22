@@ -28,7 +28,7 @@ class ApiAdminAuthController extends Controller
 
     /**
      * Get a JWT via given credentials.
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
 
@@ -38,7 +38,7 @@ class ApiAdminAuthController extends Controller
      * summary="Sign in",
      * description="Login by email, password",
      * operationId="authAdminLogin",
-     * tags={"Admin Auth"}, 
+     * tags={"Admin Auth"},
      *      @OA\Parameter(
      *          name="email",
      *          description="use email confirmation to be authenticated",
@@ -168,7 +168,7 @@ class ApiAdminAuthController extends Controller
      * summary="Request reset pin",
      * description="Request by email",
      * operationId="PinReqAdmin",
-     * tags={"Admin Auth"}, 
+     * tags={"Admin Auth"},
      *      @OA\Parameter(
      *          name="email",
      *          description="use email to generate pin",
@@ -230,9 +230,9 @@ class ApiAdminAuthController extends Controller
 
             return response()->json(
                 [
-                    'success' => true, 
+                    'success' => true,
                     'message' => "Please check your email for a 6 digit pin"
-                ], 
+                ],
                 200
             );
         }
@@ -249,7 +249,7 @@ class ApiAdminAuthController extends Controller
      * summary="check reset pin",
      * description="check by email, pin",
      * operationId="PinCheckAdmin",
-     * tags={"Admin Auth"}, 
+     * tags={"Admin Auth"},
      *      @OA\Parameter(
      *          name="email",
      *          description="use email to check pin",
@@ -316,13 +316,13 @@ class ApiAdminAuthController extends Controller
             if ($difference > 3600) {
                 return response()->json(['success' => false, 'message' => "Token Expired"], 400);
             }
-    
+
             \DB::table('password_resets')->where([
                 ['token', $request->all()['pin']],
                 ['email', $request->all()['email']],
             ])->delete();
             $token = \Str::random(64);
-    
+
             \DB::table('password_resets')->insert([
                 'email' =>$request->email,
                 'token' =>$token,
@@ -331,18 +331,18 @@ class ApiAdminAuthController extends Controller
 
             return response()->json(
                 [
-                    'success' => true, 
+                    'success' => true,
                     'message' => "You can now reset your password",
                     'token' => $token,
-                ], 
+                ],
                 200
                 );
         } else {
             return response()->json(
                 [
-                    'success' => false, 
+                    'success' => false,
                     'message' => "Invalid token"
-                ], 
+                ],
                 401
             );
         }
@@ -354,7 +354,7 @@ class ApiAdminAuthController extends Controller
      * summary="reset forgotten password",
      * description="reset password by email, newPassword, and token",
      * operationId="PasswordResetAdmin",
-     * tags={"Admin Auth"}, 
+     * tags={"Admin Auth"},
      *      @OA\Parameter(
      *          name="email",
      *          description="use email to reset password",
@@ -419,7 +419,7 @@ class ApiAdminAuthController extends Controller
      * )
      */
     public function resetPassword(Request $request)
-    {        
+    {
         $validator = Validator::make($request->all(), [
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -438,9 +438,9 @@ class ApiAdminAuthController extends Controller
         if (!$check->exists()) {
             return response()->json(
                 [
-                    'success' => false, 
+                    'success' => false,
                     'message' => "Invalid token"
-                ], 
+                ],
                 401
             );
         }
@@ -457,9 +457,9 @@ class ApiAdminAuthController extends Controller
 
         return response()->json(
             [
-                'success' => true, 
+                'success' => true,
                 'message' => "Your password has been reset"
-            ], 
+            ],
             200
         );
     }

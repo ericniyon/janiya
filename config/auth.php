@@ -45,22 +45,22 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-        
+
         'vendor' => [
             'driver' => 'session',
             'provider' => 'vendors',
-        ],        
+        ],
         'userApi' => [
             'driver' => 'jwt',
             'provider' => 'users',
-        ],      
+        ],
         'vendorApi' => [
             'driver' => 'jwt',
             'provider' => 'vendors',
-        ],     
+        ],
         'adminApi' => [
             'driver' => 'jwt',
-            'provider' => 'vendors',
+            'provider' => 'admins',
         ],
 
 
