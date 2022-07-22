@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiVendorAuthController;
 use App\Http\Controllers\Api\ApiAdminAuthController;
 use App\Http\Controllers\Api\Admin\AdminController;
-use App\Http\Controller\Api\Admin\ShopController;
+use App\Http\Controllers\Api\Admin\ShopController;
 use App\Http\Controllers\Api\ProAttController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
@@ -100,6 +100,8 @@ Route::group([
     );
 
     Route::get('/allTransaction', [AdminController::class,'all_transaction']);
+    Route::post('/newShop', [ShopController::class,'store']);
+    Route::post('/updateShop/{id}', [ShopController::class,'edit']);
 });
 
     //product route

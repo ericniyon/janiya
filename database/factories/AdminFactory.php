@@ -19,8 +19,8 @@ class AdminFactory extends Factory
     {
         return [
             'name' => Str::random(10),
-            'email' => Str::random(5).'@gmail.com',
-            'phone' => '+250722696343',
+            'email' => 'admin@gmail.com',
+            'phone' => '250722696343',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
