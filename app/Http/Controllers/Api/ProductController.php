@@ -63,6 +63,61 @@ class ProductController extends Controller
         return response()->json(['status' => true,'message' => 'susseccfull Created'], 200);
     }
 
+    public function deleteProduc($product)
+    {
+        $check = Product::where('id', $product)
+                    ->get();
+        if ($check->count()) {
+            $results = Product::where('id', $product)
+                        ->delete();
+            return response()->json(['status' => true,'message' => 'susseccfull Deleted'], 200);
+        }else{
+            return response()->json(['status' => false,'message' => 'not deleted'], 200);
+        }
+    }
+
+
+    public function updateProduct($product, Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'name'=>'required|string|unique:products,name,'.$product,
+            'price'=>'required|integer|min:500|max:500000',
+            'details'=>'string|required|min:10|max:5000',
+            'image'=>'image|mimes:png,jpg,webp|sometimes',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+        $check = Product::where('id', $product)->count();
+        if (!$check>0) {
+            return response()->json(['status' => false,'message' => 'Product not exist !'], 200);
+        }
+
+        $results = Product::where('id', $product)
+            ->update([
+            'name'=>$request->name,
+            'slug'=>str()->slug($request->name),
+            'price'=>$request->price,
+            'description'=>$request->details,
+        ]);
+
+        if($request->file('image')) {
+            if(Product::where('id', $product)->product_image->exists()){
+                Storage::delete(Product::where('id', $product)->images->image);
+                Product::where('id', $product)->delete();
+            }
+            $fileimg = $request->file('image');
+            $path = $request->file('image')->move('products/gallery/', $product->name.$product->id.".".$fileimg->extension());
+            $product->images()->create([
+                'product_id'=>$product->id,
+                'image' => $photo,
+            ]);
+        }
+
+            return response()->json(['status' => true,'message' => 'susseccfull updated'], 200);
+    }
+
     public function updateAttribute(Request $request,ProductAttribute $attribute,)
     {
         $this->validate($request,[
@@ -108,37 +163,4 @@ class ProductController extends Controller
         return back()->with('success','Product updated Successfully!');
     }
 
-
-
-
-    public function updateProduct(Request $request,Product $product)
-    {
-        $this->validate($request,[
-            'name'=>'required|string|unique:products,name,'.$product->id,
-            'price'=>'required|integer|min:500|max:500000',
-            'details'=>'string|required|min:10|max:5000',
-            'image'=>'image|mimes:png,jpg,webp|sometimes',
-        ]);
-
-        $product->update([
-            'name'=>$request->name,
-            'slug'=>str()->slug($request->name),
-            'price'=>$request->price,
-            'description'=>$request->details,
-        ]);
-
-        if($request->hasFile('image')) {
-            if($product->images()->exists()){
-                Storage::delete($product->images->image);
-                $product->images->delete();
-            }
-            $photo = $request->file('image')->store('public/products/gallery');
-            $product->images()->create([
-                'product_id'=>$product->id,
-                'image' => $photo,
-            ]);
-        }
-
-        return to_route('admin.products.single',$product->slug)->with('success',$product->name.' Updated Successfully!');
-    }
 }

@@ -11,6 +11,16 @@ use Validator;
 
 class ShopController extends Controller
 {
+    public function show()
+    {
+        $shops = Vendor::orderBy('created_at', 'DESC')->get();
+        if ($shops) {
+            return response()->json(['status' => true, 'data' => $shops], 200);
+        }else {
+            return response()->json(['status' => false, 'data' => 'No data to display'], 200);
+        }
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -84,7 +94,17 @@ class ShopController extends Controller
         if ($data) {
             return response()->json(['status' => true, 'data' => 'Shop have been updated successfully'], 200);
         }else {
-            return response()->json(['status' => true, 'data' => 'Shop have not been updated','data'], 200);
+            return response()->json(['status' => true, 'false' => 'Shop have not been updated','data'], 200);
+        }
+    }
+
+    public function delete($shop)
+    {
+        $check = Vendor::where('id', $shop)->first();
+        if ($check) {
+            return response()->json(['status' => true, 'data' => 'Shop have been successfully deleted'], 200);
+        }else {
+            return response()->json(['status' => false, 'data' => 'Shop have not been deleted'], 200);
         }
     }
 }
