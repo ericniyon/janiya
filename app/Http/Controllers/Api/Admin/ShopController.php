@@ -11,6 +11,47 @@ use Validator;
 
 class ShopController extends Controller
 {
+    /**
+     * Create a new ApiAuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:adminApi', ['except' => ['show']]);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/api/shops",
+     *      operationId="getShop",
+     *      tags={"product"},
+     *      summary="get shops list",
+     *      description="select all shops stored in database",
+     *
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function show()
     {
         $shops = Vendor::orderBy('created_at', 'DESC')->get();
@@ -21,6 +62,54 @@ class ShopController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/admin/newShop",
+     *      operationId="registerShop",
+     *      tags={"product"},
+     *      summary="Register new shop",
+     *      description="Register new record and return inserted data",
+     *      security={{"bearer_token":{}}},
+     *
+    *     @OA\RequestBody(
+    *         @OA\JsonContent(),
+    *         @OA\MediaType(
+    *            mediaType="multipart/form-data",
+    *            @OA\Schema(
+    *               type="object",
+    *               required={"name","shop", "email", "phone", "details"},
+    *               @OA\Property(property="name", type="text"),
+    *               @OA\Property(property="shop", type="text"),
+    *               @OA\Property(property="email", type="text"),
+    *               @OA\Property(property="phone", type="text"),
+    *               @OA\Property(property="details", type="text"),
+    *               @OA\Property(property="profile", type="file"),
+    *            ),
+    *        ),
+    *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -36,10 +125,10 @@ class ShopController extends Controller
             return response()->json($validator->errors(), 400);
         }
         $password = "shop@123";
-        $profile="";
-        if ($request->hasFile('logo')) {
-            $fileName = str()->slug($request->shop).time().'.'.$request->logo->extension();
-            $profile = $request->logo->storeAs('vendors',$fileName,'public');
+        $profile=null;
+        if ($request->file('profile')) {
+            $fileimg = $request->file('profile');
+            $profile = $request->file('profile')->move('vendors/', str()->slug($request->shop).time().'.'.$request->profile->extension());
         }
         $data = Vendor::create([
             'name'=>$request->name,
@@ -56,6 +145,63 @@ class ShopController extends Controller
         return response()->json(['status' => true, 'data' => 'Shop have been generated successfully','data' => $data], 200);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/admin/updateShop/{id}",
+     *      operationId="updateShop",
+     *      tags={"product"},
+     *      summary="modify shop information",
+     *      description="update the shop information",
+     *      security={{"bearer_token":{}}},
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="enter id of shop to update",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *       ),
+     *
+    *     @OA\RequestBody(
+    *         @OA\JsonContent(),
+    *         @OA\MediaType(
+    *            mediaType="multipart/form-data",
+    *            @OA\Schema(
+    *               type="object",
+    *               required={"name","shop", "email", "phone", "details"},
+    *               @OA\Property(property="name", type="text"),
+    *               @OA\Property(property="shop", type="text"),
+    *               @OA\Property(property="email", type="text"),
+    *               @OA\Property(property="phone", type="text"),
+    *               @OA\Property(property="details", type="text"),
+    *               @OA\Property(property="profile", type="file"),
+    *            ),
+    *        ),
+    *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function edit($id, Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -98,6 +244,46 @@ class ShopController extends Controller
         }
     }
 
+    /**
+     * @OA\Delete(
+     *      path="/api/admin/deleteShop/{id}",
+     *      operationId="deleteShop",
+     *      tags={"product"},
+     *      summary="Delete shop using Id",
+     *      description="remove shop in database with size id",
+     *      security={{"bearer_token":{}}},
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="enter shop id to be removed",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function delete($shop)
     {
         $check = Vendor::where('id', $shop)->first();

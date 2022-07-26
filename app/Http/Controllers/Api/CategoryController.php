@@ -15,12 +15,97 @@ use Validator;
 
 class CategoryController extends Controller
 {
+    /**
+     * Create a new ApiAuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:adminApi', ['except' => ['show']]);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/api/categories",
+     *      operationId="getCategories",
+     *      tags={"product"},
+     *      summary="get categories list",
+     *      description="select all categories stored in database",
+     *
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function show()
     {
         $categories = ProductCategory::all();
         return response()->json(['status' => true,'data' => $categories], 200);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/addCategory",
+     *      operationId="registerCategory",
+     *      tags={"product"},
+     *      summary="Register new category",
+     *      description="Register new record and return inserted data",
+     *      security={{"bearer_token":{}}},
+     *
+    *     @OA\RequestBody(
+    *         @OA\JsonContent(),
+    *         @OA\MediaType(
+    *            mediaType="multipart/form-data",
+    *            @OA\Schema(
+    *               type="object",
+    *               required={"category_name","category_image"},
+    *               @OA\Property(property="category_name", type="text"),
+    *               @OA\Property(property="category_image", type="file"),
+    *            ),
+    *        ),
+    *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[

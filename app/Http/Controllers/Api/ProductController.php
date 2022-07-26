@@ -15,11 +15,101 @@ use Validator;
 
 class ProductController extends Controller
 {
+    /**
+     * Create a new ApiAuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:adminApi', ['except' => ['show']]);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/api/products",
+     *      operationId="getProduct",
+     *      tags={"product"},
+     *      summary="get product list",
+     *      description="select all product stored in database",
+     *
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function show(Product $product)
     {
         $categories = Product::select('name','id')->orderBy('name')->get();
         return response()->json(['status' => true,'data' => $categories], 200);
     }
+
+    /**
+     * @OA\Post(
+     *      path="/api/addProduct",
+     *      operationId="registerProduct",
+     *      tags={"product"},
+     *      summary="Register new product",
+     *      description="Register new record and return inserted data",
+     *      security={{"bearer_token":{}}},
+     *
+    *     @OA\RequestBody(
+    *         @OA\JsonContent(),
+    *         @OA\MediaType(
+    *            mediaType="multipart/form-data",
+    *            @OA\Schema(
+    *               type="object",
+    *               required={"name","price", "factory_price", "product_category_id", "description"},
+    *               @OA\Property(property="name", type="text"),
+    *               @OA\Property(property="price", type="text"),
+    *               @OA\Property(property="factory_price", type="text"),
+    *               @OA\Property(property="product_category_id", type="integer"),
+    *               @OA\Property(property="description", type="text"),
+    *               @OA\Property(property="product_image", type="file"),
+    *            ),
+    *        ),
+    *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -63,11 +153,52 @@ class ProductController extends Controller
         return response()->json(['status' => true,'message' => 'susseccfull Created'], 200);
     }
 
+    /**
+     * @OA\Delete(
+     *      path="/api/productDelete/{id}",
+     *      operationId="deleteProduct",
+     *      tags={"product"},
+     *      summary="Delete product using Id",
+     *      description="remove product in database with product id",
+     *      security={{"bearer_token":{}}},
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="enter product id to be removed",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
+
     public function deleteProduc($product)
     {
         $check = Product::where('id', $product)
                     ->get();
-        if ($check->count()) {
+        if ($check->count()>0) {
             $results = Product::where('id', $product)
                         ->delete();
             return response()->json(['status' => true,'message' => 'susseccfull Deleted'], 200);
@@ -77,6 +208,61 @@ class ProductController extends Controller
     }
 
 
+    /**
+     * @OA\Post(
+     *      path="/api/productUpdate/{id}",
+     *      operationId="updateProduct",
+     *      tags={"product"},
+     *      summary="update product",
+     *      description="update product that is arleady registered",
+     *      security={{"bearer_token":{}}},
+     *
+    *     @OA\RequestBody(
+    *         @OA\JsonContent(),
+    *         @OA\MediaType(
+    *            mediaType="multipart/form-data",
+    *            @OA\Schema(
+    *               type="object",
+    *               required={"name","price", "details"},
+    *               @OA\Property(property="name", type="text"),
+    *               @OA\Property(property="price", type="text"),
+    *               @OA\Property(property="details", type="text"),
+    *               @OA\Property(property="image", type="file"),
+    *            ),
+    *        ),
+    *    ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="enter product id to be updated",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad user Input",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
     public function updateProduct($product, Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -114,8 +300,7 @@ class ProductController extends Controller
                 'image' => $photo,
             ]);
         }
-
-            return response()->json(['status' => true,'message' => 'susseccfull updated'], 200);
+        return response()->json(['status' => true,'message' => 'susseccfull updated'], 200);
     }
 
     public function updateAttribute(Request $request,ProductAttribute $attribute,)

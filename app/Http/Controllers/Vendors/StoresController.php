@@ -48,7 +48,7 @@ class StoresController extends Controller
 
         ]);
 
-        return redirect()->back()->with('message', "Thank youo for updating");
+        return redirect()->back()->with('message', "Thank you for updating");
     }
 
 
