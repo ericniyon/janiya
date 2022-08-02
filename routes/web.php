@@ -7,10 +7,11 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ShopsController;
 use App\Http\Controllers\Admins\AdminController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Api\CheckoutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Size;
 use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\CheckoutController;
+// use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Vendors\StoresController;
 
 /*
@@ -93,7 +94,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('shops-orders',[AdminController::class,'shopsOrder'])->name('shops-orders');
     Route::get('janiya-orders',[AdminController::class,'janiyaOrders'])->name('janiya-orders');
 });
- 
+
 // Vendor's routes
 Route::middleware(['auth:vendor','confirmed','active'])->prefix('vendor')->name('vendor.')->group(function(){
     Route::view('/dashboard','backend.vendors.index')->name('dashboard');
@@ -136,6 +137,12 @@ Route::get('cart/content',  [CartController::class, 'cartContents'])->name('add-
 Route::get('invoce', function(){
     return view('email.orderMail');
 });
+
+Route::get('/sano', function()
+{
+    return view('test');
+});
+Route::post('/payment', [CheckoutController::class, 'payment'])->name('payment');
 
 
 require __DIR__.'/auth.php';

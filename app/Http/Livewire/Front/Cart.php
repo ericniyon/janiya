@@ -21,7 +21,7 @@ class Cart extends Component
 
     public function increase($proId)
     {
-        $this->increaseQuantity($proId);
+        $this->increaseQuantity($proId); 
         $this->emit('alert',['type'=>'success','message'=>'Cart quantity updated successfully']);
     }
 
@@ -58,7 +58,7 @@ class Cart extends Component
         $this->reset();
         return redirect('cart');
     }
-    
+
     public function removePromoCode()
     {
         removePromoCode();

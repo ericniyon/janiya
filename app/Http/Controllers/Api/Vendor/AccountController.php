@@ -324,49 +324,4 @@ class AccountController extends Controller
             return response()->json(['status' => 'success', 'message' => 'profile updated successfully!']);
         }
     }
-
-    /**
-     * @OA\Get(
-     *      path="/api/test",
-     *      operationId="userOrder",
-     *      tags={"account"},
-     *      summary="user orders",
-     *      description="get the user orders",
-     *      security={{"bearer_token":{}}},
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Bad user Input",
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Resource Not Found"
-     *      )
-     * )
-     */
-    public function clientOrder()
-    {
-        $orders = Auth::user()->orders()
-                        ->when($this->starting_date,function($query1){
-                            return $query1->whereDate('created_at','>=',$this->starting_date);
-                        })
-                        ->when($this->until,function($query){
-                            return $query->whereDate('created_at','>=',$this->until);
-                        })
-                        ->orderByDesc('created_at')
-                        ->get();
-        return response()->json(['status' =>'success','message' => $orders]);
-    }
 }

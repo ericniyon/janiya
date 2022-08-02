@@ -13,8 +13,10 @@ use App\Http\Controllers\Api\Admin\AffiliateController;
 use App\Http\Controllers\Api\Vendor\StoreController;
 use App\Http\Controllers\Api\Vendor\AccountController;
 use App\Http\Controllers\Api\ProAttController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CheckoutController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 
@@ -120,6 +122,16 @@ Route::group([
     Route::get('/becameAffiliator',[AccountController::class,'becomeAffiliate']);
     Route::post('/changePassword',[AccountController::class,'updatePassword']);
     Route::post('/updateProfile',[AccountController::class,'updateProfile']);
-    Route::get('/test',[AccountController::class,'clientOrder']);
 });
 
+
+Route::post('/addCart',[CartController::class,'cartAdd']);
+Route::get('/viewCart',[CartController::class,'view']);
+Route::put('/updateCart',[CartController::class,'update']);
+Route::delete('/deleteItemCart/{id}',[CartController::class,'remove']);
+Route::delete('/clearCart',[CartController::class,'removeAll']);
+Route::get('/totalCart',[CartController::class,'total']);
+Route::get('/itemPriceCart/{id}',[CartController::class,'singlePrice']);
+
+
+Route::post('/payment', [CheckoutController::class, 'payment']);

@@ -85,9 +85,6 @@ class CheckoutController extends Controller
             $response = curl_exec($curl);
             curl_close($curl);
 
-            // echo "<pre>";
-            // echo $response;
-            // echo "</pre>";
 
             $res= json_decode($response);
 
