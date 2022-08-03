@@ -135,3 +135,4 @@ Route::get('/itemPriceCart/{id}',[CartController::class,'singlePrice']);
 
 
 Route::post('/payment', [CheckoutController::class, 'payment']);
+Route::post('/paymentProcess', [CheckoutController::class, 'proccess']);
