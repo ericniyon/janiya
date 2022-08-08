@@ -16,7 +16,7 @@ class Vendor extends Authenticatable implements JWTSubject
         protected $guard = 'vendor';
 
         protected $fillable = [
-            'name', 'shop_name', 'email', 'phone', 'confirmed', 'active', 'details', 'slug', 
+            'name', 'shop_name', 'email', 'phone', 'confirmed', 'active', 'details', 'slug',
             'profile',
              'password',
              'banner',
@@ -64,6 +64,7 @@ class Vendor extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'user' => Vendor::where('email', $this->email)->get(),];
     }
 }

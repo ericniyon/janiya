@@ -20,7 +20,7 @@ class Admin extends Authenticatable implements JWTSubject
     ];
 
     protected $hidden = [
-        'password', 'remember_token', 
+        'password', 'remember_token',
     ];
 
     /**
@@ -40,6 +40,8 @@ class Admin extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'user' => Admin::where('email', $this->email)->get(),
+        ];
     }
 }

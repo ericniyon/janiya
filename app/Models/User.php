@@ -92,6 +92,8 @@ class User extends Authenticatable implements JWTSubject,CanResetPassword
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return [
+            'user' => User::where('email', $this->email)->get(),
+        ];
     }
 }
