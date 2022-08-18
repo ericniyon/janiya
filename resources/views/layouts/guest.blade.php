@@ -15,7 +15,8 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-    </head>
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/janiya-logo.jpg')}}"/>
+</head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}

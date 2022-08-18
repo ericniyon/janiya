@@ -10,7 +10,7 @@
             <div class="col-lg-6">
                 <div class="page-header-left">
                     <h3>Dashboard
-                        <small>{{config('app.name')}}</small>
+            <small>{{config('app.name')}}</small>
                     </h3>
                 </div>
             </div>

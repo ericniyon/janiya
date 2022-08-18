@@ -47,8 +47,9 @@ class ShopsController extends Controller
         return view('backend.admin.addEditShops', compact('vendor'));
     }
 
-    public function update(Vendor $vendor, Request $request)
+    public function update($id, Request $request)
     {
+        $vendor = Vendor::find($id);
         $this->validate($request,[
             'name'=>'required|string|min:3|max:120',
             'shop'=>'required|unique:vendors,shop_name,'.$vendor->id.'|string|min:3|max:120',

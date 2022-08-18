@@ -24,9 +24,9 @@ class ProductsController extends Controller
     {
         $this->validate($request,[
             'quantity'=>'required|integer',
-            'image'=>'sometimes|image|mimes:png,jpg,webp|max:750', 
+            'image'=>'sometimes|image|mimes:png,jpg,webp|max:750',
         ]);
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) { 
             if ($attribute->image) {
                 Storage::delete($attribute->image);
             }

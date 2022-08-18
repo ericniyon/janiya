@@ -14,7 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ResetApiPassword;
 
-class ApiVendorAuthController extends Controller 
+class ApiVendorAuthController extends Controller
 {
     /**
      * Create a new ApiAuthController instance.
@@ -28,7 +28,7 @@ class ApiVendorAuthController extends Controller
 
     /**
      * Get a JWT via given credentials.
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
 
@@ -38,7 +38,7 @@ class ApiVendorAuthController extends Controller
      * summary="Sign in",
      * description="Login by email, password",
      * operationId="authVendorLogin",
-     * tags={"Vendor Auth"}, 
+     * tags={"Vendor Auth"},
      *      @OA\Parameter(
      *          name="email",
      *          description="use email confirmation to be authenticated",
@@ -109,7 +109,7 @@ class ApiVendorAuthController extends Controller
      *      operationId="registerVendor",
      *      tags={"Vendor Auth"},
      *      summary="Register new vendor",
-     *      description="Register new record and return inserted data", 
+     *      description="Register new record and return inserted data",
      *      @OA\Parameter(
      *          name="email",
      *          description="use email as a part of your credential",
@@ -199,7 +199,7 @@ class ApiVendorAuthController extends Controller
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
-        } 
+        }
         $vendor = Vendor::create(array_merge(
             $validator->validated(),
             ['password' =>bcrypt($req->password)]
@@ -278,7 +278,7 @@ class ApiVendorAuthController extends Controller
      * summary="Request reset pin",
      * description="Request by email",
      * operationId="PinReqVendor",
-     * tags={"Vendor Auth"}, 
+     * tags={"Vendor Auth"},
      *      @OA\Parameter(
      *          name="email",
      *          description="use email to generate pin",
@@ -342,9 +342,9 @@ class ApiVendorAuthController extends Controller
 
             return response()->json(
                 [
-                    'success' => true, 
+                    'success' => true,
                     'message' => "Please check your email for a 6 digit pin"
-                ], 
+                ],
                 200
             );
         }
@@ -362,7 +362,7 @@ class ApiVendorAuthController extends Controller
      * summary="check reset pin",
      * description="check by email, pin",
      * operationId="PinCheckVendor",
-     * tags={"Vendor Auth"}, 
+     * tags={"Vendor Auth"},
      *      @OA\Parameter(
      *          name="email",
      *          description="use email to check pin",
@@ -430,13 +430,13 @@ class ApiVendorAuthController extends Controller
             if ($difference > 3600) {
                 return response()->json(['success' => false, 'message' => "Token Expired"], 400);
             }
-    
+
             \DB::table('password_resets')->where([
                 ['token', $request->all()['pin']],
                 ['email', $request->all()['email']],
             ])->delete();
             $token = \Str::random(64);
-    
+
             \DB::table('password_resets')->insert([
                 'email' =>$request->email,
                 'token' =>$token,
@@ -445,18 +445,18 @@ class ApiVendorAuthController extends Controller
 
             return response()->json(
                 [
-                    'success' => true, 
+                    'success' => true,
                     'message' => "You can now reset your password",
                     'token' => $token,
-                ], 
+                ],
                 200
                 );
         } else {
             return response()->json(
                 [
-                    'success' => false, 
+                    'success' => false,
                     'message' => "Invalid token"
-                ], 
+                ],
                 401
             );
         }
@@ -469,7 +469,7 @@ class ApiVendorAuthController extends Controller
      * summary="reset forgotten password",
      * description="reset password by email, newPassword, and token",
      * operationId="PasswordResetVendor",
-     * tags={"Vendor Auth"}, 
+     * tags={"Vendor Auth"},
      *      @OA\Parameter(
      *          name="email",
      *          description="use email to reset password",
@@ -535,7 +535,7 @@ class ApiVendorAuthController extends Controller
      */
 
     public function resetPassword(Request $request)
-    {        
+    {
         $validator = Validator::make($request->all(), [
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -554,9 +554,9 @@ class ApiVendorAuthController extends Controller
         if (!$check->exists()) {
             return response()->json(
                 [
-                    'success' => false, 
+                    'success' => false,
                     'message' => "Invalid token"
-                ], 
+                ],
                 401
             );
         }
@@ -573,9 +573,9 @@ class ApiVendorAuthController extends Controller
 
         return response()->json(
             [
-                'success' => true, 
+                'success' => true,
                 'message' => "Your password has been reset"
-            ], 
+            ],
             200
         );
     }

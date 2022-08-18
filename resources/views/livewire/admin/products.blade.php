@@ -25,7 +25,7 @@
                                 <a href="{{route('admin.products.single',$product->slug)}}"
                                      class="btn btn-primary px-1"><i class="fa fa-eye fa-1x"></i></a>
 
-                                     
+
                                 <button wire:click="delete({{$product->id}})" class="btn btn-danger btn-sm"
                                     wire:loading.attr="disabled" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()">
                                     <i class="fa fa-trash"></i>

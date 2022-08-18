@@ -36,13 +36,13 @@ class Products extends Component
                 $attr->delete();
             }
         }
-        
+
         $product->delete();
     }
     public function render()
     {
         $products = Product::with('thumb','attributes')->withCount('images')
         ->orderByDesc('products.created_at')->paginate($this->perPage);
-        return view('livewire.admin.products', compact('products'));
+        return view('livewire.admin.products', compact('products')); 
     }
 }

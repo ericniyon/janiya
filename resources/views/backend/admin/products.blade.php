@@ -28,7 +28,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h5>Products</h5>
+                    <h5>Products</h5> 
                 </div>
                 <div class="card-body pt-0 mt-0" >
                     @livewire('admin.products')

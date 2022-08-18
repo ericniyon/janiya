@@ -15,7 +15,8 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-    </head>
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/janiya-logo.jpg')}}"/>
+</head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')

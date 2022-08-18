@@ -13,9 +13,8 @@
 
     @yield('title')
 
-    <link rel="icon" href="../assets/images/dashboard/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../assets/images/dashboard/favicon.png" type="image/x-icon">
-    <title>Multikart - Premium Admin Template</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/janiya-logo.jpg')}}"/>
+    <title>Janiya - Login Pages</title>
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -50,13 +49,13 @@
                     <div class="col-md-5 p-0 card-left" >
                         <div class="card bg-primary" style="background-color: #690c27!important">
                             <div class="svg-icon d-flex justify-content-center align-items-center">
-                                <img src="{{asset('assets/img/janiya-logo.jpg')}}" height="130" width="130"  
+                                <img src="{{asset('assets/img/janiya-logo.jpg')}}" height="130" width="130"
                                 class="rounded-circle" alt="">
                                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 viewBox="0 0 468.52 468.52" style="enable-background:new 0 0 468.52 468.52;" xml:space="preserve">
                                 </svg>
                             </div>
-    
+
                             <div class="single-item">
                                 <div>
                                     <div>
