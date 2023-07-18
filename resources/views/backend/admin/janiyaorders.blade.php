@@ -28,7 +28,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                @livewire('admin.janiya-orders')
+                @livewire('admin.Go-Green-orders')
             </div>
         </div>
     </div>

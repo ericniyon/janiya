@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\ShopOrder;
 use App\Models\Order;
 
-class JaniyaOrders extends Component
+class Go-GreenOrders extends Component
 {
 
     public $active = 1, $payment_confirmed = '';
@@ -54,6 +54,6 @@ class JaniyaOrders extends Component
                         return $query3->where('Status',$this->status);
                     })->orderByDesc('created_at')
                     ->paginate(10);
-        return view('livewire.admin.janiya-orders', compact('orders'));
+        return view('livewire.admin.Go-Green-orders', compact('orders'));
     }
 }

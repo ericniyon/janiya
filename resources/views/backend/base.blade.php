@@ -8,8 +8,8 @@
     <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{asset('assets/img/janiya-logo.jpg')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/img/janiya-logo.jpg')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('front/images/gologo.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('front/images/gologo.png')}}" type="image/x-icon">
     @yield('title')
 
     <!-- Google font-->

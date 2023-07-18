@@ -73,7 +73,7 @@
   <table width="100%">
     <tr>
       <td width="75px">
-          <img src="https://janiyashops.rw/assets/img/janiya-logo.jpg" alt="" srcset="">
+          <img src="https://Go-Greenshops.rw/assets/img/Go-Green-logo.jpg" alt="" srcset="">
       </td>
       <td width="300px"><div style="background: #670A25;border-left: 15px solid #fff;padding-left: 30px;font-size: 26px;font-weight: bold;letter-spacing: -1px;height: 73px;line-height: 75px; color:#fff">Invoice</div></td>
       <td></td>
@@ -164,8 +164,8 @@
        </td>
     </tr>
   </table>
-  <div class="alert text-center" style="color: #fff; text-align: center">Authorised By Janiya Shops @janiyashops</div>
-  {{-- <div class="socialmedia">Follow us online <small>@janiyashops</small></div> --}}
+  <div class="alert text-center" style="color: #fff; text-align: center">Authorised By Go-Green Shops @Go-Greenshops</div>
+  {{-- <div class="socialmedia">Follow us online <small>@Go-Greenshops</small></div> --}}
 </div><!-- container -->
     <script type="text/javascript">
     $(function() {

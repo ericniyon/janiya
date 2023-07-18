@@ -2,7 +2,7 @@
 
 
 @section('title')
-<title>Janiya | Shop</title>
+<title>Go-Green | Shop</title>
 
 @endsection
 
@@ -586,7 +586,7 @@
                         <a href="#">
                             <div class="classic-effect">
                                 <div>
-                                    <img src="{{$vendor->profile?$vendor->profile:asset('assets/img/janiya-logo.jpg')}}" 
+                                    <img src="{{$vendor->profile?$vendor->profile:asset('assets/img/Go-Green-logo.jpg')}}" 
                                     class="img-fluid blur-up lazyload bg-img"
                                         alt="">
                                 </div>

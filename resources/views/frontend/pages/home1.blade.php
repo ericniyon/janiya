@@ -19,7 +19,7 @@
                             <div class="col">
                                 <div class="slider-contain">
                                     <div>
-                                        <h4>Janiya Campaigns save upto 10% as janiya Partner</h4>
+                                        <h4>Go-Green Campaigns save upto 10% as Go-Green Partner</h4>
                                         <h1 style="color: #fff">Best Selling </h1><a href="#"
                                             class="btn btn-outline btn-classic">shop now</a>
                                     </div>
@@ -37,7 +37,7 @@
                             <div class="col">
                                 <div class="slider-contain">
                                     <div>
-                                        <h4>Janiya Campaigns save upto 10% as janiya Partner</h4>
+                                        <h4>Go-Green Campaigns save upto 10% as Go-Green Partner</h4>
                                         <h1 style="color: #fff">Best Selling</h1><a href="#" class="btn btn-outline btn-classic">shop
                                             now</a>
                                     </div>

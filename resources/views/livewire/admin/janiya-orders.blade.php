@@ -6,7 +6,7 @@
         </div>
         @endif
         <div class="row">
-            <h5>Janiya Clients Orders</h5>
+            <h5>Go-Green Clients Orders</h5>
         </div>
         <div class="row mt-2">
             <div class="col-md-1">

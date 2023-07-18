@@ -1,6 +1,6 @@
 @extends('frontend.base')
 @section('title')
-<title>Janiya</title>
+<title>Go-Green</title>
 @endsection
 @section('content')
 <body class="theme-color-1">

@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Color;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductAttribute;
 use App\Models\StoreAttribute;
-use App\Models\ProductSize;
 use App\Models\Store;
 use App\Models\User;
 use App\Models\Vendor;
@@ -33,7 +31,7 @@ class HomeController extends Controller
 
         $shops = Vendor::where('confirmed',1)->where('active',1)->get();
 
-        return view('frontend.pages.home1', compact('product_categories','shops', 'products'));
+        return view('frontend.pages.home', compact('product_categories','shops', 'products'));
     }
     // this function will return product by it id
     public function singleProduct($vendor, $product)

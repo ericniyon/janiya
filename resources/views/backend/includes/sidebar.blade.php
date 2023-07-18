@@ -1,6 +1,8 @@
 <div class="page-sidebar">
     <div class="main-header-left d-none d-lg-block">
-        <div class="logo-wrapper"><a href="/admin"><img class="blur-up lazyloaded" src="{{asset('assets/img/janiya-logo.jpg')}}" alt=""></a></div>
+        <div class="logo-wrapper"><a href="/admin"><img class="blur-up lazyloaded" src="{{asset('front/images/gologo.png') }}" 
+            style="width: 9rem;height:5rem"
+            alt=""></a></div>
     </div>
     <div class="sidebar custom-scrollbar">
         <div class="sidebar-user text-center">
@@ -45,7 +47,7 @@
                     <li><a href="{{ route('admin.admin-transaction') }}"><i class="fa fa-circle"></i>Transactions</a></li>
                 </ul>
             </li>
-            <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Janiya Shops</span><i class="fa fa-angle-right pull-right"></i></a>
+            <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Go-Green Shops</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
                             <li><a href="{{route('admin.shops')}}"><i class="fa fa-circle"></i>Shops</a></li>
                             <li><a href="{{ route('admin.shops.add') }}"><i class="fa fa-circle"></i>Add Shop</a></li>
@@ -61,7 +63,7 @@
                 <ul class="sidebar-submenu">
 
                     <li><a href="{{route('admin.shops-orders')}}"><i class="fa fa-circle"></i>Shops orders</a></li>
-                    <li><a href="{{route('admin.janiya-orders')}}"><i class="fa fa-circle"></i>Janiya orders</a></li>
+                    <li><a href="{{route('admin.Go-Green-orders')}}"><i class="fa fa-circle"></i>Go-Green orders</a></li>
                 </ul>
             </li>
             {{-- <li><a class="sidebar-header" href="reports.html"><i data-feather="bar-chart"></i</i><span>Reports</span></a></li> --}}

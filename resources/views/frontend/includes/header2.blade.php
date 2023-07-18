@@ -6,7 +6,7 @@
                 <div class="col-lg-6">
                     <div class="header-contact">
                         <ul>
-                            <li>Welcome to Our store Janiya shops</li>
+                            <li>Welcome to Our store Go-Green shops</li>
                             <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: +(250) 782 779 773</li>
                         </ul>
                     </div>
@@ -178,7 +178,7 @@
                         </div>
                         <div class="brand-logo">
                             <a href="index.html">
-                                <img src="{{asset('assets/img/janiya-logo.jpg')}}" class="img-fluid blur-up lazyload" alt="">
+                                <img src="{{asset('assets/img/Go-Green-logo.jpg')}}" class="img-fluid blur-up lazyload" alt="">
                             </a>
                         </div>
                     </div>

@@ -8,8 +8,8 @@
     <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{asset('assets/img/janiya-logo.jpg')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/img/janiya-logo.jpg')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('assets/img/Go-Green-logo.jpg')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/img/Go-Green-logo.jpg')}}" type="image/x-icon">
     @yield('title')
 
     <!-- Google font-->
@@ -55,7 +55,7 @@
         <!-- Page Sidebar Start-->
         <div class="page-sidebar">
             <div class="main-header-left d-none d-lg-block">
-                <div class="logo-wrapper"><a href="/admin"><img class="blur-up lazyloaded" src="{{asset('assets/img/janiya-logo.jpg')}}" alt=""></a></div>
+                <div class="logo-wrapper"><a href="/admin"><img class="blur-up lazyloaded" src="{{asset('assets/img/Go-Green-logo.jpg')}}" alt=""></a></div>
             </div>
             <div class="sidebar custom-scrollbar">
                 <div class="sidebar-user text-center">
@@ -179,9 +179,9 @@
         toastr[param['type']](param['message'],param['type']);
     });
 
-    @if(Session::has('success'))
+    @if(session()->has('success'))
         toastr.success("{{Session::get('success')}}");
-    @elseif(Session::has('warning'))
+    @elseif(session()->has('warning'))
         toastr.warning("{{Session::get('warning')}}");
     @endif
 </script>

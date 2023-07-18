@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => 'Janiya Shop',
+    'name' => 'Go - Green',
 
     /*
     |--------------------------------------------------------------------------
@@ -191,9 +191,16 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
+    // 'aliases' => Facade::defaultAliases()->merge([
         // ...
+        // 'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        // ])->toArray(),
+
+
+        'aliases' => [
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
-    ])->toArray(),
+
+       
+    ],
 
 ];

@@ -1,7 +1,7 @@
 <div class="page-main-header">
     <div class="main-header-right row">
         <div class="main-header-left d-lg-none w-auto">
-            <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded" src="{{asset('assets/img/janiya-logo.jpg')}}" alt=""></a></div>
+            <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded" src="{{asset('front/images/gologo.png')}}" alt=""></a></div>
         </div>
         <div class="mobile-sidebar w-auto">
             <div class="media-body text-end switch-sm">
@@ -39,25 +39,26 @@
                         {{-- <li><a href="{{ route('admin-profile') }}"><i data-feather="user"></i>Edit Profile</a></li> --}}
                         <li><a href="#"><i data-feather="settings"></i>Settings</a></li>
                         <li><a href="
-                            @if (Auth::guard('admin')->check())
+                            {{-- @if (\Auth::guard('admin')->check())
                                 {{route('admin.logout')}}
-                            @elseif (Auth::guard('vendor')->check())
+                            @elseif (\Auth::guard('vendor')->check())
                                 {{route('vendor.logout')}}
                             @else
                                 {{route('logout')}}
-                            @endif
+                            @endif --}}
                             "onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                             <i data-feather="log-out"></i>Logout</a></li>
                             <form id="logout-form"
                             action="
-                            @if (Auth::guard('admin')->check())
+                            {{-- @if (\Auth::guard('admin')->check())
                                 {{route('admin.logout')}}
-                            @elseif (Auth::guard('vendor')->check())
+                            @elseif (\Auth::guard('vendor')->check())
                                 {{route('vendor.logout')}}
                             @else
                                 {{route('logout')}}
-                            @endif"
+                            @endif --}}
+                            "
                             method="POST" class="d-none">
                                 @csrf
                             </form>
