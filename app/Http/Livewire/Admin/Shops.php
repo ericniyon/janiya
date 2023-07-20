@@ -35,17 +35,17 @@ class Shops extends Component
 
     public function render()
     {
-        $shops = Vendor::where('name','like','%'.$this->searchKey.'%')
-                        ->orWhere('phone','like','%'.$this->searchKey.'%')
-                        ->orWhere('shop_name','like','%'.$this->searchKey.'%')
-                        ->orWhere('email','like','%'.$this->searchKey.'%')
-                        ->when($this->active, function($query){
-                            $query->where('active',$this->active);
-                        })
-                        ->when($this->confirmed, function($query1){
-                            $query1->where('confirmed',$this->confirmed);
-                        })->orderByDesc('created_at')
-                        ->paginate($this->perPage);
+        $shops = Vendor::where('shop_name','like','%'.$this->searchKey.'%')
+            ->orWhere('phone','like','%'.$this->searchKey.'%')
+            ->orWhere('shop_name','like','%'.$this->searchKey.'%')
+            ->orWhere('email','like','%'.$this->searchKey.'%')
+            ->when($this->active, function($query){
+                $query->where('active',$this->active);
+            })
+            ->when($this->confirmed, function($query1){
+                $query1->where('confirmed',$this->confirmed);
+            })->orderByDesc('created_at')
+            ->paginate($this->perPage);
         return view('livewire.admin.shops', compact('shops'));
     }
 }

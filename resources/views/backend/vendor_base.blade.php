@@ -44,14 +44,12 @@
 
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
-
     <!-- Page Header Start-->
     @include('backend.includes.header')
     <!-- Page Header Ends -->
 
     <!-- Page Body Start-->
     <div class="page-body-wrapper">
-
         <!-- Page Sidebar Start-->
         <div class="page-sidebar">
             <div class="main-header-left d-none d-lg-block">
@@ -71,10 +69,37 @@
                 </div>
                 <ul class="sidebar-menu">
                     <li><a class="sidebar-header" href="{{route('vendor.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
-                    <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Shops</span><i class="fa fa-angle-right pull-right"></i></a>
+                    {{-- <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Shops</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
                             <li><a href="{{route('vendor.shop')}}"><i class="fa fa-circle"></i>My Shop</a></li>
                             <li><a href="{{route('vendor.store')}}"><i class="fa fa-circle"></i>Add To Store</a></li>
+                        </ul>
+                    </li> --}}
+                    <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="{{route('vendor.products.add')}}"><i class="fa fa-circle"></i>Add Product</a></li>
+                            <li><a href="{{route('admin.products.all')}}"><i class="fa fa-circle"></i>Products</a></li>
+                            {{-- <li>
+                                <a href="#"><i class="fa fa-circle"></i>
+                                    <span>Product</span> <i class="fa fa-angle-right pull-right"></i>
+                                </a>
+                                <ul class="sidebar-submenu">
+                                </ul>
+                            </li>
+                            <li><a href="{{route('admin.product-category')}}"><i class="fa fa-circle"></i>Categories</a></li>
+                            <li>
+                                <a href="#"><i class="fa fa-circle"></i>
+                                    <span>Product Attributes</span> <i class="fa fa-angle-right pull-right"></i>
+                                </a>
+                                <ul class="sidebar-submenu">
+                                    <li><a href="{{route('admin.colors')}}">
+                                        <span>Colors</span></a>
+                                    </li>
+                                    <li><a href="{{route('admin.size')}}">
+                                        <span>Sizes</span></a>
+                                    </li>
+                                </ul>
+                            </li> --}}
                         </ul>
                     </li>
                     <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Sales</span><i class="fa fa-angle-right pull-right"></i></a>
@@ -97,20 +122,13 @@
             </div>
         </div>
         <!-- Page Sidebar Ends-->
-
-
         <div class="page-body">
-
-
-
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
-                @yield('content')
-            </div>
-            <!-- Container-fluid Ends-->
-
+        <!-- Container-fluid starts-->
+        <div class="container-fluid">
+            @yield('content')
         </div>
-
+        <!-- Container-fluid Ends-->
+        </div>
         <!-- footer start-->
         @include('backend.includes.footer')
         <!-- footer end-->
@@ -180,9 +198,9 @@
     });
 
     @if(session()->has('success'))
-        toastr.success("{{Session::get('success')}}");
+        toastr.success("{{ session()->get('success') }}");
     @elseif(session()->has('warning'))
-        toastr.warning("{{Session::get('warning')}}");
+        toastr.warning("{{ session()->get('warning') }}");
     @endif
 </script>
 @livewireScripts

@@ -15,15 +15,23 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('shop_name');
+            $table->string('location');
+            $table->string('slug')->unique();
             $table->string('email')->unique();
             $table->string('phone')->unique();
+            $table->string('contact_person')->index();
+            $table->string('contact_person_email')->nullable()->index()->unique();
+            $table->string('contact_person_phone')->nullable()->index()->unique();
             $table->boolean('confirmed')->default(false);
             $table->boolean('active')->default(true);
+            $table->text('details')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('profile')->nullable();
+            $table->string('profile_image')->nullable();
+            $table->string('cover_image')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

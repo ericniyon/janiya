@@ -5,15 +5,17 @@
         </div>
     @endif
 
-
-    <form enctype="multipart/form-data" method="POST">@csrf
+    <form enctype="multipart/form-data" wire:submit.prevent="store()" method="POST">@csrf
         <div class="row">
             <div class="col-md-7 border-right">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="validationCustom01" class="col-form-label pt-0"><span>*</span> Product Name</label>
-                        <input class="form-control  @error('name') is-invalid @enderror" wire:model="name" name="name" id="validationCustom01" type="text" required>
-                        @error('name')
+                        <input class="form-control  @error('product_name') is-invalid @enderror" 
+                        wire:model="product_name" 
+                        name="product_name" id="validationCustom01" 
+                        type="text" required>
+                        @error('product_name')
                         <span class="invalid-feedback" role="alert">{{$message}}</span>
                     @enderror
                     </div>
@@ -23,16 +25,15 @@
                          name="price" type="number" required>
                      </div>
                      <div class="form-group col-md-6">
-                         <label class="col-form-label pt-0"><span>*</span>Factory Price </label>
-                         <input class="form-control @error('factory_price') is-invalid @enderror" wire:model="factory_price"
-                         name="factory_price" type="number" required>
+                         <label class="col-form-label pt-0">Discounted Price </label>
+                         <input class="form-control @error('discounted_price') is-invalid @enderror" wire:model="discounted_price"
+                         name="discounted_price" type="number">
                      </div>
                      <div class="form-group col-md-6">
                          <label class="col-form-label pt-0"><span>*</span> Category</label>
-                         <select class="custom-select form-control" required="" wire:model="product_category_id" name="product_category_id[]">
+                         <select class="custom-select form-control" required="" wire:model="product_category_id">
                              <option value="">--Select--</option>
-                             @foreach (App\Models\ProductCategory::all() as $item)
-
+                             @foreach ($categories as $item)
                              <option value="{{$item->id}}">{{$item->category_name}}</option>
                              @endforeach
                          </select>
@@ -119,11 +120,9 @@
             </div>
             @endforeach
         </div>
-
-
         <div class="row">
             <div class="col-md-12">
-                <button type="button" wire:click.prevent="store()" class="btn btn-success btn-sm">Submit</button>
+                <button type="submit" class="btn btn-success btn-sm">Submit</button>
             </div>
         </div>
 

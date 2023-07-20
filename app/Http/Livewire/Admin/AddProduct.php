@@ -15,7 +15,7 @@ class AddProduct extends Component
 {
     use WithFileUploads;
     public $colorsLoop, $sizesLoop, $colors, $sizes, $categories;
-    public $name, $price, $product_category_id,$factory_price, $description, $product_image = [];
+    public $product_name, $price, $product_category_id,$discounted_price, $description, $product_image = [];
 
     public function mount()
     {
@@ -35,30 +35,15 @@ class AddProduct extends Component
     {
         unset($this->colorsLoop[$index]);
         $this->colorsLoop = array_values($this->colorsLoop);
-    }
-
-    public function FunctionName($fields)
-    {
-        $this->validateOnly($fields,[
-            'name'=>'string|unique:products,name|min:3|max:220',
-            'price'=>'required|integer|min:500|max:500000',
-            'factory_price'=>'required|integer|min:500|max:500000',
-            'product_category_id'=>'required|integer',
-            'description'=>'string|required|min:10|max:5000',
-            'product_image.*'=>'image|mimes:png,jpg,webp|required',
-            'colorsLoop.*.color'=>'required|string',
-            'colorsLoop.*.quantity'=>'required|string',
-            'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
-            'colorsLoop.*.size'=>'required|string',
-        ]);
-    }
+    } 
 
     public function store()
     {
+        dd('something');
         $this->validate([
-            'name'=>'string|unique:products,name|min:3|max:220',
+            'product_name'=>'string|unique:products,product_name|min:3|max:220',
             'price'=>'required|integer|min:500|max:500000',
-            'factory_price'=>'required|integer|min:500|max:500000',
+            'discounted_price'=>'required|integer|min:500|max:500000',
             'product_category_id'=>'required|integer',
             'description'=>'string|required|min:10|max:5000',
             'product_image.*'=>'image|mimes:png,jpg,webp|required',
@@ -69,13 +54,13 @@ class AddProduct extends Component
         ]);
 
         $product = Product::create([
-            'name'=>$this->name,
-            'slug'=>str()->slug($this->name),
+            'product_name'=>$this->product_name,
             'price'=>$this->price,
-            'factory_price'=>$this->factory_price,
+            'discounted_price'=>$this->discounted_price,
             'description'=>$this->description,
             'product_image'=>'null',
-            'product_category_id'=>$this->product_category_id
+            'product_category_id'=>$this->product_category_id,
+            'vendor_id'=>1,
         ]);
 
         if ($this->product_image) {

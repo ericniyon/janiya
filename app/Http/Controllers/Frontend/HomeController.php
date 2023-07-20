@@ -23,28 +23,23 @@ class HomeController extends Controller
     public function index()
     {
         $arr = [];
-        $stocks = Store::all()->pluck('product_id');
-
-        $products = Product::whereNotIn('id', $stocks)->inRandomOrder()->limit(8)->get();
-
         $product_categories = ProductCategory::with('products')->get();
 
-        $shops = Vendor::where('confirmed',1)->where('active',1)->get();
+        $shops = Vendor::select('shop_name','slug','profile_image')->withCount('products')
+            ->where('confirmed',1)
+            ->where('active',1)
+            ->get();
 
-        return view('frontend.pages.home', compact('product_categories','shops', 'products'));
+        return view('frontend.pages.home', compact('product_categories','shops'));
     }
     // this function will return product by it id
-    public function singleProduct($vendor, $product)
+    public function singleProduct($product)
     {
-        $vendor = Vendor::findOrFail(Crypt::decryptString($vendor));
-        $product = Store::findOrFail(Crypt::decryptString($product));
-        $imageIDs = $product->valiations->pluck('product_attribute_id');
-        $images = ProductAttribute::whereIn('id',$imageIDs)->select(DB::raw('DISTINCT(image)'))->get();
-        $colors = StoreAttribute::where('store_id',$product->id)
-        ->addSelect(DB::raw('DISTINCT(color)'))->get();
-        $sizes = StoreAttribute::where('store_id',$product->id)
-        ->addSelect(DB::raw('DISTINCT(size)'))->get();
-        return view('frontend.pages.product_details', compact('vendor','product','colors','sizes','images'));
+        $product = Product::whereSlug($product)->firstOrFail();
+        $vendor = $product->shop;
+        // $imageIDs = $product->valiations->pluck('product_attribute_id');
+        // $images = ProductAttribute::whereIn('id',$imageIDs)->select(DB::raw('DISTINCT(image)'))->get();
+        return view('frontend.pages.product_details', compact('product','vendor'));
     }
     // this function will return product by it id
     public function shop()

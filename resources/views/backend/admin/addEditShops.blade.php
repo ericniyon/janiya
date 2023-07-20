@@ -38,29 +38,19 @@
                     @isset($vendor)
                     @method('put')
                     @endisset
-
                     <div class="row">
-
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                        <label for="shop" class="col-form-label pt-0"><span>*</span> Shop/Vendor Name</label>
-                        <input name="shop" value="{{isset($vendor)?$vendor->shop_name:old('shop')}}" class="form-control @error('shop')
-                            is-invalid @enderror" id="shop" type="text" >
-                        @error('shop')
-                            <span class="invalid-feedback" role="alert">{{$message}}</span>
-                        @enderror
-                    </div>
+                                <label for="shop_name" class="col-form-label pt-0"><span>*</span> Shop/Vendor Name</label>
+                                <input name="shop_name" 
+                                    value="{{isset($vendor)?$vendor->shop_name:old('shop_name')}}" 
+                                    class="form-control @error('shop_name') is-invalid @enderror" id="shop_name" type="text" >
+                                @error('shop_name')
+                                    <span class="invalid-feedback" role="alert">{{$message}}</span>
+                                @enderror
+                            </div>
                         </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="name" class="col-form-label pt-0"><span>*</span> Person Of Contact</label>
-                            <input name="name" value="{{isset($vendor)?$vendor->name:old('name')}}" class="form-control @error('name')
-                                is-invalid @enderror" id="name" type="text" required="">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">{{$message}}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="email" class="col-form-label pt-0"><span>*</span>Email Address</label>
                             <input name="email" value="{{isset($vendor)?$vendor->email:old('email')}}" class="form-control @error('email')
                                 is-invalid @enderror" id="email" type="email" required="">
@@ -68,7 +58,7 @@
                                 <span class="invalid-feedback" role="alert">{{$message}}</span>
                             @enderror
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="phone" class="col-form-label pt-0"><span>*</span> Phone Number</label>
                             <input name="phone" value="{{isset($vendor)?$vendor->phone:old('phone')}}" class="form-control @error('phone')
                                 is-invalid @enderror" id="phone" type="tel" required="">
@@ -76,29 +66,74 @@
                                 <span class="invalid-feedback" role="alert">{{$message}}</span>
                             @enderror
                         </div>
-                        <div class="form-group col-md-4">
-                        <label class="col-form-label pt-0"> Shop logo/image</label>
-                        <input name="logo" class="form-control @error('logo')
-                            is-invalid @enderror" id="logo" type="file">
-                        @error('logo')
-                            <span class="invalid-feedback" role="alert">{{$message}}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="col-form-label pt-0"> Shop Description</label>
-                        <textarea name="details" class="form-control @error('details') is-invalid @enderror"
-                        cols="30" rows="3" >{{isset($vendor)?$vendor->details:old('details')}}</textarea>
-                        @error('details')
-                            <span class="invalid-feedback" role="alert">{{$message}}</span>
-                        @enderror
-                    </div>
-                    </div>
-
-                    {{-- <div class="dropzone" id="singleFileUpload" >
-                        <div class="dz-message needsclick"><i class="fa fa-cloud-upload"></i>
-                            <h4 class="mb-0 f-w-600">Drop files here or click to upload.</h4>
+                        <div class="form-group col-md-3">
+                            <label for="location" class="col-form-label pt-0"><span>*</span>Shop Address/Location</label>
+                            <input name="location" 
+                            value="{{isset($vendor)?$vendor->location:old('location')}}" 
+                            class="form-control @error('location') is-invalid @enderror" 
+                            id="location" type="text" required="">
+                            @error('location')
+                                <span class="invalid-feedback" role="alert">{{$message}}</span>
+                            @enderror
                         </div>
-                    </div> --}}
+                        <div class="form-group col-md-4">
+                            <label for="contact_person" class="col-form-label pt-0"><span>*</span> Person Of Contact</label>
+                            <input name="contact_person" 
+                                value="{{isset($vendor)?$vendor->contact_person:old('contact_person')}}" 
+                                class="form-control @error('contact_person') is-invalid @enderror" 
+                                id="contact_person" type="text" required
+                            >
+                            @error('contact_person')
+                                <span class="invalid-feedback" role="alert">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="contact_person_phone" class="col-form-label pt-0"><span>*</span> Person Of Contact Phone Number</label>
+                            <input name="contact_person_phone" 
+                                value="{{isset($vendor)?$vendor->contact_person_phone:old('contact_person_phone')}}" 
+                                class="form-control @error('contact_person_phone') is-invalid @enderror" 
+                                id="contact_person_phone" type="tel"
+                            >
+                            @error('contact_person_phone')
+                                <span class="invalid-feedback" role="alert">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="contact_person_email" class="col-form-label pt-0"><span>*</span> Person Of Contact Email</label>
+                            <input name="contact_person_email" 
+                                value="{{isset($vendor)?$vendor->contact_person_email:old('contact_person_email')}}" 
+                                class="form-control @error('contact_person_email') is-invalid @enderror" 
+                                id="contact_person_email" type="email"
+                            >
+                            @error('contact_person_email')
+                                <span class="invalid-feedback" role="alert">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label pt-0"> Shop logo/image</label>
+                            <input name="profile_image" class="form-control @error('profile_image')
+                                is-invalid @enderror" id="profile_image" type="file">
+                            @error('profile_image')
+                                <span class="invalid-feedback" role="alert">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label pt-0"> Cover image</label>
+                            <input name="cover_image" class="form-control @error('cover_image')
+                                is-invalid @enderror" id="cover_image" type="file">
+                            @error('cover_image')
+                                <span class="invalid-feedback" role="alert">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-form-label pt-0"> Shop Description</label>
+                            <textarea name="details" class="form-control @error('details') is-invalid @enderror"
+                            cols="30" rows="3" >{{isset($vendor)?$vendor->details:old('details')}}</textarea>
+                            @error('details')
+                                <span class="invalid-feedback" role="alert">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
                     <button class="btn btn-sm btn-primary" type="submit">{{isset($vendor)?'Update':'Submit'}}</button>
                     </form>
                 </div>

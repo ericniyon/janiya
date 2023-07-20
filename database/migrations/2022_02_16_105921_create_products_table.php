@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\ProductCategory;
+use App\Models\Vendor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,13 +16,17 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('product_name')->index();
+            $table->string('slug')->unique();
+            $table->decimal('price', 12, 0);
+            $table->decimal('discounted_price', 10,0)->default(0);
             $table->unsignedBigInteger('product_category_id');
             $table->text('description');
             $table->string('product_image');
-            $table->timestamps();
-
+            $table->foreignIdFor(Vendor::class)->constrained()->onDelete('cascade');
             $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

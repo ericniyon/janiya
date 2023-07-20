@@ -25,11 +25,11 @@
 </div>
 
 
-@if($message = Session::get('message'))
-               <div class="alert alert-success">
-                <p>{{$message}}</p>
-                </div>
-                 @endif
+@if(session()->has('message'))
+<div class="alert alert-success">
+    <p>{{ session()->get('message') }}</p>
+</div>
+@endif
 
 
 <div class="row">

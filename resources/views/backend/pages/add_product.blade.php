@@ -1,4 +1,4 @@
-@extends('backend.base')
+@extends('backend.vendor_base')
 @section('title')
 <title>Add New Product</title>
 @endsection
