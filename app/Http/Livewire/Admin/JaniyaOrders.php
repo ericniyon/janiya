@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\ShopOrder;
 use App\Models\Order;
 
-class Go-GreenOrders extends Component
+class JaniyaOrders extends Component
 {
 
     public $active = 1, $payment_confirmed = '';

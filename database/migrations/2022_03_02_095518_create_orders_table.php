@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('street')->nullable();
             $table->text('neighborhood')->nullable();
-            $table->foreignId('promoter')->nullable()->constrained('users');
+            $table->foreignId('promoter')->nullable()->constrained('users')->nullOnDelete();
             $table->integer('discount')->nullable();
             $table->decimal('total', 10, 0);
             $table->enum('payment_method', ['On Delivery', 'Card', 'Phone'])->nullable()->default('On Delivery');

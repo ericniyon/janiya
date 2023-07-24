@@ -14,30 +14,14 @@
         </div>
         <ul class="sidebar-menu">
             <li><a class="sidebar-header" href="{{url('/admin/dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
-            <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
+            <li><a class="sidebar-header" href="{{route('admin.products.all')}}"><i data-feather="box"></i> <span>Products</span></a>
+            </li>
+            <li><a class="sidebar-header" href="{{route('admin.product-category')}}"><i data-feather="circle"></i> <span>Product Categories</span></a>
+            </li>
+            <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Attributes</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
-                    <li>
-                        <a href="#"><i class="fa fa-circle"></i>
-                            <span>Product</span> <i class="fa fa-angle-right pull-right"></i>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a href="{{route('admin.add-product')}}"><i class="fa fa-circle"></i>Add Product</a></li>
-                            <li><a href="{{route('admin.products.all')}}"><i class="fa fa-circle"></i>Products</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="{{route('admin.product-category')}}"><i class="fa fa-circle"></i>Categories</a></li>
-                    <li>
-                        <a href="#"><i class="fa fa-circle"></i>
-                            <span>Product Attributes</span> <i class="fa fa-angle-right pull-right"></i>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a href="{{route('admin.colors')}}">
-                                <span>Colors</span></a>
-                            </li>
-                            <li><a href="{{route('admin.size')}}">
-                                <span>Sizes</span></a>
-                            </li>
-                        </ul>
+                    <li><a href="{{route('admin.colors')}}"> <span>Colors</span></a> </li>
+                    <li><a href="{{route('admin.size')}}"> <span>Sizes</span></a> </li>
                     </li>
                 </ul>
             </li>

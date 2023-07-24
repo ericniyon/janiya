@@ -9,6 +9,7 @@ use App\Http\Controllers\Admins\AdminController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Size;
+use App\Http\Controllers\Front\VendorController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Vendors\StoresController;
@@ -33,7 +34,7 @@ Route::get('shops', [HomeController::class, 'shopsList'])->name('shops.list');
 // Route::view('/shops','frontend.pages.shops-list')->name('shops.list');
 Route::get('shops/{vendor}', [HomeController::class, 'singleShop'])->name('shops.list.single');
 // Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
-Route::get('shop/{vendor}/{product}', [HomeController::class, 'singleProduct'])->name('product.single');
+Route::get('products/{product}', [HomeController::class, 'singleProduct'])->name('product.single');
 // cart
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::post('add-to-cart/{product}', [CartController::class, 'addToCart'])->name('add.to.cart');
@@ -62,11 +63,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('all/orders', [AdminController::class, 'admin_orders'])->name('allorders');
     Route::get('all/transaction', [AdminController::class, 'admin_transactions'])->name('admin-transaction');
 
-
-
-
     Route::post('save-category', [AdminController::class, 'save_category'])->name('save-category');
-    Route::get('product/product', [AdminController::class, 'product_product'])->name('add-product');
     Route::view('products', 'backend.admin.products')->name('products.all');
     Route::get('products/{product}', [ProductsController::class, 'show'])->name('products.single');
     Route::put('products/{attribute}', [ProductsController::class, 'updateAttribute'])->name('attributtes.update');
@@ -100,7 +97,7 @@ Route::middleware(['auth:vendor', 'confirmed', 'active'])->prefix('vendor')->nam
     Route::get('store/add-products', [StoresController::class, 'index'])->name('store');
     Route::get('store/products/{product}', [StoresController::class, 'shop'])->name('store.single');
     Route::view('store/my-shop', 'backend.vendors.shop')->name('shop');
-
+    Route::get('products/add-new-product', [AdminController::class, 'product_product'])->name('products.add');
     Route::view('orders', 'backend.vendors.orders')->name('orders');
     Route::get('orders/view/{order}', [StoresController::class, 'singleOrder'])->name('orders.single');
     Route::post('my-store/{id}', [StoresController::class, 'storeUpdates'])->name('store_update');
@@ -130,7 +127,7 @@ Route::get('pro/{id}', [HomeController::class, 'al_product_details'])->name('al_
 Route::get('about', [HomeController::class, 'about'])->name('about');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('categories/products/{catId}', [HomeController::class, 'categorised'])->name('categories-products');
-Route::get('shops/products/{shopId}', [HomeController::class, 'shoped'])->name('shops-products');
+Route::get('shops/{shopId}/products', [VendorController::class, 'show'])->name('vendors.products.show');
 
 Route::get('cart/content',  [CartController::class, 'cartContents'])->name('add-to-cart');
 

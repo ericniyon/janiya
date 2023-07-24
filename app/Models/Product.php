@@ -2,19 +2,39 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Vendor;
+use App\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'slug', 'price', 'description', 'product_category_id','product_image','factory_price'
+        'product_name',
+        'slug',
+        'price',
+        'discounted_price',
+        'product_category_id',
+        'description',
+        'product_image',
+        'vendor_id',
     ];
 
-    public function product_categories()
+    public function productCategory()
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
+    }
+
+    /**
+     * Get the shop that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function shop(): BelongsTo
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
     }
 
     public function getRouteKeyName()
@@ -22,9 +42,13 @@ class Product extends Model
         return 'slug';
     }
 
+    protected static function booted(){
+        self::observe(ProductObserver::class);
+    }
+
     public function images()
     {
-        return $this->hasOne(ProductImage::class);
+        return $this->hasMany(ProductImage::class);
     }
 
     public function thumb()
@@ -52,7 +76,7 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function color()
+    public function colors()
     {
         return $this->hasManyThrough(Color::class, ProductAttribute::class);
     }

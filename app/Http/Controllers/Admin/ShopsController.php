@@ -2,41 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\ShopRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class ShopsController extends Controller
 {
-    public function store(Request $request)
+    public function store(ShopRequest $request)
     {
-        $this->validate($request,[
-            'name'=>'required|string|min:3|max:120',
-            'shop'=>'required|unique:vendors,shop_name|string|min:3|max:120',
-            'email'=>'required|email|string|min:5|max:120',
-            'phone'=>'required|string|min:10|max:12',
-            'details'=>'required|string|min:20',
-            'profile'=>'nullable|image|mimes:png,jpg,webp|max:700',
-        ]);
-        $password = str()->random(8);
+        $data = $request->validated();
+        $data['password'] = Str::random(8);
         if ($request->hasFile('logo')) {
-            $fileName = str()->slug($request->shop).time().'.'.$request->logo->extension();
-            $profile = $request->logo->storeAs('vendors',$fileName,'public');
+            $fileName = Str::slug($request->shop).time().'.'.$request->logo->extension();
+            $data['profile_image'] = $request->logo->storeAs('vendors',$fileName,'public');
         }
-        Vendor::create([
-            'name'=>$request->name,
-            'shop_name'=>$request->shop,
-            'slug'=>str()->slug($request->shop),
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'confirmed'=>1,
-            'active'=>1,
-            'details'=>$request->details,
-            'profile'=>$profile,
-            'password'=>Hash::make($password),
-        ]);
+
+        if ($request->hasFile('logo')) {
+            $fileName = Str::slug($request->shop).time().'.'.$request->logo->extension();
+            $data['cover_image'] = $request->logo->storeAs('vendors',$fileName,'public');
+        }
+        Vendor::create($data);
 
         return back()->with('success','Vendor Added Successfully!');
     }
@@ -47,34 +36,29 @@ class ShopsController extends Controller
         return view('backend.admin.addEditShops', compact('vendor'));
     }
 
-    public function update(Vendor $vendor, Request $request)
+    public function update(Vendor $vendor, ShopRequest $request)
     {
-        $this->validate($request,[
-            'name'=>'required|string|min:3|max:120',
-            'shop'=>'required|unique:vendors,shop_name,'.$vendor->id.'|string|min:3|max:120',
-            'email'=>'required|email|string|min:5|max:120',
-            'phone'=>'required|string|min:10|max:12',
-            'details'=>'required|string|min:20',
-            'profile'=>'sometimes|image|mimes:png,jpg,webp|max:700',
-        ]);
+        $data = $request->validated();
         if ($request->hasFile('logo')) {
-            if ($vendor->profile) {
-                Storage::delete($vendor->profile);
+            if($vendor->profile_image){
+                Storage::disk('public')->delete($vendor->profile_image);
             }
-            $fileName = str()->slug($request->shop).time().'.'.$request->logo->extension();
-            $profile = $request->logo->storeAs('vendors',$fileName,'public');
-        } else{
-            $profile = $vendor->profile;
+            $fileName = Str::slug($request->shop).time().'.'.$request->logo->extension();
+            $data['profile_image'] = $request->logo->storeAs('vendors',$fileName,'public');
+        } else {
+            $data['profile_image'] = $vendor->profile_image;
         }
-        $vendor->update([
-            'name'=>$request->name,
-            'slug'=>str()->slug($request->shop),
-            'shop_name'=>$request->shop,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'details'=>$request->details,
-            'profile'=>$profile,
-        ]);
+
+        if ($request->hasFile('logo')) {
+            if($vendor->cover_image){
+                Storage::disk('public')->delete($vendor->cover_image);
+            }
+            $fileName = Str::slug($request->shop).time().'.'.$request->logo->extension();
+            $data['cover_image'] = $request->logo->storeAs('vendors',$fileName,'public');
+        } else {
+            $data['cover_image'] = $vendor->cover_image;
+        }
+        $vendor->update($data);
 
         session()->flash('success','Vendor updated successfully');
         return to_route('admin.shops');

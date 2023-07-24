@@ -23,7 +23,7 @@
                 </button>
             </div>
             @endif
-        @if (Session::has('coupon'))
+        @if (session()->has('coupon'))
         <ul>
             <li class="d-flex pb-1 border-bottom justify-content-between">
                 <h4>Coupon Name</h4>
@@ -31,7 +31,7 @@
                 <h4>Remove</h4>
             </li>
             <li class="d-flex pt-1 justify-content-between">
-                <strong>{{Session::get('coupon')['name']}}</strong>
+                <strong>{{ session()->get('coupon')['name']}}</strong>
                 <h4>{{getDiscount()}}</h4>
                 <button class="btn btn-outline-none text-danger" wire:click="deleteCoupon()">
                     <i class="fa fa-times"></i>
@@ -46,10 +46,10 @@
             <div class="form-group">
                 <label for="input">Enter your Coupon Code</label>
                 <input type="text" id="input" name="code" wire:model.lazy="code" value="{{old('code')}}"
-                    class="form-control @error('code') is-invalid @enderror">
-                    @error('code')
-                        <span class="invalid-feedback" role="alert">{{$message}}</span>
-                    @enderror
+                class="form-control @error('code') is-invalid @enderror">
+                @error('code')
+                    <span class="invalid-feedback" role="alert">{{$message}}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <button class="btn btn-sm btn-solid">Apply Coupon</button>
@@ -106,15 +106,12 @@
                     <button class="btn btn-sm btn-solid">Submit Your Code</button>
                 </div>
             </form>
-
             @endif
-
-
         </div>
     </div>
 </div>
 <div class="payment-box">
-                <div class="text-end">
-                    <button type="submit" class="btn-solid btn" onclick="document.getElementById('orderForm').submit()">Place Order</button>
-                </div>
-            </div>
+    <div class="text-end">
+        <button type="submit" class="btn-solid btn" onclick="document.getElementById('orderForm').submit()">Place Order</button>
+    </div>
+</div>

@@ -5,6 +5,7 @@
             <th scope="col">#</th>
             <th scope="col">Store</th>
             <th scope="col">Contact Info</th>
+            <th scope="col">Contact Person</th>
             <th scope="col">Active</th>
             <th scope="col">Confirmed</th>
             <th scope="col"><i data-feather="ellipsis"></i></th>
@@ -22,12 +23,18 @@
                 </div>
               <td>
                 <div class="d-flex flex-column">
-                  <span>{{$vendor->name}}</span>
+                  <a href="mailto:{{$vendor->email}}">{{$vendor->email}}</a>
+                  <a href="tel:{{$vendor->phone}}">{{$vendor->phone}}</a>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex flex-column">
+                  <span>{{$vendor->contact_person}}</span>
                 </div>
                 <div class="d-flex">
-                  <a href="mailto:{{$vendor->email}}">{{$vendor->email}}</a>
+                  <a href="mailto:{{$vendor->contact_person_email}}">{{$vendor->contact_person_email}}</a>
                   <span class="mx-1">|</span>
-                  <a href="tel:{{$vendor->phone}}">{{$vendor->phone}}</a>
+                  <a href="tel:{{$vendor->contact_person_phone}}">{{$vendor->contact_person_phone}}</a>
                 </div>
               </td>
               <td><input type="checkbox" wire:click="changeStatus({{$vendor->id}})" {{$vendor->active?'checked':''}}></td>

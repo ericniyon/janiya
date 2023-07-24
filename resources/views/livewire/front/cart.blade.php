@@ -92,7 +92,7 @@
                     <h4>Remove</h4>
                 </li>
                 <li class="d-flex pt-1 justify-content-between">
-                    <strong>{{Session::get('coupon')['name']}}</strong>
+                    <strong>{{ session()->has('coupon')['name'] }}</strong>
                     <h4>{{getDiscount()}}</h4>
                     <button class="btn btn-outline-none text-danger" wire:click="deleteCoupon()">
                         <i class="fa fa-times"></i>
@@ -102,7 +102,7 @@
         </div>
         @endif
         @if (Cookie::has('referredBy'))
-        <div class="{{Session::has('coupon')?'col-md-6':'col-12'}}">
+        <div class="{{ session()->has('coupon')?'col-md-6':'col-12'}}">
             <div class="order-box bg-light p-4">
                 <div class="w-100 d-flex justify-content-between align-items-center">
                     <div>

@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="page-title">
-                        <h2>{{$product->product->name}}</h2>
+                        <h2>{{$product->name}}</h2>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -17,7 +17,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{url('/')}}">{{config('app.name')}}</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('shop') }}">Shop</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{$product->product->name}}</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{$product->product_name}}</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,10 +29,10 @@
     <section>
         <div class="collection-wrapper">
             <div class="container">
-                @foreach ($images as $image)
+                @foreach ($product->images as $image)
 {{-- {{ $image }} --}}
                     {{-- <div>
-                        <img src="{{ asset(Storage::url($image->image))}}" alt=""
+                        <img src="{{ asset($image->image)}}" alt=""
                             class="img-fluid blur-up lazyload image_zoom_cls-">
                     </div> --}}
                 @endforeach
@@ -40,12 +40,12 @@
                     <div class="col-lg-6">
                         <div class="product-slick">
                             <div>
-                                <img src="{{ asset(Storage::url($product->product->images->image))}}" alt=""
+                                <img src="{{ asset($product->product_image)}}" alt=""
                                     class="img-fluid blur-up lazyload image_zoom_cls-">
                             </div>
-                            @foreach ($images as $image)
+                            @foreach ($product->images as $image)
                             <div>
-                                <img src="{{ asset(Storage::url($image->image))}}" alt=""
+                                <img src="{{ asset($image->image)}}" alt=""
                                     class="img-fluid blur-up lazyload image_zoom_cls-">
                             </div>
                             @endforeach
@@ -54,9 +54,9 @@
                             <div class="col-12 p-0">
                                 <div class="slider-nav">
 
-                                    @foreach ($images as $image)
+                                    @foreach ($product->images as $image)
                                     <div>
-                                        <img src="{{ asset(Storage::url($image->image))}}" alt=""
+                                        <img src="{{ asset($image->image)}}" alt=""
                                             class="img-fluid blur-up lazyload">
                                         </div>
                                     @endforeach
@@ -69,7 +69,7 @@
                     <div class="col-lg-6 rtl-text">
                         <div class="product-right">
 
-                            <h2>{{ $product->product->name }}</h2>
+                            <h2>{{ $product->product_name }}</h2>
                             <div class="rating-section">
                                 <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -80,17 +80,17 @@
                                 @csrf
                                 <div class="label-section">
                                     <span class="badge badge-grey-color">#1 Best seller</span>
-                                    <span class="label-text">in {{$product->product->product_categories->name}}</span>
+                                    <span class="label-text">in {{$product->productCategory->name}}</span>
                                 </div>
-                                <h3 class="price-detail">{{ money($product->product->price) }} </h3>
+                                <h3 class="price-detail">{{ money($product->price) }} </h3>
                                 <ul class="color-variant">
-                                    @foreach ($colors as $item)
+                                    {{-- @foreach ($product->colors as $item)
                                     <label for="color{{$item->id}}">
                                         <li class="active" style="background: {{ $item->color }}">
                                             <input type="radio" required name="color" id="color{{$loop->iteration}}" hidden
                                             value="{{ $item->color }}">
                                         </li></label>
-                                    @endforeach
+                                    @endforeach --}}
                                 </ul>
                                 <input type="hidden" value="{{$vendor->id}}" name="vendor">
                                 <div id="selectSize" class="addeffect-section product-description border-product">
@@ -117,12 +117,12 @@
                                     {{-- <h6 class="error-message">please select size</h6> --}}
                                     <div class="size-box">
                                         <ul>
-                                            @foreach ($sizes as $item)
+                                            {{-- @foreach ($product->sizes as $item)
                                             <label for="size{{$item->id}}"><li>
                                                     {{ $item->size }}
                                                     <input type="radio" required id="size{{$loop->iteration}}" name="size" hidden value="{{ $item->size }}">
                                                 </li></label>
-                                            @endforeach
+                                            @endforeach --}}
                                         </ul>
                                     </div>
                                     <h6 class="product-title">quantity</h6>
@@ -211,7 +211,7 @@
                             aria-labelledby="top-home-tab">
                             <div class="product-tab-discription">
                                 <div class="part">
-                                    <p>{{$product->product->description}}</p>
+                                    <p>{{$product->description}}</p>
                                 </div>
 
                             </div>
@@ -279,13 +279,13 @@
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
-                                <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}">
-                                    <img src="{{$product->product->thumb()->exists()? asset(Storage::url($product->thumb->image)): asset('assets/images/2.jpg')}}"
+                                <a href="{{route('al_product_details',Crypt::encryptString($product->id)}}">
+                                    <img src="{{$product->thumb()->exists()? asset($product->thumb->image)): asset('assets/images/2.jpg')}}"
                                         class="img-fluid blur-up lazyload bg-img" alt=""></a>
                             </div>
                             <div class="back">
-                                <a href="{{route('al_product_details',Crypt::encryptString($product->id))}}">
-                                    <img src="{{$product->product->thumb()->exists()? asset(Storage::url($product->thumb->image)): asset('assets/images/2.jpg')}}"
+                                <a href="{{route('al_product_details',Crypt::encryptString($product->id)}}">
+                                    <img src="{{$product->thumb()->exists()? asset($product->thumb->image)): asset('assets/images/2.jpg')}}"
                                         class="img-fluid blur-up lazyload bg-img" alt=""></a>
                             </div>
                             <div class="cart-info cart-wrap">
@@ -301,7 +301,7 @@
                         <div class="product-detail">
 
                             <a href="product-page(no-sidebar).html">
-                                <h6>{{$product->product->name}}</h6>
+                                <h6>{{$product->name}}</h6>
                             </a>
                             <h4>{{ money($product->price) }}</h4>
 

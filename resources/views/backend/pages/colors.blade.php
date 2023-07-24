@@ -26,9 +26,9 @@
         </div>
     </div>
 </div>
-@if($message = Session::get('message'))
+@if(session()->has('message'))
     <div class="alert alert-success">
-        <p>{{$message}}</p>
+        <p>{{ session()->get('message') }}</p>
     </div>
 @endif
 
