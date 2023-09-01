@@ -35,74 +35,74 @@ class CheckoutController extends Controller
             'street' => 'required|string|min:3|max:100',
             'neighborhood' => 'required|string|min:3|max:120',
         ]);
-        $amount = \Cart::getTotal() - getDiscount();
-        $request = [
-            'tx_ref' => time(),
-            'amount' => $amount,
-            'currency' => 'RWF',
-            'style' => [
-                'color' => 'blue'
-            ],
-            'payment_options' => 'card',
-            'redirect_url' => config('app.url') . ':8000/proccesspayment',
-            'customer' => [
-                'email' => 'niyoeri6@gmail.com',
+        $this->insterOrderIntoTable($req, 'Completed');
+        return redirect()->route('thankyou');
+        // $request = [
+        //     'tx_ref' => time(),
+        //     'amount' => $amount,
+        //     'currency' => 'RWF',
+        //     'style' => [
+        //         'color' => 'blue'
+        //     ],
+        //     'payment_options' => 'card',
+        //     'redirect_url' => config('app.url') . ':8000/proccesspayment',
+        //     'customer' => [
+        //         'email' => 'niyoeri6@gmail.com',
 
-            ],
-            'meta' => [
-                'price' => $amount
-            ],
+        //     ],
+        //     'meta' => [
+        //         'price' => $amount
+        //     ],
 
-            'customizations' => [
-                'style' => [
-                    'background' => 'blue'
-                ],
-                'title' => 'Go-Green',
-                'description' => 'Expert In Pethood',
-                'theme' => '#000000',
+        //     'customizations' => [
+        //         'style' => [
+        //             'background' => 'blue'
+        //         ],
+        //         'title' => 'Go-Green',
+        //         'description' => 'Expert In Pethood',
+        //         'theme' => '#000000',
 
-            ]
-        ];
+        //     ]
+        // ];
 
         //flutterwave endpoint
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.flutterwave.com/v3/payments',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => json_encode($request),
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer FLWSECK-35001ee084cc40d5e3695bb1228a0060-X',
-                'Content-Type: application/json'
-            ),
-        ));
+        // $curl = curl_init();
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => 'https://api.flutterwave.com/v3/payments',
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => '',
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => 'POST',
+        //     CURLOPT_POSTFIELDS => json_encode($request),
+        //     CURLOPT_HTTPHEADER => array(
+        //         'Authorization: Bearer FLWSECK-35001ee084cc40d5e3695bb1228a0060-X',
+        //         'Content-Type: application/json'
+        //     ),
+        // ));
 
-        $response = curl_exec($curl);
-        curl_close($curl);
+        // $response = curl_exec($curl);
+        // curl_close($curl);
 
         // echo "<pre>";
         // echo $response;
         // echo "</pre>";
 
-        $res = json_decode($response);
+        // $res = json_decode($response);
 
-
-        if ($res->status == 'success') {
-            $link = $res->data->link;
-            $this->insterOrderIntoTable($req, 'Completed');
-            return redirect($link);
-        }
-        if ($res->status == 'cancelled') {
-            return redirect('home');
-        } else {
-            $this->insterOrderIntoTable($req, 'Error');
-            echo "We can not proccess your payment";
-        }
+        // if ($res->status == 'success') {
+        //     $link = $res->data->link;
+        //     $this->insterOrderIntoTable($req, 'Completed');
+        //     return redirect($link);
+        // }
+        // if ($res->status == 'cancelled') {
+        //     return redirect('home');
+        // } else {
+        //     $this->insterOrderIntoTable($req, 'Error');
+        //     echo "We can not proccess your payment";
+        // }
 
         return redirect()->back()->with('alert', 'Success');
     }
@@ -182,10 +182,9 @@ class CheckoutController extends Controller
             $order->items()->create([
                 'product_id' => $item->id,
                 'price' => $item->price,
-
-                'shop' => $item->attributes['shop'],
-                'color' => $item->attributes['color'],
-                'size' => $item->attributes['size'],
+                'vendor_id' => $item->attributes['shop']['id'],
+                // 'color' => $item->attributes['color'],
+                // 'size' => $item->attributes['size'],
                 'quantity' => $item->quantity,
             ]);
         }

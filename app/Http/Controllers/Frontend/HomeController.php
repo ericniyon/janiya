@@ -36,10 +36,11 @@ class HomeController extends Controller
     public function singleProduct($product)
     {
         $product = Product::whereSlug($product)->firstOrFail();
-        $vendor = $product->shop;
+        $related = $product->rel_products()->latest()->limit(4)->get();
+        // dd($related);
         // $imageIDs = $product->valiations->pluck('product_attribute_id');
         // $images = ProductAttribute::whereIn('id',$imageIDs)->select(DB::raw('DISTINCT(image)'))->get();
-        return view('frontend.pages.product_details', compact('product','vendor'));
+        return view('frontend.pages.product_details', compact('product','related'));
     }
     // this function will return product by it id
     public function shop()
@@ -54,43 +55,14 @@ class HomeController extends Controller
 
     public function shopsList(Request $request)
     {
-        // return $request->all();
-        $shops = Vendor::all();
-        $categories = ProductCategory::all();
+        $shops = Vendor::withCount('products')
+            ->whereConfirmed(true)
+            ->whereActive(true)
+            ->simplePaginate();
 
-        $products_ids = Store::all()->pluck('product_id');
-
-        $sort = '';
-
-        if($request->sort != null){
-            $sort = $request->sort;
-        }
-        if($categories == null ){
-            return view('errors.404');
-        }
-        else{
-            if($sort == 'HighToLow'){
-                $products = Store::whereHas('product', function($query){ $query->orderBy('price', 'DESC');
-                })->select('id','vendor_id','product_id')->distinct('product_id')
-                ->simplePaginate(12);
-                // $products = Product::whereIn('id', $products_ids)->orderBy('price', 'DESC')->simplePaginate(12);
-            }
-            elseif($sort == 'LowToHigh'){
-                $products = Store::whereHas('product', function($query){ $query->orderBy('price', 'ASC');
-                })->select('id','vendor_id','product_id')->distinct('product_id')
-                ->simplePaginate(12);
-                // $products = Product::whereIn('id', $products_ids)->orderBy('price', 'ASC')->simplePaginate(12);
-            }
-            else{
-                $products = Store::select('id','vendor_id','product_id')->distinct('product_id')
-                ->simplePaginate(12);
-            // $products = Product::whereIn('id', $products_ids)->simplePaginate(12);
-
-            }
-        }
-
-        $route = 'shops';
-        return view('frontend.pages.shops-list', ['categories'=> $categories, 'products' => $products, 'shops' => $shops,'route'=> $route]);
+        return view('frontend.pages.shops-list', [
+            'shops' => $shops
+        ]);
     }
 
     public function becomeAffiliate()

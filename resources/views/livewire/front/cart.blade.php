@@ -1,13 +1,5 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
-            <div class="cart_counter">
-                <div class="countdownholder">
-                    Your cart will be expired in<span id="timer">05:46</span> minutes!
-                </div>
-                <a href="{{route('checkout')}}" class="cart_checkout btn btn-solid btn-xs">check out</a>
-            </div>
-        </div>
         <div class="col-sm-12 table-responsive-md">
             <table class="table cart-table">
                 <thead>
@@ -23,19 +15,19 @@
                     @foreach(\Cart::getContent() as $item)
                         <tr data-id="{{ $item->id }}">
                             <td data-th="Product" class="d-flex">
-                                <img src="{{$item->model->thumb()->exists()? asset(Storage::url($item->model->thumb->image)): asset('assets/images/2.jpg')}}"
+                                <img src="{{ $item->model->product_image ? asset($item->model->product_image): asset('assets/images/2.jpg') }}"
                                 width="50" height="50" class="img-responsive rounded"
                                 style="margin-right: 0.7rem!important"/>
                                 <div class="row d-flex flex-column">
-                                    <h5 class="">{{ $item->model->name }}</h5>
-                                    {{-- <span><strong>Shop:{{ $item->attributes['shop'] }}</strong></span> --}}
-                                    <div class="d-flex">
+                                    <h5 class="">{{ $item->model->product_name }}</h5>
+                                    <small><strong>Shop: </strong>{{ $item->attributes['shop']['shop_name'] }}</small>
+                                    {{-- <div class="d-flex">
                                         <strong>Color: &nbsp;&nbsp;</strong>{{ $item->attributes['color'] }},&nbsp;&nbsp;&nbsp;&nbsp;
                                         <strong class="mr-2">Size:&nbsp;</strong> {{ $item->attributes['size'] }}
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </td>
-                            <td data-th="Price">{{ $item->price }}</td>
+                            <td data-th="Price">{{ money($item->price) }}</td>
                             <td data-th="Quantity">
                                 <div class="d-flex align-items-center justify-content-around">
                                     <label for="">{{ $item->quantity }}</label>
@@ -83,7 +75,7 @@
         <div class="col-6"><a href="{{route('checkout')}}" class="btn btn-solid">check out</a></div>
     </div>
     <div class="row mt-3">
-        @if (Session::has('coupon'))
+        @if (session()->has('coupon'))
         <div class="col-md-6">
             <ul>
                 <li class="d-flex pb-1 border-bottom justify-content-between">
@@ -101,7 +93,7 @@
             </ul>
         </div>
         @endif
-        @if (Cookie::has('referredBy'))
+        @if (isset($_COOKIE['referredBy']))
         <div class="{{ session()->has('coupon')?'col-md-6':'col-12'}}">
             <div class="order-box bg-light p-4">
                 <div class="w-100 d-flex justify-content-between align-items-center">
