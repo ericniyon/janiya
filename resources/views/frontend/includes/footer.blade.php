@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-12">
                     <div class="footer-bottom">
                         <p class="footer-copytext">&copy; All Copyrights Reserved by <a
@@ -64,6 +64,6 @@
                         
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </footer>

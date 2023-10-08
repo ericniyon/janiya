@@ -2,7 +2,8 @@
     <div class="container">
         <div class="row content-reverse">
             <div class="col-lg-3">
-                <div class="shop-widget-promo"><a href="#"><img src="{{ asset('front/images/promo/shop/01.jpg')}}" alt="promo"></a>
+                <div class="shop-widget-promo"><a href="#"><img src="{{ asset('front/images/gologo.png') }}"
+                            alt="promo"></a>
                 </div>
                 <div class="shop-widget">
                     <h6 class="shop-widget-title">Filter by Price</h6>
@@ -55,7 +56,7 @@
                                 filter</span></button>
                     </form>
                 </div>
-                
+
                 <div class="shop-widget">
                     <h6 class="shop-widget-title">Filter by Category</h6>
                     <form><input class="shop-widget-search" type="text" placeholder="Search...">
@@ -72,8 +73,7 @@
                             </li>
                             <li>
                                 <div class="shop-widget-content"><input type="checkbox" id="cate3"><label
-                                        for="cate3">fruits</label></div><span
-                                    class="shop-widget-number">(35)</span>
+                                        for="cate3">fruits</label></div><span class="shop-widget-number">(35)</span>
                             </li>
                             <li>
                                 <div class="shop-widget-content"><input type="checkbox" id="cate4"><label
@@ -141,14 +141,70 @@
                                     <option value="1">featured</option>
                                     <option value="2">recommend</option>
                                 </select></div>
-                            <div class="filter-action"><a href="shop-3column.html" class="active"
-                                    title="Three Column"><i class="fas fa-th"></i></a><a href="shop-2column.html"
-                                    title="Two Column"><i class="fas fa-th-large"></i></a><a href="shop-1column.html"
-                                    title="One Column"><i class="fas fa-th-list"></i></a></div>
+                            <div class="filter-action">
+                                <a href="#" class="active" title="Three Column"
+                                    wire:click.prevent='filterThree'>
+                                    <i class="fas fa-th"></i>
+                                </a>
+                                <a href="#" title="Two Column" wire:click.prevent='filterTwo'>
+                                    <i class="fas fa-th-large"></i>
+                                </a>
+                                <a href="#" title="One Column" wire:click.prevent='filterOne'>
+                                    <i class="fas fa-th-list"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
+
+
+
+                @if ($colsNumber === 1)
+                    <div class="row">
+                        @forelse ($products as $product)
+                        <div class="col">
+                            <div class="product-standard">
+                                <div class="standard-label-group"><label class="standard-label new">new</label></div>
+                                <div class="standard-media"><a class="standard-image" href="product-video.html"><img
+                                            src="{{ asset($product->product_image) }}" alt="product"></a>
+                                    <div class="standard-widget"><a title="Product Compare" href="compare.html"
+                                            class="fas fa-random"></a><a title="Product Video"
+                                            href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play vbox-item"
+                                            data-autoplay="true" data-vbtype="video" savefrom_lm_index="1"></a><a
+                                            title="Product View" href="#" class="fas fa-eye"
+                                            data-bs-toggle="modal" data-bs-target="#product-view"></a></div>
+                                </div>
+                                <div class="standard-content">
+                                    <h4 class="standard-name"><a href="product-video.html">fresh green chilis</a></h4>
+                                    <h5 class="standard-price"><del>$34</del><span>$28<small>/piece</small></span></h5>
+                                    <div class="standard-rating"><i class="active icofont-star"></i><i
+                                            class="active icofont-star"></i><i class="active icofont-star"></i><i
+                                            class="active icofont-star"></i><i class="icofont-star"></i><a
+                                            href="product-video.html">(3)</a></div>
+                                    <p class="standard-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit
+                                        molestias quaerat rem ullam ut nam quibusdam labore sed magnam eos Inventore
+                                        quis corrupti nemo ipsa ratione culpa porro vitae.</p>
+                                    <div class="standard-action-group"><button class="product-add"
+                                            title="Add to Cart"><i class="fas fa-shopping-basket"></i><span>add to
+                                                cart</span></button>
+                                        <div class="product-action"><button class="action-minus"
+                                                title="Quantity Minus"><i class="icofont-minus"></i></button><input
+                                                class="action-input" title="Quantity Number" type="text"
+                                                name="quantity" value="1"><button class="action-plus"
+                                                title="Quantity Plus"><i class="icofont-plus"></i></button></div>
+                                        <button class="standard-wish wish" title="Add to Wishlist"><i
+                                                class="fas fa-heart"></i><span>add to wish</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                       
+                       @empty
+                    @endforelse 
+                    </div>
+                @else
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-{{ $colsNumber }}">
                     @forelse ($products as $product)
                         {{-- <X-products.product :product="$product" /> --}}
                         <div class="col">
@@ -156,43 +212,56 @@
                                 <div class="product-media">
                                     <div class="product-label"><label class="label-text new">new</label></div>
                                     <button class="product-wish wish"><i class="fas fa-heart"></i></button>
-                                    <a class="product-image" href="{{ route('product.single',$product->slug) }}">
-                                        <img src="{{ asset($product->product_image)}}" alt="product">
+                                    <a class="product-image" href="{{ route('product.single', $product->slug) }}">
+                                        <img src="{{ asset($product->product_image) }}" alt="product">
                                     </a>
                                     <div class="product-widget">
                                         <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
-                                        <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8" class="venobox fas fa-play vbox-item" data-autoplay="true" data-vbtype="video"></a>
-                                        <a title="Product View" href="#" class="fas fa-eye" data-bs-toggle="modal" data-bs-target="#product-view"></a>
+                                        <a title="Product Video" href="https://youtu.be/9xzcVxSBbG8"
+                                            class="venobox fas fa-play vbox-item" data-autoplay="true"
+                                            data-vbtype="video"></a>
+                                        <a title="Product View" href="#" class="fas fa-eye"
+                                            data-bs-toggle="modal" data-bs-target="#product-view"></a>
                                     </div>
                                 </div>
                                 <div class="product-content">
                                     <div class="product-rating"><i class="active icofont-star"></i><i
                                             class="active icofont-star"></i><i class="active icofont-star"></i><i
                                             class="active icofont-star"></i><i class="icofont-star"></i><a
-                                            href="{{ route('product.single',$product->slug) }}">(3)</a></div>
-                                    <h6 class="product-name"><a href="{{ route('product.single',$product->slug) }}">{{ $product->product_name }}</a></h6>
+                                            href="{{ route('product.single', $product->slug) }}">(3)</a></div>
+                                    <h6 class="product-name"><a
+                                            href="{{ route('product.single', $product->slug) }}">{{ $product->product_name }}</a>
+                                    </h6>
                                     <h6 class="product-price">
-                                        @if($product->discount_price)
-                                        <del>{{ money($product->price) }}</del>
-                                        <span>{{ money($product->discounted_price) }} <small> /piece</small></span>
+                                        @if ($product->discount_price)
+                                            <del>{{ money($product->price) }}</del>
+                                            <span>{{ money($product->discounted_price) }} <small> /piece</small></span>
                                         @else
-                                        <span>{{ money($product->price) }} <small> /piece</small></span>
+                                            <span>{{ money($product->price) }} <small> /piece</small></span>
                                         @endif
                                     </h6>
                                     <button class="product-add" title="Add to Cart"><i
                                             class="fas fa-shopping-basket"></i><span>add</span></button>
                                     <div class="product-action">
-                                        <button class="action-minus" title="Quantity Minus"> <i class="icofont-minus"></i></button>
-                                        <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1">
-                                        <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                        <button class="action-minus" title="Quantity Minus"> <i
+                                                class="icofont-minus"></i></button>
+                                        <input class="action-input" title="Quantity Number" type="text"
+                                            name="quantity" value="1">
+                                        <button class="action-plus" title="Quantity Plus"><i
+                                                class="icofont-plus"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @empty
-                        
                     @endforelse
                 </div>
+                @endif
+
+
+
+
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="bottom-paginate">

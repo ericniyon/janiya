@@ -19,6 +19,8 @@ class SingleShop extends Component
         'sortKey'=>['except'=>'ASC'],
     ];
 
+    public $colsNumber = 3;
+
     public $vendor;
     public function mount($vendor)
     {
@@ -33,4 +35,23 @@ class SingleShop extends Component
         ->paginate($this->perPage);
         return view('livewire.front.single-shop', compact('products'));
     }
+
+
+    public function filterThree()
+    {
+        $this->colsNumber = 3;
+    }
+
+    public function filterTwo()
+    {
+        $this->colsNumber = 2;
+    }
+    public function filterOne()
+    {
+        $this->colsNumber = 1;
+    }
+
+
+
+
 }

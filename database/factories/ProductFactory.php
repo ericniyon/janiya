@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Vendor;
+use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -18,7 +19,7 @@ class ProductFactory extends Factory
             'product_name'=> $this->faker->name,
             'price'=> $this->faker->numberBetween(10000,100000),
             // 'discounted_price',
-            'product_category_id'=>1,
+            'product_category_id'=>$this->faker->randomElement(ProductCategory::pluck('id')),
             'description'=> $this->faker->paragraph,
             'product_image'=> $this->faker->imageUrl(),
             'vendor_id'=>1,

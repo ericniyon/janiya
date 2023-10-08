@@ -41,12 +41,12 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                 </div>
                 <div class="row card-body pt-0 mt-0">
                     <div class="col-5 d-flex flex-column justify-content-between">
-                        <img src="{{asset(Storage::url($product->thumb->image))}}" class="rounded img-responsive w-100"
+                        <img src="{{$product->product_image }}" class="rounded img-responsive w-100"
                         height="150">
                     </div>
                     <div class="col-7 d-flex flex-column justify-content-between">
-                        <h5><strong>Name:</strong> {{$product->name}}</h5>
-                        <h5><strong>Category:</strong> {{$product->product_categories->category_name}}</h5>
+                        <h5><strong>Name:</strong> {{$product->product_name}}</h5>
+                        <h5><strong>Category:</strong> {{$product->productCategory->category_name}}</h5>
                         <h5><strong>Quantity:</strong> {{$product->attributes->sum('quantity')}}</h5>
                         <h5><strong>Unit price:</strong> {{number_format($product->price)}} Rwf</h5>
                     </div>

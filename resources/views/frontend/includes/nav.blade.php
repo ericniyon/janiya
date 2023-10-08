@@ -38,13 +38,15 @@
                         <li class="navbar-item"><a class="navbar-link" href="{{ url('/faq') }}">need help</a></li>
                         <li class="navbar-item"><a class="navbar-link" href="{{ route('contact') }}">contact us</a></li>
                     </ul>
-                    <div class="navbar-select-group">
+                    @if (request()->is('/') || request()->is('shop/products') || request()->is('about') || request()->is('faq') || request()->is('contact') )
+                        <div class="navbar-select-group">
                         <div class="navbar-select"><i class="fas fa-flag"></i><select class="select">
                                 <option value="english" selected>english</option>
                                 <option value="bangali">kinyarwanda</option>
                             </select></div>
                         
-                    </div>
+                    </div>  
+                    @endif
                 </div>
             </div>
         </div>
