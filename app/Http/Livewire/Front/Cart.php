@@ -16,18 +16,22 @@ class Cart extends Component
     public function removeItem($proId)
     {
         $this->removeFromCart($proId);
+        $this->emitTo('front.top-cart','refreshComponent');
         $this->emit('alert',['type'=>'success','message'=>'Product removed from cart successfully']);
     }
 
     public function increase($proId)
     {
+        // dd($proId);
         $this->increaseQuantity($proId);
+        $this->emitTo('front.top-cart','refreshComponent');
         $this->emit('alert',['type'=>'success','message'=>'Cart quantity updated successfully']);
     }
 
     public function decrease($proId)
     {
         $this->decreaseQuantity($proId);
+        $this->emitTo('front.top-cart','refreshComponent');
         $this->emit('alert',['type'=>'success','message'=>'Cart quantity updated successfully']);
     }
 

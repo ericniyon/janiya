@@ -179,13 +179,8 @@
                                         <span>{{ money($product->price) }} <small> /piece</small></span>
                                         @endif
                                     </h6>
-                                    <button class="product-add" title="Add to Cart"><i
-                                            class="fas fa-shopping-basket"></i><span>add</span></button>
-                                    <div class="product-action">
-                                        <button class="action-minus" title="Quantity Minus"> <i class="icofont-minus"></i></button>
-                                        <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1">
-                                        <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
-                                    </div>
+                                    <button class="product-add" wire:click="addToCart({{ $product->id }})" title="Add to Cart">
+                                        <i class="fas fa-shopping-basket"></i><span>add</span></button>
                                 </div>
                             </div>
                         </div>

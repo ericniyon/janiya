@@ -817,36 +817,27 @@
             <div class="row">
                 <div class="col">
                     <div class="section-heading">
-                        <h2>collected new items</h2>
+                        <h2>Popular Shops</h2>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center">
+                @forelse ($shops as $vendor)
                 <div class="col">
-                    <ul class="new-slider slider-arrow">
-                        @forelse ($shops as $vendor)
-                        <li>
-                            <div class="product-card">
-                                <div class="product-media">
-                                    <a class="product-image" href="{{ route('vendors.products.show', $vendor->slug) }}">
-                                        <img src="{{asset($vendor->profile_image)}}" alt="product">
-                                    </a>
-                                </div>
-                                <div class="product-content">
-                                    <h6 class="product-name"><a href="{{ route('vendors.products.show', $vendor->slug) }}">{{ $vendor->shop_name }}</a>
-                                    </h6>
-                                    <h6 class="product-price"><span>{{ $vendor->products_count }}<small> Products</small></span></h6>
-                                    <a href="{{ route('vendors.products.show', $vendor->slug) }}" class="product-add" title="Add to Cart">
-                                        <i class="fas fa-eye"></i><span>View Products</span>
-                                    </a>
-                                </div>
+                    <div class="category-wrap">
+                        <div class="category-media">
+                            <img src="{{asset($vendor->profile_image)}}" alt="{{ $vendor->shop_name }}">
+                            <div class="category-overlay">
+                                <a href="{{ route('vendors.products.show', $vendor->slug) }}"><i class="fas fa-link"></i></a>
                             </div>
-                        </li>                            
-                        @empty
-                            
-                        @endforelse
-                    </ul>
+                        </div>
+                        <div class="category-meta">
+                            <h4>{{ $vendor->shop_name }}</h4><p>({{ $vendor->products_count }} items)</p>
+                        </div>
+                    </div>
                 </div>
+                @empty
+                @endforelse
             </div>
             <div class="row">
                 <div class="col">

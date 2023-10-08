@@ -30,7 +30,7 @@ class CartController extends Controller
     public function cart()
     {
         if (\Cart::isEmpty()) {
-            return to_route('shop')->with('warning','Your cart is empty! shop something into it!!');
+            return redirect()->route('shop')->with('warning','Your cart is empty! shop something into it!!');
         }
         return view('frontend.pages.cart');
     }
@@ -42,18 +42,15 @@ class CartController extends Controller
      */
     public function addToCart(Request $request,$product)
     {
-        // dd($product);
         $this->validate($request,[
-            'color'=>'string',
-            'size'=>'string',
             'quantity'=>'integer|min:1',
         ]);
         $product = Product::findOrFail($product);
-        // dd($product->id);
-        $vendor = $request->has('vendor')?$request->vendor:NULL;
-        $this->addToCartTrait($product,$request->color,$request->size,$request->quantity,$vendor);
+        $vendor = $product->shop;
+        // $this->addToCartTrait($product,$request->color,$request->size,$request->quantity,$vendor);
+        $this->addToCartTrait($product,$request->quantity,$vendor);
 
-        return to_route('cart');
+        return redirect()->route('cart');
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 

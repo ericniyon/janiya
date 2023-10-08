@@ -45,7 +45,7 @@ Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remo
 Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('guest-checkout', [CheckoutController::class, 'checkout'])->name('checkout.guest');
 Route::post('purchase', [CheckoutController::class, 'payment'])->name('purchase');
-Route::view('thankyou', 'front.thankyou')->name('thankyou');
+Route::view('thankyou', 'frontend.pages.thankyou')->name('thankyou');
 Route::view('order-cancelled', 'front.thankyou')->name('cancelled');
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 Route::get('profile', [AdminController::class, 'profile'])->name('admin-profile');

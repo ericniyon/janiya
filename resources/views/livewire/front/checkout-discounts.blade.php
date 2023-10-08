@@ -7,20 +7,12 @@
                 <div>
                     <span>{{session()->get('error')}}</span>
                 </div>
-                <button type="button" class="close position-absolute pull-right btn btn-outline-none"
-                data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
               </div>
             @endif
             @if (session()->has('success'))
             <div class="alert alert-info alert-dismissible d-flex justify-content-between w-100 fade show"
                 role="alert" id="my-alert">
                 <span>{{session()->get('success')}}</span>
-                <button type="button" class="close position-absolute pull-right btn btn-outline-none"
-                data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             @endif
         @if (session()->has('coupon'))
@@ -64,23 +56,15 @@
             <div class="alert alert-danger alert-dismissible fade show"
              role="alert" id="my-alert">
                 <span>{{session()->get('error1')}}</span>
-                <button type="button" class="close position-absolute pull-right btn btn-outline-none"
-                data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
               </div>
             @endif
             @if (session()->has('success1'))
             <div class="alert alert-success alert-dismissible fade show"
              role="alert" id="my-alert">
                 <span>{{session()->get('success1')}}</span>
-                <button type="button" class="close position-absolute pull-right btn btn-outline-none"
-                data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
               </div>
             @endif
-            @if (Cookie::has('referredBy'))
+            @if (isset($_COOKIE['referredBy']))
             <div class="w-100 d-flex justify-content-between align-items-center">
                 <div>
                     <h5>You were referred By <strong>{{referencedBy()->name}}</strong></h5>

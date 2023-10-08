@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\Product;
 use App\Models\Store;
+use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Http\Traits\AddToCartTrait;
 
 class SingleShop extends Component
 {
-    use WithPagination;
+    use WithPagination, AddToCartTrait;
     public $paginationTheme = 'bootstrap';
     public $perPage = 25, $searchKey = '', $sortBy = 'product_name', $sortKey = 'ASC';
     public $queryString = [
@@ -20,6 +21,15 @@ class SingleShop extends Component
     ];
 
     public $vendor;
+
+    public function addToCart($productId)
+    {
+        $product = Product::findOrFail($productId);
+        $this->addToCartTrait($product, 1, $product->shop);
+        $this->emitTo('front.top-cart','refreshComponent');
+        $this->emit('alert', ['type' => 'success', 'message' => 'Product added to cart successfully']);
+    }
+
     public function mount($vendor)
     {
         $this->vendor = $vendor;
