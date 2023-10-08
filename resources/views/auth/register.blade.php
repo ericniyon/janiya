@@ -30,6 +30,13 @@
                     <span class="invalid-feedback" role="alert">{{$message}}</span>
                 @enderror
             </div>
+            <div class="form-group">
+                <input required name="location" type="text" class="form-control @error('location') is-invalid @enderror" 
+                value="{{old('location')}}"  placeholder="Location">
+                @error('location')
+                    <span class="invalid-feedback" role="alert">{{$message}}</span>
+                @enderror
+            </div>
             @isset($url)
             <div class="form-group">
                 <input required name="shop_name" type="shop_name" class="form-control @error('shop_name') is-invalid @enderror" 

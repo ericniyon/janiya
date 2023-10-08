@@ -78,7 +78,7 @@
                     <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
                             <li><a href="{{route('vendor.products.add')}}"><i class="fa fa-circle"></i>Add Product</a></li>
-                            <li><a href="{{route('admin.products.all')}}"><i class="fa fa-circle"></i>Products</a></li>
+                            <li><a href="{{route('vendor.products.all')}}"><i class="fa fa-circle"></i>Products</a></li>
                             {{-- <li>
                                 <a href="#"><i class="fa fa-circle"></i>
                                     <span>Product</span> <i class="fa fa-angle-right pull-right"></i>

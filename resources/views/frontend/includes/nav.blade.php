@@ -1,19 +1,25 @@
 <header class="header-part">
     <div class="container">
         <div class="header-content">
-            <div class="header-media-group"><button class="header-user"><img src="{{ asset('front/images/user.png') }}"
-                        alt="user"></button><a href="index.html"><img src="{{ asset('front/images/gologo.png') }}" alt="logo"></a><button
-                    class="header-src"><i class="fas fa-search"></i></button></div><a href="index.html"
-                class="header-logo"><img src="{{ asset('front/images/gologo.png') }}" alt="logo"></a><a href="login.html"
-                class="header-widget" title="My Account"><img src="{{ asset('front/images/user.png') }}" alt="user"><span>join</span></a>
-            <form class="header-form"><input type="text" placeholder="Search anything..."><button><i
-                        class="fas fa-search"></i></button></form>
-            <div class="header-widget-group"><a href="compare.html" class="header-widget" title="Compare List"><i
-                        class="fas fa-random"></i><sup>0</sup></a><a href="wishlist.html" class="header-widget"
-                    title="Wishlist"><i class="fas fa-heart"></i><sup>0</sup></a><button
-                    class="header-widget header-cart" title="Cartlist"><i
-                        class="fas fa-shopping-basket"></i><sup>0</sup><span>total
-                        price<small>rwf00.00</small></span></button></div>
+            <div class="header-media-group">
+                <button class="header-user">
+                    <img src="{{ asset('front/images/user.png') }}" alt="user">
+                </button>
+                <a href="/">
+                    <img src="{{ asset('front/images/gologo.png') }}" alt="logo">
+                </a>
+                <button class="header-src"><i class="fas fa-search"></i></button>
+            </div>
+            <a href="/" class="header-logo"><img src="{{ asset('front/images/gologo.png') }}" alt="logo"></a>
+            <a href="{{ route('login') }}" class="header-widget" title="My Account">
+                <img src="{{ asset('front/images/user.png') }}" alt="user">
+                <span>join</span>
+            </a>
+            <form class="header-form">
+                <input type="text" placeholder="Search anything...">
+                <button><i class="fas fa-search"></i></button>
+            </form>
+            @livewire('front.top-cart')
         </div>
     </div>
 </header>
@@ -27,9 +33,12 @@
                             
                         </li>
                         <li class="navbar-item"><a class="navbar-link"
-                                href="{{ route('shop') }}">shop</a>
+                                href="{{ route('shop') }}">All Products</a>
                             
                         </li>
+                        <li class="navbar-item">
+                            <a class="navbar-link"href="{{ route('shops.list') }}">Shops List</a>
+                        </li>   
                         <li class="navbar-item dropdown"><a class="navbar-link  " href="{{ route('about') }}">about us</a>
                         
                         </li>
@@ -52,3 +61,23 @@
         </div>
     </div>
 </nav>
+@if(!\Cart::isEmpty())
+<aside class="cart-sidebar">
+    <div class="cart-header">
+       <div class="cart-total"><i class="fas fa-shopping-basket"></i><span>total item ({{ !\Cart::isEmpty() ? \Cart::getContent()->count() : 0 }})</span></div>
+       <button class="cart-close"><i class="icofont-close"></i></button>
+    </div>
+    @livewire('front.aside-cart-summary')
+    <div class="cart-footer">
+       <button class="coupon-btn">Do you have a coupon code?</button>
+       <form class="coupon-form">
+            <input type="text" placeholder="Enter your coupon code">
+            <button type="submit"><span>apply</span></button>
+        </form>
+       <a class="cart-checkout-btn" href="{{ route('cart') }}">
+            <span class="checkout-label" style="width: 35%!important">View Cart</span>
+            <span class="checkout-price" style="width: 65%!important">{{ !\Cart::isEmpty() ? money(\Cart::getSubTotal()) : 'Rwf00.00' }}</span>
+        </a>
+    </div>
+ </aside>
+@endif

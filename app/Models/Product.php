@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Http\Traits\AddToCartTrait;
 use App\Models\Vendor;
+use App\Models\ProductAttribute;
 use App\Observers\ProductObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, AddToCartTrait;
     protected $fillable = [
         'product_name',
         'slug',
@@ -68,7 +70,7 @@ class Product extends Model
 
     public function attributes()
     {
-        return $this->hasMany(ProductAttribute::class);
+        return $this->hasMany(ProductAttribute::class,'product_id','id');
     }
 
     /**

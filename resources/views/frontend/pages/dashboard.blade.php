@@ -18,7 +18,7 @@
                             <h2>My Dashboard</h2>
                         </div>
                         <div class="welcome-msg">
-                            <p>Hello, {{Auth::user()->name}} !</p>
+                            <p>Hello, {{auth()->user()->name}} !</p>
                             <p>From your My Account Dashboard you have the ability to view a snapshot of your recent
                                 account activity and update your account information. Select a link below to view or
                                 edit information.</p>
@@ -29,11 +29,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    @if (is_null(Auth::user()->promo_code))
+                                    @if (is_null(auth()->user()->promo_code))
                                     <div class="box">
                                         <div class="box-title">
                                             <h3>Affiliation Information</h3>
-                                            @if (is_null(Auth::user()->affiliate_link))
+                                            @if (is_null(auth()->user()->affiliate_link))
                                             <a href="{{route('affiliate')}}" 
                                             onclick="event.preventDefault();
                                             document.getElementById('affiliateForm').submit();"
@@ -46,15 +46,15 @@
                                             @endif
                                         </div>
                                         <div class="box-content">
-                                            @if (is_null(Auth::user()->affiliate_link))
+                                            @if (is_null(auth()->user()->affiliate_link))
                                             <address>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, praesentium.</address>
                                             @else
-                                            <h6>Referral LINK: {{config('app.url').__('/shop?ref=').Auth::user()->affiliate_link}}
+                                            <h6>Referral LINK: {{config('app.url').__('/shop?ref=').auth()->user()->affiliate_link}}
                                             </h6>
-                                            <h6>Total Click: {{Auth::user()->clicks}}</h6>
-                                            <h6>Total Sales: {{Auth::user()->sales}}</h6>
+                                            <h6>Total Click: {{auth()->user()->clicks}}</h6>
+                                            <h6>Total Sales: {{auth()->user()->sales}}</h6>
                                             <h6>Remaining sales to become {{config('app.name')}} 
-                                                partner: <b>{{50 - Auth::user()->sales}}</b></h6>
+                                                partner: <b>{{50 - auth()->user()->sales}}</b></h6>
                                             @endif
                                         </div>
                                     </div>
@@ -65,10 +65,10 @@
                                             <a href="#">Read our terms & condition</a>
                                         </div>
                                         <div class="box-content">
-                                            <h6>Promo Code: <strong>{{Auth::user()->promo_code}}</strong>
+                                            <h6>Promo Code: <strong>{{auth()->user()->promo_code}}</strong>
                                             </h6>
-                                            <h6>Category/Level: <strong>{{Auth::user()->commission->name}}</strong></h6>
-                                            <h6>Total Sales: {{Auth::user()->partner_total_sales}}</h6>
+                                            <h6>Category/Level: <strong>{{auth()->user()->commission->name}}</strong></h6>
+                                            <h6>Total Sales: {{auth()->user()->partner_total_sales}}</h6>
                                         </div>
                                     </div>
                                     @endif
@@ -81,9 +81,9 @@
                                             <h3>Contact Information</h3><a href="{{route('profile')}}">Updated my profile</a>
                                         </div>
                                         <div class="box-content">
-                                            <h6><strong>Full Name:</strong> {{Auth::user()->name}}</h6>
-                                            <h6><strong>Email Address: </strong>{{Auth::user()->email}}</h6>
-                                            <h6><strong>Phone Number: </strong>{{Auth::user()->phone}}</h6>
+                                            <h6><strong>Full Name:</strong> {{auth()->user()->name}}</h6>
+                                            <h6><strong>Email Address: </strong>{{auth()->user()->email}}</h6>
+                                            <h6><strong>Phone Number: </strong>{{auth()->user()->phone}}</h6>
                                             <h6><a href="{{route('profile.password')}}">Change Password</a></h6>
                                         </div>
                                     </div>
@@ -97,13 +97,13 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <h6>Default Billing Address</h6>
-                                            @if (is_null(Auth::user()->neighborhood)) 
+                                            @if (is_null(auth()->user()->neighborhood)) 
                                             <address>You have not set a default billing address.<br><a href="#">Edit
                                                     Address</a></address>
                                             @else
-                                            <h6><strong>Address:</strong> {{Auth::user()->address1}}</h6>
-                                            <h6><strong>Neighborhood: </strong>{{Auth::user()->neighborhood}}</h6>
-                                            <h6><strong>Street Address</strong>{{Auth::user()->street_name}}</h6>
+                                            <h6><strong>Address:</strong> {{auth()->user()->address1}}</h6>
+                                            <h6><strong>Neighborhood: </strong>{{auth()->user()->neighborhood}}</h6>
+                                            <h6><strong>Street Address</strong>{{auth()->user()->street_name}}</h6>
                                             @endif
                                         </div>
                                     </div>

@@ -36,7 +36,7 @@
                                         <div class="col-md-6 col-lg-6">
                                             <div class="banner-content">
                                                 <h2>we are delivered organic foods item within 24 hours.</h2><a
-                                                    href="#" class="btn btn-inline"><i
+                                                    href="{{ route('shops.list') }}" class="btn btn-inline"><i
                                                         class="fas fa-shopping-basket"></i><span>shop now</span></a>
                                             </div>
                                         </div>
@@ -51,7 +51,7 @@
                                     <div class="row align-items-center">
                                         <div class="col-md-6 col-lg-6">
                                             <div class="banner-content">
-                                                <h2>get your organic healthy foods item online today.</h2><a href="#"
+                                                <h2>get your organic healthy foods item online today.</h2><a href="{{ route('shops.list') }}"
                                                     class="btn btn-inline"><i class="fas fa-shopping-basket"></i><span>shop
                                                         now</span></a>
                                             </div>
@@ -68,7 +68,7 @@
                                         <div class="col-md-6 col-lg-6">
                                             <div class="banner-content">
                                                 <h2>we are delivered organic foods item within 24 hours.</h2><a
-                                                    href="#" class="btn btn-inline"><i
+                                                    href="{{ route('shops.list') }}" class="btn btn-inline"><i
                                                         class="fas fa-shopping-basket"></i><span>shop now</span></a>
                                             </div>
                                         </div>
@@ -187,15 +187,44 @@
                                 class="fas fa-shopping-basket"></i><span>shop now</span></a>
                     </div>
                 </div>
-                <div class="col-lg-1"></div>
-                <div class="col-lg-5">
-                    <div class="countdown-img"><img src="{{ asset('front/images/countdown.png') }}" alt="countdown">
-                        <div class="countdown-off"><span>20%</span><span>off</span></div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
+    {{-- <section class="section newitem-part">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="section-heading">
+                        <h2>Popular Shops</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center">
+                @forelse ($shops as $vendor)
+                <div class="col">
+                    <div class="category-wrap">
+                        <div class="category-media">
+                            <img src="{{asset($vendor->profile_image)}}" alt="{{ $vendor->shop_name }}">
+                            <div class="category-overlay">
+                                <a href="{{ route('vendors.products.show', $vendor->slug) }}"><i class="fas fa-link"></i></a>
+                            </div>
+                        </div>
+                        <div class="category-meta">
+                            <h4>{{ $vendor->shop_name }}</h4><p>({{ $vendor->products_count }} items)</p>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                @endforelse
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="section-btn-25"><a href="shop-4column.html" class="btn btn-outline"><i
+                                class="fas fa-eye"></i><span>view all new item</span></a></div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
 
 
 

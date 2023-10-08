@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{{ asset('front/css/main.css')}}">
     <link rel="stylesheet" href="{{ asset('front/css/home-standard.css')}}">
     <link rel="stylesheet" href="{{ asset('front/css/faq.css') }}" />
+    @stack('extraCss')
+    @livewireStyles
 </head>
 
 <body>
@@ -56,6 +58,7 @@
     <script src="{{ asset('front/js/venobox.js')}}"></script>
     <script src="{{ asset('front/js/slick.js')}}"></script>
     <script src="{{ asset('front/js/main.js')}}"></script>
+    @livewireScripts
 </body>
 
 </html>

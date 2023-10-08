@@ -45,7 +45,7 @@ Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remo
 Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('guest-checkout', [CheckoutController::class, 'checkout'])->name('checkout.guest');
 Route::post('purchase', [CheckoutController::class, 'payment'])->name('purchase');
-Route::view('thankyou', 'front.thankyou')->name('thankyou');
+Route::view('thankyou', 'frontend.pages.thankyou')->name('thankyou');
 Route::view('order-cancelled', 'front.thankyou')->name('cancelled');
 Route::get('proccesspayment', [CheckoutController::class, 'proccess']);
 Route::get('profile', [AdminController::class, 'profile'])->name('admin-profile');
@@ -67,7 +67,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('all/transaction', [AdminController::class, 'admin_transactions'])->name('admin-transaction');
 
     Route::post('save-category', [AdminController::class, 'save_category'])->name('save-category');
-    Route::view('products', 'backend.admin.products')->name('products.all');
+    
     Route::get('products/{product}', [ProductsController::class, 'show'])->name('products.single');
     Route::put('products/{attribute}', [ProductsController::class, 'updateAttribute'])->name('attributtes.update');
     Route::put('update/products/{product}', [ProductsController::class, 'updateProduct'])->name('product.update');
@@ -105,7 +105,7 @@ Route::middleware(['auth:vendor', 'confirmed', 'active'])->prefix('vendor')->nam
     Route::get('orders/view/{order}', [StoresController::class, 'singleOrder'])->name('orders.single');
     Route::post('my-store/{id}', [StoresController::class, 'storeUpdates'])->name('store_update');
 
-
+    Route::view('products', 'backend.vendors.products')->name('products.all');
     // coupons
     Route::view('coupons', 'backend.vendors.coupons')->name('coupons');
 });

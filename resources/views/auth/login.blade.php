@@ -42,13 +42,14 @@
                 <button class="btn btn-primary" type="submit">Login</button>
             </div>
             <div class="form-footer">
-                <span>Or Login up with social platforms</span>
-                <ul class="social">
-                    <li><a class="ti-facebook" href=""></a></li>
-                    <li><a class="ti-twitter" href=""></a></li>
-                    <li><a class="ti-instagram" href=""></a></li>
-                    <li><a class="ti-pinterest" href=""></a></li>
-                </ul>
+                <span>Or Login  as </span>
+                <a href="{{ route('admin.login') }}">
+                    <button class="btn btn-primary" type="button">Admin Login</button>
+                </a>
+                <a href="{{ route('vendor.login') }}">
+                    <button class="btn btn-primary" type="button">Vendor Login</button>
+                </a>
+                
             </div>
         </form>
     </div>

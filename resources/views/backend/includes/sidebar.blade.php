@@ -14,7 +14,7 @@
         </div>
         <ul class="sidebar-menu">
             <li><a class="sidebar-header" href="{{url('/admin/dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
-            <li><a class="sidebar-header" href="{{route('admin.products.all')}}"><i data-feather="box"></i> <span>Products</span></a>
+            <li><a class="sidebar-header" href="{{route('vendor.products.all')}}"><i data-feather="box"></i> <span>Products</span></a>
             </li>
             <li><a class="sidebar-header" href="{{route('admin.product-category')}}"><i data-feather="circle"></i> <span>Product Categories</span></a>
             </li>

@@ -9,7 +9,7 @@
                 <li><a href="{{route('cliet.orders')}}">My Orders</a></li>
                 <li><a href="#">My Wishlist</a></li>
                 <li><a href="{{route('profile')}}">My Profile</a></li>
-                @if (Auth::user()->promo_code)
+                @if (auth()->user()->promo_code)
                 <li><a href="#">Withdraw</a></li>
                 <li><a href="#">history</a></li>
                 @endif
