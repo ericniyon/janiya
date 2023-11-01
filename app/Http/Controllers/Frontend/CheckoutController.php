@@ -192,7 +192,7 @@ class CheckoutController extends Controller
             'product_id'=>$item->id,
             'price'=>$item->price,
 
-            'shop'=>$item->attributes['shop'],
+            // 'shop'=>$item->attributes['shop'],
             'color'=>$item->attributes['color'],
             'size'=>$item->attributes['size'],
             'quantity'=>$item->quantity,

@@ -688,14 +688,14 @@
         .slick-slider {
             margin-top: 6%;
         }
-        .slick-list {
-            margin: 0 -12px;
-            .slick-slide {
-                > div {
-                    margin: 0 12px;
+            .slick-list {
+                margin: 0 -12px;
+                .slick-slide {
+                    > div {
+                        margin: 0 12px;
+                    }
                 }
             }
-        }
     }
 }
 

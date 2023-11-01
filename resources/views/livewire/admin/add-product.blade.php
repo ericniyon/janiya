@@ -6,7 +6,8 @@
     @endif
 
 
-    <form enctype="multipart/form-data" method="POST">@csrf
+    <form enctype="multipart/form-data" method="POST">
+        @csrf
         <div class="row">
             <div class="col-md-7 border-right">
                 <div class="row">

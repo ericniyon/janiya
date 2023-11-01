@@ -42,10 +42,8 @@
                         <div class="footer-social">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -76,11 +74,10 @@
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="#">Gallery</a></li>
+                               
                                 <li><a href="#">Women </a></li>
                                 <li><a href="#">Men</a></li>
                                 <li><a href="#">Kids</a></li>
-                                <li><a href="#">Home & Living </a></li>
                                 <li><a href="#">About us  </a></li>
                                 <li><a href="#">Contact us  </a></li>
 
@@ -123,15 +120,7 @@
                             <li>
                                 <a href="#"><img src="../assets/images/icon/mastercard.png" alt=""></a>
                             </li>
-                            <li>
-                                <a href="#"><img src="../assets/images/icon/paypal.png" alt=""></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="../assets/images/icon/american-express.png" alt=""></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="../assets/images/icon/discover.png" alt=""></a>
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>

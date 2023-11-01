@@ -18,8 +18,9 @@ class ShopsController extends Controller
             'email'=>'required|email|string|min:5|max:120',
             'phone'=>'required|string|min:10|max:12',
             'details'=>'required|string|min:20',
-            'profile'=>'nullable|image|mimes:png,jpg,webp|max:700',
+            'profile'=>'image|mimes:png,jpg,webp|max:700',
         ]);
+        
         $password = str()->random(8);
         if ($request->hasFile('logo')) {
             $fileName = str()->slug($request->shop).time().'.'.$request->logo->extension();
@@ -49,6 +50,7 @@ class ShopsController extends Controller
 
     public function update(Vendor $vendor, Request $request)
     {
+        
         $this->validate($request,[
             'name'=>'required|string|min:3|max:120',
             'shop'=>'required|unique:vendors,shop_name,'.$vendor->id.'|string|min:3|max:120',

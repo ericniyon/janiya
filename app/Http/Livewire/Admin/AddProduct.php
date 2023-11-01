@@ -55,18 +55,18 @@ class AddProduct extends Component
 
     public function store()
     {
-        $this->validate([
-            'name'=>'string|unique:products,name|min:3|max:220',
-            'price'=>'required|integer|min:500|max:500000',
-            'factory_price'=>'required|integer|min:500|max:500000',
-            'product_category_id'=>'required|integer',
-            'description'=>'string|required|min:10|max:5000',
-            'product_image.*'=>'image|mimes:png,jpg,webp|required',
-            'colorsLoop.*.color'=>'required|string',
-            'colorsLoop.*.quantity'=>'required|string',
-            'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
-            'colorsLoop.*.size'=>'required|string',
-        ]);
+        // $this->validate([
+        //     'name'=>'string|unique:products,name|min:3|max:220',
+        //     'price'=>'required|integer|min:500|max:500000',
+        //     'factory_price'=>'required|integer|min:500|max:500000',
+        //     'product_category_id'=>'required|integer',
+        //     'description'=>'string|required|min:10|max:5000',
+        //     'product_image.*'=>'image|mimes:png,jpg,webp|required',
+        //     'colorsLoop.*.color'=>'required|string',
+        //     'colorsLoop.*.quantity'=>'required|string',
+        //     'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
+        //     'colorsLoop.*.size'=>'required|string',
+        // ]);
 
         $product = Product::create([
             'name'=>$this->name,

@@ -54,8 +54,10 @@ class HomeController extends Controller
         return view('frontend.pages.shop');
     }
 
-    public function singleShop(Vendor $vendor)
+    public function singleShop($slug)
     {
+        $vendor = Vendor::where('slug', $slug)->first();
+        // return $vendor;
         return view('frontend.pages.single-shop', compact('vendor'));
     }
 

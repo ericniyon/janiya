@@ -18,7 +18,7 @@
                                 <label class="form-check-label ps-2" for="under25">
                             Under $25
                         </label>
-                        </div>
+                        </div>  
                     </ul>
                 </div>
             </div>

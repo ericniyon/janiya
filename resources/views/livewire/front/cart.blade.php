@@ -56,7 +56,7 @@
                             <td class="actions" data-th="Remove Item">
                                 <button class="btn btn-danger btn-sm remove-from-cart"
                                 wire:click.prevent="removeItem({{$item->id}})">
-                                    <i class="fa fa-trash-o"></i>
+                                    <i class="fa fa-trash" style="color:#fff"></i>
                                 </button>
                             </td>
                         </tr>
@@ -95,7 +95,7 @@
                     <strong>{{Session::get('coupon')['name']}}</strong>
                     <h4>{{getDiscount()}}</h4>
                     <button class="btn btn-outline-none text-danger" wire:click="deleteCoupon()">
-                        <i class="fa fa-times"></i>
+                        <i class="fa fa-times text-white"></i>
                     </button>
                 </li>
             </ul>

@@ -32,7 +32,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="banner-section"><img src="{{ asset('assets/img/home.jpg')}}" class="img-fluid blur-up lazyloaded" alt=""></div>
+                <div class="banner-section"><img src="{{ asset('assets/img/LOGOSLOG.png') }}" class="img-fluid blur-up lazyloaded" alt=""></div>
             </div>
             <div class="col-sm-12">
                 <h4>Janiya bridges the past with the future to unleash the creative potential of the present.

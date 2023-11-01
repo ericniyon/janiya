@@ -6,10 +6,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.2|^8.1",
-        "consoletvs/charts": "7.*",
+        "consoletvs/charts": "6.*",
         "darryldecode/cart": "^4.2",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
+        "jorenvanhocht/laravel-share": "^4.2",
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",

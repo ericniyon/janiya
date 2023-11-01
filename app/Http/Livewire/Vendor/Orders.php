@@ -30,14 +30,14 @@ class Orders extends Component
     public function render()
     {
         // $itemIds = Auth::guard('vendor')->user()->orderItems()->distinct()->get('id');
-        $itemIds = OrderItem::where('shop',Auth::guard('vendor')->id())->select('order_id')
-        ->distinct()->get();
-        $arr =[];
-        foreach($itemIds as $item){
-            $arr[] = $item->order_id;
-        } 
+        // $itemIds = OrderItem::where('shop',Auth::guard('vendor')->id())->select('order_id')
+        // ->distinct()->get();
+        // $arr =[];
+        // foreach($itemIds as $item){
+        //     $arr[] = $item->order_id;
+        // } 
         
-        $orders = Order::whereIn('id',$arr)->when($this->searchKey, function($query){
+        $orders = Order::where('vendor_id',Auth::guard('vendor')->id())->when($this->searchKey, function($query){
                         return $query->where('name','like','%'.$this->searchKey.'%')
                                     ->orWhere('orderNo','like','%'.$this->searchKey.'%')
                                     ->orWhere('neighborhood','like','%'.$this->searchKey.'%');

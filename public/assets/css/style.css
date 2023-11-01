@@ -14782,8 +14782,8 @@ header.stickycls {
       .sticky-bottom-cart .selection-section .form-group:nth-child(2) {
         margin-left: 40px; }
 
-.stickyCart {
-  padding-bottom: 94px; }
+/* .stickyCart {
+  padding-bottom: 94px; } */
   .stickyCart .sticky-bottom-cart {
     bottom: 0;
     -webkit-transition: all 0.5s ease;

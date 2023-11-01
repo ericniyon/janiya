@@ -31,7 +31,7 @@ Route::get('/', [HomeController::class, 'index'])->middleware('referral')->name(
 Route::get('shop/products', [HomeController::class, 'shop'] )->middleware('referral')->name('shop');
 Route::get('shops',[HomeController::class,'shopsList'])->name('shops.list');
 // Route::view('/shops','frontend.pages.shops-list')->name('shops.list');
-Route::get('shops/{vendor}',[HomeController::class,'singleShop'])->name('shops.list.single');
+Route::get('shops/{slug}',[HomeController::class,'singleShop'])->name('shops.list.single');
 // Route::get('shop/{vendor}/{product}', [HomeController::class, 'product_details'] )->name('product_details');
 Route::get('shop/{vendor}/{product}',[HomeController::class,'singleProduct'])->name('product.single');
 // cart

@@ -8,16 +8,19 @@
 @section('content')
 
 
+
+
+
     <!-- Home slider -->
-    <section class="p-0">
-        <div class="slide-1 home-slider">
-            <div>
-                <div class="home text-start p-left">
-                    <img src="{{ asset('assets/img/home1.jpg')}}" alt="" class="bg-img blur-up lazyload">
-                    <div class="container">
+    <section class="" style="padding-top: 0rem">
+        <div class="slide-1 home-slider" >
+            <div >
+                <div class="home text-start p-left "  >
+                    <img src="{{ asset('assets/img/BEDS.png')}}" alt="" class="bg-img blur-up lazyload">
+                    <div class="container" >
                         <div class="row">
                             <div class="col">
-                                <div class="slider-contain">
+                                <div class="slider-contain " >
                                     <div>
                                         <h4>Janiya Campaigns save upto 10% as janiya Partner</h4>
                                         <h1 style="color: #fff">Best Selling </h1><a href="#"
@@ -31,6 +34,28 @@
             </div>
             <div>
                 <div class="home text-start p-right">
+                    {{-- <img src="{{ asset('assets/img/1.png')}}" alt="" class="bg-img blur-up lazyload"> --}}
+
+                    <img src="{{ asset('assets/img/1.jpg')}}" alt="" class="bg-img blur-up lazyload">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="slider-contain">
+                                    <div>
+                                        <h4>Janiya Campaigns save upto 10% as janiya Partner</h4>
+                                        <h1 style="color: #fff">Best Selling</h1><a href="#" class="btn btn-outline btn-classic">shop
+                                            now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="home text-start p-right">
+                    {{-- <img src="{{ asset('assets/img/1.png')}}" alt="" class="bg-img blur-up lazyload"> --}}
+
                     <img src="{{ asset('assets/img/home.jpg')}}" alt="" class="bg-img blur-up lazyload">
                     <div class="container">
                         <div class="row">
@@ -53,17 +78,17 @@
 
 
     <!-- collection banner -->
-    {{-- <section class="banner-padding banner-furniture ratio2_1">
+    <section class="banner-padding banner-furniture ratio2_1 mt-5 pt-5">
         <div class="container-fluid">
             <div class="row partition4">
                 <div class="col-lg-3 col-md-6">
                     <a href="#">
                         <div class="collection-banner p-right text-end">
                             <div class="img-part">
-                                <img src="../assets/images/fashion/banner/5.jpg"
+                                <img src="{{ asset('assets/img/mens.jpg')}}"
                                     class="img-fluid blur-up lazyload bg-img">
                             </div>
-                            <div class="contain-banner banner-4">
+                            <div class="contain-banner banner-4" style="justify-content: flex-start">
                                 <div>
                                     <h4>save 30%</h4>
                                     <h2 class="text-dark">Men</h2>
@@ -76,7 +101,7 @@
                     <a href="#">
                         <div class="collection-banner p-right text-end">
                             <div class="img-part">
-                                <img src="../assets/images/fashion/banner/10.jpg"
+                                <img src="{{ asset('assets/img/women.jpg')}}"
                                     class="img-fluid blur-up lazyload bg-img">
                             </div>
                             <div class="contain-banner banner-4">
@@ -92,10 +117,10 @@
                     <a href="#">
                         <div class="collection-banner p-right text-end">
                             <div class="img-part">
-                                <img src="../assets/images/fashion/banner/8.jpg"
+                                <img src="{{ asset('assets/img/kids.jpg')}}"
                                     class="img-fluid blur-up lazyload bg-img">
                             </div>
-                            <div class="contain-banner banner-4">
+                            <div class="contain-banner banner-4" style="justify-content: flex-start">
                                 <div>
                                     <h4>save 60%</h4>
                                     <h2 class="text-dark">Kids</h2>
@@ -108,10 +133,10 @@
                     <a href="#">
                         <div class="collection-banner p-right text-end">
                             <div class="img-part">
-                                <img src="../assets/images/fashion/banner/9.jpg"
+                                <img src="{{ asset('assets/img/BEDS.png')}}"
                                     class="img-fluid blur-up lazyload bg-img">
                             </div>
-                            <div class="contain-banner banner-4">
+                            <div class="contain-banner banner-4" style="justify-content: flex-start">
                                 <div>
                                     <h4>save 60%</h4>
                                     <h2 class="text-dark">Unisex</h2>
@@ -122,11 +147,57 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
+    <!-- collection banner end -->
+    <div class="title1 section-t-space" bis_skin_checked="1">
+        <h4>exclusive shops</h4>
+        <h2 class="title-inner1">everyday casual</h2>
+    </div>
     <!-- collection banner end -->
 
+<section class="collection section-b-space ratio_square ">
+        <div class="container" bis_skin_checked="1">
 
+            <div class="row partition-collection" bis_skin_checked="1">
+            @forelse (\App\Models\Vendor::all() as $shop)
+                
+                <div class="col-lg-3 col-md-6" bis_skin_checked="1">
+                    <div class="collection-block" bis_skin_checked="1">
+                        <a href="{{ route('shops.list.single', $shop->slug) }}">
+                        <div class="bg-size blur-up lazyloaded" bis_skin_checked="1" style="background-image: url(&quot;{{ asset(''.$shop->profile) }}&quot;); background-size: cover; background-position: center center; display: block;">
+                            <img src="{{ asset(Storage::url($shop->profile)) }}" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;">
+
+                        </div>
+                    </a>
+                        <div class="collection-content" bis_skin_checked="1">
+                            <h4>(20 products)</h4>
+                            <a href="{{ route('shops.list.single', $shop->slug) }}">
+                                <h3>{{ $shop->shop_name ? $shop->shop_name : $shop->name }}</h3>
+                            </a>
+                            <p>{{ $shop->details }}</p><a href="category-page.html" class="btn btn-outline">shop now !</a>
+                        </div>
+                    </div>
+                </div>
+                    @empty
+                    
+                    @endforelse
+                
+                
+                
+            </div>
+            
+        </div>
+    </section>
     <!-- Paragraph-->
+
+    <!-- Paragraph end -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Parallax banner end -->
 <div class="title2 mt-5">
  <h4>recent story</h4>
  <h2 class="title-inner2">trending products</h2>
@@ -137,46 +208,12 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="product-para">
-                    <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                    <p class="text-center">Looking for the latest trends in clothing, shoes and accessories? Welcome to our 'Latest Drops' edit, bringing you all the latest styles from all your fave brands.</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Paragraph end -->
-
-
-    <!-- Product section -->
-{{--
-<section class="collection section-b-space ratio_square ">
-        <div class="container">
-            <div class="row partition-collection">
-                <div class="col-lg-3 col-md-6">
-                    <div class="collection-block">
-                        <div class="bg-size blur-up lazyloaded" style="background-image: url(&quot;../assets/images/collection/1.jpg&quot;); background-size: cover; background-position: center center; display: block;"><img src="../assets/images/collection/1.jpg" class="img-fluid blur-up lazyload bg-img" alt="" style="display: none;"></div>
-                        <div class="product-detail">
-                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-                                class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                        <a href="">
-                            <h6></h6>
-                        </a>
-                        <h4></h4>
-                    </div>
-                        <div class="collection-content">
-                            <h4>fashion (20 products)</h4>
-                            <a href="category-page.html" class="btn btn-outline">shop now !</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section> --}}
-
-
-
-    <section class="pt-0 section-b-space ratio_asos">
+    <section class="pt-5 section-b-space ratio_asos">
         <div class="container">
             <div class="row game-product grid-products">
                 @if ($products->count()>0)
@@ -217,29 +254,6 @@
             </div>
         </div>
     </section>
-    <!-- Product section end -->
-
-
-    <!-- Parallax banner -->
-    <section class="p-0">
-        <div class="full-banner parallax text-center p-left">
-            <img src="{{ asset('assets/img/MSG00993.jpg')}}" alt="uh" class="bg-img blur-up lazyload">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="banner-contain">
-                            <h2>2022</h2>
-                            <h3>New Trends & Deals of the Day</h3>
-                            <h4>Special offers & Discounts </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Parallax banner end -->
-
-
     <!-- product section start -->
     <section class="tools_product bg-title section-b-space">
         <div class="container">

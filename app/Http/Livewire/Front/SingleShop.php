@@ -10,11 +10,10 @@ class SingleShop extends Component
 {
     use WithPagination;
     public $paginationTheme = 'bootstrap';
-    public $perPage = 25, $searchKey = '', $sortBy = 'name', $sortKey = 'ASC';
+    public $perPage = 25, $searchKey = '', $sortBy = 'id', $sortKey = 'ASC';
     public $queryString = [
         'perPage'=>['except'=>25],
         'searchKey'=>['except'=>''],
-        'sortBy'=>['except'=>'name'],
         'sortKey'=>['except'=>'ASC'],
     ];
 
@@ -25,9 +24,7 @@ class SingleShop extends Component
     }
     public function render()
     {
-        $products = Store::where('vendor_id',$this->vendor->id)->when($this->searchKey, function($query){
-            return $query->where('name','like','%'.$this->searchKey.'%');
-        })
+        $products = Store::where('vendor_id',$this->vendor->id)
         ->orderBy($this->sortBy,$this->sortKey)
         ->paginate($this->perPage);
         return view('livewire.front.single-shop', compact('products'));

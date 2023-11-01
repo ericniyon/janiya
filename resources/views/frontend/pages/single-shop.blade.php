@@ -34,14 +34,13 @@
                     <div class="page-main-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="top-banner-wrapper">
-                                    {{-- <img src="{{asset($vendor->banner?Storage::url($vendor->banner):'assets/img/111.jpg')}}"
-                                        class="img-fluid blur-up lazyload" alt="{{$vendor->shop_name}}"> --}}
-                                    <div class="top-banner-content small-section">
-                                        <h4>BIGGEST DEALS ON TOP BRANDS</h4>
-                                        <p>{{$vendor->details}}</p>
-                                    </div>
-                                </div>
+                                
+
+
+                                
+
+
+
                                 @livewire('front.single-shop', ['vendor' => $vendor], key($vendor->id))
                             </div>
                         </div>

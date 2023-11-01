@@ -65,7 +65,7 @@
                             </div>
                         </div>
                         <div class="brand-logo">
-                            <a href="index.html"><img src="{{asset('assets/img/janiya-logo.jpg')}}" class="img-fluid blur-up lazyloaded" alt=""></a>
+                            <a href="{{ url('/') }}"><img src="{{ asset('assets/img/janiya-logo.jpg')}}" class="img-fluid blur-up lazyloaded" alt="janiya shops" style="height: 3rem"></a>
                         </div>
                     </div>
                     <div class="menu-right pull-right">
