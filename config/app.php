@@ -177,8 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         EloquentFilter\ServiceProvider::class,
-        
-
+         'JD\Cloudder\CloudderServiceProvider'
+         
     ],
 
     /*
@@ -196,6 +196,7 @@ return [
         // ...
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
+        'Cloudder' => 'JD\Cloudder\Facades\Cloudder'
     ])->toArray(),
 
 ];

@@ -289,7 +289,7 @@
                         @foreach ($product->attributes as $image)
 
 						<div class="item">
-						  	<img src="{{ asset(Storage::url($image->image)) }}" />
+						  	<img src="{{ $image->image }}" />
 						</div>
                         @endforeach
 						
@@ -298,7 +298,7 @@
                          @foreach ($product->attributes as $image)
 
 						<div class="item">
-						  	<img src="{{ asset(Storage::url($image->image)) }}" />
+						  	<img src="{{ $image->image }}" />
 						</div>
                         @endforeach
 						
@@ -335,7 +335,7 @@
                                 <input type="hidden" value="{{ $product->name }}" name="name">
                                 <input type="hidden" value="{{ money($product->price) }}" name="price">
 																																@foreach ($product->attributes as $image)
-                                <input type="hidden" value="{{ asset(Storage::url($image->image)) }}"  name="image">
+                                <input type="hidden" value="{{ $image->image }}"  name="image">
 																																 @endforeach
                                     <div class="display-flex">
                                         <div class="qtyminus">-</div>

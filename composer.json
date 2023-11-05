@@ -6,15 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^7.2|^8.1",
+        "cloudinary-labs/cloudinary-laravel": "^2.0",
         "consoletvs/charts": "6.*",
         "darryldecode/cart": "^4.2",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "jorenvanhocht/laravel-share": "^4.2",
+        "jrm2k6/cloudder": "0.4.*",
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
+        "league/flysystem-aws-s3-v3": "^3.16",
         "livewire/livewire": "^2.10",
         "tucker-eric/eloquentfilter": "^3.1"
     },

@@ -40,12 +40,13 @@
                     <div class="col-lg-6">
                         <div class="product-slick">
                             <div>
-                                <img src="{{ asset(Storage::url($product->product->images->image))}}" alt=""
+                                {{ $product->thumb->imag }}
+                                <img src="{{ $product->thumb->image }}" alt="janiyashops"
                                     class="img-fluid blur-up lazyload image_zoom_cls-">
                             </div>
                             @foreach ($images as $image)
                             <div>
-                                <img src="{{ asset(Storage::url($image->image))}}" alt=""
+                                <img src="{{ $image->image }}" alt=""
                                     class="img-fluid blur-up lazyload image_zoom_cls-">
                             </div>
                             @endforeach
@@ -56,7 +57,7 @@
 
                                     @foreach ($images as $image)
                                     <div>
-                                        <img src="{{ asset(Storage::url($image->image))}}" alt=""
+                                        <img src="{{ $product->thumb->image }}" alt=""
                                             class="img-fluid blur-up lazyload">
                                         </div>
                                     @endforeach

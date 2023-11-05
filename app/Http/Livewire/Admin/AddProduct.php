@@ -80,16 +80,19 @@ class AddProduct extends Component
 
         if ($this->product_image) {
             foreach ($this->product_image as $key => $image) {
-                $photo = $image->store('public/products/gallery');
+                $file = cloudinary()->upload($image->getRealPath())->getSecurePath();
+                
+                // $photo = $image->store('public/products/gallery');
                 ProductImage::create([
-                    'image' => $photo,
+                    'image' => $file,
                     'product_id'=>$product->id
                 ]);
             }
         }
 
         foreach($this->colorsLoop as $key=>$item){
-            $color_image = $item['image']->store('public/products/gallery/color');
+            $color_image = cloudinary()->upload($image->getRealPath())->getSecurePath();
+            // $color_image = $item['image']->store('public/products/gallery/color');
             $product->attributes()->create([
                 'color'=>$item['color'],
                 'size'=>$item['size'],
