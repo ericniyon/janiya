@@ -204,6 +204,11 @@ class HomeController extends Controller
 
         return view('frontend.pages.about');
     }
+    public function becomeVendor()
+    {
+
+        return view('frontend.pages.become_vendor');
+    }
 
     public function contact()
     {

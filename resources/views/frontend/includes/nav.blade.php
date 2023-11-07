@@ -390,7 +390,9 @@
                                         tabindex="-1">
                                         <div bis_skin_checked="1">
                                             <div style="width: 100%; display: inline-block;" bis_skin_checked="1">
-                                                <span><i class="ti-announcement" aria-hidden="true"></i>How to become affiliate</span>
+                                                <a href="{{ route('become.vendor') }}">
+                                                    <span><i class="ti-announcement" aria-hidden="true"></i>How to become affiliate</span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

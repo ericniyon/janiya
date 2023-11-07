@@ -196,7 +196,7 @@
                         <!-- side-bar single product slider end -->
                         <!-- side-bar banner start here -->
                         <div class="collection-sidebar-banner" bis_skin_checked="1">
-                            <a href="#"><img src="../assets/images/side-banner.png"
+                            <a href="#"><img src="{{ $vendor->brand }}"
                                     class="img-fluid blur-up lazyloaded" alt=""></a>
                         </div>
                         <!-- side-bar banner end here -->
@@ -206,7 +206,7 @@
                             <div class="row" bis_skin_checked="1">
                                 <div class="col-sm-12" bis_skin_checked="1">
                                     <div class="top-banner-wrapper" bis_skin_checked="1">
-                                        <a href="#"><img src="../assets/images/mega-menu/2.jpg"
+                                        <a href="#"><img src="{{ $vendor->brand }}"
                                                 class="img-fluid blur-up lazyloaded" alt=""></a>
                                         <div class="top-banner-content small-section" bis_skin_checked="1">
                                             <h2>{{ $vendor->shop_name }}</h2>

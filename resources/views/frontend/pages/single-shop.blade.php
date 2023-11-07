@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-title">
-                    <h2>{{$vendor->shop_name}}</h2>
+                    <h2>{{$vendor->shop_name}} Shop</h2>
                 </div>
             </div>
             <div class="col-sm-6">

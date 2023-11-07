@@ -127,6 +127,7 @@ Route::middleware('auth')->group(function(){
 
 Route::get('pro/{id}', [HomeController::class, 'al_product_details'] )->name('al_product_details');
 Route::get('about', [HomeController::class, 'about'] )->name('about');
+Route::get('become-vendor', [HomeController::class, 'becomeVendor'] )->name('become.vendor');
 Route::get('contact', [HomeController::class, 'contact'] )->name('contact');
 Route::get('categories/products/{catId}', [HomeController::class, 'categorised'] )->name('categories-products');
 Route::get('shops/products/{shopId}', [HomeController::class, 'shoped'] )->name('shops-products');
