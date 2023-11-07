@@ -16,6 +16,7 @@ class AddProduct extends Component
     use WithFileUploads;
     public $colorsLoop, $sizesLoop, $colors, $sizes, $categories;
     public $name, $price, $product_category_id,$factory_price, $description, $product_image = [];
+    public $aliternativeImage;
 
     public function mount()
     {
@@ -55,18 +56,18 @@ class AddProduct extends Component
 
     public function store()
     {
-        // $this->validate([
-        //     'name'=>'string|unique:products,name|min:3|max:220',
-        //     'price'=>'required|integer|min:500|max:500000',
-        //     'factory_price'=>'required|integer|min:500|max:500000',
-        //     'product_category_id'=>'required|integer',
-        //     'description'=>'string|required|min:10|max:5000',
-        //     'product_image.*'=>'image|mimes:png,jpg,webp|required',
-        //     'colorsLoop.*.color'=>'required|string',
-        //     'colorsLoop.*.quantity'=>'required|string',
-        //     'colorsLoop.*.image'=>'sometimes|image|mimes:png,jpg,webp,jfif|max:800',
-        //     'colorsLoop.*.size'=>'required|string',
-        // ]);
+        $this->validate([
+            'name'=>'string|unique:products,name|min:3|max:220',
+            'price'=>'required|integer|min:500|max:500000',
+            'factory_price'=>'required|integer|min:500|max:500000',
+            'product_category_id'=>'required',
+            'description'=>'string|required|min:150|max:5000',
+            'product_image.*'=>'image|mimes:png,jpg,webp|required',
+            // 'colorsLoop.*.color'=>'required|string',
+            // 'colorsLoop.*.quantity'=>'required|string',
+            // 'colorsLoop.*.image'=>'required|image|mimes:png,jpg,webp,jfif|max:800',
+            // 'colorsLoop.*.size'=>'required|string',
+        ]);
 
         $product = Product::create([
             'name'=>$this->name,
@@ -81,7 +82,7 @@ class AddProduct extends Component
         if ($this->product_image) {
             foreach ($this->product_image as $key => $image) {
                 $file = cloudinary()->upload($image->getRealPath())->getSecurePath();
-                
+                $this->aliternativeImage = $file;
                 // $photo = $image->store('public/products/gallery');
                 ProductImage::create([
                     'image' => $file,
@@ -91,7 +92,11 @@ class AddProduct extends Component
         }
 
         foreach($this->colorsLoop as $key=>$item){
+            
+            $image = $item['image'] ? $item['image'] : $this->aliternativeImage;
+            
             $color_image = cloudinary()->upload($image->getRealPath())->getSecurePath();
+            
             // $color_image = $item['image']->store('public/products/gallery/color');
             $product->attributes()->create([
                 'color'=>$item['color'],

@@ -56,7 +56,7 @@
                         </div>
                         <!-- silde-bar colleps block end here -->
                         <!-- side-bar single product slider start -->
-                        <div class="theme-card" bis_skin_checked="1">
+                        {{-- <div class="theme-card" bis_skin_checked="1">
                             <h5 class="title-border">new product</h5>
                             <div class="offer-slider slide-1 slick-initialized " bis_skin_checked="1">
 
@@ -192,7 +192,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- side-bar single product slider end -->
                         <!-- side-bar banner start here -->
                         <div class="collection-sidebar-banner" bis_skin_checked="1">
@@ -360,54 +360,5 @@
     </section>
 
 
-    {{-- <div class="collection-product-wrapper">
-    
-    <div class="product-wrapper-grid">
-        <div class="row margin-res">
-            @forelse ($products as $product)
-            <div class="col-xl-3 col-6 col-grid-box">
-                <div class="product-box">
-                    <div class="img-wrapper">
-                        <div class="front">
-                            <a href="{{route('al_product_details',Crypt::encryptString($product->product->id))}}">
-                                <img src="{{ asset(Storage::url($product->product->thumb->image))}}"
-                                    class="img-fluid blur-up lazyload bg-img"
-                                    alt="{{$product->name}}"></a>
-                        </div>
-                        <div class="back">
-                            <a href="{{route('al_product_details',Crypt::encryptString($product->product->id))}}">
-                                <img src="{{ asset(Storage::url($product->product->thumb->image))}}"
-                                    class="img-fluid blur-up lazyload bg-img"
-                                    alt="{{$product->name}}"></a>
-                        </div>
-                    </div>
-                    <div class="product-detail">
-                        <div>
-                            <div class="rating"><i class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i> <i
-                                    class="fa fa-star"></i></div>
-                            <a href="{{route('al_product_details',Crypt::encryptString($product->product->id))}}">
-                                <h6>{{$product->name}}</h6>
-                            </a>
-                            <p>{{$product->product->description}}</p>
-                            <h4>{{money($product->product->price)}}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @empty
-            @endforelse
-        </div>
-    </div>
-    <div class="product-pagination">
-        <div class="theme-paggination-block">
-            <div class="row">
-                
-            </div>
-        </div>
-    </div>
-</div> --}}
 
 </div>

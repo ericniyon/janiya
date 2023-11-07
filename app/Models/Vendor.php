@@ -19,6 +19,7 @@ class Vendor extends Authenticatable
              'password',
              'banner',
               'district_id',
+              'brand',
         ];
 
         protected $hidden = [

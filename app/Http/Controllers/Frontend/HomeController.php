@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -32,6 +33,11 @@ class HomeController extends Controller
         $product_categories = ProductCategory::with('products')->get();
 
         $shops = Vendor::where('confirmed',1)->where('active',1)->get();
+
+
+
+
+        // $products = DB::table('products')->orderBy('id','desc')->get();
 
         return view('frontend.pages.home1', compact('product_categories','shops', 'products'));
     }

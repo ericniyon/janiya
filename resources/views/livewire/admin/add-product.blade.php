@@ -6,6 +6,7 @@
     @endif
 
 
+
     <form enctype="multipart/form-data" method="POST">
         @csrf
         <div class="row">
@@ -22,21 +23,30 @@
                          <label class="col-form-label pt-0"><span>*</span> Price </label>
                          <input class="form-control @error('price') is-invalid @enderror" wire:model="price"
                          name="price" type="number" required>
+                          @error('price')
+                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                    @enderror
                      </div>
                      <div class="form-group col-md-6">
                          <label class="col-form-label pt-0"><span>*</span>Factory Price </label>
                          <input class="form-control @error('factory_price') is-invalid @enderror" wire:model="factory_price"
                          name="factory_price" type="number" required>
+                          @error('factory_price')
+                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                    @enderror
                      </div>
                      <div class="form-group col-md-6">
                          <label class="col-form-label pt-0"><span>*</span> Category</label>
-                         <select class="custom-select form-control" required="" wire:model="product_category_id" name="product_category_id[]">
+                         <select class="custom-select form-control" required wire:model="product_category_id" name="product_category_id">
                              <option value="">--Select--</option>
                              @foreach (App\Models\ProductCategory::all() as $item)
 
                              <option value="{{$item->id}}">{{$item->category_name}}</option>
                              @endforeach
                          </select>
+                          @error('product_category_id')
+                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                    @enderror
                      </div>
                     <div class="col-md-6">
                      <div class="form-group">
@@ -44,6 +54,9 @@
                          <img src="" alt="" srcset="" id="preview-image-before-upload" height="70">
                          <input wire:model="product_image" type="file"  accept="image/*"
                          name="product_image" id="image" class=" form-control @error('product_image') is-invalid @enderror" required>
+                          @error('product_image')
+                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                    @enderror
                      </div>
                     </div>
                 </div>
@@ -52,6 +65,9 @@
                 <div class="form-group">
                     <label class="col-form-label"><span>*</span> Product Description</label> <br>
                     <textarea wire:model="description" name="description" cols="3" rows="6" class=" @error('description') is-invalid @enderror"></textarea>
+                     @error('description')
+                        <span class="invalid-feedback" role="alert">{{$message}}</span>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -62,6 +78,14 @@
             <div class="row">
                 <div class="form-group col-md-3">
                     <label >Image</label>
+                    
+
+                    <div x-data="{ isUploading: false, progress: 0 }"
+                        x-on:livewire-upload-start="isUploading = true"
+                        x-on:livewire-upload-finish="isUploading = false"
+                        x-on:livewire-upload-error="isUploading = false"
+                        x-on:livewire-upload-progress="progress = $event.detail.progress"
+                    >
                     <input type="file" accept="image/*" value="colorsLoop[{{$index}}][image]"
                     name="colorsLoop[{{$index}}][image]"
                     wire:model.lazy="colorsLoop.{{$index}}.image"
@@ -69,6 +93,10 @@
                     @error('colorsLoop.'.$index.'image')
                         <span class="invalid-feedback" role="alert">{{$message}}</span>
                     @enderror
+                        <div x-show="isUploading" class="progress sm-progress-bar mt-2" bis_skin_checked="1">
+                            <div class="progress-bar bg-secondary" role="progressbar" x-bind:style="`width: ${progress}%`" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" bis_skin_checked="1"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label>Color</label>
@@ -124,7 +152,13 @@
 
         <div class="row">
             <div class="col-md-12">
-                <button type="button" wire:click.prevent="store()" class="btn btn-success btn-sm">Submit</button>
+                <button type="button" wire:click.prevent="store()"  class="btn btn-success btn-sm">
+                    
+                    <span wire:loading.remove>Submit</span>
+                    <span wire:loading>Processing ...</span>
+                
+                </button>
+                
             </div>
         </div>
 

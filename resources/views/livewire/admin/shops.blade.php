@@ -17,7 +17,7 @@
               <td>
                 <div class="d-flex align-items-center">
                   <img class="mr-3 rounded-circle lazyloaded blur-up" height="30" width="30"
-                src="{{$vendor->profile?asset(Storage::url($vendor->profile)):'../assets/images/dashboard/man.png'}}" alt="#">
+                src="{{$vendor->profile? $vendor->profile :'../assets/images/dashboard/man.png'}}" alt="#">
                 {{$vendor->shop_name}}</td>
                 </div>
               <td>

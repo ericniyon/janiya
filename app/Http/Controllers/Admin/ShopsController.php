@@ -18,7 +18,7 @@ class ShopsController extends Controller
             'email'=>'required|email|string|min:5|max:120',
             'phone'=>'required|string|min:10|max:12',
             'details'=>'required|string|min:20',
-            'profile'=>'image|mimes:png,jpg,webp|max:700',
+            'profile'=>'required',
         ]);
         
         $password = str()->random(8);
@@ -45,12 +45,13 @@ class ShopsController extends Controller
     public function edit($id)
     {
         $vendor = Vendor::find($id);
-        return view('backend.admin.addEditShops', compact('vendor'));
+        
+        return view('backend.admin.edit', compact('vendor'));
     }
 
     public function update(Vendor $vendor, Request $request)
     {
-        
+        return $request->all();
         $this->validate($request,[
             'name'=>'required|string|min:3|max:120',
             'shop'=>'required|unique:vendors,shop_name,'.$vendor->id.'|string|min:3|max:120',
@@ -58,6 +59,7 @@ class ShopsController extends Controller
             'phone'=>'required|string|min:10|max:12',
             'details'=>'required|string|min:20',
             'profile'=>'sometimes|image|mimes:png,jpg,webp|max:700',
+            'brand'=>'sometimes|image|mimes:png,jpg,webp|max:700',
         ]);
         if ($request->hasFile('logo')) {
             if ($vendor->profile) {
@@ -68,6 +70,9 @@ class ShopsController extends Controller
         } else{
             $profile = $vendor->profile;
         }
+         $profileImg = cloudinary()->upload($request->profile->getRealPath())->getSecurePath();
+        $brandImg = cloudinary()->upload($request->brand->getRealPath())->getSecurePath();
+       
         $vendor->update([
             'name'=>$request->name,
             'slug'=>str()->slug($request->shop),
@@ -75,7 +80,8 @@ class ShopsController extends Controller
             'email'=>$request->email,
             'phone'=>$request->phone,
             'details'=>$request->details,
-            'profile'=>$profile,
+            'profile'=>$profileImg,
+            'brand'=>$brandImg,
         ]);
 
         session()->flash('success','Vendor updated successfully');

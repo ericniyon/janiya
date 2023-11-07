@@ -78,7 +78,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::view('/shops/add-new-shop','backend.admin.addEditShops')->name('shops.add');
     Route::post('/shops/add-new-shop',[ShopsController::class,'store'])->name('shops.store');
     Route::get('/shops/{vendor}/edit',[ShopsController::class,'edit'])->name('shops.edit');
-    Route::put('/shops/{vendor}/update',[ShopsController::class,'update'])->name('shops.update');
+    Route::post('/shops/{vendor}/update',[ShopsController::class,'update'])->name('shops.update');
 
     // users & Partners
     Route::view('partners','backend.admin.partners')->name('partners');

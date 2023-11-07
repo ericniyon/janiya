@@ -46,6 +46,7 @@ class Shops extends Component
                             $query1->where('confirmed',$this->confirmed);
                         })->orderByDesc('created_at')
                         ->paginate($this->perPage);
+
         return view('livewire.admin.shops', compact('shops'));
     }
 }

@@ -30,7 +30,10 @@
     <div class="row product-adding">
         <div class="card">
             <div class="card-body">
+                
+
                 @livewire('create-shop')
+
             </div>
         </div>
     </div>
