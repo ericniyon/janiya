@@ -85,7 +85,7 @@
                             </svg>
                             <div class="media-body" bis_skin_checked="1">
                                 <h4>free shipping</h4>
-                                <p>free shipping world wide</p>
+                                <p>free shipping in kigali</p>
                             </div>
                         </div>
                     </div>
