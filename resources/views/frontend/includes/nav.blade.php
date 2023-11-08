@@ -330,11 +330,18 @@
                             </div>
                             <ul id="sub-menu" class="sm pixelstrap sm-vertical hover-unset"
                                 data-smartmenus-id="16993054726580774">
+                                @forelse (App\Models\ProductCategory::all() as $category)
+                                    
                                 <li> <a href="#" class="has-submenu" id="sm-16993054726580774-1"
                                         aria-haspopup="true" aria-controls="sm-16993054726580774-2"
-                                        aria-expanded="false">TV &amp; Audio</a>
+                                        aria-expanded="false">
+                                    {{ $category->category_name }}
+                                    </a>
 
                                 </li>
+                                @empty
+                                    
+                                @endforelse
 
                             </ul>
                         </nav>

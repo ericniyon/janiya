@@ -196,7 +196,7 @@
                         <!-- side-bar single product slider end -->
                         <!-- side-bar banner start here -->
                         <div class="collection-sidebar-banner" bis_skin_checked="1">
-                            <a href="#"><img src="{{ $vendor->brand }}"
+                            <a href="#"><img src="{{ Storage::disk('s3')->url($vendor->brand)   }}"
                                     class="img-fluid blur-up lazyloaded" alt=""></a>
                         </div>
                         <!-- side-bar banner end here -->
@@ -206,7 +206,7 @@
                             <div class="row" bis_skin_checked="1">
                                 <div class="col-sm-12" bis_skin_checked="1">
                                     <div class="top-banner-wrapper" bis_skin_checked="1">
-                                        <a href="#"><img src="{{ $vendor->brand }}"
+                                        <a href="#"><img src="{{ Storage::disk('s3')->url($vendor->brand) }}"
                                                 class="img-fluid blur-up lazyloaded" alt=""></a>
                                         <div class="top-banner-content small-section" bis_skin_checked="1">
                                             <h2>{{ $vendor->shop_name }}</h2>
@@ -281,16 +281,16 @@
                                                                 <div class="front" bis_skin_checked="1">
                                                                     <a href="{{ route('al_product_details', Crypt::encryptString($product->product->id)) }}"
                                                                         class="bg-size blur-up lazyloaded"
-                                                                        style="background-image: url(&quot;{{ asset(Storage::url($product->product->thumb->image)) }}&quot;); background-size: cover; background-position: center center; display: block;"><img
-                                                                            src="{{ asset(Storage::url($product->product->thumb->image)) }}"
+                                                                        style="background-image: url(&quot;{{ Storage::url($product->product->thumb->image) }}&quot;); background-size: cover; background-position: center center; display: block;"><img
+                                                                            src="{{ Storage::url($product->product->thumb->image) }}"
                                                                             class="img-fluid blur-up lazyload bg-img"
                                                                             alt="" style="display: none;"></a>
                                                                 </div>
                                                                 <div class="back" bis_skin_checked="1">
                                                                     <a href="{{ route('al_product_details', Crypt::encryptString($product->product->id)) }}"
                                                                         class="bg-size blur-up lazyloaded"
-                                                                        style="background-image: url(&quot;{{ asset(Storage::url($product->product->thumb->image)) }}&quot;); background-size: cover; background-position: center center; display: block;"><img
-                                                                            src="{{ asset(Storage::url($product->product->thumb->image)) }}"
+                                                                        style="background-image: url(&quot;{{ Storage::url($product->product->thumb->image) }}&quot;); background-size: cover; background-position: center center; display: block;"><img
+                                                                            src="{{ Storage::url($product->product->thumb->image) }}"
                                                                             class="img-fluid blur-up lazyload bg-img"
                                                                             alt="" style="display: none;"></a>
                                                                 </div>

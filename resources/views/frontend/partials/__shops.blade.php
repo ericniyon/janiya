@@ -6,9 +6,9 @@
                 <div class="category-wrapper" bis_skin_checked="1">
                     <div bis_skin_checked="1">
                         <div class="bg-size blur-up lazyloaded"
-                            style="background-image: url(&quot;{{ $shop->profile }}&quot;); background-size: cover; background-position: center center; display: block;"
+                            style="background-image: url(&quot;{{ Storage::disk('s3')->url($shop->profile) }}&quot;); background-size: cover; background-position: center center; display: block;"
                             bis_skin_checked="1">
-                            <img src="{{ $shop->profile }}" class="img-fluid blur-up lazyload bg-img"
+                            <img src="{{ Storage::disk('s3')->url($shop->profile) }}" class="img-fluid blur-up lazyload bg-img"
                                 alt="" style="display: none;">
                         </div>
                         <h4>{{ $shop->shop_name }}</h4>

@@ -81,7 +81,8 @@ class AddProduct extends Component
 
         if ($this->product_image) {
             foreach ($this->product_image as $key => $image) {
-                $file = cloudinary()->upload($image->getRealPath())->getSecurePath();
+                $file = $image->store('product','s3');
+                // $file = cloudinary()->upload($image->getRealPath())->getSecurePath();
                 $this->aliternativeImage = $file;
                 // $photo = $image->store('public/products/gallery');
                 ProductImage::create([
@@ -95,7 +96,8 @@ class AddProduct extends Component
             
             $image = $item['image'] ? $item['image'] : $this->aliternativeImage;
             
-            $color_image = cloudinary()->upload($image->getRealPath())->getSecurePath();
+            $color_image = $image->store('product_items','s3');
+            // $color_image = cloudinary()->upload($image->getRealPath())->getSecurePath();
             
             // $color_image = $item['image']->store('public/products/gallery/color');
             $product->attributes()->create([

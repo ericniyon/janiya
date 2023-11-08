@@ -43,11 +43,13 @@ class EditShop extends Component
         // $$brandImg;
         if ($this->p1) {
             # code...
-            $this->profilePhoto = cloudinary()->upload($this->p1->getRealPath())->getSecurePath();
+            $profilePhoto = $this->profile->store('shop_profile','s3');
+        
+            
         }
         if ($this->p2) {
             # code...
-            $this->brandPhoto = cloudinary()->upload($this->p2->getRealPath())->getSecurePath();
+           $brandPhoto = $this->brand->store('shop_brand','s3');
         }
         
         $this->shopUpdate->update([

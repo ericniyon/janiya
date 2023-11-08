@@ -28,7 +28,7 @@ class HomeController extends Controller
         $arr = [];
         $stocks = Store::all()->pluck('product_id');
 
-        $products = Product::whereNotIn('id', $stocks)->inRandomOrder()->limit(8)->get();
+        $products = Product::whereNotIn('id', $stocks)->orderBy('id', 'desc')->limit(12)->get();
 
         $product_categories = ProductCategory::with('products')->get();
 

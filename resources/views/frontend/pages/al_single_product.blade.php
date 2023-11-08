@@ -344,7 +344,7 @@
 																					
                         @foreach ($product->attributes as $image)
                             <div class="item" >
-                                <img src="{{ $image->image ? $image->image : $product->product_image }}" />
+                                <img src="{{ $image->image ? Storage::disk('s3')->url($image->image) : Storage::disk('s3')->url($image->product_image) }}" />
                             </div>
                         @endforeach
 
@@ -352,7 +352,7 @@
                     <div id="thumb" class="owl-carousel product-thumb" >
                         @foreach ($product->attributes as $image)
                             <div class="item" >
-                                <img src="{{ $image->image ? $image->image : $product->product_image }}"style="height:200px !important" />
+                                <img src="{{ $image->image ? Storage::disk('s3')->url($image->image) : Storage::disk('s3')->url($product->product_image) }}"style="height:200px !important" />
                             </div>
                         @endforeach
 
