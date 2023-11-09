@@ -43,13 +43,13 @@ class EditShop extends Component
         // $$brandImg;
         if ($this->p1) {
             # code...
-            $profilePhoto = $this->profile->store('shop_profile','s3');
+            $profilePhoto = $this->profile->store('shop_profile');
         
             
         }
         if ($this->p2) {
             # code...
-           $brandPhoto = $this->brand->store('shop_brand','s3');
+           $brandPhoto = $this->brand->store('shop_brand');
         }
         
         $this->shopUpdate->update([

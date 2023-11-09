@@ -242,15 +242,15 @@
                 bis_skin_checked="1">
 
                 @forelse ($products as $product)
-                
+                    
                     <div class="product-box product-wrap product-style-3" bis_skin_checked="1">
                         <div class="img-wrapper" bis_skin_checked="1">
                             <div class="front" bis_skin_checked="1">
                                 <a href="{{ route('al_product_details', Crypt::encryptString($product->id)) }}"
                                     class="bg-size blur-up lazyloaded"
-                                    style="background-image: url({{ Storage::disk('s3')->url($product->product_image)}}); background-size: cover; background-position: center center; display: block;"
+                                    style="background-image: url({{$product->thumb()->exists()? asset('storage/'.$product->thumb->image): asset('assets/images/2.jpg')}}); background-size: cover; background-position: center center; display: block;"
                                     bis_skin_checked="1"><img alt=""
-                                        src="{{ $product->thumb()->exists() ? Storage::disk('s3')->url($product->thumb->image) : asset('assets/images/2.jpg') }}"
+                                        src="{{$product->thumb()->exists()? asset('storage/'.$product->thumb->image): asset('assets/images/2.jpg')}}"
                                         class="img-fluid blur-up lazyload bg-img" style="display: none;"></a>
                             </div>
                             <div class="cart-detail" bis_skin_checked="1"><a href="javascript:void(0)"

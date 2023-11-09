@@ -196,7 +196,7 @@
                         <!-- side-bar single product slider end -->
                         <!-- side-bar banner start here -->
                         <div class="collection-sidebar-banner" bis_skin_checked="1">
-                            <a href="#"><img src="{{ Storage::disk('s3')->url($vendor->brand)   }}"
+                            <a href="#"><img src="{{ asset('storage/'.$vendor->brand) }}"
                                     class="img-fluid blur-up lazyloaded" alt=""></a>
                         </div>
                         <!-- side-bar banner end here -->
@@ -206,7 +206,7 @@
                             <div class="row" bis_skin_checked="1">
                                 <div class="col-sm-12" bis_skin_checked="1">
                                     <div class="top-banner-wrapper" bis_skin_checked="1">
-                                        <a href="#"><img src="{{ Storage::disk('s3')->url($vendor->brand) }}"
+                                        <a href="#"><img src="{{ asset('storage/'.$vendor->brand) }}"
                                                 class="img-fluid blur-up lazyloaded" alt=""></a>
                                         <div class="top-banner-content small-section" bis_skin_checked="1">
                                             <h2>{{ $vendor->shop_name }}</h2>

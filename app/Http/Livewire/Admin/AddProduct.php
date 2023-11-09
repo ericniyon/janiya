@@ -81,7 +81,7 @@ class AddProduct extends Component
 
         if ($this->product_image) {
             foreach ($this->product_image as $key => $image) {
-                $file = $image->store('product','s3');
+                $file = $image->store('products_images');
                 // $file = cloudinary()->upload($image->getRealPath())->getSecurePath();
                 $this->aliternativeImage = $file;
                 // $photo = $image->store('public/products/gallery');
@@ -94,9 +94,9 @@ class AddProduct extends Component
 
         foreach($this->colorsLoop as $key=>$item){
             
-            $image = $item['image'] ? $item['image'] : $this->aliternativeImage;
+            // $image = $item['image'] ? $item['image'] : $this->aliternativeImage;
             
-            $color_image = $image->store('product_items','s3');
+            $color_image = $item['image']->store('product_items');
             // $color_image = cloudinary()->upload($image->getRealPath())->getSecurePath();
             
             // $color_image = $item['image']->store('public/products/gallery/color');

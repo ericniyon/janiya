@@ -41,7 +41,7 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
                 </div>
                 <div class="row card-body pt-0 mt-0">
                     <div class="col-5 d-flex flex-column justify-content-between">
-                        <img src="{{asset(Storage::url($product->thumb->image))}}" class="rounded img-responsive w-100"
+                        <img src="{{asset('storage/'.$product->thumb->image)}}" class="rounded img-responsive w-100"
                         height="150">
                     </div>
                     <div class="col-7 d-flex flex-column justify-content-between">

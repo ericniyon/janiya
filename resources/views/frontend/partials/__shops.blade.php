@@ -1,4 +1,6 @@
 @forelse (App\Models\Vendor::where('confirmed',1)->where('active',1)->get() as $shop)
+
+
     <div class="slick-slide" data-slick-index="0" aria-hidden="true" style="width: 349px;" bis_skin_checked="1"
         tabindex="-1">
         <div bis_skin_checked="1">
@@ -6,9 +8,9 @@
                 <div class="category-wrapper" bis_skin_checked="1">
                     <div bis_skin_checked="1">
                         <div class="bg-size blur-up lazyloaded"
-                            style="background-image: url(&quot;{{ Storage::disk('s3')->url($shop->profile) }}&quot;); background-size: cover; background-position: center center; display: block;"
+                            style="background-image: url(&quot;{{ asset('storage/'.$shop->profile) }}&quot;); background-size: cover; background-position: center center; display: block;"
                             bis_skin_checked="1">
-                            <img src="{{ Storage::disk('s3')->url($shop->profile) }}" class="img-fluid blur-up lazyload bg-img"
+                            <img src="{{ asset('storage/'.$shop->profile) }}" class="img-fluid blur-up lazyload bg-img"
                                 alt="" style="display: none;">
                         </div>
                         <h4>{{ $shop->shop_name }}</h4>

@@ -30,8 +30,8 @@ class CreateShop extends Component
         
         $password = str()->random(8);
 
-        $profileImg = $this->profile->store('shop_profile','s3');
-        $brandImg = $this->brand->store('shop_brand','s3');
+        $profileImg = $this->profile->store('shop_profile');
+        $brandImg = $this->brand->store('shop_brand');
         // $brandImg = cloudinary()->upload($this->brand->getRealPath())->getSecurePath();
        
         Vendor::create([
@@ -51,7 +51,7 @@ class CreateShop extends Component
             'password'=>Hash::make($password),
         ]);
 
-        return to_route('shops.list');
+        return to_route('admin.shops');
         
     }
 

@@ -15,9 +15,9 @@ class Bedsheet extends Component
     public function render()
     {
 
-        $category = ProductCategory::where('category_name','BEDSHEET')->pluck('id');
+        $category = ProductCategory::where('category_name','BEDSHEET')->first('id');
 
-        $this->beedsheets = Product::where('product_category_id', $category)->get();
+        $this->bedsheets = Product::where('product_category_id', $category->id)->get();
         
         return view('livewire.bedsheet', ['category' => $category]);
     }
