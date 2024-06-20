@@ -1,3 +1,4 @@
+
 <section class="inner-section shop-part">
     <div class="container">
         <div class="row content-reverse">
@@ -275,3 +276,4 @@
         };
    </script>
 </section>
+

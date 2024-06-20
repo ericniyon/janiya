@@ -32,13 +32,15 @@
                         <li class="navbar-item "><a class="navbar-link" href="{{ route('home') }}">home</a>
                             
                         </li>
-                        <li class="navbar-item"><a class="navbar-link"
+                        {{-- <li class="navbar-item"><a class="navbar-link"
                                 href="{{ route('shop') }}">All Products</a>
                             
-                        </li>
-                        <li class="navbar-item">
-                            <a class="navbar-link"href="{{ route('shops.list') }}">Shops List</a>
-                        </li>   
+                        </li> --}}
+                        
+                        
+                        @include('frontend.partial.__shop')
+                        @include('frontend.partial.__categories')
+
                         <li class="navbar-item dropdown"><a class="navbar-link  " href="{{ route('about') }}">about us</a>
                         
                         </li>

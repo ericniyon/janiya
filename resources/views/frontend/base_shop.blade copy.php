@@ -23,22 +23,72 @@
     <link rel="stylesheet" href="{{ asset('front/css/main.css')}}">
     <link rel="stylesheet" href="{{ asset('front/css/home-classic.css')}}">
     
+      
+
+
+    @livewireStyles
 </head>
 
 <body>
+    <div class="backdrop"></div><a class="backtop fas fa-arrow-up" href="#"></a>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-5">
+                    <div class="header-top-welcome">
+                        <p>Welcome to Ecomart in Your Dream Online Store!</p>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-3">
+                    <div class="header-top-select">
+                        <div class="header-select"><i class="icofont-world"></i><select class="select">
+                                <option value="english" selected>english</option>
+                                <option value="bangali">kinyarwanda</option>
+                                <option value="arabic">arabic</option>
+                            </select></div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-4">
+                    <ul class="header-top-list">
+                        <li><a href="#">offers</a></li>
+                        <li><a href="{{ url('faq') }}">need help</a></li>
+                        <li><a href="{{ url('contact') }}">contact us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     
 
+    
 @yield('content')
-
-
-    
    
-    
-    
+    <section class="news-part" style="background: url(images/newsletter.jpg) no-repeat center;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5 col-lg-6 col-xl-7">
+                    <div class="news-text">
+                        <h2>Get 20% Discount for Subscriber</h2>
+                        <p>Lorem ipsum dolor consectetur adipisicing accusantium</p>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-6 col-xl-5">
+                    <form class="news-form"><input type="text"
+                            placeholder="Enter Your Email Address"><button><span><i
+                                    class="icofont-ui-email"></i>Subscribe</span></button></form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-   
-@include('frontend.includes.footer')
-    
+
+
+    {{-- @include('frontend.includes.footer') --}}
+
+@livewireScripts
+
 
     <script src="{{ asset('front/vendor/bootstrap/jquery-1.12.4.min.js')}}"></script>
     <script src="{{ asset('front/vendor/bootstrap/popper.min.js')}}"></script>
